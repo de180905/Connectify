@@ -1,0 +1,1 @@
+D:\DotnetProjects\Connectify\connectify.client\obj\Debug\connectify.client.esproj.CoreCompileInputs.cache

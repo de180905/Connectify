@@ -1,0 +1,13 @@
+D:\DotnetProjects\Connectify\Connectify.BusinessObjects\obj\Debug\net8.0\Connectify.BusinessObjects.csproj.AssemblyReference.cache
+D:\DotnetProjects\Connectify\Connectify.BusinessObjects\obj\Debug\net8.0\Connectify.BusinessObjects.GeneratedMSBuildEditorConfig.editorconfig
+D:\DotnetProjects\Connectify\Connectify.BusinessObjects\obj\Debug\net8.0\Connectify.BusinessObjects.AssemblyInfoInputs.cache
+D:\DotnetProjects\Connectify\Connectify.BusinessObjects\obj\Debug\net8.0\Connectify.BusinessObjects.AssemblyInfo.cs
+D:\DotnetProjects\Connectify\Connectify.BusinessObjects\obj\Debug\net8.0\Connectify.BusinessObjects.csproj.CoreCompileInputs.cache
+D:\DotnetProjects\Connectify\Connectify.BusinessObjects\bin\Debug\net8.0\Connectify.BusinessObjects.deps.json
+D:\DotnetProjects\Connectify\Connectify.BusinessObjects\bin\Debug\net8.0\Connectify.BusinessObjects.dll
+D:\DotnetProjects\Connectify\Connectify.BusinessObjects\bin\Debug\net8.0\Connectify.BusinessObjects.pdb
+D:\DotnetProjects\Connectify\Connectify.BusinessObjects\obj\Debug\net8.0\Connectify.BusinessObjects.dll
+D:\DotnetProjects\Connectify\Connectify.BusinessObjects\obj\Debug\net8.0\refint\Connectify.BusinessObjects.dll
+D:\DotnetProjects\Connectify\Connectify.BusinessObjects\obj\Debug\net8.0\Connectify.BusinessObjects.pdb
+D:\DotnetProjects\Connectify\Connectify.BusinessObjects\obj\Debug\net8.0\ref\Connectify.BusinessObjects.dll
+D:\DotnetProjects\Connectify\Connectify.BusinessObjects\obj\Debug\net8.0\Connectify.BusinessObjects.sourcelink.json
