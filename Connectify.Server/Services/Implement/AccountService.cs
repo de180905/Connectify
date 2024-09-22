@@ -4,7 +4,12 @@ using Connectify.BussinessObjects.Authen;
 using Connectify.Server.DataAccess;
 using Connectify.Server.DTOs;
 using Connectify.Server.Services.Abstract;
+using Connectify.Server.Services.Exceptions;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Routing;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -12,6 +17,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.Encodings.Web;
+using System.Web;
 
 
 namespace Connectify.Server.Services.Implement { 
@@ -22,16 +29,19 @@ namespace Connectify.Server.Services.Implement {
         private readonly IConfiguration configuration;
         private readonly AppDbContext dbContext;
         private readonly RoleManager<IdentityRole> roleManager;
+        private readonly IEmailSender emailSender;
 
         public AccountService(UserManager<User> userManager,
             SignInManager<User> signInManager, AppDbContext dbContext,
-            IConfiguration configuration, RoleManager<IdentityRole> roleManager)
+            IConfiguration configuration, RoleManager<IdentityRole> roleManager
+            ,IEmailSender emailSender)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.configuration = configuration;
             this.dbContext = dbContext;
             this.roleManager = roleManager;
+            this.emailSender = emailSender;
         }
         private string GenerateRefreshToken()
         {
@@ -121,9 +131,42 @@ namespace Connectify.Server.Services.Implement {
                     await roleManager.CreateAsync(new IdentityRole(AppRole.NormalUser));
                 }
                 await userManager.AddToRoleAsync(user, AppRole.NormalUser);
+                
             }
             return result;
         }
+        public async Task<bool> RequireEmailConfirmAsync(string email)
+        {
+            var user = await userManager.FindByEmailAsync(email);
+            if (user == null)
+            {
+                return false;
+            }
+            if (await userManager.IsEmailConfirmedAsync(user))
+            {
+                return false;
+            }
+            try
+            {
+                var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
+                var encodedToken = HttpUtility.UrlEncode(token.ToString());
+                var callbackUrl = $"https://localhost:7094/api/Account/Confirmemail?userId={user.Id}&token={encodedToken}";
+                await emailSender.SendEmailAsync(email, "Confirm your email", $"Please confirm your account by clicking this link: <a href='{callbackUrl}'>link</a>");
+            }catch (Exception ex)
+            {
+                return false;
+            }
+            return true;
+        }
+        public async Task<bool> ConfirmEmailAsync(string userId, string token)
+        {
+            var user = await userManager.FindByIdAsync(userId);
+            if (user == null) return false;
+
+            var result = await userManager.ConfirmEmailAsync(user, token);
+            return result.Succeeded;
+        }
+
         public async Task<TokenDTO?> SignInAsync(SignInDTO dto)
         {
             var result = await signInManager.PasswordSignInAsync(dto.Email, dto.Password, false, false);
@@ -131,11 +174,14 @@ namespace Connectify.Server.Services.Implement {
             {
                 return null;
             }
-
             var user = await userManager.FindByEmailAsync(dto.Email);
             if (user == null)
             {
                 return null;
+            }
+            if (!await userManager.IsEmailConfirmedAsync(user))
+            {
+                throw new EmailNotVerifiedException();
             }
             var authClaims = new List<Claim>
             {

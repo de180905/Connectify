@@ -7,5 +7,7 @@ namespace Connectify.Server.Services.Abstract
     {
         Task<IdentityResult> SignUpAsync(SignUpDTO dto);
         Task<TokenDTO> SignInAsync(SignInDTO dto);
+        Task<bool> ConfirmEmailAsync(string userId, string token);
+        Task<bool> RequireEmailConfirmAsync(string email);
     }
 }

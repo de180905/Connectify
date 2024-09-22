@@ -6,16 +6,24 @@ import GroupTimeline from './js/GroupTimeline';
 import ChatroomsLayout from './js/ChatroomsLayout';
 import ChatroomDetail from './js/ChatRoomDetail';
 import UserTimeline from './js/UserTimeline';
+import LoginLayout from './js/LoginLayout';
+import LoginForm from './js/LoginForm';
+import RegisterForm from './js/RegisterForm';
+import { signin } from './js/api/authen';
+import VerifyAccount from './js/VerifyAccount';
 
 function MyApp() {
     return (
         <Router>
             <Routes>
-                <Route index element={<Feed/>}/>
-
+                <Route index element={<Feed />} />
                 {/* User profile */}
                 <Route path=":userId" element={<UserTimeline />} />
-
+                <Route path="account" element={<LoginLayout />}>
+                    <Route path="login" element={<LoginForm/>} />
+                    <Route path="register" element={<RegisterForm />} />
+                </Route>
+                <Route path="account/verify-email/:email" element={<VerifyAccount/>} />
                 {/* Groups section */}
                 <Route path="groups" element={<GroupLayout />}>
                     <Route index element={<GroupIndex />} />
@@ -36,6 +44,8 @@ function MyApp() {
                     {/* Nested route for individual chatroom */}
                     <Route path=":id" element={<ChatroomDetail />} />
                 </Route>
+
+
             </Routes>
         </Router>
     );

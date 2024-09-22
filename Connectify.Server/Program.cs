@@ -4,6 +4,7 @@ using Connectify.Server.Services.Abstract;
 using Connectify.Server.Services.Implement;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -55,12 +56,24 @@ namespace Connectify.Server
                     }
                 });
             });
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("SignalRCorsPolicy", policy =>
+                {
+                    policy.WithOrigins("https://localhost:5173") // Specify the exact origin
+                          .AllowAnyHeader()
+                          .AllowAnyMethod()
+                          .AllowCredentials(); // Allow credentials
+                });
+            });
             builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
             builder.Services.AddDbContext<AppDbContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectifyDb"));
             });
             builder.Services.AddScoped<IAccountService, AccountService>();
+            builder.Services.AddTransient<IEmailSender, EmailSender>();
+
             builder.Services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -111,7 +124,7 @@ namespace Connectify.Server
             }
 
             app.UseHttpsRedirection();
-
+            app.UseCors("SignalRCorsPolicy");
             app.UseAuthorization();
 
 
