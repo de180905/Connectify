@@ -3,6 +3,7 @@ using Connectify.Server.Services.Abstract;
 using Connectify.Server.Services.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Connectify.Server.Controllers
 {
@@ -75,6 +76,42 @@ namespace Connectify.Server.Controllers
                 return Unauthorized(new {message = "Wrong Email or Password"});
             }
             return Ok(result);
+        }
+
+        [HttpPost("forgot-password")]
+        public async Task<IActionResult> ForgotPassword(EmailDTO emailDTO)
+        {
+            try
+            {
+                var result = await accountRepo.SendPasswordResetLinkAsync(emailDTO.Email);
+
+                if (result) return Ok(new { message = "Password reset link sent, please check your email!" });
+                else throw new Exception("This email does not exist or has not been confirmed. Please check your email.");
+            }
+            
+            catch (Exception ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+        }
+
+        [HttpPost("reset-password")]
+        public async Task<IActionResult> ResetPassword(ResetPasswordDTO resetPasswordDTO)
+        {
+            try
+            {
+                var result = await accountRepo.ResetPasswordAsync(resetPasswordDTO);
+                if (result)
+                {
+                    return Ok(new { success = true, message = "Password reset successful." });
+                }
+                return BadRequest(new { error = "Invalid token." });
+            }
+            
+            catch (Exception ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
         }
     }
 }

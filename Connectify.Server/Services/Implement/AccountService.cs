@@ -229,5 +229,45 @@ namespace Connectify.Server.Services.Implement {
 
             return new TokenDTO { AccessToken = accessToken, RefreshToken = refreshToken };
         }
+        // phương thức gửi link reset tới email
+        public async Task<bool> SendPasswordResetLinkAsync(string email)
+        {
+            var user = await userManager.FindByEmailAsync(email);
+            if (user == null || !(await userManager.IsEmailConfirmedAsync(user)))
+            {
+                return false;
+            }
+            var token = await userManager.GeneratePasswordResetTokenAsync(user);
+
+            user.PasswordResetTokenExpires = DateTime.UtcNow.AddHours(1);
+            await userManager.UpdateAsync(user);
+            var encodedToken = HttpUtility.UrlEncode(token);
+            var callbackUrl = $"https://localhost:5173/account/reset-password?email={user.Email}&token={encodedToken}";
+            await emailSender.SendEmailAsync(email, "Reset password",
+                $"Please reset your password by clicking this link: " +
+                $"<a href='{callbackUrl}'>link</a><br>If you do not wish to reset your password, ignore this message. " +
+                $"It will expire in 1 hours."
+               );
+            return true;
+        }
+        // phương thức reset password
+        public async Task<bool> ResetPasswordAsync(ResetPasswordDTO resetPasswordDTO)
+        {
+            var user = await userManager.FindByEmailAsync(resetPasswordDTO.Email);
+            if (user == null || user.PasswordResetTokenExpires < DateTime.UtcNow)
+                return false;
+            
+            var decodedToken = HttpUtility.UrlDecode(resetPasswordDTO.Token);
+            var result = await userManager.ResetPasswordAsync(user, decodedToken, resetPasswordDTO.Password);
+            if (result.Succeeded)
+            {
+                user.PasswordResetTokenExpires = null;
+                await userManager.UpdateAsync(user);
+                return true;
+            }
+            return false;
+        }
+
+
     }
 }

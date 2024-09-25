@@ -4799,19 +4799,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\khoiv\\.nuget\\packages\\": {}
+    "C:\\Users\\PC\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\DotnetProjects\\Connectify\\Connectify.Server\\Connectify.Server.csproj",
+      "projectUniqueName": "E:\\OJT\\GroupProject\\Connectify.Server\\Connectify.Server.csproj",
       "projectName": "Connectify.Server",
-      "projectPath": "D:\\DotnetProjects\\Connectify\\Connectify.Server\\Connectify.Server.csproj",
-      "packagesPath": "C:\\Users\\khoiv\\.nuget\\packages\\",
-      "outputPath": "D:\\DotnetProjects\\Connectify\\Connectify.Server\\obj\\",
+      "projectPath": "E:\\OJT\\GroupProject\\Connectify.Server\\Connectify.Server.csproj",
+      "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
+      "outputPath": "E:\\OJT\\GroupProject\\Connectify.Server\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\khoiv\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4819,14 +4819,15 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\DotnetProjects\\Connectify\\Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj": {
-              "projectPath": "D:\\DotnetProjects\\Connectify\\Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj"
+            "E:\\OJT\\GroupProject\\Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj": {
+              "projectPath": "E:\\OJT\\GroupProject\\Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj"
             }
           }
         }
@@ -4835,6 +4836,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -4895,7 +4901,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

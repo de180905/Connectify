@@ -11,6 +11,9 @@ import LoginForm from './js/LoginForm';
 import RegisterForm from './js/RegisterForm';
 import { signin } from './js/api/authen';
 import VerifyAccount from './js/VerifyAccount';
+import ForgotPasswordForm from './js/password/ForgotPasswordForm';
+import ResetPasswordForm from './js/password/ResetPasswordForm';
+import ResetPasswordSuccess from './js/password/ResetPasswordSuccess';
 
 function MyApp() {
     return (
@@ -22,6 +25,9 @@ function MyApp() {
                 <Route path="account" element={<LoginLayout />}>
                     <Route path="login" element={<LoginForm/>} />
                     <Route path="register" element={<RegisterForm />} />
+                    <Route path="forgot-password" element={<ForgotPasswordForm/>}/>
+                    <Route path="reset-password" element={<ResetPasswordForm/>}/>
+                    <Route path="reset-password-success" element={<ResetPasswordSuccess/>}/>
                 </Route>
                 <Route path="account/verify-email/:email" element={<VerifyAccount/>} />
                 {/* Groups section */}

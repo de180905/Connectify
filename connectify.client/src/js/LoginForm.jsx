@@ -26,6 +26,9 @@ function LoginForm() {
             }
         }
     }
+    const handleForgotPassword = ()=>{
+        navigate('/account/forgot-password')
+    }
   return (
       <>
           {/* title */}
@@ -35,7 +38,7 @@ function LoginForm() {
                   Sign in to your account{" "}
               </h2>
               <p className="text-sm text-gray-700 font-normal">
-                  If you haven’t signed up yet.{" "}
+                  If you havenï¿½t signed up yet.{" "}
                   <a href="/account/register" className="text-blue-700">
                       Register here!
                   </a>
@@ -95,7 +98,7 @@ function LoginForm() {
                           Remember me
                       </label>
                   </div>
-                  <a href="#" className="text-blue-700">
+                  <a onClick={handleForgotPassword} href="#" className="text-blue-700">
                       Forgot password{" "}
                   </a>
               </div>

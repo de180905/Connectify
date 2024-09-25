@@ -19,5 +19,7 @@ namespace Connectify.BusinessObjects.Authen
         public string FullName { get { return FirstName + " " + LastName; } }
         public DateTime DateOfBirth { get; set; }
         public Gender Gender { get; set; }
+        public string PasswordResetToken { get; set; } = "";
+        public DateTime? PasswordResetTokenExpires { get; set; }
     }
 }

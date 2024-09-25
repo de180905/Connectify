@@ -1,13 +1,13 @@
 {
   "Version": 1,
-  "Hash": "51UQakEzASu/OLGKIBNIAs3mhoct47jFFN/bXGazxLg=",
+  "Hash": "g5hNTiNe0/3bbBuaOEWhhbjjHvas8sG5RZbLxEBpSPY=",
   "Source": "Connectify.Server",
   "BasePath": "_content/Connectify.Server",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [
     {
-      "Identity": "D:\\DotnetProjects\\Connectify\\connectify.client\\connectify.client.esproj",
+      "Identity": "E:\\OJT\\GroupProject\\connectify.client\\connectify.client.esproj",
       "Version": 2,
       "Source": "connectify.client",
       "GetPublishAssetsTargets": "GetCurrentProjectPublishStaticWebAssetItems",

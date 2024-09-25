@@ -11,3 +11,16 @@ D:\DotnetProjects\Connectify\Connectify.BusinessObjects\obj\Debug\net8.0\refint\
 D:\DotnetProjects\Connectify\Connectify.BusinessObjects\obj\Debug\net8.0\Connectify.BusinessObjects.pdb
 D:\DotnetProjects\Connectify\Connectify.BusinessObjects\obj\Debug\net8.0\ref\Connectify.BusinessObjects.dll
 D:\DotnetProjects\Connectify\Connectify.BusinessObjects\obj\Debug\net8.0\Connectify.BusinessObjects.sourcelink.json
+E:\OJT\GroupProject\Connectify.BusinessObjects\bin\Debug\net8.0\Connectify.BusinessObjects.deps.json
+E:\OJT\GroupProject\Connectify.BusinessObjects\bin\Debug\net8.0\Connectify.BusinessObjects.dll
+E:\OJT\GroupProject\Connectify.BusinessObjects\bin\Debug\net8.0\Connectify.BusinessObjects.pdb
+E:\OJT\GroupProject\Connectify.BusinessObjects\obj\Debug\net8.0\Connectify.BusinessObjects.csproj.AssemblyReference.cache
+E:\OJT\GroupProject\Connectify.BusinessObjects\obj\Debug\net8.0\Connectify.BusinessObjects.GeneratedMSBuildEditorConfig.editorconfig
+E:\OJT\GroupProject\Connectify.BusinessObjects\obj\Debug\net8.0\Connectify.BusinessObjects.AssemblyInfoInputs.cache
+E:\OJT\GroupProject\Connectify.BusinessObjects\obj\Debug\net8.0\Connectify.BusinessObjects.AssemblyInfo.cs
+E:\OJT\GroupProject\Connectify.BusinessObjects\obj\Debug\net8.0\Connectify.BusinessObjects.csproj.CoreCompileInputs.cache
+E:\OJT\GroupProject\Connectify.BusinessObjects\obj\Debug\net8.0\Connectify.BusinessObjects.sourcelink.json
+E:\OJT\GroupProject\Connectify.BusinessObjects\obj\Debug\net8.0\Connectify.BusinessObjects.dll
+E:\OJT\GroupProject\Connectify.BusinessObjects\obj\Debug\net8.0\refint\Connectify.BusinessObjects.dll
+E:\OJT\GroupProject\Connectify.BusinessObjects\obj\Debug\net8.0\Connectify.BusinessObjects.pdb
+E:\OJT\GroupProject\Connectify.BusinessObjects\obj\Debug\net8.0\ref\Connectify.BusinessObjects.dll

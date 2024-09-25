@@ -83,4 +83,61 @@ async function signin(email, password) {
 
 
 }
-export { requireEmailConfirm, signin, signup };
+async function forgotPassword(email) {
+    const url = CONNECTIFY_API_BASE_URL + 'api/Account/forgot-password'
+    const forgotPasswordData = {
+        email: email
+    }
+    try {
+        const response = await fetch(url,
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(forgotPasswordData)
+            });
+            const responseData = await response.json();
+            if (response.ok) {
+                return { success: true, message: responseData.message };
+            } else {
+                return { success: false, error: responseData.error };
+            }
+    } catch (error) {
+        console.error('Error during login:', error);
+        return { success: false, error: 'Something went wrong. Please try again.' };
+    }
+}
+async function resetPassword(email, password, token) {
+    const url = CONNECTIFY_API_BASE_URL + 'api/Account/reset-password'
+   
+    const resetPasswordData = {
+        email: email,
+        password: password,
+        token: token
+    }
+    console.log(resetPasswordData)
+    try{
+        const response = await fetch(url,
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(resetPasswordData)
+            }
+        )
+        const responseData = await response.json()
+        console.log(responseData)
+        if (response.ok) {
+            return { success: true, message: responseData.message };
+        } else {
+            return { success: false, error: responseData.error };
+        }
+    }
+    catch(error){
+        console.error('Error during login:', error);
+        return { success: false, error: 'Something went wrong. Please try again.' };
+    }
+}
+export { requireEmailConfirm, signin, signup, forgotPassword, resetPassword };

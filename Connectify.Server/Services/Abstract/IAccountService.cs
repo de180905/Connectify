@@ -9,5 +9,7 @@ namespace Connectify.Server.Services.Abstract
         Task<TokenDTO> SignInAsync(SignInDTO dto);
         Task<bool> ConfirmEmailAsync(string userId, string token);
         Task<bool> RequireEmailConfirmAsync(string email);
+        Task<bool> SendPasswordResetLinkAsync(string email);
+        Task<bool> ResetPasswordAsync(ResetPasswordDTO resetPasswordDTO);
     }
 }
