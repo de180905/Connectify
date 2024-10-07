@@ -1,12 +1,24 @@
-﻿import MainLayout from "./MainLayout"
-import { Outlet, Link } from "react-router-dom";
+﻿import * as React from "react";
+import Chatroom from "./Chatroom";
+import MainLayout from "./MainLayout"
+import { Outlet, Link, useNavigate } from "react-router-dom";
+import { loadChatRooms } from "./api/chat";
+import Header from "./Header";
+import Sidebar from "./Sidebar";
+
 const ChatroomsLayout = () => {
-    const mainContent = (
+    const [chatroomslist, setChatroomslist] = React.useState([]);
+    React.useEffect(() => {
+        loadChatRooms().then((chatrooms) => {
+            setChatroomslist(chatrooms);
+        });
+    }, []);
+    return (
         <main
             id="site__main"
             className="2xl:ml-[--w-side]  xl:ml-[--w-side-sm] p-2.5 h-[calc(100vh-var(--m-top))] mt-[--m-top]"
         >
-            <div className="relative overflow-hidden border -m-2.5 dark:border-slate-700">
+            <div className="relative overflow-hidden border -m-2.5 dark:border-slate-700" >
                 <div className="flex bg-white dark:bg-dark2">
                     {/* sidebar */}
                     <div className="md:w-[360px] relative border-r dark:border-slate-700">
@@ -90,264 +102,8 @@ const ChatroomsLayout = () => {
                             </div>
                             {/* users list */}
                             <div className="space-y-2 p-2 overflow-y-auto md:h-[calc(100vh-204px)] h-[calc(100vh-130px)]">
-                                <a
-                                    href="#"
-                                    className="relative flex items-center gap-4 p-2 duration-200 rounded-xl hover:bg-secondery"
-                                >
-                                    <div className="relative w-14 h-14 shrink-0">
-                                        <img
-                                            src="assets/images/avatars/avatar-5.jpg"
-                                            alt=""
-                                            className="object-cover w-full h-full rounded-full"
-                                        />
-                                        <div className="w-4 h-4 absolute bottom-0 right-0  bg-green-500 rounded-full border border-white dark:border-slate-800" />
-                                    </div>
-                                    <div className="flex-1 min-w-0">
-                                        <div className="flex items-center gap-2 mb-1.5">
-                                            <div className="mr-auto text-sm text-black dark:text-white font-medium">
-                                                Jesse Steeve
-                                            </div>
-                                            <div className="text-xs font-light text-gray-500 dark:text-white/70">
-                                                09:40AM
-                                            </div>
-                                        </div>
-                                        <div className="font-medium overflow-hidden text-ellipsis text-sm whitespace-nowrap">
-                                            Love your photos 😍
-                                        </div>
-                                    </div>
-                                </a>
-                                <a
-                                    href="#"
-                                    className="relative flex items-center gap-4 p-2 duration-200 rounded-xl hover:bg-secondery"
-                                >
-                                    <div className="relative w-14 h-14 shrink-0">
-                                        <img
-                                            src="assets/images/avatars/avatar-2.jpg"
-                                            alt=""
-                                            className="object-cover w-full h-full rounded-full"
-                                        />
-                                    </div>
-                                    <div className="flex-1 min-w-0">
-                                        <div className="flex items-center gap-2 mb-1.5">
-                                            <div className="mr-auto text-sm text-black dark:text-white font-medium">
-                                                Martin Gray
-                                            </div>
-                                            <div className="text-xs font-light text-gray-500 dark:text-white/70">
-                                                09:40AM
-                                            </div>
-                                            <div className="w-2.5 h-2.5 bg-blue-600 rounded-full dark:bg-slate-700" />
-                                        </div>
-                                        <div className="font-medium overflow-hidden text-ellipsis text-sm whitespace-nowrap">
-                                            Photo editor needed. Fix photos? 🛠️
-                                        </div>
-                                    </div>
-                                </a>
-                                <a
-                                    href="#"
-                                    className="relative flex items-center gap-4 p-2 duration-200 rounded-xl hover:bg-secondery"
-                                >
-                                    <div className="relative w-14 h-14 shrink-0">
-                                        <img
-                                            src="assets/images/avatars/avatar-3.jpg"
-                                            alt=""
-                                            className="object-cover w-full h-full rounded-full"
-                                        />
-                                        <div className="w-4 h-4 absolute bottom-0 right-0  bg-green-500 rounded-full border border-white dark:border-slate-800" />
-                                    </div>
-                                    <div className="flex-1 min-w-0">
-                                        <div className="flex items-center gap-2 mb-1.5">
-                                            <div className="mr-auto text-sm text-black dark:text-white font-medium">
-                                                Monroe Parker
-                                            </div>
-                                            <div className="text-xs font-light text-gray-500 dark:text-white/70">
-                                                09:40AM
-                                            </div>
-                                        </div>
-                                        <div className="font-medium overflow-hidden text-ellipsis text-sm whitespace-nowrap">
-                                            Can i call you to day?
-                                        </div>
-                                    </div>
-                                </a>
-                                <a
-                                    href="#"
-                                    className="relative flex items-center gap-4 p-2 duration-200 rounded-xl hover:bg-secondery"
-                                >
-                                    <div className="relative w-14 h-14 shrink-0">
-                                        <img
-                                            src="assets/images/avatars/avatar-4.jpg"
-                                            alt=""
-                                            className="object-cover w-full h-full rounded-full"
-                                        />
-                                    </div>
-                                    <div className="flex-1 min-w-0">
-                                        <div className="flex items-center gap-2 mb-1.5">
-                                            <div className="mr-auto text-sm text-black dark:text-white font-medium">
-                                                James Lewis
-                                            </div>
-                                            <div className="text-xs font-light text-gray-500 dark:text-white/70">
-                                                09:40AM
-                                            </div>
-                                        </div>
-                                        <div className="font-medium overflow-hidden text-ellipsis text-sm whitespace-nowrap">
-                                            {" "}
-                                            Want to buy landscape photo? 🌄{" "}
-                                        </div>
-                                    </div>
-                                </a>
-                                <a
-                                    href="#"
-                                    className="relative flex items-center gap-4 p-2 duration-200 rounded-xl hover:bg-secondery"
-                                >
-                                    <div className="relative w-14 h-14 shrink-0">
-                                        <img
-                                            src="assets/images/avatars/avatar-5.jpg"
-                                            alt=""
-                                            className="object-cover w-full h-full rounded-full"
-                                        />
-                                        <div className="w-4 h-4 absolute bottom-0 right-0  bg-green-500 rounded-full border border-white dark:border-slate-800" />
-                                    </div>
-                                    <div className="flex-1 min-w-0">
-                                        <div className="flex items-center gap-2 mb-1.5">
-                                            <div className="mr-auto text-sm text-black dark:text-white font-medium">
-                                                Jesse Steeve
-                                            </div>
-                                            <div className="text-xs font-light text-gray-500 dark:text-white/70">
-                                                09:40AM
-                                            </div>
-                                        </div>
-                                        <div className="font-medium overflow-hidden text-ellipsis text-sm whitespace-nowrap">
-                                            Headshot needed. Resume. Do it? 👩‍💼
-                                        </div>
-                                    </div>
-                                </a>
-                                <a
-                                    href="#"
-                                    className="relative flex items-center gap-4 p-2 duration-200 rounded-xl hover:bg-secondery"
-                                >
-                                    <div className="relative w-14 h-14 shrink-0">
-                                        <img
-                                            src="assets/images/avatars/avatar-2.jpg"
-                                            alt=""
-                                            className="object-cover w-full h-full rounded-full"
-                                        />
-                                    </div>
-                                    <div className="flex-1 min-w-0">
-                                        <div className="flex items-center gap-2 mb-1.5">
-                                            <div className="mr-auto text-sm text-black dark:text-white font-medium">
-                                                Martin Gray
-                                            </div>
-                                            <div className="text-xs font-light text-gray-500 dark:text-white/70">
-                                                04:20PM
-                                            </div>
-                                            <div className="w-2.5 h-2.5 bg-blue-600 rounded-full dark:bg-slate-700" />
-                                        </div>
-                                        <div className="font-medium overflow-hidden text-ellipsis text-sm whitespace-nowrap">
-                                            Online course interesting? 🎓
-                                        </div>
-                                    </div>
-                                </a>
-                                <a
-                                    href="#"
-                                    className="relative flex items-center gap-4 p-2 duration-200 rounded-xl hover:bg-secondery"
-                                >
-                                    <div className="relative w-14 h-14 shrink-0">
-                                        <img
-                                            src="assets/images/avatars/avatar-3.jpg"
-                                            alt=""
-                                            className="object-cover w-full h-full rounded-full"
-                                        />
-                                    </div>
-                                    <div className="flex-1 min-w-0">
-                                        <div className="flex items-center gap-2 mb-1.5">
-                                            <div className="mr-auto text-sm text-black dark:text-white font-medium">
-                                                Monroe Parker
-                                            </div>
-                                            <div className="text-xs font-light text-gray-500 dark:text-white/70">
-                                                09:40AM
-                                            </div>
-                                        </div>
-                                        <div className="font-medium overflow-hidden text-ellipsis text-sm whitespace-nowrap">
-                                            I’m glad you like it.😊
-                                        </div>
-                                    </div>
-                                </a>
-                                <a
-                                    href="#"
-                                    className="relative flex items-center gap-4 p-2 duration-200 rounded-xl hover:bg-secondery"
-                                >
-                                    <div className="relative w-14 h-14 shrink-0">
-                                        <img
-                                            src="assets/images/avatars/avatar-4.jpg"
-                                            alt=""
-                                            className="object-cover w-full h-full rounded-full"
-                                        />
-                                    </div>
-                                    <div className="flex-1 min-w-0">
-                                        <div className="flex items-center gap-2 mb-1.5">
-                                            <div className="mr-auto text-sm text-black dark:text-white font-medium">
-                                                James Lewis
-                                            </div>
-                                            <div className="text-xs font-light text-gray-500 dark:text-white/70">
-                                                01:10PM
-                                            </div>
-                                        </div>
-                                        <div className="font-medium overflow-hidden text-ellipsis text-sm whitespace-nowrap">
-                                            {" "}
-                                            Product photographer wanted? 📷{" "}
-                                        </div>
-                                    </div>
-                                </a>
-                                <a
-                                    href="#"
-                                    className="relative flex items-center gap-4 p-2 duration-200 rounded-xl hover:bg-secondery"
-                                >
-                                    <div className="relative w-14 h-14 shrink-0">
-                                        <img
-                                            src="assets/images/avatars/avatar-5.jpg"
-                                            alt=""
-                                            className="object-cover w-full h-full rounded-full"
-                                        />
-                                        <div className="w-4 h-4 absolute bottom-0 right-0  bg-green-500 rounded-full border border-white dark:border-slate-800" />
-                                    </div>
-                                    <div className="flex-1 min-w-0">
-                                        <div className="flex items-center gap-2 mb-1.5">
-                                            <div className="mr-auto text-sm text-black dark:text-white font-medium">
-                                                Jesse Steeve
-                                            </div>
-                                            <div className="text-xs font-light text-gray-500 dark:text-white/70">
-                                                09:40AM
-                                            </div>
-                                        </div>
-                                        <div className="font-medium overflow-hidden text-ellipsis text-sm whitespace-nowrap">
-                                            Love your photos 😍
-                                        </div>
-                                    </div>
-                                </a>
-                                <a
-                                    href="#"
-                                    className="relative flex items-center gap-4 p-2 duration-200 rounded-xl hover:bg-secondery"
-                                >
-                                    <div className="relative w-14 h-14 shrink-0">
-                                        <img
-                                            src="assets/images/avatars/avatar-2.jpg"
-                                            alt=""
-                                            className="object-cover w-full h-full rounded-full"
-                                        />
-                                    </div>
-                                    <div className="flex-1 min-w-0">
-                                        <div className="flex items-center gap-2 mb-1.5">
-                                            <div className="mr-auto text-sm text-black dark:text-white font-medium">
-                                                Martin Gray
-                                            </div>
-                                            <div className="text-xs font-light text-gray-500 dark:text-white/70">
-                                                02:52PM
-                                            </div>
-                                        </div>
-                                        <div className="font-medium overflow-hidden text-ellipsis text-sm whitespace-nowrap">
-                                            Photo editor needed. Fix photos? 🛠️
-                                        </div>
-                                    </div>
-                                </a>
+                                {chatroomslist.map((cr) => (<Chatroom chatroom={cr} key={cr.chatRoomId} />))}
+
                             </div>
                         </div>
                         {/* overly */}
@@ -357,15 +113,11 @@ const ChatroomsLayout = () => {
                             uk-toggle="target: #side-chat ; cls: max-md:-translate-x-full"
                         />
                     </div>
-                    <Outlet/>
-                    
+                    <Outlet />
+
                 </div>
             </div>
         </main>
-
-    );
-    return (
-        <MainLayout mainContent={mainContent}/>
     )
 }
 export default ChatroomsLayout;

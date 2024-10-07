@@ -186,8 +186,8 @@ namespace Connectify.Server.Migrations
 
                     b.Property<string>("MediaType")
                         .IsRequired()
-                        .HasMaxLength(8)
-                        .HasColumnType("nvarchar(8)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -237,6 +237,15 @@ namespace Connectify.Server.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<string>("Avatar")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Bio")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Company")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -264,6 +273,9 @@ namespace Connectify.Server.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<string>("Location")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -280,6 +292,12 @@ namespace Connectify.Server.Migrations
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordResetToken")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("PasswordResetTokenExpires")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
@@ -373,7 +391,10 @@ namespace Connectify.Server.Migrations
                     b.Property<int>("ChatRoomId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ReplyToMessageId")
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("ReplyToId")
                         .HasColumnType("int");
 
                     b.Property<string>("SenderId")
@@ -386,11 +407,14 @@ namespace Connectify.Server.Migrations
                     b.Property<string>("Text")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
                     b.HasKey("MessageId");
 
                     b.HasIndex("ChatRoomId");
 
-                    b.HasIndex("ReplyToMessageId");
+                    b.HasIndex("ReplyToId");
 
                     b.HasIndex("SenderId");
 
@@ -422,6 +446,33 @@ namespace Connectify.Server.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("MessageReactions");
+                });
+
+            modelBuilder.Entity("Connectify.BusinessObjects.ChatFeature.MessageVisibility", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("MessageId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MessageId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("MessageVisibilities");
                 });
 
             modelBuilder.Entity("Connectify.BusinessObjects.CommentFeature.Comment", b =>
@@ -903,7 +954,7 @@ namespace Connectify.Server.Migrations
 
                     b.HasOne("Connectify.BusinessObjects.ChatFeature.Message", "ReplyToMessage")
                         .WithMany()
-                        .HasForeignKey("ReplyToMessageId");
+                        .HasForeignKey("ReplyToId");
 
                     b.HasOne("Connectify.BusinessObjects.Authen.User", "Sender")
                         .WithMany()
@@ -924,6 +975,25 @@ namespace Connectify.Server.Migrations
                         .WithMany("Reactions")
                         .HasForeignKey("MessageId")
                         .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Connectify.BusinessObjects.Authen.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Message");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Connectify.BusinessObjects.ChatFeature.MessageVisibility", b =>
+                {
+                    b.HasOne("Connectify.BusinessObjects.ChatFeature.Message", "Message")
+                        .WithMany("MessageVisibilities")
+                        .HasForeignKey("MessageId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Connectify.BusinessObjects.Authen.User", "User")
@@ -1134,6 +1204,8 @@ namespace Connectify.Server.Migrations
             modelBuilder.Entity("Connectify.BusinessObjects.ChatFeature.Message", b =>
                 {
                     b.Navigation("Files");
+
+                    b.Navigation("MessageVisibilities");
 
                     b.Navigation("Reactions");
                 });

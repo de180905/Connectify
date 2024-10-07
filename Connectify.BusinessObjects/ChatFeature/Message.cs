@@ -14,8 +14,6 @@ namespace Connectify.BusinessObjects.ChatFeature
     {
         [Key]
         public int MessageId { get; set; }
-
-        [Required]
         public int ChatRoomId { get; set; }
 
         [ForeignKey(nameof(ChatRoomId))]
@@ -27,13 +25,16 @@ namespace Connectify.BusinessObjects.ChatFeature
         [ForeignKey(nameof(SenderId))]
         public virtual User Sender { get; set; }
         public string? Text { get; set; }
+        public MessageType Type { get; set; }
         public DateTime SentAt { get; set; }
 
         public virtual ICollection<MessageReaction> Reactions { get; set; } = new List<MessageReaction>();
         public virtual ICollection<MessageMedia> Files { get; set; } = new List<MessageMedia>();
-        public int? ReplyToMessageId { get; set; } // Optional, for replies to messages
+        public int? ReplyToId { get; set; } // Optional, for replies to messages
 
-        [ForeignKey(nameof(ReplyToMessageId))]
+        [ForeignKey(nameof(ReplyToId))]
         public virtual Message ReplyToMessage { get; set; }
+        public virtual ICollection<MessageVisibility> MessageVisibilities { get; set; } = new List<MessageVisibility>();
+        public bool Deleted { get; set; }
     }
 }

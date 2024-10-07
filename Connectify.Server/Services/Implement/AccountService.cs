@@ -1,10 +1,12 @@
-﻿using Azure.Core;
+﻿using AutoMapper;
+using Azure.Core;
 using Connectify.BusinessObjects.Authen;
 using Connectify.BussinessObjects.Authen;
 using Connectify.Server.DataAccess;
 using Connectify.Server.DTOs;
 using Connectify.Server.Services.Abstract;
 using Connectify.Server.Services.Exceptions;
+using Connectify.Server.Services.FilterOptions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -19,6 +21,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Web;
+using YueXiao.Utils;
 
 
 namespace Connectify.Server.Services.Implement { 
@@ -30,11 +33,14 @@ namespace Connectify.Server.Services.Implement {
         private readonly AppDbContext dbContext;
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly IEmailSender emailSender;
+        private readonly ICloudStorageService _cloudStorageService;
+        private readonly IMapper _mapper;
 
         public AccountService(UserManager<User> userManager,
             SignInManager<User> signInManager, AppDbContext dbContext,
             IConfiguration configuration, RoleManager<IdentityRole> roleManager
-            ,IEmailSender emailSender)
+            ,IEmailSender emailSender, ICloudStorageService cloudStorageService,
+            IMapper mapper)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
@@ -42,6 +48,8 @@ namespace Connectify.Server.Services.Implement {
             this.dbContext = dbContext;
             this.roleManager = roleManager;
             this.emailSender = emailSender;
+            this._cloudStorageService = cloudStorageService;
+            this._mapper = mapper;
         }
         private string GenerateRefreshToken()
         {
@@ -121,7 +129,8 @@ namespace Connectify.Server.Services.Implement {
                 Email = dto.Email,
                 UserName = dto.Email,
                 DateOfBirth = dto.DateOfBirth,
-                Gender = dto.Gender
+                Gender = dto.Gender,
+                Avatar = "https://res.cloudinary.com/dj7lju0cn/image/upload/v1728124472/AvatarDefault_w6dlj3.jpg"
             };
             var result = await userManager.CreateAsync(user, dto.Password);
             if (result.Succeeded)
@@ -229,5 +238,129 @@ namespace Connectify.Server.Services.Implement {
 
             return new TokenDTO { AccessToken = accessToken, RefreshToken = refreshToken };
         }
-    }
+        public async Task<IdentityResult> UpdateUserDescription(string userId, UserDescriptionDTO dto)
+        {
+            var user = await userManager.FindByIdAsync(userId);
+            if(user != null)
+            {
+                user.FirstName = dto.FirstName;
+                user.LastName = dto.LastName;
+                user.Bio = dto.Bio;
+                user.Gender = dto.Gender;
+                user.DateOfBirth = dto.DateOfBirth;
+                user.Company = dto.Company;
+                user.Location = dto.Location;
+            }
+            return await userManager.UpdateAsync(user);
+        }
+        public async Task<UserDescriptionDTO?> GetUserDescription(string userId)
+        {
+            var user = await userManager.FindByIdAsync(userId);
+            if (user != null)
+            {
+                return new UserDescriptionDTO
+                {
+                    Email = user.Email,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Location = user.Location,
+                    Gender = user.Gender,
+                    DateOfBirth = user.DateOfBirth,
+                    Company = user.Company,
+                    Bio = user.Bio,
+                };
+            }
+            return null;
+        }
+        public async Task<IdentityResult> ChangePasswordAsync(string userId, ChangePasswordDTO dto)
+        {
+            var user = await userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                throw new Exception("User not found");
+            }
+
+            if (dto.NewPassword != dto.ConfirmNewPassword)
+            {
+                var error = new IdentityError { Description = "Passwords do not match" };
+                return IdentityResult.Failed(error);
+            }
+
+            var result = await userManager.ChangePasswordAsync(user, dto.CurrentPassword, dto.NewPassword);
+            return result;
+        }
+        public async Task<UserDTO?> GetMyUser(string userId)
+        {
+            return await dbContext.Users.Where(u => u.Id == userId).Select(u => new UserDTO
+            {
+                Id = u.Id,
+                FirstName = u.FirstName,
+                LastName = u.LastName,
+                Avatar = u.Avatar
+            }).FirstOrDefaultAsync();
+        }
+        public async Task<string> UploadAvatarAsync(string userId, UploadAvatarDTO dto)
+        {
+            if (dto.File == null || dto.File.Length == 0)
+            {
+                throw new ArgumentException("Avatar file is required.");
+            }
+            if (!dto.File.ContentType.StartsWith("image/"))
+            {
+                throw new Exception(dto.File.ContentType);
+            }
+            // Upload the avatar to cloud storage
+            var mediaUrl = await _cloudStorageService.UploadFileAsync(dto.File);
+
+            // Find the user and update their avatar URL
+            var user = await dbContext.Users.FindAsync(userId);
+            if (user == null)
+            {
+                throw new KeyNotFoundException("User not found.");
+            }
+
+            user.Avatar = mediaUrl; // Assuming you have AvatarUrl property in your User entity
+            await dbContext.SaveChangesAsync();
+
+            return mediaUrl; // Return the uploaded avatar URL
+        }
+
+        public async Task<bool> SendPasswordResetLinkAsync(string email)
+        {
+            var user = await userManager.FindByEmailAsync(email);
+            if (user == null || !(await userManager.IsEmailConfirmedAsync(user)))
+            {
+                return false;
+            }
+            var token = await userManager.GeneratePasswordResetTokenAsync(user);
+
+            user.PasswordResetTokenExpires = DateTime.UtcNow.AddHours(1);
+            await userManager.UpdateAsync(user);
+            var encodedToken = HttpUtility.UrlEncode(token);
+            var callbackUrl = $"https://localhost:5173/account/reset-password?email={user.Email}&token={encodedToken}";
+            await emailSender.SendEmailAsync(email, "Reset password",
+                $"Please reset your password by clicking this link: " +
+                $"<a href='{callbackUrl}'>link</a><br>If you do not wish to reset your password, ignore this message. " +
+                $"It will expire in 1 hours."
+               );
+            return true;
+        }
+        // phương thức reset password
+        public async Task<bool> ResetPasswordAsync(ResetPasswordDTO resetPasswordDTO)
+        {
+            var user = await userManager.FindByEmailAsync(resetPasswordDTO.Email);
+            if (user == null || user.PasswordResetTokenExpires < DateTime.UtcNow)
+                return false;
+
+            var decodedToken = HttpUtility.UrlDecode(resetPasswordDTO.Token);
+            var result = await userManager.ResetPasswordAsync(user, decodedToken, resetPasswordDTO.Password);
+            if (result.Succeeded)
+            {
+                user.PasswordResetTokenExpires = null;
+                await userManager.UpdateAsync(user);
+                return true;
+            }
+            return false;
+        }
+    }    
 }

@@ -15,16 +15,15 @@ function LoginForm() {
             setErrorMessage(response.message)
         }
         else {
-            const data = response.data;
-            console.log(data);
-            localStorage.setItem("accessToken", data.accessToken);
-            localStorage.setItem("refreshToken", data.refreshToken);
-            if (response.data.needEmailVerified) {
+            if (response.needEmailVerified) {
                 navigate("/account/verify-email/" + email);
             } else {
-                navigate("/");
+                window.location.href = '/';
             }
         }
+    }
+    const handleForgotPassword = () => {
+        navigate('/account/forgot-password')
     }
   return (
       <>
@@ -95,7 +94,7 @@ function LoginForm() {
                           Remember me
                       </label>
                   </div>
-                  <a href="#" className="text-blue-700">
+                  <a onClick={handleForgotPassword} href="#" className="text-blue-700">
                       Forgot password{" "}
                   </a>
               </div>

@@ -1,8 +1,139 @@
-﻿const ChatroomDetail = () => {
+﻿import { useParams} from "react-router-dom";
+import { loadChatMessages, loadChatRoomById, sendTextMessage, sendMultiFilesMessage, sendSingleFileMessage, deleteMessage } from "./api/chat";
+import * as React from "react";
+import { TextMessage } from "./TextMessage";
+import FilePreview from "./FilePreview";
+import { generateGuid } from "./Utils/MathsHelper";
+
+const ChatroomDetail = React.forwardRef((props, ref) => {
+    const { id } = useParams();
+    const [chatroom, setChatroom] = React.useState(null);
+    const chatMessagesRef = React.useRef(null);
+    const [chatMessages, setChatMessages] = React.useState([]);
+    const todoAfterSetChatMsgesRef = React.useRef(() => { });
+    const [filesList, setFilesList] = React.useState([]);
+    const [messageInput, setMsgInput] = React.useState("");
+    const [loadingOlderMessages, setLoadingOlderMessages] = React.useState(false);
+    const [replyMessage, setReplyMessage] = React.useState(null);
+
+    const handleReply = (message) => {
+        setReplyMessage(message);
+    };
+    const handleDelete = (message) => {
+
+        deleteMessage(message.messageId, message.isSent? "delete" : "detach");
+    };
+    const handleCancelReply = () => {
+        setReplyMessage(null);
+    };
+    const fileInputRef = React.useRef(null);
+    React.useImperativeHandle(ref, () => ({
+        setMessages: setChatMessages
+    }));
+    const initialize = async (chatRoomId) => {
+        const messages = await loadChatMessages(chatRoomId);
+        
+        console.log(messages);
+        setChatMessages(prevMsges => {
+            todoAfterSetChatMsgesRef.current = () => {
+                if (chatMessagesRef.current) {
+                    chatMessagesRef.current.scrollTop = chatMessagesRef.current.scrollHeight;
+                }
+            };
+            return messages;
+            console.log(messages);
+        });
+        const chatroomdata = await loadChatRoomById(chatRoomId);
+        console.log(chatroomdata);
+        setChatroom(() => (chatroomdata));
+        setFilesList([]);
+        setMsgInput("");
+        setLoadingOlderMessages(false);
+        setReplyMessage(null);
+    };
+    const handleChatMessagesScrollUp = async (event) => {
+        event.persist();
+        if (event.target.scrollTop === 0 && !loadingOlderMessages) {
+            setLoadingOlderMessages(true);
+            const currentScrollHeight = event.target.scrollHeight;
+            const messages = await loadChatMessages(id, chatMessages.at(-1).sentAt);
+            if (messages.length > 0) {
+                setChatMessages(prevMessages => {
+                    todoAfterSetChatMsgesRef.current = () => { event.target.scrollTop = event.target.scrollHeight - currentScrollHeight; }
+                    return [...prevMessages, ...messages];
+                });
+                setLoadingOlderMessages(false);
+            }
+        }
+    };
+    const sendMessages = async () => {
+        try {
+            // First, handle the text message if it exists
+            if (messageInput.trim() || filesList.length > 0) {
+                const nonImageFiles = filesList.filter(file => !file.type.startsWith('image/'));
+                const imageFiles = filesList.filter(file => file.type.startsWith('image/'));
+                if (messageInput.trim()) {
+                    await sendTextMessage(id, messageInput.trim(), replyMessage?.messageId);
+                }
+                if (nonImageFiles.length === 0 && imageFiles.length > 0) {
+                    // Case 1: Only image files (sent as a single multi-file message)
+                    await sendMultiFilesMessage(id, messageInput.trim(), imageFiles, replyMessage?.messageId);
+                } else if (nonImageFiles.length > 0 && imageFiles.length === 0) {
+                    // Case 2: Only non-image files (each file sent as a single file message)
+                    for (const file of nonImageFiles) {
+                        await sendSingleFileMessage(id, file, replyMessage?.messageId);
+                    }
+                    if (messageInput.trim()) {
+                        await sendTextMessage(id, messageInput.trim(), replyMessage?.messageId);
+                    }
+                } else if (imageFiles.length > 0 && nonImageFiles.length > 0) {
+                    // Case 3: Both image and non-image files
+                    await sendMultiFilesMessage(id, messageInput.trim(), imageFiles, replyMessage?.messageId);
+                    for (const file of nonImageFiles) {
+                        await sendSingleFileMessage(id, file, replyMessage?.messageId);
+                    }
+                }
+                // Clear the message input and file list after sending
+                setMsgInput('');
+                setFilesList([]);
+                setReplyMessage(null);
+            }
+        } catch (error) {
+            console.error("Error sending message:", error);
+        }
+    };
+    const handleMsgInputChange = (event) => {
+        setMsgInput(event.target.value);
+    }
+    // Handle file selection
+    const handleFileChange = (event) => {
+        const selectedFiles = Array.from(event.target.files);
+        selectedFiles.forEach(f => { f.id = generateGuid() })
+        setFilesList((prevFiles) => [...prevFiles, ...selectedFiles]);
+        // Reset the file input so the same file can be selected again
+        event.target.value = null;
+    };
+
+    // Remove file by index
+    const removeFile = (fileToRemove) => {
+        setFilesList(prevFiles => prevFiles.filter(file => file.id !== fileToRemove.id));
+    };
+    React.useEffect(() => {
+        initialize(id);
+    }, [id]);
+    React.useEffect(() => {
+        todoAfterSetChatMsgesRef.current();
+        todoAfterSetChatMsgesRef.current = () => { };
+    }, [chatMessages]);
+    React.useEffect(() => {
+        if (replyMessage || filesList.length > 0) {
+            window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' });
+        }
+    }, [replyMessage, filesList]);
     return (
         <>
             {/* message center */}
-            <div className="flex-1">
+            <div className="relative flex-1 flex-col" style={{ width: '50vw'}}>
                 {/* chat heading */}
                 <div className="flex items-center justify-between gap-2 w- px-6 py-3.5 z-10 border-b dark:border-slate-700 uk-animation-slide-top-medium">
                     <div className="flex items-center sm:gap-4 gap-2">
@@ -22,7 +153,7 @@
                             uk-toggle="target: .rightt ; cls: hidden"
                         >
                             <img
-                                src="assets/images/avatars/avatar-6.jpg"
+                                src={chatroom?.avatar}
                                 alt=""
                                 className="w-8 h-8 rounded-full shadow"
                             />
@@ -32,7 +163,7 @@
                             className="cursor-pointer"
                             uk-toggle="target: .rightt ; cls: hidden"
                         >
-                            <div className="text-base font-bold"> Monroe Parker</div>
+                            <div className="text-base font-bold">{chatroom?.name}</div>
                             <div className="text-xs text-green-500 font-semibold">
                                 {" "}
                                 Online
@@ -95,21 +226,19 @@
                     </div>
                 </div>
                 {/* chats bubble */}
-                <div className="w-full p-5 py-10 overflow-y-auto md:h-[calc(100vh-204px)] h-[calc(100vh-195px)]">
+                <div ref={chatMessagesRef} onScroll={handleChatMessagesScrollUp} className={`relative w-full p-5 py-10 overflow-y-auto md:h-[calc(100vh-204px)] h-[calc(100vh-195px)]`}>
                     <div className="py-10 text-center text-sm lg:pt-8">
                         <img
-                            src="assets/images/avatars/avatar-6.jpg"
+                            src={chatroom?.avatar}
                             className="w-24 h-24 rounded-full mx-auto mb-3"
                             alt=""
                         />
                         <div className="mt-8">
                             <div className="md:text-xl text-base font-medium text-black dark:text-white">
-                                {" "}
-                                Monroe Parker{" "}
+                                {chatroom?.name+" "}
                             </div>
                             <div className="text-gray-500 text-sm   dark:text-white/80">
                                 {" "}
-                                @Monroepark{" "}
                             </div>
                         </div>
                         <div className="mt-3.5">
@@ -122,358 +251,77 @@
                         </div>
                     </div>
                     <div className="text-sm font-medium space-y-6">
-                        {/* received */}
-                        <div className="flex gap-3">
-                            <img
-                                src="assets/images/avatars/avatar-2.jpg"
-                                alt=""
-                                className="w-9 h-9 rounded-full shadow"
-                            />
-                            <div className="px-4 py-2 rounded-[20px] max-w-sm bg-secondery">
-                                {" "}
-                                Hi, I’m John{" "}
-                            </div>
-                        </div>
-                        {/* sent */}
-                        <div className="flex gap-2 flex-row-reverse items-end">
-                            <img
-                                src="assets/images/avatars/avatar-3.jpg"
-                                alt=""
-                                className="w-5 h-5 rounded-full shadow"
-                            />
-                            <div className="px-4 py-2 rounded-[20px] max-w-sm bg-gradient-to-tr from-sky-500 to-blue-500 text-white shadow">
-                                {" "}
-                                I’m Lisa. welcome John
-                            </div>
-                        </div>
-                        {/* time */}
-                        <div className="flex justify-center ">
-                            <div className="font-medium text-gray-500 text-sm dark:text-white/70">
-                                April 8,2023,6:30 AM
-                            </div>
-                        </div>
-                        {/* received */}
-                        <div className="flex gap-3">
-                            <img
-                                src="assets/images/avatars/avatar-2.jpg"
-                                alt=""
-                                className="w-9 h-9 rounded-full shadow"
-                            />
-                            <div className="px-4 py-2 rounded-[20px] max-w-sm bg-secondery">
-                                {" "}
-                                I’m selling a photo of a sunset. It’s a print on canvas, signed
-                                by the photographer. Do you like it? 😊{" "}
-                            </div>
-                        </div>
-                        {/* sent */}
-                        <div className="flex gap-2 flex-row-reverse items-end">
-                            <img
-                                src="assets/images/avatars/avatar-3.jpg"
-                                alt=""
-                                className="w-4 h-4 rounded-full shadow"
-                            />
-                            <div className="px-4 py-2 rounded-[20px] max-w-sm bg-gradient-to-tr from-sky-500 to-blue-500 text-white shadow">
-                                {" "}
-                                Wow, it’s beautiful. How much ? 😍{" "}
-                            </div>
-                        </div>
-                        {/* sent media*/}
-                        <div className="flex gap-2 flex-row-reverse items-end">
-                            <img
-                                src="assets/images/avatars/avatar-3.jpg"
-                                alt=""
-                                className="w-4 h-4 rounded-full shadow"
-                            />
-                            <a
-                                className="block rounded-[18px] border overflow-hidden"
-                                href="#"
-                            >
-                                <div className="max-w-md">
-                                    <div className="max-w-full relative w-72">
-                                        <div
-                                            className="relative"
-                                            style={{ paddingBottom: "57.4286%" }}
-                                        >
-                                            <div className="w-full h-full absolute inset-0">
-                                                <img
-                                                    src="assets/images/product/product-2.jpg"
-                                                    alt=""
-                                                    className="block max-w-full max-h-52 w-full h-full object-cover"
-                                                />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        {/* time */}
-                        <div className="flex justify-center ">
-                            <div className="font-medium text-gray-500 text-sm dark:text-white/70">
-                                April 8,2023,6:30 AM
-                            </div>
-                        </div>
-                        {/* received */}
-                        <div className="flex gap-3">
-                            <img
-                                src="assets/images/avatars/avatar-2.jpg"
-                                alt=""
-                                className="w-9 h-9 rounded-full shadow"
-                            />
-                            <div className="px-4 py-2 rounded-[20px] max-w-sm bg-secondery">
-                                {" "}
-                                I’m glad you like it. I’m asking for $200 🤑
-                            </div>
-                        </div>
-                        {/* sent */}
-                        <div className="flex gap-2 flex-row-reverse items-end">
-                            <img
-                                src="assets/images/avatars/avatar-3.jpg"
-                                alt=""
-                                className="w-5 h-5 rounded-full shadow"
-                            />
-                            <div className="px-4 py-2 rounded-[20px] max-w-sm bg-gradient-to-tr from-sky-500 to-blue-500 text-white shadow">
-                                {" "}
-                                $200? Too steep. Can you lower the price a bit? 😕
-                            </div>
-                        </div>
-                        {/* received */}
-                        <div className="flex gap-3">
-                            <img
-                                src="assets/images/avatars/avatar-2.jpg"
-                                alt=""
-                                className="w-9 h-9 rounded-full shadow"
-                            />
-                            <div className="px-4 py-2 rounded-[20px] max-w-sm bg-secondery">
-                                {" "}
-                                Well, I can’t go too low because I paid a lot. But I’m willing
-                                to negotiate. What’s your offer? 🤔{" "}
-                            </div>
-                        </div>
-                        {/* sent */}
-                        <div className="flex gap-2 flex-row-reverse items-end">
-                            <img
-                                src="assets/images/avatars/avatar-3.jpg"
-                                alt=""
-                                className="w-5 h-5 rounded-full shadow"
-                            />
-                            <div className="px-4 py-2 rounded-[20px] max-w-sm bg-gradient-to-tr from-sky-500 to-blue-500 text-white shadow">
-                                {" "}
-                                Sorry, can’t pay more than $150. 😅
-                            </div>
-                        </div>
-                        {/* time */}
-                        <div className="flex justify-center ">
-                            <div className="font-medium text-gray-500 text-sm dark:text-white/70">
-                                April 8,2023,6:30 AM
-                            </div>
-                        </div>
-                        {/* received */}
-                        <div className="flex gap-3">
-                            <img
-                                src="assets/images/avatars/avatar-2.jpg"
-                                alt=""
-                                className="w-9 h-9 rounded-full shadow"
-                            />
-                            <div className="px-4 py-2 rounded-[20px] max-w-sm bg-secondery">
-                                {" "}
-                                $150? Too low. Photo worth more. 😬
-                            </div>
-                        </div>
-                        {/* sent */}
-                        <div className="flex gap-2 flex-row-reverse items-end">
-                            <img
-                                src="assets/images/avatars/avatar-3.jpg"
-                                alt=""
-                                className="w-5 h-5 rounded-full shadow"
-                            />
-                            <div className="px-4 py-2 rounded-[20px] max-w-sm bg-gradient-to-tr from-sky-500 to-blue-500 text-white shadow">
-                                {" "}
-                                Too high. I Can’t . How about $160? Final offer. 😬{" "}
-                            </div>
-                        </div>
-                        {/* received */}
-                        <div className="flex gap-3">
-                            <img
-                                src="assets/images/avatars/avatar-2.jpg"
-                                alt=""
-                                className="w-9 h-9 rounded-full shadow"
-                            />
-                            <div className="px-4 py-2 rounded-[20px] max-w-sm bg-secondery">
-                                {" "}
-                                Fine, fine. You’re hard to please. I’ll take $160, but only
-                                because I like you. 😍
-                            </div>
-                        </div>
-                        {/* sent */}
-                        <div className="flex gap-2 flex-row-reverse items-end">
-                            <img
-                                src="assets/images/avatars/avatar-3.jpg"
-                                alt=""
-                                className="w-5 h-5 rounded-full shadow"
-                            />
-                            <div className="px-4 py-2 rounded-[20px] max-w-sm bg-gradient-to-tr from-sky-500 to-blue-500 text-white shadow">
-                                {" "}
-                                Great, thank you. I appreciate it. I love this photo and can’t
-                                wait to hang it. 😩{" "}
-                            </div>
-                        </div>
+                        {chatMessages.map((element, index, array) => {
+                            const msg = array[array.length - index - 1];
+                            return <TextMessage key={msg.messageId} message={msg} onReply={handleReply} onDelete={handleDelete} />
+                        })}
                     </div>
+                </div>
+                {replyMessage && (
+                    <div className="flex items-center justify-between px-4 py-2 bg-gray-100 rounded-lg shadow mb-2">
+                        <div className="text-gray-600">
+                            <span className="font-semibold">Replying to {replyMessage.senderName}:</span>
+                            {replyMessage.type == 0 ? `" ${replyMessage.text}"` : replyMessage.type == 1? " [File]" : " [Image]"}
+                        </div>
+                        <button
+                            onClick={handleCancelReply}
+                            className="ml-2 text-gray-500 hover:text-gray-800 focus:outline-none"
+                        >
+                            <i className="fas fa-times"></i> {/* Font Awesome X icon */}
+                        </button>
+                    </div>
+                )}
+                {/* File preview region */}
+                <div className="mt-2 overflow-x-auto flex space-x-2">
+                    {filesList.map((file, index) => (
+                        <FilePreview
+                            key={file.id}
+                            file={file}
+                            onRemove={() => removeFile(file)}  // Pass the remove handler as a prop
+                        />
+                    ))}
                 </div>
                 {/* sending message area */}
                 <div className="flex items-center md:gap-4 gap-2 md:p-3 p-2 overflow-hidden">
-                    <div
-                        id="message__wrap"
-                        className="flex items-center gap-2 h-full dark:text-white -mt-1.5"
-                    >
-                        <button type="button" className="shrink-0">
-                            <ion-icon className="text-3xl flex" name="add-circle-outline" />
-                        </button>
-                        <div
-                            className="dropbar pt-36 h-60 bg-gradient-to-t via-white from-white via-30% from-30% dark:from-slate-900 dark:via-900"
-                            uk-drop="stretch: x; target: #message__wrap ;animation:  slide-bottom ;animate-out: true; pos: top-left; offset:10 ; mode: click ; duration: 200"
-                        >
-                            <div
-                                className="sm:w-full p-3 flex justify-center gap-5"
-                                uk-scrollspy="target: > button; cls: uk-animation-slide-bottom-small; delay: 100;repeat:true"
-                            >
-                                <button
-                                    type="button"
-                                    className="bg-sky-50 text-sky-600 border border-sky-100 shadow-sm p-2.5 rounded-full shrink-0 duration-100 hover:scale-[1.15] dark:bg-dark3 dark:border-0"
-                                >
-                                    <ion-icon className="text-3xl flex" name="image" />
-                                </button>
-                                <button
-                                    type="button"
-                                    className="bg-green-50 text-green-600 border border-green-100 shadow-sm p-2.5 rounded-full shrink-0 duration-100 hover:scale-[1.15] dark:bg-dark3 dark:border-0"
-                                >
-                                    <ion-icon className="text-3xl flex" name="images" />
-                                </button>
-                                <button
-                                    type="button"
-                                    className="bg-pink-50 text-pink-600 border border-pink-100 shadow-sm p-2.5 rounded-full shrink-0 duration-100 hover:scale-[1.15] dark:bg-dark3 dark:border-0"
-                                >
-                                    <ion-icon className="text-3xl flex" name="document-text" />
-                                </button>
-                                <button
-                                    type="button"
-                                    className="bg-orange-50 text-orange-600 border border-orange-100 shadow-sm p-2.5 rounded-full shrink-0 duration-100 hover:scale-[1.15] dark:bg-dark3 dark:border-0"
-                                >
-                                    <ion-icon className="text-3xl flex" name="gift" />
-                                </button>
-                            </div>
-                        </div>
-                        <button type="button" className="shrink-0">
-                            <ion-icon className="text-3xl flex" name="happy-outline" />
-                        </button>
-                        <div
-                            className="dropbar p-2"
-                            uk-drop="stretch: x; target: #message__wrap ;animation: uk-animation-scale-up uk-transform-origin-bottom-left ;animate-out: true; pos: top-left ; offset:2; mode: click ; duration: 200 "
-                        >
-                            <div className="sm:w-60 bg-white shadow-lg border rounded-xl  pr-0 dark:border-slate-700 dark:bg-dark3">
-                                <h4 className="text-sm font-semibold p-3 pb-0">Send Imogi</h4>
-                                <div className="grid grid-cols-5 overflow-y-auto max-h-44 p-3 text-center text-xl">
-                                    <div className="hover:bg-secondery p-1.5 rounded-md hover:scale-125 cursor-pointer duration-200">
-                                        {" "}
-                                        😊{" "}
-                                    </div>
-                                    <div className="hover:bg-secondery p-1.5 rounded-md hover:scale-125 cursor-pointer duration-200">
-                                        {" "}
-                                        🤩{" "}
-                                    </div>
-                                    <div className="hover:bg-secondery p-1.5 rounded-md hover:scale-125 cursor-pointer duration-200">
-                                        {" "}
-                                        😎
-                                    </div>
-                                    <div className="hover:bg-secondery p-1.5 rounded-md hover:scale-125 cursor-pointer duration-200">
-                                        {" "}
-                                        🥳{" "}
-                                    </div>
-                                    <div className="hover:bg-secondery p-1.5 rounded-md hover:scale-125 cursor-pointer duration-200">
-                                        {" "}
-                                        😂{" "}
-                                    </div>
-                                    <div className="hover:bg-secondery p-1.5 rounded-md hover:scale-125 cursor-pointer duration-200">
-                                        {" "}
-                                        🥰{" "}
-                                    </div>
-                                    <div className="hover:bg-secondery p-1.5 rounded-md hover:scale-125 cursor-pointer duration-200">
-                                        {" "}
-                                        😡{" "}
-                                    </div>
-                                    <div className="hover:bg-secondery p-1.5 rounded-md hover:scale-125 cursor-pointer duration-200">
-                                        {" "}
-                                        😊{" "}
-                                    </div>
-                                    <div className="hover:bg-secondery p-1.5 rounded-md hover:scale-125 cursor-pointer duration-200">
-                                        {" "}
-                                        🤩{" "}
-                                    </div>
-                                    <div className="hover:bg-secondery p-1.5 rounded-md hover:scale-125 cursor-pointer duration-200">
-                                        {" "}
-                                        😎
-                                    </div>
-                                    <div className="hover:bg-secondery p-1.5 rounded-md hover:scale-125 cursor-pointer duration-200">
-                                        {" "}
-                                        🥳{" "}
-                                    </div>
-                                    <div className="hover:bg-secondery p-1.5 rounded-md hover:scale-125 cursor-pointer duration-200">
-                                        {" "}
-                                        😂{" "}
-                                    </div>
-                                    <div className="hover:bg-secondery p-1.5 rounded-md hover:scale-125 cursor-pointer duration-200">
-                                        {" "}
-                                        🥰{" "}
-                                    </div>
-                                    <div className="hover:bg-secondery p-1.5 rounded-md hover:scale-125 cursor-pointer duration-200">
-                                        {" "}
-                                        😡{" "}
-                                    </div>
-                                    <div className="hover:bg-secondery p-1.5 rounded-md hover:scale-125 cursor-pointer duration-200">
-                                        {" "}
-                                        🤔{" "}
-                                    </div>
-                                    <div className="hover:bg-secondery p-1.5 rounded-md hover:scale-125 cursor-pointer duration-200">
-                                        {" "}
-                                        😊{" "}
-                                    </div>
-                                    <div className="hover:bg-secondery p-1.5 rounded-md hover:scale-125 cursor-pointer duration-200">
-                                        {" "}
-                                        🤩{" "}
-                                    </div>
-                                    <div className="hover:bg-secondery p-1.5 rounded-md hover:scale-125 cursor-pointer duration-200">
-                                        {" "}
-                                        😎
-                                    </div>
-                                    <div className="hover:bg-secondery p-1.5 rounded-md hover:scale-125 cursor-pointer duration-200">
-                                        {" "}
-                                        🥳{" "}
-                                    </div>
-                                    <div className="hover:bg-secondery p-1.5 rounded-md hover:scale-125 cursor-pointer duration-200">
-                                        {" "}
-                                        😂{" "}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {/* Hidden file input */}
+                    <input
+                        type="file"
+                        multiple
+                        ref={fileInputRef}
+                        style={{ display: 'none' }}
+                        onChange={handleFileChange}
+                    />
+
+                    {/* Clickable Iconic attachment icon */}
+                    <i className="fas fa-paperclip" style={{ cursor: "pointer" }} onClick={() => { fileInputRef.current.click(); }}></i>
                     <div className="relative flex-1">
                         <textarea
                             placeholder="Write your message"
                             rows={1}
                             className="w-full resize-none bg-secondery rounded-full px-4 p-2"
-                            defaultValue={""}
+                            value={messageInput}
+                            onChange={handleMsgInputChange}
+                            onKeyDown={(event) => {
+                                if (event.key === 'Enter') {
+                                    event.preventDefault();
+                                    sendMessages();
+                                    todoAfterSetChatMsgesRef.current = () => {
+                                        if (chatMessagesRef.current) {
+                                            chatMessagesRef.current.scrollTop = chatMessagesRef.current.scrollHeight;
+                                        }
+                                    };
+                                }
+                            }}
                         />
                         <button
                             type="button"
-                            className="text-white shrink-0 p-2 absolute right-0.5 top-0"
+                            onClick={sendMessages}
+                            className="text-white focus:outline-none rounded-full shrink-0 p-2 absolute right-0.5 top-0"
                         >
-                            <ion-icon className="text-xl flex" name="send-outline" />
+                            <i className="far fa-paper-plane text-xl flex text-gray-400"></i>
                         </button>
                     </div>
-                    <button type="button" className="flex h-full dark:text-white">
-                        <ion-icon className="text-3xl flex -mt-3" name="heart-outline" />
-                    </button>
-                </div>
+                </div>               
             </div>
             {/* user profile right info */}
             <div className="rightt w-full h-full absolute top-0 right-0 z-10 hidden transition-transform">
@@ -586,5 +434,5 @@
             </div>
         </>
     );
-}
+})
 export default ChatroomDetail;

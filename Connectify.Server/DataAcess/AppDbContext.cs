@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -29,7 +30,22 @@ namespace Connectify.Server.DataAccess
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            builder.Entity<Message>()
+                .HasMany(m => m.Files)
+                .WithOne(f => f.Message)
+                .HasForeignKey(f => f.MessageId)
+                .OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<MessageVisibility>()
+            .HasOne(mv => mv.User)
+            .WithMany() // Adjust as necessary based on your User entity's navigation properties
+            .HasForeignKey(mv => mv.UserId)
+            .OnDelete(DeleteBehavior.Restrict); // No action for User deletion
 
+            builder.Entity<MessageVisibility>()
+                .HasOne(mv => mv.Message)
+                .WithMany(m => m.MessageVisibilities) // Adjust as necessary based on your Message entity's navigation properties
+                .HasForeignKey(mv => mv.MessageId)
+                .OnDelete(DeleteBehavior.Restrict); // No action for Message deletion
             //Post
             builder.Entity<Post>()
                 .HasDiscriminator<string>("PostType")
@@ -41,7 +57,17 @@ namespace Connectify.Server.DataAccess
                 .HasForeignKey(p => p.AuthorId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            //Friend request
+            //FriendShip
+            builder.Entity<FriendShip>()
+                .HasOne(fs => fs.User1)
+                .WithMany()
+                .HasForeignKey(fs => fs.User1Id)
+                .OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<FriendShip>()
+                .HasOne(fs => fs.User2)
+                .WithMany()
+                .HasForeignKey(fs => fs.User2Id)
+                .OnDelete(DeleteBehavior.Restrict);
             builder.Entity<FriendRequest>()
                 .HasOne(fr => fr.Requester)
                 .WithMany()
@@ -51,18 +77,6 @@ namespace Connectify.Server.DataAccess
                 .HasOne(fr => fr.Receiver)
                 .WithMany()
                 .HasForeignKey(fr => fr.ReceiverId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            //FriendShip
-            builder.Entity<FriendShip>()
-                .HasOne(fs => fs.User1)
-                .WithMany()
-                .HasForeignKey(fr => fr.User1Id)
-                .OnDelete(DeleteBehavior.Restrict);
-            builder.Entity<FriendShip>()
-                .HasOne(fs => fs.User2)
-                .WithMany()
-                .HasForeignKey(fr => fr.User2Id)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<CommentReaction>()
@@ -112,6 +126,7 @@ namespace Connectify.Server.DataAccess
                 .WithMany()
                 .HasForeignKey(mr => mr.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
+            
         }
         public DbSet<Post> Posts { get; set; }
         public DbSet<Media> Media { get; set; }
@@ -129,5 +144,6 @@ namespace Connectify.Server.DataAccess
         public DbSet<Message> Messages { get; set; }
         public DbSet<MessageReaction> MessageReactions { get; set; }
         public DbSet<ChatRoomMember> ChatRoomMembers { get; set; }
+        public DbSet<MessageVisibility> MessageVisibilities { get; set; }
     }
 }

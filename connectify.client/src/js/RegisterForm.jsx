@@ -25,9 +25,9 @@ function RegisterForm() {
 
     const validateFirstName = (name) => {
         if (name.length > 40) {
-            return "First name must be at most 40 characters.";
+            return "First/last name must be at most 40 characters.";
         } else if (/[^a-zA-Z ]/.test(name)) {
-            return "First name must not contain special characters.";
+            return "First/last name must not contain special characters.";
         }
         return null;
     };
@@ -58,6 +58,9 @@ function RegisterForm() {
         let error = null;
         switch (name) {
             case "firstName":
+                error = validateFirstName(value);
+                break;
+            case "lastName":
                 error = validateFirstName(value);
                 break;
             case "email":
@@ -155,6 +158,9 @@ function RegisterForm() {
                                 required
                                 className="!w-full !rounded-lg !bg-transparent !shadow-sm !border-slate-200 dark:!border-slate-800 dark:!bg-white/5"
                             />
+                            {errors.lastName && (
+                                <p className="text-red-600 text-sm mt-1">{errors.lastName}</p>
+                            )}
                         </div>
                     </div>
 

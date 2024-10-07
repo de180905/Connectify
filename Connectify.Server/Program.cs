@@ -1,15 +1,25 @@
 using Connectify.BusinessObjects.Authen;
 using Connectify.Server.DataAccess;
+using Connectify.Server.Hubs;
+using Connectify.Server.Services;
 using Connectify.Server.Services.Abstract;
 using Connectify.Server.Services.Implement;
+using Connectify.Server.Utils;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Text;
+using tusdotnet;
+using tusdotnet.Helpers;
+using tusdotnet.Models;
+using tusdotnet.Models.Configuration;
+using tusdotnet.Stores;
 
 namespace Connectify.Server
 {
@@ -18,7 +28,10 @@ namespace Connectify.Server
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
+            builder.WebHost.ConfigureKestrel(serverOptions =>
+            {
+                serverOptions.Limits.MaxRequestBodySize = 2147483648; // Set max request body size to 2 GB
+            });
             // Add services to the container.
 
             builder.Services.AddControllers()
@@ -63,7 +76,7 @@ namespace Connectify.Server
                     policy.WithOrigins("https://localhost:5173") // Specify the exact origin
                           .AllowAnyHeader()
                           .AllowAnyMethod()
-                          .AllowCredentials(); // Allow credentials
+                          .AllowCredentials();// Allow credentials
                 });
             });
             builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
@@ -71,7 +84,12 @@ namespace Connectify.Server
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectifyDb"));
             });
+            builder.Services.AddAutoMapper(typeof(UserProfile), typeof(MessageProfile));
             builder.Services.AddScoped<IAccountService, AccountService>();
+            builder.Services.AddScoped<IChatService, ChatService>();
+            builder.Services.AddScoped<ICloudStorageService, CloudStorageService>();
+            builder.Services.AddScoped<ISearchService, SearchService>();
+            builder.Services.AddScoped<IFriendService, FriendService>();
             builder.Services.AddTransient<IEmailSender, EmailSender>();
 
             builder.Services.AddAuthentication(options =>
@@ -111,8 +129,11 @@ namespace Connectify.Server
                     }
                 };
             });
+            builder.Services.Configure<FormOptions>(options =>
+            {
+                options.MultipartBodyLengthLimit = 2147483648; // 2 GB
+            });
             var app = builder.Build();
-
             app.UseDefaultFiles();
             app.UseStaticFiles();
 
@@ -129,7 +150,7 @@ namespace Connectify.Server
 
 
             app.MapControllers();
-
+            app.MapHub<ChatHub>("/hubs/chathub");
             app.MapFallbackToFile("/index.html");
 
             app.Run();

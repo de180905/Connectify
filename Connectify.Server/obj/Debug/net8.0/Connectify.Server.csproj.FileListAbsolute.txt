@@ -156,3 +156,7 @@ D:\DotnetProjects\Connectify\Connectify.Server\bin\Debug\net8.0\BouncyCastle.Cry
 D:\DotnetProjects\Connectify\Connectify.Server\bin\Debug\net8.0\MailKit.dll
 D:\DotnetProjects\Connectify\Connectify.Server\bin\Debug\net8.0\MimeKit.dll
 D:\DotnetProjects\Connectify\Connectify.Server\bin\Debug\net8.0\System.Formats.Asn1.dll
+D:\DotnetProjects\Connectify\Connectify.Server\bin\Debug\net8.0\tusdotnet.dll
+D:\DotnetProjects\Connectify\Connectify.Server\bin\Debug\net8.0\MegaApiClient.dll
+D:\DotnetProjects\Connectify\Connectify.Server\bin\Debug\net8.0\Newtonsoft.Json.dll
+D:\DotnetProjects\Connectify\Connectify.Server\bin\Debug\net8.0\CloudinaryDotNet.dll

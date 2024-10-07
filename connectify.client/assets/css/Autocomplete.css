@@ -1,0 +1,43 @@
+.autocomplete-container {
+    position: relative;
+    max-width: 400px; /* Set a max width for the input */
+    margin: 0 auto; /* Center the component */
+}
+
+.autocomplete-input {
+    width: 100%;
+    padding: 10px 15px; /* Add padding for a better look */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 4px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    font-size: 16px; /* Increase font size */
+    transition: border-color 0.3s; /* Smooth transition for border color */
+}
+
+    .autocomplete-input:focus {
+        border-color: #007bff; /* Change border color on focus */
+        outline: none; /* Remove outline */
+    }
+
+.suggestions-list {
+    list-style-type: none; /* Remove default list styling */
+    padding: 0;
+    margin: 5px 0 0 0; /* Space above the suggestions */
+    border: 1px solid #ccc; /* Light border around the list */
+    border-radius: 4px; /* Rounded corners */
+    background-color: #fff; /* White background */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    position: absolute; /* Position the list below the input */
+    width: 100%; /* Full width */
+    z-index: 1000; /* Make sure it appears above other elements */
+}
+
+.suggestion-item {
+    padding: 10px 15px; /* Padding for each suggestion */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.2s; /* Smooth transition for background color */
+}
+
+    .suggestion-item:hover {
+        background-color: #f1f1f1; /* Highlight on hover */
+    }

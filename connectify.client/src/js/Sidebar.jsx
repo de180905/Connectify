@@ -1,3 +1,4 @@
+import {Link} from 'react-router-dom';
 const Sidebar = () => {
     return (
         <div
@@ -9,85 +10,45 @@ const Sidebar = () => {
                 <div className="pr-4" data-simplebar="">
                     <nav id="side">
                         <ul>
-                            <li className="active">
-                                <a href="feed.html">
+                            <li>
+                                <Link to="/">
                                     <img
                                         src="assets/images/icons/home.png"
                                         alt="feeds"
                                         className="w-6"
                                     />
                                     <span> Feed </span>
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <a href="messages.html">
+                                <Link to="/chatrooms">
                                     <img
                                         src="assets/images/icons/message.png"
                                         alt="messages"
                                         className="w-5"
                                     />
                                     <span> messages </span>
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <a href="video.html">
-                                    <img
-                                        src="assets/images/icons/video.png"
-                                        alt="messages"
-                                        className="w-6"
-                                    />
-                                    <span> video </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="event.html">
-                                    <img
-                                        src="assets/images/icons/event.png"
-                                        alt="messages"
-                                        className="w-6"
-                                    />
-                                    <span> event </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="pages.html">
+                                <Link to="/people">
                                     <img
                                         src="assets/images/icons/page.png"
                                         alt="pages"
                                         className="w-6"
                                     />
-                                    <span> Pages </span>
-                                </a>
+                                    <span> People </span>
+                                </Link>
                             </li>
                             <li>
-                                <a href="groups.html">
+                                <Link to="/groups">
                                     <img
                                         src="assets/images/icons/group.png"
                                         alt="groups"
                                         className="w-6"
                                     />
                                     <span> Groups </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="market.html">
-                                    <img
-                                        src="assets/images/icons/market.png"
-                                        alt="market"
-                                        className="w-7 -ml-1"
-                                    />
-                                    <span> market </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="blog.html">
-                                    <img
-                                        src="assets/images/icons/blog.png"
-                                        alt="blog"
-                                        className="w-6"
-                                    />
-                                    <span> blog </span>
-                                </a>
+                                </Link>
                             </li>
                             <li className="!hidden" id="show__more">
                                 <a href="games.html">

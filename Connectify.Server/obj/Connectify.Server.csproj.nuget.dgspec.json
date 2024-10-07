@@ -109,9 +109,17 @@
               "target": "Package",
               "version": "[13.0.1, )"
             },
+            "CloudinaryDotNet": {
+              "target": "Package",
+              "version": "[1.26.2, )"
+            },
             "MailKit": {
               "target": "Package",
               "version": "[4.7.1.1, )"
+            },
+            "MegaApiClient": {
+              "target": "Package",
+              "version": "[1.10.4, )"
             },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
@@ -138,6 +146,10 @@
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.4.0, )"
+            },
+            "tusdotnet": {
+              "target": "Package",
+              "version": "[2.8.0, )"
             }
           },
           "imports": [

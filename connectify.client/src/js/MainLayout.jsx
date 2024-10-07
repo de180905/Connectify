@@ -9,7 +9,6 @@ const MainLayout = ({ mainContent, subContent }) => {
                 <Sidebar />
                 {mainContent}
             </div>
-            {subContent}
         </>
     )
 }
