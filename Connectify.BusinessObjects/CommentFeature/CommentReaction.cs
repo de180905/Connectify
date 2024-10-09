@@ -12,7 +12,7 @@ namespace Connectify.BusinessObjects.CommentFeature
     public class CommentReaction
     {
         [Key]
-        public int Id { get; set; }
+        public int  Id { get; set; }
         [ForeignKey(nameof(CommentId))]
         public int CommentId { get; set; }
         public virtual Comment Comment { get; set; }

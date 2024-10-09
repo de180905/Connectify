@@ -8,11 +8,11 @@ namespace Connectify.BusinessObjects
 {
     public enum ReactionType
     {
-        Like,
-        Love,
-        Haha,
-        Wow,
-        Sad,
-        Angry
+        Like=1,
+        Love=2,
+        Haha=3,
+        Wow=4,
+        Sad=5,
+        Angry=6
     }
 }

@@ -73,6 +73,7 @@ namespace Connectify.Server
             });
             builder.Services.AddScoped<IAccountService, AccountService>();
             builder.Services.AddTransient<IEmailSender, EmailSender>();
+            builder.Services.AddScoped<ICommentService, CommentService>();
 
             builder.Services.AddAuthentication(options =>
             {

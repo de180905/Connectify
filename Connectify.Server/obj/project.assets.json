@@ -4799,19 +4799,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\khoiv\\.nuget\\packages\\": {}
+    "C:\\Users\\Admin\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\DotnetProjects\\Connectify\\Connectify.Server\\Connectify.Server.csproj",
+      "projectUniqueName": "D:\\Internship\\Project\\Connectify\\Connectify.Server\\Connectify.Server.csproj",
       "projectName": "Connectify.Server",
-      "projectPath": "D:\\DotnetProjects\\Connectify\\Connectify.Server\\Connectify.Server.csproj",
-      "packagesPath": "C:\\Users\\khoiv\\.nuget\\packages\\",
-      "outputPath": "D:\\DotnetProjects\\Connectify\\Connectify.Server\\obj\\",
+      "projectPath": "D:\\Internship\\Project\\Connectify\\Connectify.Server\\Connectify.Server.csproj",
+      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+      "outputPath": "D:\\Internship\\Project\\Connectify\\Connectify.Server\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\khoiv\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4825,8 +4825,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\DotnetProjects\\Connectify\\Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj": {
-              "projectPath": "D:\\DotnetProjects\\Connectify\\Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj"
+            "D:\\Internship\\Project\\Connectify\\Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj": {
+              "projectPath": "D:\\Internship\\Project\\Connectify\\Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj"
             }
           }
         }
@@ -4835,6 +4835,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -4895,7 +4900,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.205/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
