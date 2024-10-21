@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Internship\\Project\\Connectify\\Connectify.Server\\Connectify.Server.csproj": {}
+    "D:\\Backup\\Connectify\\Connectify.Server\\Connectify.Server.csproj": {}
   },
   "projects": {
-    "D:\\Internship\\Project\\Connectify\\Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj": {
+    "D:\\Backup\\Connectify\\Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Internship\\Project\\Connectify\\Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj",
+        "projectUniqueName": "D:\\Backup\\Connectify\\Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj",
         "projectName": "Connectify.BusinessObjects",
-        "projectPath": "D:\\Internship\\Project\\Connectify\\Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj",
+        "projectPath": "D:\\Backup\\Connectify\\Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\Internship\\Project\\Connectify\\Connectify.BusinessObjects\\obj\\",
+        "outputPath": "D:\\Backup\\Connectify\\Connectify.BusinessObjects\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -70,14 +70,14 @@
         }
       }
     },
-    "D:\\Internship\\Project\\Connectify\\Connectify.Server\\Connectify.Server.csproj": {
+    "D:\\Backup\\Connectify\\Connectify.Server\\Connectify.Server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Internship\\Project\\Connectify\\Connectify.Server\\Connectify.Server.csproj",
+        "projectUniqueName": "D:\\Backup\\Connectify\\Connectify.Server\\Connectify.Server.csproj",
         "projectName": "Connectify.Server",
-        "projectPath": "D:\\Internship\\Project\\Connectify\\Connectify.Server\\Connectify.Server.csproj",
+        "projectPath": "D:\\Backup\\Connectify\\Connectify.Server\\Connectify.Server.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\Internship\\Project\\Connectify\\Connectify.Server\\obj\\",
+        "outputPath": "D:\\Backup\\Connectify\\Connectify.Server\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -94,8 +94,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\Internship\\Project\\Connectify\\Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj": {
-                "projectPath": "D:\\Internship\\Project\\Connectify\\Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj"
+              "D:\\Backup\\Connectify\\Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj": {
+                "projectPath": "D:\\Backup\\Connectify\\Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj"
               }
             }
           }

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Connectify.Server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6240e6a48449befe7a2efb90e8b02ddb4a15ce53")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ae9c38b0c35af93efe1b7cabf6ec0164b12b21e3")]
 [assembly: System.Reflection.AssemblyProductAttribute("Connectify.Server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Connectify.Server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

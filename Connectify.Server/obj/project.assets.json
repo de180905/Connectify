@@ -204,7 +204,7 @@
           }
         }
       },
-      "Microsoft.AspNetCore.SpaProxy/8.0.8": {
+      "Microsoft.AspNetCore.SpaProxy/8.0.10": {
         "type": "package",
         "compile": {
           "lib/net8.0/Microsoft.AspNetCore.SpaProxy.dll": {}
@@ -2039,10 +2039,10 @@
         "microsoft.aspnetcore.signalr.common.nuspec"
       ]
     },
-    "Microsoft.AspNetCore.SpaProxy/8.0.8": {
-      "sha512": "T9Zhb64OmOr2nU0iND7br44EfJrQYHpopxvq33l33uZM2Uu/V2GTHKg5OmGMO3XJuUX59fhqvMyXOcFFj6k1pA==",
+    "Microsoft.AspNetCore.SpaProxy/8.0.10": {
+      "sha512": "8oqu48JT85gDrgkS8nbrIBYY4R+u3twEnycD8zSJJUVfw+Y14BmkymSGtH413ev3hc4hq4le9fD0P5468NlNbg==",
       "type": "package",
-      "path": "microsoft.aspnetcore.spaproxy/8.0.8",
+      "path": "microsoft.aspnetcore.spaproxy/8.0.10",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -2050,7 +2050,7 @@
         "THIRD-PARTY-NOTICES.TXT",
         "build/Microsoft.AspNetCore.SpaProxy.targets",
         "lib/net8.0/Microsoft.AspNetCore.SpaProxy.dll",
-        "microsoft.aspnetcore.spaproxy.8.0.8.nupkg.sha512",
+        "microsoft.aspnetcore.spaproxy.8.0.10.nupkg.sha512",
         "microsoft.aspnetcore.spaproxy.nuspec"
       ]
     },
@@ -4804,11 +4804,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Internship\\Project\\Connectify\\Connectify.Server\\Connectify.Server.csproj",
+      "projectUniqueName": "D:\\Backup\\Connectify\\Connectify.Server\\Connectify.Server.csproj",
       "projectName": "Connectify.Server",
-      "projectPath": "D:\\Internship\\Project\\Connectify\\Connectify.Server\\Connectify.Server.csproj",
+      "projectPath": "D:\\Backup\\Connectify\\Connectify.Server\\Connectify.Server.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "D:\\Internship\\Project\\Connectify\\Connectify.Server\\obj\\",
+      "outputPath": "D:\\Backup\\Connectify\\Connectify.Server\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -4825,8 +4825,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\Internship\\Project\\Connectify\\Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj": {
-              "projectPath": "D:\\Internship\\Project\\Connectify\\Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj"
+            "D:\\Backup\\Connectify\\Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj": {
+              "projectPath": "D:\\Backup\\Connectify\\Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj"
             }
           }
         }

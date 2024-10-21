@@ -1,34 +1,22 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Internship\\Project\\Connectify\\",
+  "WorkspaceRootPath": "D:\\Backup\\Connectify\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|D:\\Internship\\Project\\Connectify\\connectify.server\\dtos\\commentdtos\\createcommentdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\dtos\\commentdtos\\createcommentdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6ADC48AF-4695-4957-ABAE-8003BC5E8633}|Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj|d:\\internship\\project\\connectify\\connectify.businessobjects\\commentfeature\\comment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6ADC48AF-4695-4957-ABAE-8003BC5E8633}|Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj|solutionrelative:connectify.businessobjects\\commentfeature\\comment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|D:\\Internship\\Project\\Connectify\\connectify.server\\services\\implement\\commentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|d:\\backup\\connectify\\connectify.server\\services\\implement\\commentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\services\\implement\\commentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|D:\\Internship\\Project\\Connectify\\connectify.server\\services\\abstract\\icommentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\services\\abstract\\icommentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|D:\\Internship\\Project\\Connectify\\connectify.server\\dtos\\commentdtos\\commentdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\dtos\\commentdtos\\commentdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|D:\\Internship\\Project\\Connectify\\connectify.server\\dtos\\commentdtos\\addreactiondtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\dtos\\commentdtos\\addreactiondtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|d:\\internship\\project\\connectify\\connectify.server\\controllers\\commentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|D:\\Backup\\Connectify\\connectify.server\\controllers\\commentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\controllers\\commentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F1B2C64-EB0E-48E9-ADE8-9A2AD64BF706}|connectify.client\\connectify.client.esproj|D:\\Backup\\Connectify\\connectify.client\\src\\socialite-v3.0\\video.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5F1B2C64-EB0E-48E9-ADE8-9A2AD64BF706}|connectify.client\\connectify.client.esproj|solutionrelative:connectify.client\\src\\socialite-v3.0\\video.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F1B2C64-EB0E-48E9-ADE8-9A2AD64BF706}|connectify.client\\connectify.client.esproj|D:\\Backup\\Connectify\\connectify.client\\src\\socialite-v3.0\\form-login.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5F1B2C64-EB0E-48E9-ADE8-9A2AD64BF706}|connectify.client\\connectify.client.esproj|solutionrelative:connectify.client\\src\\socialite-v3.0\\form-login.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -58,93 +46,51 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Comment.cs",
-              "DocumentMoniker": "D:\\Internship\\Project\\Connectify\\Connectify.BusinessObjects\\CommentFeature\\Comment.cs",
-              "RelativeDocumentMoniker": "Connectify.BusinessObjects\\CommentFeature\\Comment.cs",
-              "ToolTip": "D:\\Internship\\Project\\Connectify\\Connectify.BusinessObjects\\CommentFeature\\Comment.cs",
-              "RelativeToolTip": "Connectify.BusinessObjects\\CommentFeature\\Comment.cs",
-              "ViewState": "AQIAAAcAAAAAAAAAAAAuwCIAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-09T06:37:02.525Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "CommentService.cs",
-              "DocumentMoniker": "D:\\Internship\\Project\\Connectify\\Connectify.Server\\Services\\Implement\\CommentService.cs",
-              "RelativeDocumentMoniker": "Connectify.Server\\Services\\Implement\\CommentService.cs",
-              "ToolTip": "D:\\Internship\\Project\\Connectify\\Connectify.Server\\Services\\Implement\\CommentService.cs",
-              "RelativeToolTip": "Connectify.Server\\Services\\Implement\\CommentService.cs",
-              "ViewState": "AQIAABUAAAAAAAAAAAAAACIAAAAOAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-07T06:23:06.344Z",
-              "EditorCaption": ""
+              "Title": "video.html",
+              "DocumentMoniker": "D:\\Backup\\Connectify\\connectify.client\\src\\socialite-v3.0\\video.html",
+              "RelativeDocumentMoniker": "connectify.client\\src\\socialite-v3.0\\video.html",
+              "ToolTip": "D:\\Backup\\Connectify\\connectify.client\\src\\socialite-v3.0\\video.html",
+              "RelativeToolTip": "connectify.client\\src\\socialite-v3.0\\video.html",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2024-10-18T15:15:56.906Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "ICommentService.cs",
-              "DocumentMoniker": "D:\\Internship\\Project\\Connectify\\Connectify.Server\\Services\\Abstract\\ICommentService.cs",
-              "RelativeDocumentMoniker": "Connectify.Server\\Services\\Abstract\\ICommentService.cs",
-              "ToolTip": "D:\\Internship\\Project\\Connectify\\Connectify.Server\\Services\\Abstract\\ICommentService.cs",
-              "RelativeToolTip": "Connectify.Server\\Services\\Abstract\\ICommentService.cs",
+              "Title": "form-login.html",
+              "DocumentMoniker": "D:\\Backup\\Connectify\\connectify.client\\src\\socialite-v3.0\\form-login.html",
+              "RelativeDocumentMoniker": "connectify.client\\src\\socialite-v3.0\\form-login.html",
+              "ToolTip": "D:\\Backup\\Connectify\\connectify.client\\src\\socialite-v3.0\\form-login.html",
+              "RelativeToolTip": "connectify.client\\src\\socialite-v3.0\\form-login.html",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2024-10-18T15:15:36.365Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CommentController.cs",
+              "DocumentMoniker": "D:\\Backup\\Connectify\\Connectify.Server\\Controllers\\CommentController.cs",
+              "RelativeDocumentMoniker": "Connectify.Server\\Controllers\\CommentController.cs",
+              "ToolTip": "D:\\Backup\\Connectify\\Connectify.Server\\Controllers\\CommentController.cs",
+              "RelativeToolTip": "Connectify.Server\\Controllers\\CommentController.cs",
+              "ViewState": "AQIAAEEAAAAAAAAAAAAgwFQAAABKAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-07T06:23:04.825Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-18T15:07:21.6Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "CreateCommentDTOs.cs",
-              "DocumentMoniker": "D:\\Internship\\Project\\Connectify\\Connectify.Server\\DTOs\\CommentDTOs\\CreateCommentDTOs.cs",
-              "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\CommentDTOs\\CreateCommentDTOs.cs",
-              "ToolTip": "D:\\Internship\\Project\\Connectify\\Connectify.Server\\DTOs\\CommentDTOs\\CreateCommentDTOs.cs",
-              "RelativeToolTip": "Connectify.Server\\DTOs\\CommentDTOs\\CreateCommentDTOs.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAAAAAA",
+              "Title": "CommentService.cs",
+              "DocumentMoniker": "D:\\Backup\\Connectify\\Connectify.Server\\Services\\Implement\\CommentService.cs",
+              "RelativeDocumentMoniker": "Connectify.Server\\Services\\Implement\\CommentService.cs",
+              "ToolTip": "D:\\Backup\\Connectify\\Connectify.Server\\Services\\Implement\\CommentService.cs",
+              "RelativeToolTip": "Connectify.Server\\Services\\Implement\\CommentService.cs",
+              "ViewState": "AQIAAEEAAAAAAAAAAAAgwGUAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-07T06:23:01.817Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "CommentDTOs.cs",
-              "DocumentMoniker": "D:\\Internship\\Project\\Connectify\\Connectify.Server\\DTOs\\CommentDTOs\\CommentDTOs.cs",
-              "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\CommentDTOs\\CommentDTOs.cs",
-              "ToolTip": "D:\\Internship\\Project\\Connectify\\Connectify.Server\\DTOs\\CommentDTOs\\CommentDTOs.cs",
-              "RelativeToolTip": "Connectify.Server\\DTOs\\CommentDTOs\\CommentDTOs.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-07T06:23:01.189Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "AddReactionDTOs.cs",
-              "DocumentMoniker": "D:\\Internship\\Project\\Connectify\\Connectify.Server\\DTOs\\CommentDTOs\\AddReactionDTOs.cs",
-              "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\CommentDTOs\\AddReactionDTOs.cs",
-              "ToolTip": "D:\\Internship\\Project\\Connectify\\Connectify.Server\\DTOs\\CommentDTOs\\AddReactionDTOs.cs",
-              "RelativeToolTip": "Connectify.Server\\DTOs\\CommentDTOs\\AddReactionDTOs.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-07T06:23:00.491Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "CommentController.cs",
-              "DocumentMoniker": "D:\\Internship\\Project\\Connectify\\Connectify.Server\\Controllers\\CommentController.cs",
-              "RelativeDocumentMoniker": "Connectify.Server\\Controllers\\CommentController.cs",
-              "ToolTip": "D:\\Internship\\Project\\Connectify\\Connectify.Server\\Controllers\\CommentController.cs",
-              "RelativeToolTip": "Connectify.Server\\Controllers\\CommentController.cs",
-              "ViewState": "AQIAABQAAAAAAAAAAAAAwCoAAAANAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-07T06:22:59.026Z",
+              "WhenOpened": "2024-10-18T15:07:12.099Z",
               "EditorCaption": ""
             }
           ]

@@ -1,8 +1,14 @@
-﻿using Connectify.Server.DTOs;
+﻿using Connectify.BusinessObjects.Authen;
+using Connectify.Server.DTOs;
+using Connectify.Server.DTOs.UpdateProfileDTO;
+using Connectify.Server.DTOs.UpdateProfileDTOs;
 using Connectify.Server.Services.Abstract;
 using Connectify.Server.Services.Exceptions;
+using Connectify.Server.Services.Implement;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Connectify.Server.Controllers
 {
@@ -11,10 +17,9 @@ namespace Connectify.Server.Controllers
     public class AccountController : ControllerBase
     {
         private readonly IAccountService accountRepo;
-
-        public AccountController(IAccountService accountRepo)
+        public AccountController(IAccountService accountRepo, UserManager<User> userManager)
         {
-            this.accountRepo = accountRepo;
+            this.accountRepo = accountRepo;         
         }
 
         [HttpPost("SignUp")]
@@ -76,5 +81,54 @@ namespace Connectify.Server.Controllers
             }
             return Ok(result);
         }
+
+        // Update profile
+        [HttpPut("UpdateProfile")]
+        public async Task<IActionResult> UpdateProfile([FromBody] UpdateProfileDTO dto)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == null)
+            {
+                return Unauthorized(new { massage = "User does not exist !" });
+            }
+            try
+            {
+                var result = await accountRepo.UpdateProfileAsync(userId, dto);
+                return result ? Ok(new { message = "Update information successfully." }) : BadRequest();
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "An unexpected error occurred.", details = ex.Message });
+            }
+           
+
+        }
+        [HttpPut("ChangePassword")]
+        public async Task<IActionResult> ChangePassword(ChangePasswordDTO dto)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);            
+            if(userId == null)
+            {
+                return Unauthorized(new {message="You are not logged in or User does not exsit ! "});
+            }
+            try
+            {
+                var result = await accountRepo.ChangePasswordAsync(userId, dto);
+                return result ? Ok(new { message = "Password changed successfully." }) : BadRequest(new { message = "Failed to change password." });
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "An unexpected error occurred.", details = ex.Message });
+            }
+        }
+        
     }
 }

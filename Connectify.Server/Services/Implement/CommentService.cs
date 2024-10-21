@@ -39,16 +39,14 @@ namespace Connectify.Server.Services.Implement
                 Content = dto.Content,
                 CreatedAt = DateTime.Now,  
                 PostId =3,// dto.PostId,  
-                AuthorId = userId, //"bbe771ab-531c-45a3-8e68-310762bbcd04",  
+                AuthorId = userId, 
                 ParentCommentId = dto.ParentCommentId,  
                 AttachmentUrl = dto.AttachmentUrl ?? "",  
             };
-
-            // Lưu bình luận vào database
+       
             await _dbContext.Comments.AddAsync(comment);
             await _dbContext.SaveChangesAsync();
 
-            // Trả về DTO sau khi bình luận được tạo
             return await MapToDTOAsync(comment, userId);
         }
 
@@ -61,13 +59,11 @@ namespace Connectify.Server.Services.Implement
                 .FirstOrDefaultAsync(r => r.CommentId == dto.CommentId && r.UserId == userId);
 
             if (existingReaction != null)
-            {
-                // Cập nhật phản ứng hiện có
+            {      
                 existingReaction.Reaction = dto.Reaction;
             }
             else
             {
-                // Thêm phản ứng mới
                 var newReaction = new CommentReaction
                 {
                     CommentId = dto.CommentId,
@@ -77,7 +73,6 @@ namespace Connectify.Server.Services.Implement
                 await _dbContext.CommentReactions.AddAsync(newReaction);
             }
 
-            // Lưu thay đổi
             await _dbContext.SaveChangesAsync();
             return true;
         }
@@ -105,7 +100,6 @@ namespace Connectify.Server.Services.Implement
         // Mapping Comment entity to CommentDTO with User info
         private async Task<CommentDTO> MapToDTOAsync(Comment comment, string userId)
         {
-            // Tìm kiếm thông tin của tác giả (Author) từ UserManager
             var author = await _userManager.FindByIdAsync(comment.AuthorId);
             var authorFullName = author != null ? author.FullName : "Unknown Author";
 
@@ -120,19 +114,57 @@ namespace Connectify.Server.Services.Implement
                 CommentId = comment.CommentId,
                 Content = comment.Content,
                 CreatedAt = comment.CreatedAt,
-                AuthorFullName = authorFullName,  // Lấy tên đầy đủ của tác giả
+                AuthorFullName = authorFullName, 
                 AuthorId = comment.AuthorId,
                 ReactionCounts = reactionCounts,
                 CurrentUserReaction = currentUserReaction,
                 Replies = comment.Replies.Select(r => MapToDTOAsync(r, userId).Result).ToList()
             };
         }
-        public Task<bool> DeleteCommentAsync(Guid commentId, string userId)
+
+        // Delete a new comment
+        public async Task<bool> DeleteCommentAsync(int commentId, string userId)
         {
-            throw new NotImplementedException();
+            var comment = await _dbContext.Comments.Include(c => c.Replies).FirstOrDefaultAsync(c => c.CommentId== commentId);
+            
+            if(comment == null)
+            {
+                throw new AggregateException("Comment not found.");
+            }
+            if(comment.AuthorId != userId)
+            {
+                throw new UnauthorizedAccessException("You do not have permission to delete this comment.");
+            }
+            var replies = await _dbContext.Comments.Where(c => c.ParentCommentId== commentId).ToListAsync();
+            if (replies.Any())
+            {
+                _dbContext.Comments.RemoveRange(replies);
+            }
+            _dbContext.Comments.Remove(comment);
+            await _dbContext.SaveChangesAsync();
+            return true;
         }
 
-        public Task<CommentDTO> GetCommentByIdAsync(Guid commentId, string userId)
+        // Update a new comment
+        public async Task<bool> UpdateCommentAsync(int commentId, string userId, string newContent)
+        {
+           var comment = await _dbContext.Comments.FirstOrDefaultAsync(c =>c.CommentId== commentId);
+            if(comment == null)
+            {
+                throw new AggregateException("Comment not found.");
+            }
+            if (comment.AuthorId != userId)
+            {
+                throw new UnauthorizedAccessException("You do not have permission to update this comment.");
+            }
+            comment.Content = newContent;
+            comment.UpdatedAt= DateTime.Now;
+
+            _dbContext.Comments.Update(comment);
+            await _dbContext.SaveChangesAsync();
+            return true;
+        }
+        public Task<CommentDTO> GetCommentByIdAsync(int commentId, string userId)
         {
             throw new NotImplementedException();
         }

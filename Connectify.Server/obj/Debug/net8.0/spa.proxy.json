@@ -3,7 +3,7 @@
 "ServerUrl": "https://localhost:5173",
 "RedirectUrl": "",
 "LaunchCommand": "npm run dev",
-"WorkingDirectory": "D:\\Internship\\Project\\Connectify\\Connectify.Server\\..\\connectify.client",
+"WorkingDirectory": "D:\\Backup\\Connectify\\Connectify.Server\\..\\connectify.client",
 "MaxTimeoutInSeconds": "120",
 "KeepRunning": "false"
 }

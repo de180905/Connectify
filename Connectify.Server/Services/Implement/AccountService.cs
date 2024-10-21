@@ -3,6 +3,8 @@ using Connectify.BusinessObjects.Authen;
 using Connectify.BussinessObjects.Authen;
 using Connectify.Server.DataAccess;
 using Connectify.Server.DTOs;
+using Connectify.Server.DTOs.UpdateProfileDTO;
+using Connectify.Server.DTOs.UpdateProfileDTOs;
 using Connectify.Server.Services.Abstract;
 using Connectify.Server.Services.Exceptions;
 using Microsoft.AspNetCore.Identity;
@@ -229,5 +231,43 @@ namespace Connectify.Server.Services.Implement {
 
             return new TokenDTO { AccessToken = accessToken, RefreshToken = refreshToken };
         }
+
+        // Update profile of user
+        public async Task<bool> UpdateProfileAsync(string userId, UpdateProfileDTO dto)
+        {
+            var user = await userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return false;
+            }
+
+            user.FirstName = dto.FirstName;
+            user.LastName = dto.LastName;          
+            user.DateOfBirth = dto.DateOfBirth;
+            user.Gender = dto.Gender;
+
+            var result = await userManager.UpdateAsync(user);
+            return result.Succeeded;
+        }      
+
+        //Change Password 
+        public async Task<bool> ChangePasswordAsync(string userId, ChangePasswordDTO dto)
+        {
+            var user = await userManager.FindByIdAsync(userId);
+            if(user == null)
+            {
+                return false;
+            }
+            var check = await userManager.CheckPasswordAsync(user, dto.CurrentPassword);
+            if (!check)
+            {
+                throw new AggregateException("Curent password is incorrect.");
+            }
+            var change = await userManager.ChangePasswordAsync(user, dto.CurrentPassword, dto.NewPassword);
+            return change.Succeeded;
+
+        }
+
+        
     }
 }
