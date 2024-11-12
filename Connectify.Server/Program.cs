@@ -1,4 +1,4 @@
-using Connectify.BusinessObjects.Authen;
+﻿using Connectify.BusinessObjects.Authen;
 using Connectify.Server.DataAccess;
 using Connectify.Server.Hubs;
 using Connectify.Server.Services;
@@ -32,16 +32,15 @@ namespace Connectify.Server
             {
                 serverOptions.Limits.MaxRequestBodySize = 2147483648; // Set max request body size to 2 GB
             });
-            // Add services to the container.
 
+            // Add services to the container.
             builder.Services.AddControllers()
                 .AddJsonOptions(options =>
                 {
                     options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
-                    //options.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull;
                 });
+
             builder.Services.AddSignalR();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(options =>
             {
@@ -65,10 +64,11 @@ namespace Connectify.Server
                                 Id = "Bearer"
                             }
                         },
-                        new string []{}
+                        new string []{ }
                     }
                 });
             });
+
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("SignalRCorsPolicy", policy =>
@@ -79,18 +79,24 @@ namespace Connectify.Server
                           .AllowCredentials();// Allow credentials
                 });
             });
+
+            // Đăng ký các dịch vụ khác
             builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
             builder.Services.AddDbContext<AppDbContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectifyDb"));
             });
-            builder.Services.AddAutoMapper(typeof(UserProfile), typeof(MessageProfile));
+
+            // Đăng ký IManageUser và ManageUserService
+            builder.Services.AddScoped<IManageUser, ManageUserService>();
             builder.Services.AddScoped<IAccountService, AccountService>();
             builder.Services.AddScoped<IChatService, ChatService>();
             builder.Services.AddScoped<ICloudStorageService, CloudStorageService>();
             builder.Services.AddScoped<ISearchService, SearchService>();
             builder.Services.AddScoped<IFriendService, FriendService>();
             builder.Services.AddTransient<IEmailSender, EmailSender>();
+
+            builder.Services.AddAutoMapper(typeof(UserProfile), typeof(MessageProfile));
 
             builder.Services.AddAuthentication(options =>
             {
@@ -101,7 +107,7 @@ namespace Connectify.Server
             {
                 options.SaveToken = true;
                 options.RequireHttpsMetadata = false;
-                options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = true,
                     ValidateAudience = true,
@@ -110,29 +116,28 @@ namespace Connectify.Server
                     ValidIssuer = builder.Configuration["JWT:ValidIssuer"],
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:SecretKey"]))
                 };
+
                 options.Events = new JwtBearerEvents
                 {
                     OnMessageReceived = context =>
                     {
-                        // Check if the token is coming in the query string
                         var accessToken = context.Request.Query["access_token"];
 
-                        // If the request is for SignalR hub...
                         var path = context.HttpContext.Request.Path;
-                        if (!string.IsNullOrEmpty(accessToken) &&
-                            (path.StartsWithSegments("/hubs")))
+                        if (!string.IsNullOrEmpty(accessToken) && path.StartsWithSegments("/hubs"))
                         {
-                            // Read the token out of the query string
                             context.Token = accessToken;
                         }
                         return Task.CompletedTask;
                     }
                 };
             });
+
             builder.Services.Configure<FormOptions>(options =>
             {
                 options.MultipartBodyLengthLimit = 2147483648; // 2 GB
             });
+
             var app = builder.Build();
             app.UseDefaultFiles();
             app.UseStaticFiles();
@@ -147,7 +152,6 @@ namespace Connectify.Server
             app.UseHttpsRedirection();
             app.UseCors("SignalRCorsPolicy");
             app.UseAuthorization();
-
 
             app.MapControllers();
             app.MapHub<ChatHub>("/hubs/chathub");

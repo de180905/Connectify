@@ -26,5 +26,6 @@ namespace Connectify.BusinessObjects.Authen
         public string? Location { get; set; }
         public string? Company { get; set; }
         public string? Avatar { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     }
 }

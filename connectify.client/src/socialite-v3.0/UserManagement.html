@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quản Lý Người Dùng</title>
+  <style>
+    /* Đặt nền và kiểu dáng cơ bản */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f9;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    /* Bộ lọc */
+    .filter-container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 10px;
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 4px;
+    }
+
+    .filter-container label {
+      margin-right: 10px;
+    }
+
+    .filter-container select {
+      padding: 6px;
+      margin-right: 15px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    /* Kiểu dáng bảng người dùng */
+    .user-table {
+      width: 100%;
+      max-width: 800px;
+      margin: 20px auto;
+      border-collapse: collapse;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+    }
+
+    .user-table th, .user-table td {
+      padding: 12px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+
+    .user-table th {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .user-table tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    /* Kiểu dáng nút thao tác */
+    .action-btn {
+      padding: 8px 12px;
+      margin: 0 2px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      color: #fff;
+    }
+
+    .lock-btn { background-color: #f39c12; }
+    .unlock-btn { background-color: #3498db; }
+    .delete-btn { background-color: #e74c3c; }
+    .update-btn { background-color: #2ecc71; }
+
+    .action-btn:hover {
+      opacity: 0.8;
+    }
+
+    /* Modal xác nhận xóa */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      background-color: white;
+      padding: 20px;
+      border-radius: 4px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .modal button {
+      padding: 8px 12px;
+      margin: 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .modal button.cancel {
+      background-color: #e74c3c;
+      color: white;
+    }
+
+    .modal button.confirm {
+      background-color: #2ecc71;
+      color: white;
+    }
+
+    /* Form cập nhật thông tin người dùng */
+    .update-form {
+      max-width: 500px;
+      margin: 20px auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      display: none;
+    }
+
+    .update-form label, .update-form input {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    .update-form input[type="text"],
+    .update-form input[type="email"],
+    .update-form input[type="date"],
+    .update-form select {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .update-form button {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      background-color: #4CAF50;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .update-form button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Quản Lý Người Dùng</h1>
+
+<!-- Bộ lọc người dùng -->
+<div class="filter-container">
+  <label for="statusFilter">Trạng Thái:</label>
+  <select id="statusFilter" onchange="applyFilters()">
+    <option value="all">Tất cả</option>
+    <option value="active">Hoạt động</option>
+    <option value="locked">Bị khóa</option>
+  </select>
+
+  <label for="genderFilter">Giới Tính:</label>
+  <select id="genderFilter" onchange="applyFilters()">
+    <option value="all">Tất cả</option>
+    <option value="male">Nam</option>
+    <option value="female">Nữ</option>
+  </select>
+</div>
+
+<!-- Bảng người dùng -->
+<table class="user-table" id="userTable">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Tên</th>
+      <th>Email</th>
+      <th>Trạng Thái</th>
+      <th>Giới Tính</th>
+      <th>Hành Động</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr data-status="active" data-gender="male" id="user1">
+      <td>1</td>
+      <td>Nguyễn Văn A</td>
+      <td>nguyenvana@example.com</td>
+      <td>Hoạt động</td>
+      <td>Nam</td>
+      <td>
+        <button class="action-btn lock-btn">Khóa</button>
+        <button class="action-btn unlock-btn">Mở khóa</button>
+        <button class="action-btn delete-btn" onclick="confirmDelete(1)">Xóa</button>
+        <button class="action-btn update-btn" onclick="editUser(1)">Cập nhật</button>
+      </td>
+    </tr>
+    <tr data-status="locked" data-gender="female" id="user2">
+      <td>2</td>
+      <td>Trần Thị B</td>
+      <td>tranthib@example.com</td>
+      <td>Bị khóa</td>
+      <td>Nữ</td>
+      <td>
+        <button class="action-btn lock-btn">Khóa</button>
+        <button class="action-btn unlock-btn">Mở khóa</button>
+        <button class="action-btn delete-btn" onclick="confirmDelete(2)">Xóa</button>
+        <button class="action-btn update-btn" onclick="editUser(2)">Cập nhật</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Modal xác nhận xóa -->
+<div id="deleteModal" class="modal">
+  <div class="modal-content">
+    <h2>Bạn chắc chắn muốn xóa tài khoản này không?</h2>
+    <button class="cancel" onclick="closeModal()">Hủy</button>
+    <button class="confirm" onclick="deleteUser()">Xóa</button>
+  </div>
+</div>
+
+<!-- Form cập nhật thông tin người dùng -->
+<div class="update-form" id="updateForm">
+  <h2>Cập nhật thông tin người dùng</h2>
+  <form id="updateFormContent">
+    <label for="userId">ID:</label>
+    <input type="text" id="userId" disabled>
+
+    <label for="firstName">Tên:</label>
+    <input type="text" id="firstName">
+
+    <label for="lastName">Họ:</label>
+    <input type="text" id="lastName">
+
+    <label for="email">Email:</label>
+    <input type="email" id="email">
+
+    <label for="avatar">Ảnh đại diện (URL):</label>
+    <input type="text" id="avatar">
+
+    <label for="dateOfBirth">Ngày sinh:</label>
+    <input type="date" id="dateOfBirth">
+
+    <label for="gender">Giới tính:</label>
+    <select id="gender">
+      <option value="male">Nam</option>
+      <option value="female">Nữ</option>
+    </select>
+
+    <label for="location">Vị trí:</label>
+    <input type="text" id="location">
+
+    <button type="submit">Lưu thay đổi</button>
+    <button type="button" onclick="closeForm()">Hủy</button>
+  </form>
+</div>
+
+<script>
+  // Hàm lọc người dùng theo trạng thái và giới tính
+  function applyFilters() {
+    const statusFilter = document.getElementById("statusFilter").value;
+    const genderFilter = document.getElementById("genderFilter").value;
+    const rows = document.querySelectorAll("#userTable tbody tr");
+
+    rows.forEach(row => {
+      const status = row.getAttribute("data-status");
+      const gender = row.getAttribute("data-gender");
+
+      let statusMatch = (statusFilter === "all" || statusFilter === status);
+      let genderMatch = (genderFilter === "all" || genderFilter === gender);
+
+      if (statusMatch && genderMatch) {
+        row.style.display = "";
+      } else {
+        row.style.display = "none";
+      }
+    });
+  }
+
+  // Hàm chỉnh sửa thông tin người dùng
+  function editUser(userId) {
+    const row = document.getElementById("user" + userId);
+    const cells = row.getElementsByTagName("td");
+    
+    document.getElementById("userId").value = cells[0].innerText;
+    document.getElementById("firstName").value = cells[1].innerText.split(" ")[0];
+    document.getElementById("lastName").value = cells[1].innerText.split(" ")[1];
+    document.getElementById("email").value = cells[2].innerText;
+    document.getElementById("avatar").value = "";  // Có thể cập nhật ảnh đại diện
+    document.getElementById("dateOfBirth").value = "1990-01-01"; // Cập nhật thông tin thực tế
+    document.getElementById("gender").value = cells[4].innerText.toLowerCase();
+    document.getElementById("location").value = "Hà Nội"; // Cập nhật thông tin thực tế
+
+    document.getElementById("updateForm").style.display = "block";
+  }
+
+  // Hàm đóng form
+  function closeForm() {
+    document.getElementById("updateForm").style.display = "none";
+  }
+
+  let currentUserId = null;
+
+  // Hàm xác nhận xóa người dùng
+  function confirmDelete(userId) {
+    currentUserId = userId;
+    document.getElementById('deleteModal').style.display = 'flex';
+  }
+
+  // Hàm đóng modal
+  function closeModal() {
+    document.getElementById('deleteModal').style.display = 'none';
+  }
+
+  // Hàm xóa người dùng
+  function deleteUser() {
+    const row = document.getElementById("user" + currentUserId);
+    row.remove(); // Xóa hàng trong bảng
+    closeModal(); // Đóng modal
+    alert("Tài khoản đã bị xóa"); // Thông báo người dùng
+  }
+</script>
+
+</body>
+</html>

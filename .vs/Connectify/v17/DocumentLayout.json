@@ -1,0 +1,149 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Connectify\\Connectify\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|d:\\connectify\\connectify\\connectify.server\\services\\implement\\manageuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\services\\implement\\manageuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F1B2C64-EB0E-48E9-ADE8-9A2AD64BF706}|connectify.client\\connectify.client.esproj|d:\\connectify\\connectify\\connectify.client\\src\\js\\registerform.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{5F1B2C64-EB0E-48E9-ADE8-9A2AD64BF706}|connectify.client\\connectify.client.esproj|solutionrelative:connectify.client\\src\\js\\registerform.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6ADC48AF-4695-4957-ABAE-8003BC5E8633}|Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj|d:\\connectify\\connectify\\connectify.businessobjects\\authen\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6ADC48AF-4695-4957-ABAE-8003BC5E8633}|Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj|solutionrelative:connectify.businessobjects\\authen\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|d:\\connectify\\connectify\\connectify.server\\services\\abstract\\imanageuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\services\\abstract\\imanageuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|d:\\connectify\\connectify\\connectify.server\\dtos\\admindtos\\userfilteroptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\dtos\\admindtos\\userfilteroptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6ADC48AF-4695-4957-ABAE-8003BC5E8633}|Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj|d:\\connectify\\connectify\\connectify.businessobjects\\authen\\approle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6ADC48AF-4695-4957-ABAE-8003BC5E8633}|Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj|solutionrelative:connectify.businessobjects\\authen\\approle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|d:\\connectify\\connectify\\connectify.server\\dtos\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\dtos\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|d:\\connectify\\connectify\\connectify.server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "RegisterForm.jsx",
+              "DocumentMoniker": "D:\\Connectify\\Connectify\\connectify.client\\src\\js\\RegisterForm.jsx",
+              "RelativeDocumentMoniker": "connectify.client\\src\\js\\RegisterForm.jsx",
+              "ToolTip": "D:\\Connectify\\Connectify\\connectify.client\\src\\js\\RegisterForm.jsx",
+              "RelativeToolTip": "connectify.client\\src\\js\\RegisterForm.jsx",
+              "ViewState": "AgIAAK4AAAAAAAAAAAAAALoAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2024-10-09T07:13:20.858Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AppRole.cs",
+              "DocumentMoniker": "D:\\Connectify\\Connectify\\Connectify.BusinessObjects\\Authen\\AppRole.cs",
+              "RelativeDocumentMoniker": "Connectify.BusinessObjects\\Authen\\AppRole.cs",
+              "ToolTip": "D:\\Connectify\\Connectify\\Connectify.BusinessObjects\\Authen\\AppRole.cs",
+              "RelativeToolTip": "Connectify.BusinessObjects\\Authen\\AppRole.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-08T07:35:28.739Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Connectify\\Connectify\\Connectify.Server\\Program.cs",
+              "RelativeDocumentMoniker": "Connectify.Server\\Program.cs",
+              "ToolTip": "D:\\Connectify\\Connectify\\Connectify.Server\\Program.cs",
+              "RelativeToolTip": "Connectify.Server\\Program.cs",
+              "ViewState": "AgIAAIkAAAAAAAAAAAAmwBEAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-07T16:22:06.147Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "User.cs",
+              "DocumentMoniker": "D:\\Connectify\\Connectify\\Connectify.BusinessObjects\\Authen\\User.cs",
+              "RelativeDocumentMoniker": "Connectify.BusinessObjects\\Authen\\User.cs",
+              "ToolTip": "D:\\Connectify\\Connectify\\Connectify.BusinessObjects\\Authen\\User.cs",
+              "RelativeToolTip": "Connectify.BusinessObjects\\Authen\\User.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAABkAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-07T16:14:39.975Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ManageUserService.cs",
+              "DocumentMoniker": "D:\\Connectify\\Connectify\\Connectify.Server\\Services\\Implement\\ManageUserService.cs",
+              "RelativeDocumentMoniker": "Connectify.Server\\Services\\Implement\\ManageUserService.cs",
+              "ToolTip": "D:\\Connectify\\Connectify\\Connectify.Server\\Services\\Implement\\ManageUserService.cs",
+              "RelativeToolTip": "Connectify.Server\\Services\\Implement\\ManageUserService.cs",
+              "ViewState": "AgIAAGQAAAAAAAAAAAAYwGsAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-07T16:01:25.053Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IManageUser.cs",
+              "DocumentMoniker": "D:\\Connectify\\Connectify\\Connectify.Server\\Services\\Abstract\\IManageUser.cs",
+              "RelativeDocumentMoniker": "Connectify.Server\\Services\\Abstract\\IManageUser.cs",
+              "ToolTip": "D:\\Connectify\\Connectify\\Connectify.Server\\Services\\Abstract\\IManageUser.cs",
+              "RelativeToolTip": "Connectify.Server\\Services\\Abstract\\IManageUser.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-07T16:00:51.178Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "UserFilterOptions.cs",
+              "DocumentMoniker": "D:\\Connectify\\Connectify\\Connectify.Server\\DTOs\\AdminDTOs\\UserFilterOptions.cs",
+              "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\AdminDTOs\\UserFilterOptions.cs",
+              "ToolTip": "D:\\Connectify\\Connectify\\Connectify.Server\\DTOs\\AdminDTOs\\UserFilterOptions.cs",
+              "RelativeToolTip": "Connectify.Server\\DTOs\\AdminDTOs\\UserFilterOptions.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-07T15:44:16.859Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "UserDTO.cs",
+              "DocumentMoniker": "D:\\Connectify\\Connectify\\Connectify.Server\\DTOs\\UserDTO.cs",
+              "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\UserDTO.cs",
+              "ToolTip": "D:\\Connectify\\Connectify\\Connectify.Server\\DTOs\\UserDTO.cs",
+              "RelativeToolTip": "Connectify.Server\\DTOs\\UserDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-07T15:42:41.935Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
