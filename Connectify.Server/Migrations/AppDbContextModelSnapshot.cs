@@ -563,6 +563,80 @@ namespace Connectify.Server.Migrations
                     b.ToTable("FriendShips");
                 });
 
+            modelBuilder.Entity("Connectify.BusinessObjects.Notification.NotificationRecipient", b =>
+                {
+                    b.Property<int>("NotificationId")
+                        .HasColumnType("int")
+                        .HasColumnName("notification_id");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)")
+                        .HasColumnName("user_id");
+
+                    b.Property<bool>("IsRead")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false)
+                        .HasColumnName("is_read");
+
+                    b.HasKey("NotificationId", "UserId")
+                        .HasName("notification_recipient_pkey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("notification_recipient", (string)null);
+                });
+
+            modelBuilder.Entity("Connectify.BusinessObjects.Notification.Notifications", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("notification_id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ActionLink")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasColumnName("action_link");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasColumnName("create_at")
+                        .HasDefaultValueSql("GETDATE()");
+
+                    b.Property<DateTime?>("ExpirationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("expiration_time");
+
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasColumnName("message");
+
+                    b.Property<string>("TriggeredByUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)")
+                        .HasColumnName("triggered_by_user_id");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id")
+                        .HasName("notification_pkey");
+
+                    b.HasIndex("TriggeredByUserId");
+
+                    b.ToTable("notification", (string)null);
+                });
+
             modelBuilder.Entity("Connectify.BusinessObjects.PostFeature.Post", b =>
                 {
                     b.Property<int>("Id")
@@ -1024,6 +1098,36 @@ namespace Connectify.Server.Migrations
                     b.Navigation("User2");
                 });
 
+            modelBuilder.Entity("Connectify.BusinessObjects.Notification.NotificationRecipient", b =>
+                {
+                    b.HasOne("Connectify.BusinessObjects.Notification.Notifications", "Notification")
+                        .WithMany("NotificationRecipients")
+                        .HasForeignKey("NotificationId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Connectify.BusinessObjects.Authen.User", "User")
+                        .WithMany("NotificationsReceived")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Notification");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Connectify.BusinessObjects.Notification.Notifications", b =>
+                {
+                    b.HasOne("Connectify.BusinessObjects.Authen.User", "TriggeredByUser")
+                        .WithMany("SentNotifications")
+                        .HasForeignKey("TriggeredByUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TriggeredByUser");
+                });
+
             modelBuilder.Entity("Connectify.BusinessObjects.PostFeature.Post", b =>
                 {
                     b.HasOne("Connectify.BusinessObjects.Authen.User", "Author")
@@ -1131,6 +1235,13 @@ namespace Connectify.Server.Migrations
                     b.Navigation("Requests");
                 });
 
+            modelBuilder.Entity("Connectify.BusinessObjects.Authen.User", b =>
+                {
+                    b.Navigation("NotificationsReceived");
+
+                    b.Navigation("SentNotifications");
+                });
+
             modelBuilder.Entity("Connectify.BusinessObjects.ChatFeature.ChatRoom", b =>
                 {
                     b.Navigation("Members");
@@ -1150,6 +1261,11 @@ namespace Connectify.Server.Migrations
                     b.Navigation("Reactions");
 
                     b.Navigation("Replies");
+                });
+
+            modelBuilder.Entity("Connectify.BusinessObjects.Notification.Notifications", b =>
+                {
+                    b.Navigation("NotificationRecipients");
                 });
 
             modelBuilder.Entity("Connectify.BusinessObjects.PostFeature.Post", b =>

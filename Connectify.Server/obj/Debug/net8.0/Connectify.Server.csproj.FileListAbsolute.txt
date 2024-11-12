@@ -297,7 +297,6 @@ E:\OJT\GroupProject\Connectify.Server\obj\Debug\net8.0\Connectify.Server.Generat
 E:\OJT\GroupProject\Connectify.Server\obj\Debug\net8.0\Connectify.Server.AssemblyInfoInputs.cache
 E:\OJT\GroupProject\Connectify.Server\obj\Debug\net8.0\Connectify.Server.AssemblyInfo.cs
 E:\OJT\GroupProject\Connectify.Server\obj\Debug\net8.0\Connectify.Server.csproj.CoreCompileInputs.cache
-E:\OJT\GroupProject\Connectify.Server\obj\Debug\net8.0\Connectify.Server.MvcApplicationPartsAssemblyInfo.cs
 E:\OJT\GroupProject\Connectify.Server\obj\Debug\net8.0\Connectify.Server.MvcApplicationPartsAssemblyInfo.cache
 E:\OJT\GroupProject\Connectify.Server\obj\Debug\net8.0\Connectify.Server.sourcelink.json
 E:\OJT\GroupProject\Connectify.Server\obj\Debug\net8.0\staticwebassets.build.json
@@ -314,3 +313,4 @@ E:\OJT\GroupProject\Connectify.Server\obj\Debug\net8.0\refint\Connectify.Server.
 E:\OJT\GroupProject\Connectify.Server\obj\Debug\net8.0\Connectify.Server.pdb
 E:\OJT\GroupProject\Connectify.Server\obj\Debug\net8.0\Connectify.Server.genruntimeconfig.cache
 E:\OJT\GroupProject\Connectify.Server\obj\Debug\net8.0\ref\Connectify.Server.dll
+E:\OJT\GroupProject\Connectify.Server\obj\Debug\net8.0\Connectify.Server.MvcApplicationPartsAssemblyInfo.cs

@@ -3,28 +3,112 @@
   "WorkspaceRootPath": "E:\\OJT\\GroupProject\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|e:\\ojt\\groupproject\\connectify.server\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|e:\\ojt\\groupproject\\connectify.server\\controllers\\notificationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\controllers\\notificationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|e:\\ojt\\groupproject\\connectify.server\\dtos\\notification\\createnotificationdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\dtos\\notification\\createnotificationdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|e:\\ojt\\groupproject\\connectify.server\\services\\implement\\accountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\services\\implement\\accountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|e:\\ojt\\groupproject\\connectify.server\\dtos\\resetpassworddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\dtos\\resetpassworddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|e:\\ojt\\groupproject\\connectify.server\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|e:\\ojt\\groupproject\\connectify.server\\dtos\\tokendto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\dtos\\tokendto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|e:\\ojt\\groupproject\\connectify.server\\dtos\\notification\\getnotificaitonsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\dtos\\notification\\getnotificaitonsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|e:\\ojt\\groupproject\\connectify.server\\hubs\\notificationhub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\hubs\\notificationhub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|e:\\ojt\\groupproject\\connectify.server\\services\\abstract\\inotificationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\services\\abstract\\inotificationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|e:\\ojt\\groupproject\\connectify.server\\services\\implement\\notificationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\services\\implement\\notificationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|e:\\ojt\\groupproject\\connectify.server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|e:\\ojt\\groupproject\\connectify.server\\services\\abstract\\iaccountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\services\\abstract\\iaccountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|e:\\ojt\\groupproject\\connectify.server\\dataacess\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\dataacess\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6ADC48AF-4695-4957-ABAE-8003BC5E8633}|Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj|e:\\ojt\\groupproject\\connectify.businessobjects\\notification\\notifications.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6ADC48AF-4695-4957-ABAE-8003BC5E8633}|Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj|solutionrelative:connectify.businessobjects\\notification\\notifications.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6ADC48AF-4695-4957-ABAE-8003BC5E8633}|Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj|e:\\ojt\\groupproject\\connectify.businessobjects\\notification\\notificationrecipient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6ADC48AF-4695-4957-ABAE-8003BC5E8633}|Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj|solutionrelative:connectify.businessobjects\\notification\\notificationrecipient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6ADC48AF-4695-4957-ABAE-8003BC5E8633}|Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj|e:\\ojt\\groupproject\\connectify.businessobjects\\authen\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6ADC48AF-4695-4957-ABAE-8003BC5E8633}|Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj|solutionrelative:connectify.businessobjects\\authen\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|e:\\ojt\\groupproject\\connectify.server\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|e:\\ojt\\groupproject\\connectify.server\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6ADC48AF-4695-4957-ABAE-8003BC5E8633}|Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj|e:\\ojt\\groupproject\\connectify.businessobjects\\reactiontype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6ADC48AF-4695-4957-ABAE-8003BC5E8633}|Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj|solutionrelative:connectify.businessobjects\\reactiontype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6ADC48AF-4695-4957-ABAE-8003BC5E8633}|Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj|e:\\ojt\\groupproject\\connectify.businessobjects\\requeststatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6ADC48AF-4695-4957-ABAE-8003BC5E8633}|Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj|solutionrelative:connectify.businessobjects\\requeststatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|e:\\ojt\\groupproject\\connectify.server\\services\\implement\\emailsender.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\services\\implement\\emailsender.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|e:\\ojt\\groupproject\\connectify.server\\dtos\\signupdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\dtos\\signupdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|e:\\ojt\\groupproject\\connectify.server\\dtos\\tokendto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\dtos\\tokendto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6ADC48AF-4695-4957-ABAE-8003BC5E8633}|Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj|e:\\ojt\\groupproject\\connectify.businessobjects\\authen\\approle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6ADC48AF-4695-4957-ABAE-8003BC5E8633}|Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj|solutionrelative:connectify.businessobjects\\authen\\approle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6ADC48AF-4695-4957-ABAE-8003BC5E8633}|Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj|e:\\ojt\\groupproject\\connectify.businessobjects\\authen\\refreshtoken.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6ADC48AF-4695-4957-ABAE-8003BC5E8633}|Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj|solutionrelative:connectify.businessobjects\\authen\\refreshtoken.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|e:\\ojt\\groupproject\\connectify.server\\dtos\\signindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\dtos\\signindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6ADC48AF-4695-4957-ABAE-8003BC5E8633}|Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj|e:\\ojt\\groupproject\\connectify.businessobjects\\memberrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6ADC48AF-4695-4957-ABAE-8003BC5E8633}|Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj|solutionrelative:connectify.businessobjects\\memberrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6ADC48AF-4695-4957-ABAE-8003BC5E8633}|Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj|e:\\ojt\\groupproject\\connectify.businessobjects\\friendfeature\\friendrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6ADC48AF-4695-4957-ABAE-8003BC5E8633}|Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj|solutionrelative:connectify.businessobjects\\friendfeature\\friendrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|e:\\ojt\\groupproject\\connectify.server\\dtos\\resetpassworddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\dtos\\resetpassworddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5F1B2C64-EB0E-48E9-ADE8-9A2AD64BF706}|connectify.client\\connectify.client.esproj|e:\\ojt\\groupproject\\connectify.client\\src\\js\\password\\resetpasswordform.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
@@ -35,40 +119,12 @@
       "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\weatherforecast.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6ADC48AF-4695-4957-ABAE-8003BC5E8633}|Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj|e:\\ojt\\groupproject\\connectify.businessobjects\\authen\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6ADC48AF-4695-4957-ABAE-8003BC5E8633}|Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj|solutionrelative:connectify.businessobjects\\authen\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{5F1B2C64-EB0E-48E9-ADE8-9A2AD64BF706}|connectify.client\\connectify.client.esproj|e:\\ojt\\groupproject\\connectify.client\\src\\js\\api\\authen.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{5F1B2C64-EB0E-48E9-ADE8-9A2AD64BF706}|connectify.client\\connectify.client.esproj|solutionrelative:connectify.client\\src\\js\\api\\authen.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|e:\\ojt\\groupproject\\connectify.server\\services\\abstract\\iaccountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\services\\abstract\\iaccountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|e:\\ojt\\groupproject\\connectify.server\\services\\implement\\emailsender.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\services\\implement\\emailsender.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|e:\\ojt\\groupproject\\connectify.server\\services\\exceptions\\emailnotverifiedexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\services\\exceptions\\emailnotverifiedexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|e:\\ojt\\groupproject\\connectify.server\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|e:\\ojt\\groupproject\\connectify.server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6ADC48AF-4695-4957-ABAE-8003BC5E8633}|Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj|e:\\ojt\\groupproject\\connectify.businessobjects\\authen\\refreshtoken.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6ADC48AF-4695-4957-ABAE-8003BC5E8633}|Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj|solutionrelative:connectify.businessobjects\\authen\\refreshtoken.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6ADC48AF-4695-4957-ABAE-8003BC5E8633}|Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj|e:\\ojt\\groupproject\\connectify.businessobjects\\authen\\approle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6ADC48AF-4695-4957-ABAE-8003BC5E8633}|Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj|solutionrelative:connectify.businessobjects\\authen\\approle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|e:\\ojt\\groupproject\\connectify.server\\dtos\\emaildto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -119,10 +175,6 @@
       "RelativeMoniker": "D:0:0:{5F1B2C64-EB0E-48E9-ADE8-9A2AD64BF706}|connectify.client\\connectify.client.esproj|solutionrelative:connectify.client\\src\\js\\loginlayout.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|e:\\ojt\\groupproject\\connectify.server\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{5F1B2C64-EB0E-48E9-ADE8-9A2AD64BF706}|connectify.client\\connectify.client.esproj|e:\\ojt\\groupproject\\connectify.client\\src\\socialite-v3.0\\form-register.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{5F1B2C64-EB0E-48E9-ADE8-9A2AD64BF706}|connectify.client\\connectify.client.esproj|solutionrelative:connectify.client\\src\\socialite-v3.0\\form-register.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -154,19 +206,168 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 15,
+          "SelectedChildIndex": 5,
           "Children": [
             {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CreateNotificationDto.cs",
+              "DocumentMoniker": "E:\\OJT\\GroupProject\\Connectify.Server\\DTOs\\notification\\CreateNotificationDto.cs",
+              "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\notification\\CreateNotificationDto.cs",
+              "ToolTip": "E:\\OJT\\GroupProject\\Connectify.Server\\DTOs\\notification\\CreateNotificationDto.cs",
+              "RelativeToolTip": "Connectify.Server\\DTOs\\notification\\CreateNotificationDto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAtAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-21T09:02:28Z"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "GetNotificaitonsDto.cs",
+              "DocumentMoniker": "E:\\OJT\\GroupProject\\Connectify.Server\\DTOs\\notification\\GetNotificaitonsDto.cs",
+              "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\notification\\GetNotificaitonsDto.cs",
+              "ToolTip": "E:\\OJT\\GroupProject\\Connectify.Server\\DTOs\\notification\\GetNotificaitonsDto.cs",
+              "RelativeToolTip": "Connectify.Server\\DTOs\\notification\\GetNotificaitonsDto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-21T08:06:56.614Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "NotificationHub.cs",
+              "DocumentMoniker": "E:\\OJT\\GroupProject\\Connectify.Server\\Hubs\\NotificationHub.cs",
+              "RelativeDocumentMoniker": "Connectify.Server\\Hubs\\NotificationHub.cs",
+              "ToolTip": "E:\\OJT\\GroupProject\\Connectify.Server\\Hubs\\NotificationHub.cs",
+              "RelativeToolTip": "Connectify.Server\\Hubs\\NotificationHub.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAsAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-20T08:06:09.065Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "NotificationRecipient.cs",
+              "DocumentMoniker": "E:\\OJT\\GroupProject\\Connectify.BusinessObjects\\Notification\\NotificationRecipient.cs",
+              "RelativeDocumentMoniker": "Connectify.BusinessObjects\\Notification\\NotificationRecipient.cs",
+              "ToolTip": "E:\\OJT\\GroupProject\\Connectify.BusinessObjects\\Notification\\NotificationRecipient.cs",
+              "RelativeToolTip": "Connectify.BusinessObjects\\Notification\\NotificationRecipient.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAABUAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-19T14:41:59.907Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Notifications.cs",
+              "DocumentMoniker": "E:\\OJT\\GroupProject\\Connectify.BusinessObjects\\Notification\\Notifications.cs",
+              "RelativeDocumentMoniker": "Connectify.BusinessObjects\\Notification\\Notifications.cs",
+              "ToolTip": "E:\\OJT\\GroupProject\\Connectify.BusinessObjects\\Notification\\Notifications.cs",
+              "RelativeToolTip": "Connectify.BusinessObjects\\Notification\\Notifications.cs",
+              "ViewState": "AQIAAAoAAAAAAAAAAAAuwBIAAAAKAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-19T12:41:38.57Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "NotificationController.cs",
+              "DocumentMoniker": "E:\\OJT\\GroupProject\\Connectify.Server\\Controllers\\NotificationController.cs",
+              "RelativeDocumentMoniker": "Connectify.Server\\Controllers\\NotificationController.cs",
+              "ToolTip": "E:\\OJT\\GroupProject\\Connectify.Server\\Controllers\\NotificationController.cs",
+              "RelativeToolTip": "Connectify.Server\\Controllers\\NotificationController.cs",
+              "ViewState": "AQIAACwAAAAAAAAAAAAgwDYAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-18T13:41:50.001Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "NotificationService.cs",
+              "DocumentMoniker": "E:\\OJT\\GroupProject\\Connectify.Server\\Services\\Implement\\NotificationService.cs",
+              "RelativeDocumentMoniker": "Connectify.Server\\Services\\Implement\\NotificationService.cs",
+              "ToolTip": "E:\\OJT\\GroupProject\\Connectify.Server\\Services\\Implement\\NotificationService.cs",
+              "RelativeToolTip": "Connectify.Server\\Services\\Implement\\NotificationService.cs",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAYwBYAAACtAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-18T08:23:59.991Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
+              "Title": "INotificationService.cs",
+              "DocumentMoniker": "E:\\OJT\\GroupProject\\Connectify.Server\\Services\\Abstract\\INotificationService.cs",
+              "RelativeDocumentMoniker": "Connectify.Server\\Services\\Abstract\\INotificationService.cs",
+              "ToolTip": "E:\\OJT\\GroupProject\\Connectify.Server\\Services\\Abstract\\INotificationService.cs",
+              "RelativeToolTip": "Connectify.Server\\Services\\Abstract\\INotificationService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-18T08:21:58.29Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "MemberRole.cs",
+              "DocumentMoniker": "E:\\OJT\\GroupProject\\Connectify.BusinessObjects\\MemberRole.cs",
+              "RelativeDocumentMoniker": "Connectify.BusinessObjects\\MemberRole.cs",
+              "ToolTip": "E:\\OJT\\GroupProject\\Connectify.BusinessObjects\\MemberRole.cs",
+              "RelativeToolTip": "Connectify.BusinessObjects\\MemberRole.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-18T07:24:31.849Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "ReactionType.cs",
+              "DocumentMoniker": "E:\\OJT\\GroupProject\\Connectify.BusinessObjects\\ReactionType.cs",
+              "RelativeDocumentMoniker": "Connectify.BusinessObjects\\ReactionType.cs",
+              "ToolTip": "E:\\OJT\\GroupProject\\Connectify.BusinessObjects\\ReactionType.cs",
+              "RelativeToolTip": "Connectify.BusinessObjects\\ReactionType.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-18T07:24:30.664Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "RequestStatus.cs",
+              "DocumentMoniker": "E:\\OJT\\GroupProject\\Connectify.BusinessObjects\\RequestStatus.cs",
+              "RelativeDocumentMoniker": "Connectify.BusinessObjects\\RequestStatus.cs",
+              "ToolTip": "E:\\OJT\\GroupProject\\Connectify.BusinessObjects\\RequestStatus.cs",
+              "RelativeToolTip": "Connectify.BusinessObjects\\RequestStatus.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-18T07:24:29.753Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "FriendRequest.cs",
+              "DocumentMoniker": "E:\\OJT\\GroupProject\\Connectify.BusinessObjects\\FriendFeature\\FriendRequest.cs",
+              "RelativeDocumentMoniker": "Connectify.BusinessObjects\\FriendFeature\\FriendRequest.cs",
+              "ToolTip": "E:\\OJT\\GroupProject\\Connectify.BusinessObjects\\FriendFeature\\FriendRequest.cs",
+              "RelativeToolTip": "Connectify.BusinessObjects\\FriendFeature\\FriendRequest.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-18T06:40:51.31Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "E:\\OJT\\GroupProject\\Connectify.Server\\DataAcess\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "Connectify.Server\\DataAcess\\AppDbContext.cs",
+              "ToolTip": "E:\\OJT\\GroupProject\\Connectify.Server\\DataAcess\\AppDbContext.cs",
+              "RelativeToolTip": "Connectify.Server\\DataAcess\\AppDbContext.cs",
+              "ViewState": "AQIAALMAAAAAAAAAAAA0wJwAAAAkAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-18T06:29:40.998Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
               "Title": "ResetPasswordForm.jsx",
               "DocumentMoniker": "E:\\OJT\\GroupProject\\connectify.client\\src\\js\\password\\ResetPasswordForm.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\password\\ResetPasswordForm.jsx",
@@ -178,20 +379,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "AccountService.cs",
               "DocumentMoniker": "E:\\OJT\\GroupProject\\Connectify.Server\\Services\\Implement\\AccountService.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Services\\Implement\\AccountService.cs",
               "ToolTip": "E:\\OJT\\GroupProject\\Connectify.Server\\Services\\Implement\\AccountService.cs",
               "RelativeToolTip": "Connectify.Server\\Services\\Implement\\AccountService.cs",
-              "ViewState": "AQIAAPcAAAAAAAAAAAAAAAoBAAANAAAA",
+              "ViewState": "AQIAAJMAAAAAAAAAAADwvzoAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-23T02:17:11.646Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-23T02:17:11.646Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 26,
               "Title": "ResetPasswordDTO.cs",
               "DocumentMoniker": "E:\\OJT\\GroupProject\\Connectify.Server\\DTOs\\ResetPasswordDTO.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\ResetPasswordDTO.cs",
@@ -199,36 +399,35 @@
               "RelativeToolTip": "Connectify.Server\\DTOs\\ResetPasswordDTO.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-23T15:34:19.126Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-23T15:34:19.126Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 13,
               "Title": "User.cs",
               "DocumentMoniker": "E:\\OJT\\GroupProject\\Connectify.BusinessObjects\\Authen\\User.cs",
               "RelativeDocumentMoniker": "Connectify.BusinessObjects\\Authen\\User.cs",
               "ToolTip": "E:\\OJT\\GroupProject\\Connectify.BusinessObjects\\Authen\\User.cs",
               "RelativeToolTip": "Connectify.BusinessObjects\\Authen\\User.cs",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAAABQAAAAqAAAA",
+              "ViewState": "AQIAAA4AAAAAAAAAAAD4vx4AAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-23T08:06:59.705Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 22,
               "Title": "RefreshToken.cs",
               "DocumentMoniker": "E:\\OJT\\GroupProject\\Connectify.BusinessObjects\\Authen\\RefreshToken.cs",
               "RelativeDocumentMoniker": "Connectify.BusinessObjects\\Authen\\RefreshToken.cs",
               "ToolTip": "E:\\OJT\\GroupProject\\Connectify.BusinessObjects\\Authen\\RefreshToken.cs",
               "RelativeToolTip": "Connectify.BusinessObjects\\Authen\\RefreshToken.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-23T08:06:58.911Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 21,
               "Title": "AppRole.cs",
               "DocumentMoniker": "E:\\OJT\\GroupProject\\Connectify.BusinessObjects\\Authen\\AppRole.cs",
               "RelativeDocumentMoniker": "Connectify.BusinessObjects\\Authen\\AppRole.cs",
@@ -240,7 +439,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 31,
               "Title": "EmailDTO.cs",
               "DocumentMoniker": "E:\\OJT\\GroupProject\\Connectify.Server\\DTOs\\EmailDTO.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\EmailDTO.cs",
@@ -252,19 +451,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 19,
               "Title": "SignUpDTO.cs",
               "DocumentMoniker": "E:\\OJT\\GroupProject\\Connectify.Server\\DTOs\\SignUpDTO.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\SignUpDTO.cs",
               "ToolTip": "E:\\OJT\\GroupProject\\Connectify.Server\\DTOs\\SignUpDTO.cs",
               "RelativeToolTip": "Connectify.Server\\DTOs\\SignUpDTO.cs",
-              "ViewState": "AQIAAA0AAAAAAAAAAAAzwAAAAAAAAAAA",
+              "ViewState": "AQIAAA4AAAAAAAAAAAAAwAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-23T03:36:00.33Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 40,
               "Title": "vite.config.js",
               "DocumentMoniker": "E:\\OJT\\GroupProject\\connectify.client\\vite.config.js",
               "RelativeDocumentMoniker": "connectify.client\\vite.config.js",
@@ -276,7 +475,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 34,
               "Title": "MyApp.jsx",
               "DocumentMoniker": "E:\\OJT\\GroupProject\\connectify.client\\src\\MyApp.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\MyApp.jsx",
@@ -288,7 +487,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 39,
               "Title": "main.jsx",
               "DocumentMoniker": "E:\\OJT\\GroupProject\\connectify.client\\src\\main.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\main.jsx",
@@ -300,7 +499,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 36,
               "Title": "LoginForm.jsx",
               "DocumentMoniker": "E:\\OJT\\GroupProject\\connectify.client\\src\\js\\LoginForm.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\LoginForm.jsx",
@@ -312,7 +511,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 32,
               "Title": "VerifyAccount.jsx",
               "DocumentMoniker": "E:\\OJT\\GroupProject\\connectify.client\\src\\js\\VerifyAccount.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\VerifyAccount.jsx",
@@ -324,20 +523,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "AccountController.cs",
               "DocumentMoniker": "E:\\OJT\\GroupProject\\Connectify.Server\\Controllers\\AccountController.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Controllers\\AccountController.cs",
               "ToolTip": "E:\\OJT\\GroupProject\\Connectify.Server\\Controllers\\AccountController.cs",
               "RelativeToolTip": "Connectify.Server\\Controllers\\AccountController.cs",
-              "ViewState": "AQIAAFEAAAAAAAAAAAAowFQAAAANAAAA",
+              "ViewState": "AQIAAD0AAAAAAAAAAAAkwA0AAAAjAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-23T02:17:11.596Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-23T02:17:11.596Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 35,
               "Title": "RegisterForm.jsx",
               "DocumentMoniker": "E:\\OJT\\GroupProject\\connectify.client\\src\\js\\RegisterForm.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\RegisterForm.jsx",
@@ -349,7 +547,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 38,
               "Title": "index.html",
               "DocumentMoniker": "E:\\OJT\\GroupProject\\connectify.client\\index.html",
               "RelativeDocumentMoniker": "connectify.client\\index.html",
@@ -361,7 +559,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 37,
               "Title": "ChatroomDetail.jsx",
               "DocumentMoniker": "E:\\OJT\\GroupProject\\connectify.client\\src\\js\\ChatroomDetail.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\ChatroomDetail.jsx",
@@ -373,19 +571,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 8,
               "Title": "Program.cs",
               "DocumentMoniker": "E:\\OJT\\GroupProject\\Connectify.Server\\Program.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Program.cs",
               "ToolTip": "E:\\OJT\\GroupProject\\Connectify.Server\\Program.cs",
               "RelativeToolTip": "Connectify.Server\\Program.cs",
-              "ViewState": "AQIAAD8AAAAAAAAAAAAAAEQAAAAwAAAA",
+              "ViewState": "AQIAAG8AAAAAAAAAAAAwwIQAAAAkAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-23T02:17:11.614Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 29,
               "Title": "authen.js",
               "DocumentMoniker": "E:\\OJT\\GroupProject\\connectify.client\\src\\js\\api\\authen.js",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\api\\authen.js",
@@ -397,19 +595,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "appsettings.json",
               "DocumentMoniker": "E:\\OJT\\GroupProject\\Connectify.Server\\appsettings.json",
               "RelativeDocumentMoniker": "Connectify.Server\\appsettings.json",
               "ToolTip": "E:\\OJT\\GroupProject\\Connectify.Server\\appsettings.json",
               "RelativeToolTip": "Connectify.Server\\appsettings.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAfAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAABZAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2024-09-23T02:17:11.624Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 33,
               "Title": "routing.js",
               "DocumentMoniker": "E:\\OJT\\GroupProject\\connectify.client\\src\\js\\Utils\\routing.js",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\Utils\\routing.js",
@@ -421,7 +619,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 20,
               "Title": "TokenDTO.cs",
               "DocumentMoniker": "E:\\OJT\\GroupProject\\Connectify.Server\\DTOs\\TokenDTO.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\TokenDTO.cs",
@@ -433,19 +631,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 9,
               "Title": "IAccountService.cs",
               "DocumentMoniker": "E:\\OJT\\GroupProject\\Connectify.Server\\Services\\Abstract\\IAccountService.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Services\\Abstract\\IAccountService.cs",
               "ToolTip": "E:\\OJT\\GroupProject\\Connectify.Server\\Services\\Abstract\\IAccountService.cs",
               "RelativeToolTip": "Connectify.Server\\Services\\Abstract\\IAccountService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAABJAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAzAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-23T02:17:11.652Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 30,
               "Title": "EmailNotVerifiedException.cs",
               "DocumentMoniker": "E:\\OJT\\GroupProject\\Connectify.Server\\Services\\Exceptions\\EmailNotVerifiedException.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Services\\Exceptions\\EmailNotVerifiedException.cs",
@@ -457,7 +655,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 18,
               "Title": "EmailSender.cs",
               "DocumentMoniker": "E:\\OJT\\GroupProject\\Connectify.Server\\Services\\Implement\\EmailSender.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Services\\Implement\\EmailSender.cs",
@@ -469,7 +667,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 41,
               "Title": "config.js",
               "DocumentMoniker": "E:\\OJT\\GroupProject\\connectify.client\\src\\js\\api\\config.js",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\api\\config.js",
@@ -481,7 +679,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 15,
               "Title": "WeatherForecastController.cs",
               "DocumentMoniker": "E:\\OJT\\GroupProject\\Connectify.Server\\Controllers\\WeatherForecastController.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Controllers\\WeatherForecastController.cs",
@@ -493,7 +691,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 42,
               "Title": "LoginLayout.jsx",
               "DocumentMoniker": "E:\\OJT\\GroupProject\\connectify.client\\src\\js\\LoginLayout.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\LoginLayout.jsx",
@@ -505,19 +703,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 23,
               "Title": "SignInDTO.cs",
               "DocumentMoniker": "E:\\OJT\\GroupProject\\Connectify.Server\\DTOs\\SignInDTO.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\SignInDTO.cs",
               "ToolTip": "E:\\OJT\\GroupProject\\Connectify.Server\\DTOs\\SignInDTO.cs",
               "RelativeToolTip": "Connectify.Server\\DTOs\\SignInDTO.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAADAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-23T02:17:11.687Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 43,
               "Title": "form-register.html",
               "DocumentMoniker": "E:\\OJT\\GroupProject\\connectify.client\\src\\socialite-v3.0\\form-register.html",
               "RelativeDocumentMoniker": "connectify.client\\src\\socialite-v3.0\\form-register.html",
@@ -529,7 +727,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 44,
               "Title": "form-login.html",
               "DocumentMoniker": "E:\\OJT\\GroupProject\\connectify.client\\src\\socialite-v3.0\\form-login.html",
               "RelativeDocumentMoniker": "connectify.client\\src\\socialite-v3.0\\form-login.html",
@@ -541,7 +739,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 28,
               "Title": "WeatherForecast.cs",
               "DocumentMoniker": "E:\\OJT\\GroupProject\\Connectify.Server\\WeatherForecast.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\WeatherForecast.cs",
@@ -553,7 +751,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 46,
               "Title": "package.json",
               "DocumentMoniker": "E:\\OJT\\GroupProject\\connectify.client\\package.json",
               "RelativeDocumentMoniker": "connectify.client\\package.json",
@@ -565,7 +763,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 45,
               "Title": "eslint.config.js",
               "DocumentMoniker": "E:\\OJT\\GroupProject\\connectify.client\\eslint.config.js",
               "RelativeDocumentMoniker": "connectify.client\\eslint.config.js",
@@ -577,7 +775,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 47,
               "Title": "GroupLayout.jsx",
               "DocumentMoniker": "E:\\OJT\\GroupProject\\connectify.client\\src\\js\\GroupLayout.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\GroupLayout.jsx",
@@ -589,7 +787,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 48,
               "Title": "launch.json",
               "DocumentMoniker": "E:\\OJT\\GroupProject\\connectify.client\\.vscode\\launch.json",
               "RelativeDocumentMoniker": "connectify.client\\.vscode\\launch.json",

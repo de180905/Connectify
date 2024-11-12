@@ -1,5 +1,6 @@
 using Connectify.BusinessObjects.Authen;
 using Connectify.Server.DataAccess;
+using Connectify.Server.Hubs;
 using Connectify.Server.Services.Abstract;
 using Connectify.Server.Services.Implement;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -74,6 +75,9 @@ namespace Connectify.Server
             builder.Services.AddScoped<IAccountService, AccountService>();
             builder.Services.AddTransient<IEmailSender, EmailSender>();
 
+            //add notification service
+            builder.Services.AddScoped<INotificationService, NotificationService>();
+
             builder.Services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -112,6 +116,7 @@ namespace Connectify.Server
                 };
             });
             var app = builder.Build();
+            app.MapHub<NotificationHub>("/hubs/notificationHub");
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
@@ -125,8 +130,9 @@ namespace Connectify.Server
 
             app.UseHttpsRedirection();
             app.UseCors("SignalRCorsPolicy");
+            app.UseAuthentication();
             app.UseAuthorization();
-
+            
 
             app.MapControllers();
 

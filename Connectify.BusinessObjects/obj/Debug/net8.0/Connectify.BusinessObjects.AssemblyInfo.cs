@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Connectify.BusinessObjects")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6240e6a48449befe7a2efb90e8b02ddb4a15ce53")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5768d196a5b35c1fb10b438fc945f3fcdc520a2a")]
 [assembly: System.Reflection.AssemblyProductAttribute("Connectify.BusinessObjects")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Connectify.BusinessObjects")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -14,6 +14,7 @@ import VerifyAccount from './js/VerifyAccount';
 import ForgotPasswordForm from './js/password/ForgotPasswordForm';
 import ResetPasswordForm from './js/password/ResetPasswordForm';
 import ResetPasswordSuccess from './js/password/ResetPasswordSuccess';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function MyApp() {
     return (

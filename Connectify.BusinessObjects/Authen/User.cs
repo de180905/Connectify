@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using Connectify.BusinessObjects.Notification;
 
 namespace Connectify.BusinessObjects.Authen
 {
@@ -21,5 +22,11 @@ namespace Connectify.BusinessObjects.Authen
         public Gender Gender { get; set; }
         public string PasswordResetToken { get; set; } = "";
         public DateTime? PasswordResetTokenExpires { get; set; }
+
+        // Các thông báo mà người dùng đã nhận (nhiều-nhiều)
+        public ICollection<NotificationRecipient> NotificationsReceived { get; set; }
+
+        // Các thông báo mà người dùng kích hoạt
+        public ICollection<Notifications> SentNotifications { get; set; }
     }
 }
