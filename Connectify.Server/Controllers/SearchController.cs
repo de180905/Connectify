@@ -11,10 +11,11 @@ namespace Connectify.Server.Controllers
     public class SearchController : ControllerBase
     {
         private readonly ISearchService searchService;
-
-        public SearchController(ISearchService searchService)
+        private readonly IUserService userService;
+        public SearchController(ISearchService searchService, IUserService userService)
         {
             this.searchService = searchService;
+            this.userService = userService;
         }
         [HttpGet("people")]
         public async Task<IActionResult> GetPeople([FromQuery]UserFilterOptions options)
@@ -29,6 +30,20 @@ namespace Connectify.Server.Controllers
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Get user ID from claims
             var friendRequest = await searchService.GetFriendRequestForUserAsync(userId, filter, pageNumber, 1);
             return Ok(friendRequest);
+        }
+        [HttpGet("UserBasic/{userId}")]
+        public async Task<IActionResult> GetUserBasic(string userId)
+        {
+            var viewerId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Get user ID from claims
+            var res = await userService.GetUserBasic(viewerId, userId);
+            return Ok(res);
+        }
+        [HttpGet("UserDescription/{userId}")]
+        public async Task<IActionResult> GetDescriptionOfUser(string userId)
+        {
+            var viewerId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Get user ID from claims
+            var res = await userService.GetDescriptionOfUser(viewerId, userId);
+            return Ok(res);
         }
     }
 }

@@ -1,0 +1,8 @@
+.icon-hover {
+    font-size: 120%; /* Regular size */
+    transition: font-size 0.3s ease; /* Smooth transition */
+}
+
+    .icon-hover:hover {
+        font-size: 160%; /* Size on hover (20% bigger) */
+    }

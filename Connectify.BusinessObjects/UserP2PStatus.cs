@@ -6,5 +6,6 @@
         FriendRequestSent,
         FriendRequestReceived,
         Friend,
+        Self
     }
 }

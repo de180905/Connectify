@@ -31,5 +31,6 @@ namespace Connectify.BusinessObjects.ChatFeature
         public DateTime JoinedAt { get; set; }
 
         public MemberRole? Role { get; set; } // Optional, applicable only for group chats
+        public DateTime LastSeen { get; set; }
     }
 }

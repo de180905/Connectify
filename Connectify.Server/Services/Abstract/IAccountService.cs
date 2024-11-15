@@ -18,5 +18,7 @@ namespace Connectify.Server.Services.Abstract
         Task<string> UploadAvatarAsync(string userId, UploadAvatarDTO dto);
         Task<bool> SendPasswordResetLinkAsync(string email);
         Task<bool> ResetPasswordAsync(ResetPasswordDTO resetPasswordDTO);
+        Task UploadProfileCoverAsync(string userId, IFormFile file);
+        Task TrackUserConnectionAsync(string userId, bool isOnline);
     }
 }

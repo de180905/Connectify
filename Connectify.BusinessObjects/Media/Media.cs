@@ -13,6 +13,8 @@ namespace BussinessObjects.MediaFeature
         public string Url { get; set; } // URL of the media file
         public string? Name { get; set; }
         [StringLength(100)]
-        public string MediaType { get; set; } 
+        public string MediaType { get; set; }
+        [StringLength(50)]
+        public string? FileType { get; set; }
     }
 }

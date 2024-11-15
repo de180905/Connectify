@@ -10,6 +10,7 @@ namespace Connectify.Server.DTOs.ChatDTOs
         public int ChatRoomId { get; set; }
         public string SenderId { get; set; }
         public string SenderName { get; set; } // New property for sender's name
+        public string SenderAvatar {  get; set; }
         public DateTime SentAt { get; set; }
         public MessageType? Type { get; set; }
         public int? ReplyToId { get; set; } // Optional, for replies to messages

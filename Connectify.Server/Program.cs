@@ -1,5 +1,6 @@
 using Connectify.BusinessObjects.Authen;
 using Connectify.Server.DataAccess;
+using Connectify.Server.Filters;
 using Connectify.Server.Hubs;
 using Connectify.Server.Services;
 using Connectify.Server.Services.Abstract;
@@ -84,12 +85,17 @@ namespace Connectify.Server
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectifyDb"));
             });
-            builder.Services.AddAutoMapper(typeof(UserProfile), typeof(MessageProfile));
+            builder.Services.AddAutoMapper(typeof(UserProfile), typeof(MessageProfile), typeof(PostProfile),
+                typeof(ChatMappingProfile), typeof(CommentProfile));
             builder.Services.AddScoped<IAccountService, AccountService>();
             builder.Services.AddScoped<IChatService, ChatService>();
             builder.Services.AddScoped<ICloudStorageService, CloudStorageService>();
             builder.Services.AddScoped<ISearchService, SearchService>();
             builder.Services.AddScoped<IFriendService, FriendService>();
+            builder.Services.AddScoped<IPostService, PostService>();
+            builder.Services.AddScoped<IUserService, UserService>();
+            builder.Services.AddScoped<IMediaService, MediaService>();
+            builder.Services.AddScoped<ICommentService, CommentService>();
             builder.Services.AddTransient<IEmailSender, EmailSender>();
 
             builder.Services.AddAuthentication(options =>
@@ -151,6 +157,7 @@ namespace Connectify.Server
 
             app.MapControllers();
             app.MapHub<ChatHub>("/hubs/chathub");
+            app.MapHub<NotificationHub>("/hubs/notificationhub");
             app.MapFallbackToFile("/index.html");
 
             app.Run();

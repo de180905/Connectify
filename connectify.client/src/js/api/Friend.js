@@ -35,6 +35,24 @@ async function respondFriendRequest(otherUserId, status) {
         return false;
     }
 }
+async function unFriend(otherUserId) {
+    try {
+        const response = await fetch(CONNECTIFY_API_BASE_URL + `/api/FriendRequest/UnFriend?otherUserId=${otherUserId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + TokenService.getAccessToken(), // Assuming token-based auth
+            },
+        });
+        if (!response.ok) {
+            return false;
+        }
+        return true;
+    } catch (error) {
+        console.error("Error unfriending:", error);
+        return false;
+    }
+}
 async function revokeFriendRequest(otherUserId) {
     try {
         const response = await fetch(CONNECTIFY_API_BASE_URL + `/api/FriendRequest/revoke?otherUserId=${otherUserId}`, {
@@ -52,4 +70,4 @@ async function revokeFriendRequest(otherUserId) {
         return false;
     }
 }
-export { sendFriendRequest, respondFriendRequest, revokeFriendRequest }
+export { sendFriendRequest, respondFriendRequest, revokeFriendRequest, unFriend }

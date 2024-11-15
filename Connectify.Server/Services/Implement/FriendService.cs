@@ -7,6 +7,7 @@ using Connectify.Server.DTOs;
 using Connectify.Server.DTOs.FriendDTOs;
 using Connectify.Server.Services.Abstract;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 using YueXiao.Utils;
 
 namespace Connectify.Server.Services.Implement
@@ -35,6 +36,22 @@ namespace Connectify.Server.Services.Implement
                 RequestDate = DateTime.UtcNow
             };
             dbContext.FriendRequests.Add(request);
+            await dbContext.SaveChangesAsync();
+            return true;
+        }
+        public async Task<bool> UnFriend(string userId1, string userId2)
+        {
+            if (!Friend(userId1, userId2))
+            {
+                return false;
+            }
+            var curFs = dbContext.FriendShips.Where(fs => fs.User1Id == userId1 && fs.User2Id == userId2
+                || fs.User2Id == userId1 && fs.User1Id == userId2).FirstOrDefault();
+            if(curFs == null)
+            {
+                return false;
+            }
+            dbContext.FriendShips.Remove(curFs);
             await dbContext.SaveChangesAsync();
             return true;
         }
@@ -79,6 +96,10 @@ namespace Connectify.Server.Services.Implement
         }
         public UserP2PStatus GetUsersP2PStatus(string userId1, string userId2)
         {
+            if(userId1 == userId2)
+            {
+                return UserP2PStatus.Self;
+            }
             if(Friend(userId1, userId2))
             {
                 return UserP2PStatus.Friend;
@@ -108,6 +129,5 @@ namespace Connectify.Server.Services.Implement
                 fs => fs.User1Id == userId1 && fs.User2Id == userId2
                 || fs.User2Id == userId1 && fs.User1Id == userId2);
         }
-        
     }
 }

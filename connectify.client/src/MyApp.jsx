@@ -1,35 +1,39 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Feed from './js/Feed';
-import GroupIndex from './js/GroupIndex';
-import GroupTimeline from './js/GroupTimeline';
-import ChatroomsLayout from './js/ChatroomsLayout';
-import ChatroomDetail from './js/ChatRoomDetail';
-import UserTimeline from './js/UserTimeline';
-import LoginLayout from './js/LoginLayout';
-import LoginForm from './js/LoginForm';
-import RegisterForm from './js/RegisterForm';
+import { BrowserRouter as Router, Routes, Route, Navigate, Outlet } from 'react-router-dom';
+import Feed from './js/Components/newsFeedFeature/Feed';
+import GroupIndex from './js/Components/groupFeature/GroupIndex';
+import GroupTimeline from './js/Components/groupFeature/GroupTimeline';
+import UserTimeline from './js/Components/userTimelineFeature/UserTimeline';
+import LoginLayout from './js/Components/authenFeature/LoginLayout';
+import LoginForm from './js/Components/authenFeature/LoginForm';
+import RegisterForm from './js/Components/authenFeature/RegisterForm';
 import { TokenService, signin } from './js/api/authen';
-import VerifyAccount from './js/VerifyAccount';
+import VerifyAccount from './js/Components/authenFeature/VerifyAccount';
 import * as signalR from '@microsoft/signalr';
 import { CONNECTIFY_API_BASE_URL } from './js/api/config';
 import * as React from 'react';
-import UserSettings from './js/UserSetting';
+import UserSettings from './js/Components/userSettingFeature/UserSetting';
 import AppProvider from './js/Contexts/AppProvider';
-import PeopleIndex from './js/PeopleIndex';
-import PeopleRequest from './js/PeopleRequest';
-import AppLayout from './js/AppLayout';
-import ForgotPasswordForm from './js/password/ForgotPasswordForm';
-import ResetPasswordForm from './js/password/ResetPasswordForm';
-import ResetPasswordSuccess from './js/password/ResetPasswordSuccess';
-
-
+import PeopleIndex from './js/Components/peopleFeature/PeopleIndex';
+import ResetPasswordForm from './js/Components/password/ResetPasswordForm';
+import ResetPasswordSuccess from './js/Components/password/ResetPasswordSuccess';
+import UserTimelineMain from './js/Components/userTimelineFeature/UserTimelineMain';
+import TimelineGallery from './js/Components/userTimelineFeature/TimelineGallery';
+import UserTimelineFriends from './js/Components/userTimelineFeature/UserTimelineFriends';
+import Sidebar from './js/Components/appLayout/Sidebar';
+import Header from './js/Components/appLayout/Header';
+import ChatroomsLayout from './js/Components/chatFeature/ChatroomsLayout';
+import ChatroomDetail from './js/Components/chatFeature/ChatroomDetail';
+import PeopleRequest from './js/Components/peopleFeature/PeopleRequest';
+import ForgotPasswordForm from './js/Components/password/ForgotPasswordForm';
 function MyApp() {
     const [connection, setConnection] = React.useState(null);
-    const chatRoomRef = React.useRef(null);
+    const chatRoomDetailRef = React.useRef(null);
+    const chatroomsLayoutRef = React.useRef(null);
+    const chatNotificationRef = React.useRef(null);
     React.useEffect(() => {
         // Create a new connection
         const newConnection = new signalR.HubConnectionBuilder()
-            .withUrl(CONNECTIFY_API_BASE_URL + '/hubs/chathub', {
+            .withUrl(`${CONNECTIFY_API_BASE_URL}/hubs/chatHub`, {
                 accessTokenFactory: () => TokenService.getAccessToken()
             })
             .withAutomaticReconnect() // Optional: Automatically reconnect if the connection is lost
@@ -43,26 +47,22 @@ function MyApp() {
             connection.start()
                 .then(() => {
                     console.log('Connected to the SignalR hub');
-
-                    // Receive messages from the hub
                     connection.on('ReceiveMessage', (message) => {
-
-                        if (chatRoomRef.current) {
-                            console.log(message);
-                            chatRoomRef.current.setMessages((prev) => {
-                                return [message, ...prev];
-                            }); // Replace newMessages with your messages array
-                        }
+                        if (message.chatRoomId == chatRoomDetailRef?.current?.id) {
+                            chatRoomDetailRef.current.receiveMessage(message);                              
+                        }                          
+                        connection.invoke('AcknowledgeMessage', parseInt(message.chatRoomId)
+                            , message.chatRoomId == chatRoomDetailRef?.current?.id)
+                            .then(result => {
+                                if (chatroomsLayoutRef.current) {
+                                    chatroomsLayoutRef.current.updateAndMoveChatroomToTop(result);
+                                }                               
+                                chatNotificationRef.current.updateAndMoveChatroomToTop(result);
+                            })
                     });
                     connection.on('deleteMessage', (messageId) => {
-                        if (chatRoomRef.current) {
-                            chatRoomRef.current.setMessages((prev) => {
-                                return prev.map((message) => {
-                                    return message.messageId === messageId ? { ...message, deleted: true, text: null, files: null } :
-                                        message.replyToId === messageId ? { ...message, replyToContent: null, relyToDeleted: true } :
-                                            message
-                                });
-                            }); // Replace newMessages with your messages array
+                        if (chatRoomDetailRef.current) {
+                            chatRoomDetailRef.current.deleteMessage(messageId);
                         }
                     });
                 })
@@ -80,9 +80,19 @@ function MyApp() {
         <AppProvider>
             <Router>
                 <Routes>
-                    <Route element={<AppLayout />}>
+                    <Route element={
+                        (<div id="wrapper">
+                            <Header chatNotificationRef={chatNotificationRef} />
+                            <Sidebar />
+                            <Outlet />
+                        </div>)}
+                    >
                         <Route index element={<Feed />} />
-                        <Route path=":userId" element={<UserTimeline />} />
+                        <Route path=":userId" element={<UserTimeline />}>
+                            <Route index element={<UserTimelineMain />} />
+                            <Route path="photos" element={<TimelineGallery />} />
+                            <Route path="friends" element={<UserTimelineFriends />} />
+                        </Route>
                         <Route path="/settings" element={<UserSettings />} />
                         <Route path="groups">
                             <Route index element={<GroupIndex />} />
@@ -92,9 +102,17 @@ function MyApp() {
                             <Route index element={<PeopleIndex />} />
                             <Route path="requests" element={<PeopleRequest />} />
                         </Route>
-                        <Route path="chatrooms" element={<ChatroomsLayout />}>
-                            <Route index element={<Navigate to={`/chatrooms/1`} replace />} />
-                            <Route path=":id" element={<ChatroomDetail ref={chatRoomRef} />} />
+                        <Route path="chatrooms" element={<ChatroomsLayout ref={chatroomsLayoutRef} />}>
+                            <Route path=":id" element={<ChatroomDetail
+                                ref={chatRoomDetailRef}
+                                updateChatroomHasSeen={(id) => {
+                                    if (chatroomsLayoutRef.current) {
+                                        chatroomsLayoutRef.current.updateChatroomHasSeen(id);
+                                    }
+                                    chatNotificationRef.current.updateChatroomHasSeen(id);
+                                }}
+                            />}
+                            />
                         </Route>
                     </Route>                   
                     <Route path="account" element={<LoginLayout />}>

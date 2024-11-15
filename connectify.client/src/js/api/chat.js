@@ -25,25 +25,20 @@ const loadChatMessages = async (chatRoomId, toDate = null, pageNumber = 1) => {
     }
 };
 
-const loadChatRooms = async () => {
-    try {
-        const response = await fetch(`${CONNECTIFY_API_BASE_URL}/api/Chat/chatrooms?pageNumber=1&pageSize=10`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + TokenService.getAccessToken()
-            }
-        });
-
-        if (!response.ok) {
-            throw new Error('Failed to fetch chat rooms');
+const loadChatRooms = async (searchTerm = "", pageNumber = 1, pageSize = 2) => {
+    let url = `${CONNECTIFY_API_BASE_URL}/api/Chat/chatrooms?searchTerm=${searchTerm}&pageNumber=${pageNumber}&pageSize=${pageSize}`;
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + TokenService.getAccessToken()
         }
-
-        const chatRoomsData = await response.json();
-        return chatRoomsData.items;
-    } catch (error) {
-        console.error('Error:', error);
+    });
+    if (!response.ok) {
+        throw new Error('Failed to fetch chat rooms');
     }
+    const chatRoomsData = await response.json();
+    return chatRoomsData.items;
 };
 const loadChatRoomById = async (id) => {
     try {

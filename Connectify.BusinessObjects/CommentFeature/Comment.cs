@@ -18,7 +18,7 @@ namespace Connectify.BusinessObjects.CommentFeature
         public int? PostId { get; set; }
         public Post? Post { get; set; }
         public string Content { get; set; }
-        public string AttachmentUrl { get; set; }
+        public string? AttachmentUrl { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public string AuthorId { get; set; }
@@ -26,7 +26,10 @@ namespace Connectify.BusinessObjects.CommentFeature
         [ForeignKey(nameof(ParentCommentId))]
         public int? ParentCommentId { get; set; }
         public virtual Comment ParentComment { get; set; }
+        [ForeignKey(nameof(ReplyToUserId))]
+        public string? ReplyToUserId { get; set; }
+        public virtual User? ReplyToUser {get; set; }
         public virtual ICollection<Comment> Replies { get; set; } = new List<Comment>();
-        public virtual ICollection<CommentReaction> Reactions { get; set; } = new HashSet<CommentReaction>();
+        public virtual ICollection<CommentReaction> Reactions { get; set; } = new List<CommentReaction>();
     }
 }

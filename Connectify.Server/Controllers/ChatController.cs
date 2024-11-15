@@ -1,4 +1,5 @@
 ﻿using Connectify.Server.DTOs.ChatDTOs;
+using Connectify.Server.Filters;
 using Connectify.Server.Hubs;
 using Connectify.Server.Services.Abstract;
 using Connectify.Server.Services.FilterOptions;
@@ -31,10 +32,10 @@ namespace Connectify.Server.Controllers
         }
 
         [HttpGet("chatrooms")]
-        public async Task<IActionResult> GetChatRoomsForUser([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+        public async Task<IActionResult> GetChatRoomsForUser([FromQuery] string searchTerm="", [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Assuming an extension method to get the user ID
-            var chatRooms = await _chatService.GetChatRoomsForUserAsync(userId, "", pageNumber, pageSize);
+            var chatRooms = await _chatService.GetChatRoomsForUserAsync(userId, searchTerm, pageNumber, pageSize);
             return Ok(chatRooms);
         }
 
@@ -53,11 +54,14 @@ namespace Connectify.Server.Controllers
             var msgId = await _chatService.SendTextMessageAsync(userId, dto);
             var msg = await _chatService.GetMessageByIdAsync(msgId, userId);
             var mems = await _chatService.GetChatRoomMembers(userId, dto.ChatRoomId, 1);
-            foreach (var mem in mems.Items)
+
+            var tasks = mems.Items.Select(async mem =>
             {
                 msg.IsSent = mem.Id == userId;
                 await _chatHubContext.Clients.User(mem.Id).SendAsync("ReceiveMessage", msg);
-            }
+            });
+
+            Task.WhenAll(tasks);
             return Ok(new { success = true });
         }
 
@@ -68,11 +72,13 @@ namespace Connectify.Server.Controllers
             var msgId = await _chatService.SendSingleFileMessageAsync(userId, dto);
             var msg = await _chatService.GetMessageByIdAsync(msgId, userId);
             var mems = await _chatService.GetChatRoomMembers(userId, dto.ChatRoomId, 1);
-            foreach (var mem in mems.Items)
+
+            var tasks = mems.Items.Select(async mem =>
             {
                 msg.IsSent = mem.Id == userId;
                 await _chatHubContext.Clients.User(mem.Id).SendAsync("ReceiveMessage", msg);
-            }
+            });
+            Task.WhenAll(tasks);
             return Ok(new { success = true });
         }
 
@@ -83,11 +89,13 @@ namespace Connectify.Server.Controllers
             var msgId = await _chatService.SendMultiFilesMessageAsync(userId, dto);
             var msg = await _chatService.GetMessageByIdAsync(msgId, userId);
             var mems = await _chatService.GetChatRoomMembers(userId, dto.ChatRoomId, 1);
-            foreach (var mem in mems.Items)
+
+            var tasks = mems.Items.Select(async mem =>
             {
                 msg.IsSent = mem.Id == userId;
                 await _chatHubContext.Clients.User(mem.Id).SendAsync("ReceiveMessage", msg);
-            }
+            });
+            Task.WhenAll(tasks);
             return Ok(new { success = true });
         }
 
@@ -120,6 +128,7 @@ namespace Connectify.Server.Controllers
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var messages = await _chatService.GetMessagesAsync(userId, options, pageNumber, pageSize);
+            await _chatService.SetMemberLastSeenAsync(userId, options.ChatRoomId, DateTime.UtcNow);
             return Ok(messages);
         }
         [HttpDelete("messages/{messageId}")]
@@ -145,10 +154,11 @@ namespace Connectify.Server.Controllers
                     await _chatService.DeleteMessageAsync(messageId, userId);
                     var msg = await _chatService.GetMessageByIdAsync(messageId, userId);
                     var mems = await _chatService.GetChatRoomMembers(userId, msg.ChatRoomId, 1);
-                    foreach (var mem in mems.Items)
+                    var tasks = mems.Items.Select(async mem =>
                     {
                         await _chatHubContext.Clients.User(mem.Id).SendAsync("deleteMessage", messageId);
-                    }
+                    });
+                    Task.WhenAll(tasks);
                 } 
                 // Return success response
                 return NoContent(); // 204 No Content on successful deletion
@@ -172,7 +182,7 @@ namespace Connectify.Server.Controllers
         public async Task<IActionResult> GetChatRoom(int id)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Assuming an extension method to get the user ID
-            var res = await _chatService.GetChatRoomById(userId, id);
+            var res = await _chatService.GetChatRoomByIdAsync(userId, id);
             return Ok(new {success = true, data = res});
         }
     }

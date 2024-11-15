@@ -30,6 +30,11 @@ namespace Connectify.Server.DataAccess
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            builder.Entity<Comment>()
+            .HasOne(c => c.ParentComment)
+            .WithMany(c => c.Replies)
+            .HasForeignKey(c => c.ParentCommentId)
+            .OnDelete(DeleteBehavior.Cascade);
             builder.Entity<Message>()
                 .HasMany(m => m.Files)
                 .WithOne(f => f.Message)
@@ -126,7 +131,11 @@ namespace Connectify.Server.DataAccess
                 .WithMany()
                 .HasForeignKey(mr => mr.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
-            
+            builder.Entity<PostReaction>()
+                .HasOne(pr => pr.User)
+                .WithMany()
+                .HasForeignKey(pr => pr.UserId)
+                .OnDelete(DeleteBehavior.Restrict); // Prevent cascade delete
         }
         public DbSet<Post> Posts { get; set; }
         public DbSet<Media> Media { get; set; }
@@ -145,5 +154,7 @@ namespace Connectify.Server.DataAccess
         public DbSet<MessageReaction> MessageReactions { get; set; }
         public DbSet<ChatRoomMember> ChatRoomMembers { get; set; }
         public DbSet<MessageVisibility> MessageVisibilities { get; set; }
+        public DbSet<PostTag> PostTags { get; set; }
+        public DbSet<PostReaction> PostReactions { get; set; }
     }
 }

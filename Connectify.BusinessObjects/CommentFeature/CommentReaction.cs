@@ -19,6 +19,6 @@ namespace Connectify.BusinessObjects.CommentFeature
         [ForeignKey(nameof(UserId))]
         public string UserId { get; set; }
         public virtual User User { get; set; }
-        public ReactionType Reaction { get; set; }  
+        public bool IsLike { get; set; }  
     }
 }

@@ -230,6 +230,23 @@ async function uploadAvatar(file) {
         return { success: false, message: 'Something went wrong. Please try again.' };
     }
 }
+async function uploadProfileCover(file) {
+    const url = CONNECTIFY_API_BASE_URL + '/api/Account/upload-profileCover'; // Replace with your API URL
+    const formData = new FormData();
+    formData.append('file', file); // Attach the file to the form data
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Authorization': 'Bearer ' + TokenService.getAccessToken(), // Include authorization header
+        },
+        body: formData, // Send the form data containing the file
+    });
+
+    if (!response.ok) {
+        console.log(response);
+       throw new Error(`HTTP error! status: ${response.status}`);
+    }
+}
 // Function to get user data from the API
 async function getMyUser() {
     try {
@@ -311,5 +328,5 @@ async function resetPassword(email, password, token) {
 
 export {
     requireEmailConfirm, signin, signup, TokenService, getUserDescription, updateUserDescription,
-    changePassword, uploadAvatar, getMyUser, forgotPassword, resetPassword
+    changePassword, uploadAvatar, getMyUser, forgotPassword, resetPassword, uploadProfileCover
 };

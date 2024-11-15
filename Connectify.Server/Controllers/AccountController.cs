@@ -133,6 +133,21 @@ namespace Connectify.Server.Controllers
             var avatarUrl = await accountRepo.UploadAvatarAsync(userId, dto);
             return Ok(new { AvatarUrl = avatarUrl });
         }
+        [Authorize]
+        [HttpPost("upload-profileCover")]
+        public async Task<IActionResult> UploadProfileCover([FromForm] IFormFile file)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Get user ID from claims
+            try
+            {
+                await accountRepo.UploadProfileCoverAsync(userId, file);
+            }catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            
+            return NoContent();
+        }
 
         [HttpPost("forgot-password")]
         public async Task<IActionResult> ForgotPassword(EmailDTO emailDTO)

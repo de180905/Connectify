@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Azure.Core;
 using Connectify.BusinessObjects.Authen;
 using Connectify.BussinessObjects.Authen;
 using Connectify.Server.DataAccess;
 using Connectify.Server.DTOs;
+using Connectify.Server.DTOs.PostDTOs;
 using Connectify.Server.Services.Abstract;
 using Connectify.Server.Services.Exceptions;
 using Connectify.Server.Services.FilterOptions;
@@ -130,7 +132,8 @@ namespace Connectify.Server.Services.Implement {
                 UserName = dto.Email,
                 DateOfBirth = dto.DateOfBirth,
                 Gender = dto.Gender,
-                Avatar = "https://res.cloudinary.com/dj7lju0cn/image/upload/v1728124472/AvatarDefault_w6dlj3.jpg"
+                Avatar = "https://res.cloudinary.com/dj7lju0cn/image/upload/v1730541203/Connectify/bui9wpcatrjkpjvqypoc.png",
+                ProfileCover = "http://res.cloudinary.com/dj7lju0cn/image/upload/v1730547974/Connectify/l5hhwu26y65yqiutslmc.png"
             };
             var result = await userManager.CreateAsync(user, dto.Password);
             if (result.Succeeded)
@@ -291,26 +294,15 @@ namespace Connectify.Server.Services.Implement {
         }
         public async Task<UserDTO?> GetMyUser(string userId)
         {
-            return await dbContext.Users.Where(u => u.Id == userId).Select(u => new UserDTO
-            {
-                Id = u.Id,
-                FirstName = u.FirstName,
-                LastName = u.LastName,
-                Avatar = u.Avatar
-            }).FirstOrDefaultAsync();
+            return await dbContext.Users.Where(u => u.Id == userId).
+                ProjectTo<UserDTO>(_mapper.ConfigurationProvider).FirstOrDefaultAsync();
         }
         public async Task<string> UploadAvatarAsync(string userId, UploadAvatarDTO dto)
         {
-            if (dto.File == null || dto.File.Length == 0)
+            if (dto.File == null || dto.File.Length == 0 || !dto.File.ContentType.StartsWith("image/"))
             {
-                throw new ArgumentException("Avatar file is required.");
+                throw new ArgumentException("Avatar file not valid.");
             }
-            if (!dto.File.ContentType.StartsWith("image/"))
-            {
-                throw new Exception(dto.File.ContentType);
-            }
-            // Upload the avatar to cloud storage
-            var mediaUrl = await _cloudStorageService.UploadFileAsync(dto.File);
 
             // Find the user and update their avatar URL
             var user = await dbContext.Users.FindAsync(userId);
@@ -319,10 +311,38 @@ namespace Connectify.Server.Services.Implement {
                 throw new KeyNotFoundException("User not found.");
             }
 
+            // Upload the avatar to cloud storage
+            var mediaUrl = await _cloudStorageService.UploadFileAsync(dto.File);
+            var oldFile = user.Avatar;
             user.Avatar = mediaUrl; // Assuming you have AvatarUrl property in your User entity
             await dbContext.SaveChangesAsync();
-
+            if (oldFile != null)
+            {
+                Task.Run(() => { _cloudStorageService.DeleteFileAsync(oldFile); });
+            }
             return mediaUrl; // Return the uploaded avatar URL
+        }
+        public async Task UploadProfileCoverAsync(string userId, IFormFile file)
+        {
+            if (file == null || !file.ContentType.StartsWith("image/"))
+            {
+                throw new ArgumentException("Only accept image");
+            }
+            // Find the user and update their avatar URL
+            var user = await dbContext.Users.FindAsync(userId);
+            if (user == null)
+            {
+                throw new KeyNotFoundException("User not found.");
+            }
+            // Upload the avatar to cloud storage
+            var mediaUrl = await _cloudStorageService.UploadFileAsync(file);
+            var oldFile = user.ProfileCover;
+            user.ProfileCover = mediaUrl; // Assuming you have AvatarUrl property in your User entity
+            await dbContext.SaveChangesAsync();
+            if (oldFile != null)
+            {
+                Task.Run(() => { _cloudStorageService.DeleteFileAsync(oldFile); });
+            }
         }
 
         public async Task<bool> SendPasswordResetLinkAsync(string email)
@@ -361,6 +381,17 @@ namespace Connectify.Server.Services.Implement {
                 return true;
             }
             return false;
+        }
+        public async Task TrackUserConnectionAsync(string userId, bool isOnline)
+        {
+            var user = await userManager.FindByIdAsync(userId);
+            if(user != null)
+            {
+                user.IsOnline = isOnline;
+                if(!isOnline) user.LastOnline = DateTime.UtcNow;
+                await userManager.UpdateAsync(user);
+                await dbContext.SaveChangesAsync();
+            }
         }
     }    
 }

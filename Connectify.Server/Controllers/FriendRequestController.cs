@@ -1,6 +1,7 @@
 ﻿using Connectify.BusinessObjects;
 using Connectify.Server.DTOs.FriendDTOs;
 using Connectify.Server.Services.Abstract;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Org.BouncyCastle.Asn1.Ocsp;
@@ -10,6 +11,7 @@ namespace Connectify.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class FriendRequestController : ControllerBase
     {
         private readonly IFriendService friendService;
@@ -40,6 +42,18 @@ namespace Connectify.Server.Controllers
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var result = await friendService.ResponseFriendRequestAsync(userId, otherUserId, status);
+            if (result)
+            {
+                return Ok("Friend request responded successfully.");
+            }
+
+            return BadRequest("Failed to respond to friend request.");
+        }
+        [HttpDelete("UnFriend")]
+        public async Task<IActionResult> UnFriend(string otherUserId)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var result = await friendService.UnFriend(userId, otherUserId);
             if (result)
             {
                 return Ok("Friend request responded successfully.");

@@ -22,9 +22,10 @@ namespace Connectify.Server.Services.Abstract
         Task<ChatRoomDTO> GetPrivateChatRoomAsync(string currentUserId, string otherUserId);
         Task<MessageDTO> GetMessageByIdAsync(int id, string userId);
         Task<PaginatedResult<UserDTO>> GetChatRoomMembers(string currentUserId,  int chatRoomId, int pageNumber, int pageSize = -1);
-        Task<ChatRoomDTO> GetChatRoomById(string userId, int chatRoomId);
+        Task<ChatRoomDTO?> GetChatRoomByIdAsync(string userId, int chatRoomId);
         Task DetachMessageAsync(int messageId, string userId);
         Task DeleteMessageAsync(int messageId, string userId);
+        Task SetMemberLastSeenAsync(string memId, int chatRoomId, DateTime time);
     }
 
 }
