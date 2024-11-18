@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Connectify.BusinessObjects.FriendFeature;
+using Connectify.BusinessObjects.Notification;
 
 namespace Connectify.BusinessObjects.Authen
 {
@@ -29,5 +30,10 @@ namespace Connectify.BusinessObjects.Authen
         public string? ProfileCover { get; set; }
         public bool IsOnline { get; set; }
         public DateTime? LastOnline { get; set; }
+        // Các thông báo mà người dùng đã nhận (nhiều-nhiều)
+        public ICollection<NotificationRecipient> NotificationsReceived { get; set; }
+
+        // Các thông báo mà người dùng kích hoạt
+        public ICollection<Notifications> SentNotifications { get; set; }
     }
 }

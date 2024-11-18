@@ -6,7 +6,7 @@ import FriendSearch from '../utils/FriendSearch';
 import { createPost, getPost, updatePost } from '../../api/Post';
 import { generateGuid } from '../../Utils/MathsHelper';
 import { FaCamera } from 'react-icons/fa';
-
+import TextareaAutosize from 'react-textarea-autosize';
 const PostUpdateBox = forwardRef(({ }, ref) => {
     const [id, setId] = useState(0);
     const { user } = useContext(AppContext);
@@ -127,21 +127,26 @@ const PostUpdateBox = forwardRef(({ }, ref) => {
                 <Modal.Body>
                     {!isTaggingFriends ? (
                         <>
-                            <Form.Group controlId="postContent" style={{ position: 'relative' }} >
-                                <Form.Control
-                                    as="textarea"
-                                    rows={3}
+                            <div style={{ position: 'relative' }}>
+                                <TextareaAutosize
+                                    minRows={5}
+                                    maxRows={15}
                                     placeholder="What's on your mind?"
                                     value={postContent}
                                     onChange={(e) => setPostContent(e.target.value)}
-                                />
+                                    className="w-full p-2 border rounded-md"
+                                ></TextareaAutosize>
                                 {/* Emoji Button */}
-                                <EmojiPicker style={{
-                                    position: 'absolute',
-                                    bottom: '10px',
-                                    right: '10px',
-                                }} onSelect={handleEmojiSelect} />
-                            </Form.Group>
+                                <EmojiPicker
+                                    style={{
+                                        position: 'absolute',
+                                        bottom: '10px',
+                                        right: '10px',
+                                    }}
+                                    onSelect={handleEmojiSelect}
+                                />
+                            </div>
+
 
                             {/* Image/Video upload section */}
                             <div className="mt-3">

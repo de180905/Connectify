@@ -1,0 +1,64 @@
+#notificaitonList {
+    width: 100%;
+    padding: 10px 5px 10px 10px;
+}
+
+#notificaitonList .header .title {
+    font-size: 20px;
+    font-weight: 650;
+}
+
+#notificaitonList .body {
+    width: 100%;
+    padding: 5px;
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+}
+
+.body .notificationItem {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.notificationItem:hover {
+    background-color: #e6f7ff;
+}
+
+.notificationItem .avatar {
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+.notificationItem .avatar img {
+    border-radius: 50%;
+}
+
+.notificationItem .notifiMessage {
+    color: #5d70ef;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.notificationItem .isRead {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.notificationItem .isRead .dot {
+    height: 10px;
+    width: 10px;
+    background-color: #007bff;
+    border-radius: 10px;
+}
+
+#notificaitonList .footer {
+    color: #007bff;
+}
+
+.footer button {
+    width: 100%;
+    background-color: #E4E6EB;
+    border-radius: 5px;
+}

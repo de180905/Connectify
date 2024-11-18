@@ -38,6 +38,7 @@
     "react-read-more-less": "^0.1.6",
     "react-router-dom": "^6.26.2",
     "react-textarea-autosize": "^8.5.5",
+    "sass": "^1.80.3",
     "tus-js-client": "^4.2.3",
     "uuid": "^11.0.3"
   },

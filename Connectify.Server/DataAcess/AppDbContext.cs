@@ -4,6 +4,7 @@ using Connectify.BusinessObjects.Authen;
 using Connectify.BusinessObjects.ChatFeature;
 using Connectify.BusinessObjects.CommentFeature;
 using Connectify.BusinessObjects.FriendFeature;
+using Connectify.BusinessObjects.Notification;
 using Connectify.BusinessObjects.PostFeature;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -34,7 +35,7 @@ namespace Connectify.Server.DataAccess
             .HasOne(c => c.ParentComment)
             .WithMany(c => c.Replies)
             .HasForeignKey(c => c.ParentCommentId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .OnDelete(DeleteBehavior.NoAction);
             builder.Entity<Message>()
                 .HasMany(m => m.Files)
                 .WithOne(f => f.Message)
@@ -136,6 +137,53 @@ namespace Connectify.Server.DataAccess
                 .WithMany()
                 .HasForeignKey(pr => pr.UserId)
                 .OnDelete(DeleteBehavior.Restrict); // Prevent cascade delete
+
+            //notification
+            builder.Entity<Notifications>(entity => {
+                entity.ToTable("notification");
+                entity.HasKey(n => n.Id)
+                .HasName("notification_pkey");
+                entity.Property(n => n.Id)
+                .HasColumnName("notification_id");
+                entity.Property(n => n.TriggeredByUserId)
+                .IsRequired()
+                .HasColumnName("triggered_by_user_id");
+                entity.Property(n => n.Message)
+                .IsRequired()
+                .HasMaxLength(255)
+                .HasColumnName("message");
+                entity.Property(n => n.ActionLink)
+                .HasMaxLength(255)
+                .HasColumnName("action_link");
+                entity.Property(n => n.CreatedAt)
+                .HasDefaultValueSql("GETDATE()")
+                .HasColumnName("create_at");
+                entity.Property(n => n.ExpirationTime)
+                .HasColumnName("expiration_time");
+            });
+            builder.Entity<Notifications>()
+                .HasOne(n => n.TriggeredByUser)
+                .WithMany(u => u.SentNotifications)
+                .HasForeignKey(n => n.TriggeredByUserId);
+
+            //NotificationRecipient
+            builder.Entity<NotificationRecipient>(entity =>
+            {
+                entity.ToTable("notification_recipient");
+                entity.HasKey(nr => new { nr.NotificationId, nr.UserId });
+            });
+
+            builder.Entity<NotificationRecipient>()
+            .HasOne(nr => nr.Notification)
+            .WithMany(n => n.NotificationRecipients)
+            .HasForeignKey(nr => nr.NotificationId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<NotificationRecipient>()
+            .HasOne(nr => nr.User)
+            .WithMany(u => u.NotificationsReceived)
+            .HasForeignKey(nr => nr.UserId)
+            .OnDelete(DeleteBehavior.Restrict);
         }
         public DbSet<Post> Posts { get; set; }
         public DbSet<Media> Media { get; set; }
@@ -156,5 +204,7 @@ namespace Connectify.Server.DataAccess
         public DbSet<MessageVisibility> MessageVisibilities { get; set; }
         public DbSet<PostTag> PostTags { get; set; }
         public DbSet<PostReaction> PostReactions { get; set; }
+        public DbSet<Notifications> Notifications { get; set; }
+        public DbSet<NotificationRecipient> NotificationRecipients { get; set; }
     }
 }
