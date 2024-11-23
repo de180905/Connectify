@@ -1,4 +1,5 @@
-﻿using Connectify.Server.DTOs.CommentDTOs;
+﻿using Connectify.BusinessObjects.CommentFeature;
+using Connectify.Server.DTOs.CommentDTOs;
 using Connectify.Server.Utils.Sort;
 using Microsoft.Data.SqlClient;
 using YueXiao.Utils;
@@ -15,5 +16,8 @@ namespace Connectify.Server.Services.Abstract
         Task<CommentDTO?> GetCommentByIdAsync(string viewerId, int id);
         Task DeleteCommentAsync(int commentId, string userId);
         Task EditCommentAsync(string userId, EditCommentDTO dto);
+        Task<Comment> GetCommentById(int commentId);
+        Task<int> GetPostId(int commentId);
+        Task<string> GetAuthorId ( int commentId);
     }
 }

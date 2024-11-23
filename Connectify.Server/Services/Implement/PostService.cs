@@ -221,5 +221,11 @@ namespace Connectify.Server.Services.Implement
             }
             return;
         }
+
+        public async Task<string> GetAuthorIdOfPost(int postId)
+        {
+            var post = await _context.Posts.FirstOrDefaultAsync(p=>p.Id== postId);
+            return post.AuthorId;
+        }
     }
 }

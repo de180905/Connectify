@@ -25,11 +25,16 @@ import ChatroomsLayout from './js/Components/chatFeature/ChatroomsLayout';
 import ChatroomDetail from './js/Components/chatFeature/ChatroomDetail';
 import PeopleRequest from './js/Components/peopleFeature/PeopleRequest';
 import ForgotPasswordForm from './js/Components/password/ForgotPasswordForm';
+import NotificationForm from './js/Components/notification/NotificationForm';
+import { toast, ToastContainer } from 'react-toastify';
+import PostView from './js/Components/post/PostView';
+import PostReport from './js/Components/report/PostReport';
 function MyApp() {
     const [connection, setConnection] = React.useState(null);
     const chatRoomDetailRef = React.useRef(null);
     const chatroomsLayoutRef = React.useRef(null);
     const chatNotificationRef = React.useRef(null);
+    const headerRef = React.useRef(null);
     React.useEffect(() => {
         // Create a new connection
         const newConnection = new signalR.HubConnectionBuilder()
@@ -49,14 +54,14 @@ function MyApp() {
                     console.log('Connected to the SignalR hub');
                     connection.on('ReceiveMessage', (message) => {
                         if (message.chatRoomId == chatRoomDetailRef?.current?.id) {
-                            chatRoomDetailRef.current.receiveMessage(message);                              
-                        }                          
+                            chatRoomDetailRef.current.receiveMessage(message);
+                        }
                         connection.invoke('AcknowledgeMessage', parseInt(message.chatRoomId)
                             , message.chatRoomId == chatRoomDetailRef?.current?.id)
                             .then(result => {
                                 if (chatroomsLayoutRef.current) {
                                     chatroomsLayoutRef.current.updateAndMoveChatroomToTop(result);
-                                }                               
+                                }
                                 chatNotificationRef.current.updateAndMoveChatroomToTop(result);
                             })
                     });
@@ -65,6 +70,29 @@ function MyApp() {
                             chatRoomDetailRef.current.deleteMessage(messageId);
                         }
                     });
+                    connection.on('notification', (data) => {
+                        if (data) {
+                            console.log('send notification data:', data)
+                            toast(<NotificationForm 
+                                name={data.triggeredByUserName}
+                                avatar={data.triggeredByUserAvatarUrl}
+                                message={data.message}
+                                actionLink={data.actionLink}/>,
+                                {
+                                    position: "bottom-right",
+                                    autoClose: 8000,
+                                    hideProgressBar: false,
+                                    closeOnClick: true,
+                                    pauseOnHover: true,
+                                    draggable: true,
+                                    progress: undefined,
+                                }
+                            )
+                            if (headerRef.current) {
+                                headerRef.current.incrementUnreadNotification();
+                            }
+                        }
+                    })
                 })
                 .catch(error => console.error('Connection failed: ', error));
         }
@@ -82,7 +110,7 @@ function MyApp() {
                 <Routes>
                     <Route element={
                         (<div id="wrapper">
-                            <Header chatNotificationRef={chatNotificationRef} />
+                            <Header ref={headerRef} chatNotificationRef={chatNotificationRef} />
                             <Sidebar />
                             <Outlet />
                         </div>)}
@@ -114,7 +142,7 @@ function MyApp() {
                             />}
                             />
                         </Route>
-                    </Route>                   
+                    </Route>
                     <Route path="account" element={<LoginLayout />}>
                         <Route path="login" element={<LoginForm />} />
                         <Route path="register" element={<RegisterForm />} />
@@ -123,9 +151,13 @@ function MyApp() {
                         <Route path="reset-password-success" element={<ResetPasswordSuccess />} />
                     </Route>
                     <Route path="account/verify-email/:email" element={<VerifyAccount />} />
+                    <Route path='post-view/:postId' element={<PostView/>}/>
+                    
                 </Routes>
             </Router>
+            <ToastContainer />
         </AppProvider>
+
     );
 }
 

@@ -6,6 +6,7 @@ using Connectify.BusinessObjects.CommentFeature;
 using Connectify.BusinessObjects.FriendFeature;
 using Connectify.BusinessObjects.Notification;
 using Connectify.BusinessObjects.PostFeature;
+using Connectify.BusinessObjects.Report;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -61,6 +62,11 @@ namespace Connectify.Server.DataAccess
                 .HasOne(p => p.Author)
                 .WithMany()
                 .HasForeignKey(p => p.AuthorId)
+                .OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<PostTag>()
+                .HasOne(p => p.Post)
+                .WithMany()
+                .HasForeignKey(p => p.PostId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             //FriendShip
@@ -184,6 +190,52 @@ namespace Connectify.Server.DataAccess
             .WithMany(u => u.NotificationsReceived)
             .HasForeignKey(nr => nr.UserId)
             .OnDelete(DeleteBehavior.Restrict);
+            //report 
+            builder.Entity<PostReportReason>(entity =>
+            {
+                entity.HasKey(n => n.Id)
+                .HasName("post_report_reason_pkey");
+                entity.Property(e => e.Id)
+                .HasColumnName("id");
+                entity.Property(e => e.Description)
+                .HasColumnName("description");
+                entity.Property(e => e.CreatedAt) 
+                .HasColumnName("created_at");
+            });
+            builder.Entity<PostReport>(entity =>
+            {
+                entity.HasKey(n => n.Id)
+                .HasName("post_report_pkey");
+                entity.Property(e=>e.Id)
+                .HasColumnName("id");
+                entity.Property(e=>e.PostId) 
+                .HasColumnName("post_id");
+                entity.Property(e => e.ReportedByUserId)
+                .HasJsonPropertyName("reported_by_userId");
+                entity.Property(e => e.PostReportReasonId)
+                .HasColumnName("post_report_reason_id");
+                entity.Property(e=>e.Status)
+                .HasColumnName("status");
+                entity.Property(e=>e.CreatedAt) 
+                .HasColumnName("created_at");
+                entity.Property(e=>e.UpdatedAt)
+                .HasColumnName("updated_at");
+            });
+            builder.Entity<PostReport>()
+                .HasOne(pr => pr.ReportedByUser)
+                .WithMany(u => u.PostReports)
+                .HasForeignKey(pr => pr.ReportedByUserId)
+                .OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<PostReport>()
+                .HasOne(pr => pr.Post)
+                .WithMany(p => p.PostReports)
+                .HasForeignKey(pr => pr.PostId)
+                .OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<PostReport>()
+                .HasOne(pr => pr.ReportedReason)
+                .WithMany(prs => prs.Reports)
+                .HasForeignKey(pr => pr.PostReportReasonId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
         public DbSet<Post> Posts { get; set; }
         public DbSet<Media> Media { get; set; }
@@ -206,5 +258,7 @@ namespace Connectify.Server.DataAccess
         public DbSet<PostReaction> PostReactions { get; set; }
         public DbSet<Notifications> Notifications { get; set; }
         public DbSet<NotificationRecipient> NotificationRecipients { get; set; }
+        public DbSet<PostReportReason>PostReportReasons { get; set; }
+        public DbSet<PostReport>PostReports { get; set; }
     }
 }

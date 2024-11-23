@@ -23,31 +23,47 @@ namespace Connectify.Server.Controllers
             try
             {
                 var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-                Console.WriteLine($"User id: {userId}");
                 if (string.IsNullOrEmpty(userId))
-                {
                     return BadRequest(new { error = "User ID not found in token." });
-                }
-                var notifications = await _notificationService.GetUserNotifications(userId, pageSize, pageNumber);
-                return Ok(notifications);
+                var response = await _notificationService.GetUserNotifications(userId, pageSize, pageNumber);
+                return Ok(response);
             }
             catch (Exception ex)
             {
                 return BadRequest(new { error = ex.Message });
             }
         }
-        [HttpPost("create-notification")]
-        public async Task<IActionResult> CreateNotification([FromBody] CreateNotificationDto request)
+        [HttpGet("get-unread-notifications-count")]
+        public async Task<IActionResult> GetUnreadNotificationsCount()
         {
-            var notification = await _notificationService.CreateNotification(
-                request.TriggeredByUserId,
-                request.RecipientUserIds,
-                request.Message,
-                request.ActionLink,
-                request.Type
-            );
-
-            return Ok(notification);
+            try
+            {
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                if (string.IsNullOrEmpty(userId))
+                    return BadRequest(new { error = "User ID not found in token." });
+                int count = await _notificationService.GetUnreadNotificationsCount(userId);
+                return Ok(new {count=count});
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+        }
+        [HttpPut("mark-notification-as-read")]
+        public async Task<IActionResult> MarkNotificationAsRead([FromQuery]int notificationId)
+        {
+            try
+            {
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                if (string.IsNullOrEmpty(userId))
+                    return BadRequest(new { error = "User ID not found in token." });
+                await _notificationService.MarkNotificationAsRead(userId, notificationId);
+                return Ok(true);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
         }
     }
 }

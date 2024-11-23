@@ -3,7 +3,7 @@
 "ServerUrl": "https://localhost:5173",
 "RedirectUrl": "",
 "LaunchCommand": "npm run dev",
-"WorkingDirectory": "D:\\DotnetProjects\\Connectify\\Connectify.Server\\..\\connectify.client",
+"WorkingDirectory": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\..\\connectify.client",
 "MaxTimeoutInSeconds": "120",
 "KeepRunning": "false"
 }

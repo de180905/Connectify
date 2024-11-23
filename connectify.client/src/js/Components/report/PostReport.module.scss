@@ -1,0 +1,46 @@
+.postReport{
+    //background-color: #fdfcfc;
+    backdrop-filter: blur(10px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99999;
+}
+.header .closeIcon i{
+    background-color: #e2dede;
+    padding: 5px 7px;
+    border-radius: 50%;
+}
+.header .closeIcon i:hover{
+    background-color: rgb(220, 38, 38);
+    color: #fff;
+    cursor: pointer;
+}
+.postReportFrom{
+    width: 20%;
+    border: 1px #ccc solid;
+    border-radius: 5px;
+    background-color: #fff;
+
+}
+.line{
+    width: 100%;
+    border-bottom: 2px #ccc solid;
+}
+.reportItem{
+    padding: 6px 20px;
+    cursor: pointer;
+}
+.reportItem:hover{
+    background-color: #ccc;
+    color: #000;
+}
+.doneBtn{
+    color: #fff;
+    background-color: #1c6cec;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.doneBtn:hover{
+    background-color: #0542a4;
+}

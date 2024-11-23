@@ -1,9 +1,15 @@
-﻿using Connectify.Server.DTOs.CommentDTOs;
+﻿using Connectify.BusinessObjects.Authen;
+using Connectify.BusinessObjects.Notification;
+using Connectify.BusinessObjects.PostFeature;
+using Connectify.Server.DTOs.CommentDTOs;
+using Connectify.Server.DTOs.notification;
 using Connectify.Server.Services.Abstract;
+using Connectify.Server.Services.Implement;
 using Connectify.Server.Utils.Sort;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Org.BouncyCastle.Cms;
 using System.Security.Claims;
 
 namespace Connectify.Server.Controllers
@@ -14,10 +20,16 @@ namespace Connectify.Server.Controllers
     public class CommentController : ControllerBase
     {
         private readonly ICommentService _commentService;
+        private readonly IAccountService _accountService;
+        private readonly IPostService _postService;
+        private readonly INotificationService _notificationService;
 
-        public CommentController(ICommentService commentService)
+        public CommentController(ICommentService commentService, IAccountService accountService, IPostService postService, INotificationService notificationService)
         {
             _commentService = commentService;
+            _accountService = accountService;
+            _postService = postService;
+            _notificationService = notificationService;
         }
 
         [HttpPost("add")]
@@ -25,7 +37,36 @@ namespace Connectify.Server.Controllers
         {
             var authorId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var commentId = await _commentService.AddCommentAsync(authorId, dto);
-            CommentDTO createdComment = new CommentDTO();
+            //gửi thông báo
+            var recipientId = await _postService.GetAuthorIdOfPost(dto.PostId);
+            if(authorId!=recipientId)
+            {
+                var notification = new Notifications
+                {
+                    TriggeredByUserId = authorId,
+                    Message = "commented on your post.",
+                    Type = NotificationType.CommentPost,
+                    ActionLink = $"/post-view/{dto.PostId}",
+                };
+                var recipientIds = new List<string>();
+                recipientIds.Add(recipientId);
+                notification = await _notificationService.CreateNotification(notification, recipientIds);
+
+                var triggeredByUserName = await _accountService.GetFullName(authorId);
+                var triggeredByUserAvatarUrl = await _accountService.GetAvatarUrl(authorId);
+                var sendNotification = new SendNotificationDTO
+                {
+                    NotificationId = notification.Id,
+                    TriggeredByUserName = triggeredByUserName,
+                    TriggeredByUserAvatarUrl = triggeredByUserAvatarUrl,
+                    Message = notification.Message,
+                    ActionLink = notification.ActionLink,
+                };
+                await _notificationService.SendNotification(recipientId, sendNotification);
+            }
+            //
+
+                CommentDTO createdComment = new CommentDTO();
             try
             {
                 createdComment = await _commentService.GetCommentByIdAsync(authorId, commentId);
@@ -46,6 +87,57 @@ namespace Connectify.Server.Controllers
             try
             {
                 createdReply = await _commentService.GetCommentByIdAsync(authorId, commentId);
+                //gửi thông báo cho user commnent
+                
+                var postId = await _commentService.GetPostId(dto.ParentCommentId);
+                var recipientId = await _commentService.GetAuthorId(dto.ParentCommentId);
+                if (createdReply.AuthorId != recipientId)
+                {
+                    var notif = new Notifications
+                    {
+                        TriggeredByUserId = createdReply.AuthorId,
+                        Message = "replied to your comment.",
+                        Type = NotificationType.CommentReply,
+                        ActionLink = $"/post-view/{postId}",
+                    };
+                    notif = await _notificationService.CreateNotification(notif, recipientId);
+                    var triggeredByUserAvatarUrl = await _accountService.GetAvatarUrl(createdReply.AuthorId);
+                    var sendNotification = new SendNotificationDTO
+                    {
+                        NotificationId = notif.Id,
+                        TriggeredByUserName = createdReply.AuthorName,
+                        TriggeredByUserAvatarUrl = triggeredByUserAvatarUrl,
+                        Message = notif.Message,
+                        ActionLink = notif.ActionLink,
+                    };
+                    await _notificationService.SendNotification(recipientId, sendNotification);
+                }
+            
+                //gửi thông báo cho user post
+                recipientId = await _postService.GetAuthorIdOfPost(postId);
+                if(recipientId != authorId && recipientId != createdReply.ReplyToAuthorId)
+                {
+                    var notif = new Notifications
+                    {
+                        TriggeredByUserId = authorId,
+                        Message = "commented on your post.",
+                        Type = NotificationType.CommentPost,
+                        ActionLink = $"/post-view/{postId}",
+                    };
+                    notif = await _notificationService.CreateNotification(notif, recipientId);
+
+                 
+                    var triggeredByUserAvatarUrl = await _accountService.GetAvatarUrl(authorId);
+                    var sendNotification = new SendNotificationDTO
+                    {
+                        NotificationId = notif.Id,
+                        TriggeredByUserName = createdReply.AuthorName,
+                        TriggeredByUserAvatarUrl = triggeredByUserAvatarUrl,
+                        Message = notif.Message,
+                        ActionLink = notif.ActionLink,
+                    };
+                    await _notificationService.SendNotification(recipientId, sendNotification);
+                }
             }
             catch (Exception ex)
             {
@@ -115,7 +207,35 @@ namespace Connectify.Server.Controllers
         public async Task<IActionResult> ReactToComment(int commentId, bool? value)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
             await _commentService.ReactToCommentAsync(userId, commentId, value);
+            //gui thong bao
+            var postId = await _commentService.GetPostId(commentId);
+            var recipientId = await _commentService.GetAuthorId(commentId);
+            if (userId != recipientId)
+            {
+                var notif = new Notifications
+                {
+                    TriggeredByUserId = userId,
+                    Message = "reacted to your comment.",
+                    Type = NotificationType.CommentReact,
+                    ActionLink = $"/post-view/{postId}",
+                };
+                notif = await _notificationService.CreateNotification(notif, recipientId);
+                var triggeredByUserAvatarUrl = await _accountService.GetAvatarUrl(userId);
+                var triggeredByUserName = await _accountService.GetFullName(userId);
+                var sendNotification = new SendNotificationDTO
+                {
+                    NotificationId = notif.Id,
+                    TriggeredByUserName = triggeredByUserName,
+                    TriggeredByUserAvatarUrl = triggeredByUserAvatarUrl,
+                    Message = notif.Message,
+                    ActionLink = notif.ActionLink,
+                };
+
+                await _notificationService.SendNotification(recipientId, sendNotification);
+            }
+            //
             return Ok();
         }
     }

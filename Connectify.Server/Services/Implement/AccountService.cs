@@ -393,5 +393,19 @@ namespace Connectify.Server.Services.Implement {
                 await dbContext.SaveChangesAsync();
             }
         }
+
+        public async Task<string> GetFullName(string userId)
+        {
+            var user = await dbContext.Users.FirstOrDefaultAsync(u=>u.Id==userId);
+            if (user != null) return user.FullName;
+            else return "";
+        }
+
+        public async Task<string> GetAvatarUrl(string userId)
+        {
+            var user = await dbContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            if (user != null) return user.Avatar;
+            else return "";
+        }
     }    
 }

@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Connectify.BusinessObjects.FriendFeature;
 using Connectify.BusinessObjects.Notification;
+using System.Collections;
+using Connectify.BusinessObjects.Report;
 
 namespace Connectify.BusinessObjects.Authen
 {
@@ -35,5 +37,6 @@ namespace Connectify.BusinessObjects.Authen
 
         // Các thông báo mà người dùng kích hoạt
         public ICollection<Notifications> SentNotifications { get; set; }
+        public ICollection<PostReport> PostReports { get; set; }
     }
 }

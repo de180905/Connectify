@@ -1,12 +1,35 @@
-﻿import { useContext } from "react";
+﻿import { forwardRef, useCallback, useContext, useEffect, useImperativeHandle, useState } from "react";
 import { AppContext } from "../../Contexts/AppProvider";
 import { TokenService } from "../../api/authen";
 import { Link } from 'react-router-dom';
 import ChatNotification from "../chatFeature/ChatNotification";
 import NotificationList from "../notification/NotificationList";
+import { getUnreadNotificationsCount } from "../../api/notificationApi";
 
-const Header = ({ chatNotificationRef, NotificationRef }) => {
+const Header = forwardRef(({ chatNotificationRef }, ref) => {
     const { user } = useContext(AppContext);
+    const [numberUnReadNotification, setNumberUnreadNotification]=useState(0)
+    const [loadNotifications, setLoadNotifications]=useState(0)
+    const fetchData = useCallback(async () => {
+        try {
+            const response = await getUnreadNotificationsCount();
+            console.log('number of notification:', response);
+            if (response && response.data) {
+                setNumberUnreadNotification(response.data.count);
+            }
+        } catch (error) {
+            console.error('Error fetching notifications:', error);
+        }
+    }, []);
+    useEffect(()=>{
+        fetchData()
+    }, [])
+    useImperativeHandle(ref, ()=>({
+        incrementUnreadNotification(){
+            setNumberUnreadNotification(prevCount => prevCount + 1)
+            setLoadNotifications(prev=>prev+1)
+        }
+    }))
     return (
         <header className="z-[100] h-[--m-top] fixed top-0 left-0 w-full flex items-center bg-white/80 sky-50 backdrop-blur-xl border-b border-slate-200 dark:bg-dark2 dark:border-slate-800">
             <div className="flex items-center w-full xl:px-6 px-2 max-lg:gap-10">
@@ -437,7 +460,7 @@ const Header = ({ chatNotificationRef, NotificationRef }) => {
                                     />
                                 </svg>
                                 <div className="absolute top-0 right-0 -m-1 bg-red-600 text-white text-xs px-1 rounded-full">
-                                    6
+                                    {numberUnReadNotification ?numberUnReadNotification:''}
                                 </div>
                                 <ion-icon
                                     name="notifications-outline"
@@ -449,7 +472,7 @@ const Header = ({ chatNotificationRef, NotificationRef }) => {
                                 className="hidden bg-white rounded-lg drop-shadow-xl dark:bg-slate-700 md:w-[365px] w-screen border2"
                                 uk-drop="offset:6;pos: bottom-right; mode: click; animate-out: true; animation: uk-animation-scale-up uk-transform-origin-top-right "
                             >
-                                <NotificationList />
+                                <NotificationList notificationEvent={loadNotifications}/>
                             </div>
                             {/* messages */}
                             <ChatNotification ref={chatNotificationRef} />
@@ -554,6 +577,6 @@ const Header = ({ chatNotificationRef, NotificationRef }) => {
         </header>
 
     )
-}
+})
 export default Header;
 

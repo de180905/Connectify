@@ -1,0 +1,54 @@
+.notificationForm {
+    position: fixed;
+    right: 20px;
+    bottom: 5px;
+    z-index: 9999;
+    background-color: #e7f3ff;
+    width: 400px;
+    height: 140px;
+    color: #000;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 2px solid #ccc;
+    cursor: pointer;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2), 0 5px 5px rgba(0, 0, 0, 0.25);
+    animation: slide-in 0.5s ease-out, slide-out 0.5s ease-out 7.5s forwards;
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    margin-right: 10px;
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+/* Hiệu ứng trượt lên khi thông báo xuất hiện */
+@keyframes slide-in {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Hiệu ứng trượt xuống khi thông báo biến mất */
+@keyframes slide-out {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+}

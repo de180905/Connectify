@@ -17,7 +17,7 @@ namespace Connectify.BusinessObjects.Notification
         public NotificationType Type { get; set; }
         public string ActionLink { get; set; }
         //public bool IsRead { get; set; } = false;
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow.ToLocalTime();
         public DateTime? ExpirationTime { get; set; }
 
         public User TriggeredByUser { get; set; }
@@ -25,9 +25,13 @@ namespace Connectify.BusinessObjects.Notification
     }
     public enum NotificationType
     {
-        Like,
-        Comment,
+        Post,
+        ReactPost,
+        CommentPost,
+        CommentReply,
+        CommentReact,
         FriendRequest,
+        AcceptFriendRequest,
         Message,
         Mention,
         Follow

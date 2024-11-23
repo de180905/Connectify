@@ -1,6 +1,7 @@
 ﻿using BussinessObjects.MediaFeature;
 using Connectify.BusinessObjects.Authen;
 using Connectify.BusinessObjects.CommentFeature;
+using Connectify.BusinessObjects.Report;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -25,8 +26,10 @@ namespace Connectify.BusinessObjects.PostFeature
         public virtual ICollection<PostMedia> Media { get; set; } = new List<PostMedia>();
         public virtual ICollection<PostTag> PostTags { get; set; } = new List<PostTag>();
         public virtual ICollection<PostReaction> Reactions { get; set; } = new List<PostReaction>();
+        public virtual ICollection<PostReport>PostReports { get; set; }
         public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
         [StringLength(50)]
         public string? Feeling { get; set; }
+
     }
 }

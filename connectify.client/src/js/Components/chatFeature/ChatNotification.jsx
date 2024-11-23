@@ -3,7 +3,7 @@ import Chatroom from "./Chatroom";
 import { Outlet, Link, useNavigate, useLocation } from "react-router-dom";
 import { loadChatRooms } from "../../api/chat";
 import OutsideClickHandler from "react-outside-click-handler";
-import NotificationDot from "../notificationFeature/NotificationDot";
+import NotificationDot from "../notification/NotificationDot";
 
 const ChatNotification = forwardRef((props, ref) => {
     const navigate = useNavigate();

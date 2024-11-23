@@ -96,7 +96,10 @@ namespace Connectify.Server
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IMediaService, MediaService>();
             builder.Services.AddScoped<ICommentService, CommentService>();
+            builder.Services.AddScoped<IPostReportService, PostReportService>();
+            builder.Services.AddScoped<INotificationService, NotificationService>();
             builder.Services.AddTransient<IEmailSender, EmailSender>();
+            
 
             builder.Services.AddAuthentication(options =>
             {
@@ -157,7 +160,6 @@ namespace Connectify.Server
 
             app.MapControllers();
             app.MapHub<ChatHub>("/hubs/chathub");
-            app.MapHub<NotificationHub>("/hubs/notificationhub");
             app.MapFallbackToFile("/index.html");
 
             app.Run();

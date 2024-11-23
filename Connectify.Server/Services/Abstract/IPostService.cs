@@ -14,5 +14,6 @@ namespace Connectify.Server.Services.Abstract
         Task ReactToPost(string userId, int postId, ReactionType reaction);
         Task UnReactPost(string userId, int postId);
         Task<PostDTO> GetPostByIdForUser(string userId, int postId);
+        Task<string>GetAuthorIdOfPost(int postId);
     }
 }

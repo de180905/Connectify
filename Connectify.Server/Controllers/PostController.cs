@@ -1,6 +1,8 @@
 ﻿using BussinessObjects.MediaFeature;
+using Connectify.BusinessObjects.Notification;
 using Connectify.BusinessObjects.PostFeature;
 using Connectify.Server.DTOs;
+using Connectify.Server.DTOs.notification;
 using Connectify.Server.DTOs.PostDTOs;
 using Connectify.Server.Services;
 using Connectify.Server.Services.Abstract;
@@ -19,11 +21,17 @@ namespace Connectify.Server.Controllers
     {
         private readonly IPostService postService;
         private readonly ICloudStorageService cloudStorageService;
+        private readonly INotificationService _notificationService;
+        private readonly IFriendService _friendService;
+        private readonly IAccountService _accountService;
 
-        public PostsController(IPostService postService, ICloudStorageService cloudStorageService)
+        public PostsController(IPostService postService, ICloudStorageService cloudStorageService, IAccountService accountService, INotificationService notificationService, IFriendService friendService)
         {
             this.postService = postService;
             this.cloudStorageService = cloudStorageService;
+            _accountService = accountService;
+            _notificationService = notificationService;
+            _friendService = friendService;
         }
 
         [HttpPost("")]
@@ -32,6 +40,33 @@ namespace Connectify.Server.Controllers
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             int postId = await postService.CreatePostAsync(userId, createPostDto);
+            //send notification
+            /*var recipientIds = await _friendService.GetFriends(userId);
+            var notification = new Notifications
+            {
+                TriggeredByUserId = userId,
+                Message = "just shared a post",
+                Type = NotificationType.Post,
+                ActionLink = $"/post/{postId}",
+            };
+            notification = await _notificationService.CreateNotification(notification, recipientIds);
+            var triggeredByUserName = await _accountService.GetFullName(userId);
+            var triggeredByUserAvatarUrl = await _accountService.GetAvatarUrl(userId); 
+            if (notification != null) {
+                var sendNotification = new SendNotificationDTO
+                {
+                    NotificationId = notification.Id,
+                    TriggeredByUserName = triggeredByUserName,
+                    TriggeredByUserAvatarUrl = triggeredByUserAvatarUrl,
+                    Message = notification.Message,
+                    ActionLink = notification.ActionLink,
+                };
+                foreach (var recipientId in recipientIds)
+                {
+                    await _notificationService.SendNotification(recipientId, sendNotification);
+                }
+            }*/
+            //
             return CreatedAtAction(nameof(GetPostById), new { id = postId }, null);
         }
         [HttpPut("{id}")]
@@ -73,7 +108,34 @@ namespace Connectify.Server.Controllers
             {
                 var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 await postService.ReactToPost(userId, postId, dto.Reaction);
+                //gửi thông báo
+                var recipientId = await postService.GetAuthorIdOfPost(postId);
+                if (recipientId != userId)
+                {
+                    var notification = new Notifications
+                    {
+                        TriggeredByUserId = userId,
+                        Message = "reacted to your post.",
+                        Type = NotificationType.ReactPost,
+                        ActionLink = $"/post-view/{postId}",
+                    };
 
+                    var recipientIds = new List<string>();
+                    recipientIds.Add(recipientId);
+                    notification = await _notificationService.CreateNotification(notification, recipientIds);
+
+                    var triggeredByUserName = await _accountService.GetFullName(userId);
+                    var triggeredByUserAvatarUrl = await _accountService.GetAvatarUrl(userId);
+                    var sendNotification = new SendNotificationDTO
+                    {
+                        NotificationId = notification.Id,
+                        TriggeredByUserName = triggeredByUserName,
+                        TriggeredByUserAvatarUrl = triggeredByUserAvatarUrl,
+                        Message = notification.Message,
+                        ActionLink = notification.ActionLink,
+                    };
+                    await _notificationService.SendNotification(recipientId, sendNotification);
+                }
                 // Return a 204 No Content to indicate the dto was successful
                 return Ok(new ReactionDTO { Text = dto.Reaction.ToString(), Value = dto.Reaction});
             }

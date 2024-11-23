@@ -1,4 +1,5 @@
 ﻿using Connectify.BusinessObjects;
+using Connectify.BusinessObjects.Authen;
 using Connectify.BusinessObjects.FriendFeature;
 using Connectify.Server.DTOs;
 using Connectify.Server.DTOs.FriendDTOs;
@@ -16,5 +17,6 @@ namespace Connectify.Server.Services.Abstract
         Task<bool> RevokeFriendRequestAsync(string requesterId, string receiverId);
         bool Friend(string userId1, string userId2);
         Task<bool> UnFriend(string userId1, string userId2);
+        Task<List<string>> GetFriends(string userId);
     }
 }

@@ -129,5 +129,14 @@ namespace Connectify.Server.Services.Implement
                 fs => fs.User1Id == userId1 && fs.User2Id == userId2
                 || fs.User2Id == userId1 && fs.User1Id == userId2);
         }
+        //get friend
+        public async Task<List<string>> GetFriends(string userId)
+        {
+            return await dbContext.FriendShips
+                .Where(fr => fr.User1Id == userId || fr.User2Id == userId)
+                .Select(fr => fr.User1Id == userId ? fr.User2Id : fr.User1Id)
+                .Distinct()
+                .ToListAsync();
+        }
     }
 }

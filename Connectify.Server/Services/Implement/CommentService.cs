@@ -152,7 +152,25 @@ namespace Connectify.Server.Services.Implement
 
             // Save changes
             await _context.SaveChangesAsync();
-        }  
+        }
 
+        public async Task<Comment> GetCommentById(int commentId)
+        {
+            return await _context.Comments.FirstOrDefaultAsync(c => c.CommentId==commentId);
+        }
+
+        public async Task<int> GetPostId(int commentId)
+        {      
+            var comment = await _context.Comments.FirstOrDefaultAsync(c => c.CommentId==commentId);
+            if(comment!=null)return comment.PostId??0;
+            return 0;
+        }
+
+        public async Task<string> GetAuthorId(int commentId)
+        {
+            var comment = await _context.Comments.FirstOrDefaultAsync(c => c.CommentId == commentId);
+            if (comment != null) return comment.AuthorId;
+            return "";
+        }
     }
 }
