@@ -3,16 +3,36 @@
   "WorkspaceRootPath": "E:\\OJT\\mooc_project\\project\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|e:\\ojt\\mooc_project\\project\\connectify.server\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|e:\\ojt\\mooc_project\\project\\connectify.server\\controllers\\postcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\controllers\\postcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|e:\\ojt\\mooc_project\\project\\connectify.server\\services\\implement\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\services\\implement\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|e:\\ojt\\mooc_project\\project\\connectify.server\\services\\abstract\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\services\\abstract\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|e:\\ojt\\mooc_project\\project\\connectify.server\\dataacess\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\dataacess\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6ADC48AF-4695-4957-ABAE-8003BC5E8633}|Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj|e:\\ojt\\mooc_project\\project\\connectify.businessobjects\\report\\blockedusers .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6ADC48AF-4695-4957-ABAE-8003BC5E8633}|Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj|solutionrelative:connectify.businessobjects\\report\\blockedusers .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|e:\\ojt\\mooc_project\\project\\connectify.server\\services\\implement\\useractivityservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\services\\implement\\useractivityservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|e:\\ojt\\mooc_project\\project\\connectify.server\\controllers\\useractivitycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\controllers\\useractivitycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|e:\\ojt\\mooc_project\\project\\connectify.server\\services\\implement\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\services\\implement\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|e:\\ojt\\mooc_project\\project\\connectify.server\\services\\abstract\\iuseractivityservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -25,10 +45,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|e:\\ojt\\mooc_project\\project\\connectify.server\\services\\implement\\postservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\services\\implement\\postservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|e:\\ojt\\mooc_project\\project\\connectify.server\\controllers\\postcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\controllers\\postcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|e:\\ojt\\mooc_project\\project\\connectify.server\\services\\abstract\\ipostservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -49,10 +65,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|e:\\ojt\\mooc_project\\project\\connectify.server\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|e:\\ojt\\mooc_project\\project\\connectify.server\\dataacess\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\dataacess\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6ADC48AF-4695-4957-ABAE-8003BC5E8633}|Connectify.BusinessObjects\\Connectify.BusinessObjects.csproj|e:\\ojt\\mooc_project\\project\\connectify.businessobjects\\authen\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -133,10 +145,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|e:\\ojt\\mooc_project\\project\\connectify.server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|e:\\ojt\\mooc_project\\project\\connectify.server\\services\\abstract\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\services\\abstract\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|e:\\ojt\\mooc_project\\project\\connectify.server\\dtos\\useractivitydtos\\useractivityresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -563,10 +571,6 @@
       "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\utils\\userprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|e:\\ojt\\mooc_project\\project\\connectify.server\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|e:\\ojt\\mooc_project\\project\\connectify.server\\controllers\\searchcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DB46DD48-C824-469B-9A5E-78638B3B0265}|Connectify.Server\\Connectify.Server.csproj|solutionrelative:connectify.server\\controllers\\searchcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -814,11 +818,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 131,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 5,
+              "Title": "BlockedUsers .cs",
+              "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.BusinessObjects\\Report\\BlockedUsers .cs",
+              "RelativeDocumentMoniker": "Connectify.BusinessObjects\\Report\\BlockedUsers .cs",
+              "ToolTip": "E:\\OJT\\mooc_project\\project\\Connectify.BusinessObjects\\Report\\BlockedUsers .cs",
+              "RelativeToolTip": "Connectify.BusinessObjects\\Report\\BlockedUsers .cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAABUAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-26T07:01:06.675Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
               "Title": "PostSave.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.BusinessObjects\\PostFeature\\PostSave.cs",
               "RelativeDocumentMoniker": "Connectify.BusinessObjects\\PostFeature\\PostSave.cs",
@@ -826,12 +843,11 @@
               "RelativeToolTip": "Connectify.BusinessObjects\\PostFeature\\PostSave.cs",
               "ViewState": "AQIAAAMAAAAAAAAAAAAAAAwAAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-25T07:27:37.166Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-25T07:27:37.166Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 22,
               "Title": "UserBlock.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.BusinessObjects\\Block\\UserBlock.cs",
               "RelativeDocumentMoniker": "Connectify.BusinessObjects\\Block\\UserBlock.cs",
@@ -843,7 +859,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 6,
               "Title": "UserActivityService.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Services\\Implement\\UserActivityService.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Services\\Implement\\UserActivityService.cs",
@@ -856,7 +872,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 40,
               "Title": "UserActivityGroupedByDateResponse.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\DTOs\\UserActivityDTOs\\UserActivityGroupedByDateResponse.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\UserActivityDTOs\\UserActivityGroupedByDateResponse.cs",
@@ -868,7 +884,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 8,
               "Title": "IUserActivityService.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Services\\Abstract\\IUserActivityService.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Services\\Abstract\\IUserActivityService.cs",
@@ -876,12 +892,11 @@
               "RelativeToolTip": "Connectify.Server\\Services\\Abstract\\IUserActivityService.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-23T07:11:32.27Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-23T07:11:32.27Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 7,
               "Title": "UserActivityController.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Controllers\\UserActivityController.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Controllers\\UserActivityController.cs",
@@ -889,12 +904,11 @@
               "RelativeToolTip": "Connectify.Server\\Controllers\\UserActivityController.cs",
               "ViewState": "AQIAABgAAAAAAAAAAAAqwC0AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-23T05:16:50.906Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-23T05:16:50.906Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 36,
               "Title": "UserActivityResponse.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\DTOs\\UserActivityDTOs\\UserActivityResponse.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\UserActivityDTOs\\UserActivityResponse.cs",
@@ -906,7 +920,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 42,
               "Title": "UserActivityRequest.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\DTOs\\UserActivityDTOs\\UserActivityRequest.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\UserActivityDTOs\\UserActivityRequest.cs",
@@ -918,7 +932,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 30,
               "Title": "PostReportService.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Services\\Implement\\PostReportService.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Services\\Implement\\PostReportService.cs",
@@ -930,7 +944,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 13,
               "Title": "IPostReportService.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Services\\Abstract\\IPostReportService.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Services\\Abstract\\IPostReportService.cs",
@@ -938,12 +952,11 @@
               "RelativeToolTip": "Connectify.Server\\Services\\Abstract\\IPostReportService.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAATAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-22T09:18:22.143Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-22T09:18:22.143Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 12,
               "Title": "PostReportController.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Controllers\\PostReportController.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Controllers\\PostReportController.cs",
@@ -951,12 +964,11 @@
               "RelativeToolTip": "Connectify.Server\\Controllers\\PostReportController.cs",
               "ViewState": "AQIAABkAAAAAAAAAAAAYwDEAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-22T09:17:09.783Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-22T09:17:09.783Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 44,
+              "DocumentIndex": 46,
               "Title": "GetPostReportReasonsResponse.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\DTOs\\ReportDTOs\\GetPostReportReasonsResponse.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\ReportDTOs\\GetPostReportReasonsResponse.cs",
@@ -968,7 +980,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 48,
+              "DocumentIndex": 50,
               "Title": "GroupJoinRequest.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.BusinessObjects\\GroupFeature\\GroupJoinRequest.cs",
               "RelativeDocumentMoniker": "Connectify.BusinessObjects\\GroupFeature\\GroupJoinRequest.cs",
@@ -980,7 +992,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 47,
+              "DocumentIndex": 49,
               "Title": "GroupInvitation.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.BusinessObjects\\GroupFeature\\GroupInvitation.cs",
               "RelativeDocumentMoniker": "Connectify.BusinessObjects\\GroupFeature\\GroupInvitation.cs",
@@ -992,7 +1004,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 45,
               "Title": "PostReportReason.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.BusinessObjects\\Report\\PostReportReason.cs",
               "RelativeDocumentMoniker": "Connectify.BusinessObjects\\Report\\PostReportReason.cs",
@@ -1004,7 +1016,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 44,
               "Title": "PostReport.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.BusinessObjects\\Report\\PostReport.cs",
               "RelativeDocumentMoniker": "Connectify.BusinessObjects\\Report\\PostReport.cs",
@@ -1016,7 +1028,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 52,
+              "DocumentIndex": 54,
               "Title": "GetNotificationResponse.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\DTOs\\notification\\GetNotificationResponse.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\notification\\GetNotificationResponse.cs",
@@ -1028,7 +1040,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 55,
+              "DocumentIndex": 57,
               "Title": "CreateCommentDTO.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\DTOs\\CommentDTOs\\CreateCommentDTO.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\CommentDTOs\\CreateCommentDTO.cs",
@@ -1040,7 +1052,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 45,
+              "DocumentIndex": 47,
               "Title": "AccountController.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Controllers\\AccountController.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Controllers\\AccountController.cs",
@@ -1052,7 +1064,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 21,
               "Title": "SendNotificationDTO.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\DTOs\\notification\\SendNotificationDTO.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\notification\\SendNotificationDTO.cs",
@@ -1064,7 +1076,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 64,
+              "DocumentIndex": 66,
               "Title": "Connectify.Server.http",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Connectify.Server.http",
               "RelativeDocumentMoniker": "Connectify.Server\\Connectify.Server.http",
@@ -1076,7 +1088,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 123,
+              "DocumentIndex": 125,
               "Title": "EnumMapper.jsx",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\Utils\\EnumMapper.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\Utils\\EnumMapper.jsx",
@@ -1088,7 +1100,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 69,
+              "DocumentIndex": 71,
               "Title": "NotificationList.jsx",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\Components\\notification\\NotificationList.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\Components\\notification\\NotificationList.jsx",
@@ -1100,7 +1112,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 67,
+              "DocumentIndex": 69,
               "Title": "PostUpdateBox.jsx",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\Components\\postFeature\\PostUpdateBox.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\Components\\postFeature\\PostUpdateBox.jsx",
@@ -1112,7 +1124,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 68,
+              "DocumentIndex": 70,
               "Title": "PostBox.jsx",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\Components\\postFeature\\PostBox.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\Components\\postFeature\\PostBox.jsx",
@@ -1124,7 +1136,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 57,
+              "DocumentIndex": 59,
               "Title": "MyApp.jsx",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\MyApp.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\MyApp.jsx",
@@ -1136,7 +1148,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 66,
+              "DocumentIndex": 68,
               "Title": "Sidebar.jsx",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\Components\\appLayout\\Sidebar.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\Components\\appLayout\\Sidebar.jsx",
@@ -1148,7 +1160,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 65,
+              "DocumentIndex": 67,
               "Title": "Header.jsx",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\Components\\appLayout\\Header.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\Components\\appLayout\\Header.jsx",
@@ -1160,7 +1172,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 63,
+              "DocumentIndex": 65,
               "Title": "ChatHub.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Hubs\\ChatHub.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Hubs\\ChatHub.cs",
@@ -1172,19 +1184,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 4,
               "Title": "AppDbContext.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\DataAcess\\AppDbContext.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\DataAcess\\AppDbContext.cs",
               "ToolTip": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\DataAcess\\AppDbContext.cs",
               "RelativeToolTip": "Connectify.Server\\DataAcess\\AppDbContext.cs",
-              "ViewState": "AQIAAPgAAAAAAAAAAAAowAsBAAA0AAAA",
+              "ViewState": "AQIAABwBAAAAAAAAAAAxwCMBAAA2AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T09:15:11.98Z"
+              "WhenOpened": "2024-11-18T09:15:11.98Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 58,
+              "DocumentIndex": 60,
               "Title": "ChatController.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Controllers\\ChatController.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Controllers\\ChatController.cs",
@@ -1196,7 +1209,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 70,
+              "DocumentIndex": 72,
               "Title": "package.json",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\package.json",
               "RelativeDocumentMoniker": "connectify.client\\package.json",
@@ -1208,7 +1221,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 71,
+              "DocumentIndex": 73,
               "Title": "notificationApi.js",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\api\\notificationApi.js",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\api\\notificationApi.js",
@@ -1220,7 +1233,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 72,
+              "DocumentIndex": 74,
               "Title": "Post.js",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\api\\Post.js",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\api\\Post.js",
@@ -1232,7 +1245,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 73,
+              "DocumentIndex": 75,
               "Title": "otherApi.js",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\api\\otherApi.js",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\api\\otherApi.js",
@@ -1244,7 +1257,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 74,
+              "DocumentIndex": 76,
               "Title": "NotificationList.module.scss",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\Components\\notification\\NotificationList.module.scss",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\Components\\notification\\NotificationList.module.scss",
@@ -1256,7 +1269,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 53,
+              "DocumentIndex": 55,
               "Title": "CreateNotificationDto.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\DTOs\\notification\\CreateNotificationDto.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\notification\\CreateNotificationDto.cs",
@@ -1268,7 +1281,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 41,
               "Title": "NotificationController.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Controllers\\NotificationController.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Controllers\\NotificationController.cs",
@@ -1280,7 +1293,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 39,
               "Title": "NotificationRecipient.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.BusinessObjects\\Notification\\NotificationRecipient.cs",
               "RelativeDocumentMoniker": "Connectify.BusinessObjects\\Notification\\NotificationRecipient.cs",
@@ -1292,7 +1305,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 27,
               "Title": "NotificationService.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Services\\Implement\\NotificationService.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Services\\Implement\\NotificationService.cs",
@@ -1304,7 +1317,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 25,
               "Title": "INotificationService.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Services\\Abstract\\INotificationService.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Services\\Abstract\\INotificationService.cs",
@@ -1316,7 +1329,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 16,
               "Title": "User.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.BusinessObjects\\Authen\\User.cs",
               "RelativeDocumentMoniker": "Connectify.BusinessObjects\\Authen\\User.cs",
@@ -1328,7 +1341,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 38,
               "Title": "Notifications.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.BusinessObjects\\Notification\\Notifications.cs",
               "RelativeDocumentMoniker": "Connectify.BusinessObjects\\Notification\\Notifications.cs",
@@ -1340,7 +1353,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 31,
               "Title": "ReactionType.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.BusinessObjects\\ReactionType.cs",
               "RelativeDocumentMoniker": "Connectify.BusinessObjects\\ReactionType.cs",
@@ -1352,7 +1365,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 75,
+              "DocumentIndex": 77,
               "Title": "ChatroomDetail.jsx",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\Components\\chatFeature\\ChatroomDetail.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\Components\\chatFeature\\ChatroomDetail.jsx",
@@ -1364,7 +1377,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 76,
+              "DocumentIndex": 78,
               "Title": "Comment.jsx",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\Components\\commentFeature\\Comment.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\Components\\commentFeature\\Comment.jsx",
@@ -1376,7 +1389,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 24,
               "Title": "CommentController.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Controllers\\CommentController.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Controllers\\CommentController.cs",
@@ -1388,7 +1401,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 15,
               "Title": "appsettings.json",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\appsettings.json",
               "RelativeDocumentMoniker": "Connectify.Server\\appsettings.json",
@@ -1400,7 +1413,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 77,
+              "DocumentIndex": 79,
               "Title": "ReplySection.jsx",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\Components\\commentFeature\\ReplySection.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\Components\\commentFeature\\ReplySection.jsx",
@@ -1412,7 +1425,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 78,
+              "DocumentIndex": 80,
               "Title": "index.html",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\index.html",
               "RelativeDocumentMoniker": "connectify.client\\index.html",
@@ -1424,7 +1437,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 79,
+              "DocumentIndex": 81,
               "Title": "style.css",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\assets\\css\\style.css",
               "RelativeDocumentMoniker": "connectify.client\\assets\\css\\style.css",
@@ -1436,7 +1449,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 28,
               "Title": "CommentService.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Services\\Implement\\CommentService.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Services\\Implement\\CommentService.cs",
@@ -1448,7 +1461,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 80,
+              "DocumentIndex": 82,
               "Title": "SortOption.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Utils\\Sort\\SortOption.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Utils\\Sort\\SortOption.cs",
@@ -1460,7 +1473,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 29,
               "Title": "CommentDTO.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\DTOs\\CommentDTOs\\CommentDTO.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\CommentDTOs\\CommentDTO.cs",
@@ -1472,7 +1485,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 81,
+              "DocumentIndex": 83,
               "Title": "datetimeUtil.js",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\Utils\\datetimeUtil.js",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\Utils\\datetimeUtil.js",
@@ -1484,7 +1497,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 32,
               "Title": "Comment.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.BusinessObjects\\CommentFeature\\Comment.cs",
               "RelativeDocumentMoniker": "Connectify.BusinessObjects\\CommentFeature\\Comment.cs",
@@ -1496,7 +1509,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 82,
+              "DocumentIndex": 84,
               "Title": "CommentProfile.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Utils\\CommentProfile.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Utils\\CommentProfile.cs",
@@ -1508,7 +1521,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 10,
               "Title": "PostService.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Services\\Implement\\PostService.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Services\\Implement\\PostService.cs",
@@ -1516,12 +1529,11 @@
               "RelativeToolTip": "Connectify.Server\\Services\\Implement\\PostService.cs",
               "ViewState": "AQIAANwAAAAAAAAAAAAwwO8AAAAvAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T09:15:12.074Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-18T09:15:12.074Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 83,
+              "DocumentIndex": 85,
               "Title": "main.jsx",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\main.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\main.jsx",
@@ -1533,7 +1545,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 84,
+              "DocumentIndex": 86,
               "Title": "ConfirmationModel.jsx",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\Components\\utils\\ConfirmationModel.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\Components\\utils\\ConfirmationModel.jsx",
@@ -1545,7 +1557,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 85,
+              "DocumentIndex": 87,
               "Title": "Comment.js",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\api\\Comment.js",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\api\\Comment.js",
@@ -1557,7 +1569,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 51,
+              "DocumentIndex": 53,
               "Title": "ReplyCommentDTO.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\DTOs\\CommentDTOs\\ReplyCommentDTO.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\CommentDTOs\\ReplyCommentDTO.cs",
@@ -1569,7 +1581,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 34,
               "Title": "CommentReaction.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.BusinessObjects\\CommentFeature\\CommentReaction.cs",
               "RelativeDocumentMoniker": "Connectify.BusinessObjects\\CommentFeature\\CommentReaction.cs",
@@ -1581,7 +1593,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 86,
+              "DocumentIndex": 88,
               "Title": "PostProfile.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Utils\\PostProfile.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Utils\\PostProfile.cs",
@@ -1593,7 +1605,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 62,
+              "DocumentIndex": 64,
               "Title": "ChatService.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Services\\Implement\\ChatService.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Services\\Implement\\ChatService.cs",
@@ -1605,7 +1617,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 33,
               "Title": "ICommentService.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Services\\Abstract\\ICommentService.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Services\\Abstract\\ICommentService.cs",
@@ -1617,7 +1629,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 35,
               "Title": "Program.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Program.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Program.cs",
@@ -1629,7 +1641,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 87,
+              "DocumentIndex": 89,
               "Title": "ChatroomsLayout.jsx",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\Components\\chatFeature\\ChatroomsLayout.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\Components\\chatFeature\\ChatroomsLayout.jsx",
@@ -1641,7 +1653,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 88,
+              "DocumentIndex": 90,
               "Title": "chat.js",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\api\\chat.js",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\api\\chat.js",
@@ -1653,7 +1665,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 89,
+              "DocumentIndex": 91,
               "Title": "ChatNotification.jsx",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\Components\\chatFeature\\ChatNotification.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\Components\\chatFeature\\ChatNotification.jsx",
@@ -1665,7 +1677,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 91,
+              "DocumentIndex": 93,
               "Title": "EditCommentDTO.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\DTOs\\CommentDTOs\\EditCommentDTO.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\CommentDTOs\\EditCommentDTO.cs",
@@ -1677,7 +1689,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 90,
+              "DocumentIndex": 92,
               "Title": "authen.js",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\api\\authen.js",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\api\\authen.js",
@@ -1689,20 +1701,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 1,
               "Title": "PostController.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Controllers\\PostController.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Controllers\\PostController.cs",
               "ToolTip": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Controllers\\PostController.cs",
               "RelativeToolTip": "Connectify.Server\\Controllers\\PostController.cs",
-              "ViewState": "AQIAAKIAAAAAAAAAAAAAwLYAAAANAAAA",
+              "ViewState": "AQIAAJ8AAAAAAAAAAAAAwLEAAAAQAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-18T09:15:12.141Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 92,
+              "DocumentIndex": 94,
               "Title": "CommentSortingHelper.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Utils\\Sort\\CommentSortingHelper.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Utils\\Sort\\CommentSortingHelper.cs",
@@ -1714,7 +1726,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 94,
+              "DocumentIndex": 96,
               "Title": "ResetPasswordForm.jsx",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\Components\\password\\ResetPasswordForm.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\Components\\password\\ResetPasswordForm.jsx",
@@ -1726,7 +1738,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 95,
+              "DocumentIndex": 97,
               "Title": "ForgotPasswordForm.jsx",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\Components\\password\\ForgotPasswordForm.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\Components\\password\\ForgotPasswordForm.jsx",
@@ -1738,7 +1750,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 93,
+              "DocumentIndex": 95,
               "Title": "ResetPasswordSuccess.jsx",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\Components\\password\\ResetPasswordSuccess.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\Components\\password\\ResetPasswordSuccess.jsx",
@@ -1750,7 +1762,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 96,
+              "DocumentIndex": 98,
               "Title": "ChangePassword.jsx",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\Components\\password\\ChangePassword.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\Components\\password\\ChangePassword.jsx",
@@ -1762,7 +1774,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 97,
+              "DocumentIndex": 99,
               "Title": "Feed.jsx",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\Components\\newsFeedFeature\\Feed.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\Components\\newsFeedFeature\\Feed.jsx",
@@ -1774,7 +1786,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 98,
+              "DocumentIndex": 100,
               "Title": "UserSetting.jsx",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\Components\\userSettingFeature\\UserSetting.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\Components\\userSettingFeature\\UserSetting.jsx",
@@ -1786,7 +1798,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 99,
+              "DocumentIndex": 101,
               "Title": "UserTimelineMain.jsx",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\Components\\userTimelineFeature\\UserTimelineMain.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\Components\\userTimelineFeature\\UserTimelineMain.jsx",
@@ -1798,7 +1810,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 100,
+              "DocumentIndex": 102,
               "Title": "PeopleCard.jsx",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\Components\\peopleFeature\\PeopleCard.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\Components\\peopleFeature\\PeopleCard.jsx",
@@ -1810,7 +1822,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 101,
+              "DocumentIndex": 103,
               "Title": "UserTimelineFriends.jsx",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\Components\\userTimelineFeature\\UserTimelineFriends.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\Components\\userTimelineFeature\\UserTimelineFriends.jsx",
@@ -1822,7 +1834,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 103,
+              "DocumentIndex": 105,
               "Title": "AvatarUpload.jsx",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\Components\\utils\\AvatarUpload.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\Components\\utils\\AvatarUpload.jsx",
@@ -1834,7 +1846,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 102,
+              "DocumentIndex": 104,
               "Title": "Stories.jsx",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\Components\\newsFeedFeature\\Stories.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\Components\\newsFeedFeature\\Stories.jsx",
@@ -1846,7 +1858,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 104,
+              "DocumentIndex": 106,
               "Title": "UserDescription.jsx",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\Components\\userSettingFeature\\UserDescription.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\Components\\userSettingFeature\\UserDescription.jsx",
@@ -1858,7 +1870,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 105,
+              "DocumentIndex": 107,
               "Title": "FriendSearch.jsx",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\Components\\utils\\FriendSearch.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\Components\\utils\\FriendSearch.jsx",
@@ -1870,7 +1882,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 106,
+              "DocumentIndex": 108,
               "Title": "RegisterForm.jsx",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\Components\\authenFeature\\RegisterForm.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\Components\\authenFeature\\RegisterForm.jsx",
@@ -1882,7 +1894,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 107,
+              "DocumentIndex": 109,
               "Title": "EmojiPicker.jsx",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\Components\\utils\\EmojiPicker.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\Components\\utils\\EmojiPicker.jsx",
@@ -1894,7 +1906,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 108,
+              "DocumentIndex": 110,
               "Title": "SearchAutoComplete.jsx",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\Components\\utils\\SearchAutoComplete.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\Components\\utils\\SearchAutoComplete.jsx",
@@ -1906,7 +1918,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 109,
+              "DocumentIndex": 111,
               "Title": "VerifyAccount.jsx",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\Components\\authenFeature\\VerifyAccount.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\Components\\authenFeature\\VerifyAccount.jsx",
@@ -1918,7 +1930,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 110,
+              "DocumentIndex": 112,
               "Title": "FilePreview.jsx",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\Components\\chatFeature\\FilePreview.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\Components\\chatFeature\\FilePreview.jsx",
@@ -1930,7 +1942,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 111,
+              "DocumentIndex": 113,
               "Title": "FeedSidebar.jsx",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\Components\\newsFeedFeature\\FeedSidebar.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\Components\\newsFeedFeature\\FeedSidebar.jsx",
@@ -1942,7 +1954,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 112,
+              "DocumentIndex": 114,
               "Title": "LoginForm.jsx",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\Components\\authenFeature\\LoginForm.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\Components\\authenFeature\\LoginForm.jsx",
@@ -1954,7 +1966,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 114,
+              "DocumentIndex": 116,
               "Title": "TimelineGallery.jsx",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\Components\\userTimelineFeature\\TimelineGallery.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\Components\\userTimelineFeature\\TimelineGallery.jsx",
@@ -1966,7 +1978,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 113,
+              "DocumentIndex": 115,
               "Title": "LoginLayout.jsx",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\Components\\authenFeature\\LoginLayout.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\Components\\authenFeature\\LoginLayout.jsx",
@@ -1978,7 +1990,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 115,
+              "DocumentIndex": 117,
               "Title": "UserTimeline.jsx",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\Components\\userTimelineFeature\\UserTimeline.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\Components\\userTimelineFeature\\UserTimeline.jsx",
@@ -1990,7 +2002,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 117,
+              "DocumentIndex": 119,
               "Title": "Sendmessagewidgets.jsx",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\Components\\chatFeature\\Sendmessagewidgets.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\Components\\chatFeature\\Sendmessagewidgets.jsx",
@@ -2002,7 +2014,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 116,
+              "DocumentIndex": 118,
               "Title": "PostBoxOpener.jsx",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\Components\\postFeature\\PostBoxOpener.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\Components\\postFeature\\PostBoxOpener.jsx",
@@ -2014,7 +2026,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 118,
+              "DocumentIndex": 120,
               "Title": "PeopleSuggestion.jsx",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\Components\\peopleFeature\\PeopleSuggestion.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\Components\\peopleFeature\\PeopleSuggestion.jsx",
@@ -2026,7 +2038,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 119,
+              "DocumentIndex": 121,
               "Title": "PeopleIndex.jsx",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\Components\\peopleFeature\\PeopleIndex.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\Components\\peopleFeature\\PeopleIndex.jsx",
@@ -2038,7 +2050,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 120,
+              "DocumentIndex": 122,
               "Title": "Chatroom.jsx",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\Components\\chatFeature\\Chatroom.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\Components\\chatFeature\\Chatroom.jsx",
@@ -2050,7 +2062,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 121,
+              "DocumentIndex": 123,
               "Title": "CoverUploader.jsx",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\Components\\croppedUploaders\\CoverUploader.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\Components\\croppedUploaders\\CoverUploader.jsx",
@@ -2062,7 +2074,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 122,
+              "DocumentIndex": 124,
               "Title": "AvatarUploader.jsx",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\Components\\croppedUploaders\\AvatarUploader.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\Components\\croppedUploaders\\AvatarUploader.jsx",
@@ -2074,7 +2086,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 124,
+              "DocumentIndex": 126,
               "Title": "AppProvider.jsx",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\Contexts\\AppProvider.jsx",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\Contexts\\AppProvider.jsx",
@@ -2086,7 +2098,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 125,
+              "DocumentIndex": 127,
               "Title": "ChatMappingProfile.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Utils\\ChatMappingProfile.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Utils\\ChatMappingProfile.cs",
@@ -2098,7 +2110,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 126,
+              "DocumentIndex": 128,
               "Title": "MessageProfile.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Utils\\MessageProfile.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Utils\\MessageProfile.cs",
@@ -2110,7 +2122,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 127,
+              "DocumentIndex": 129,
               "Title": "ICloudStorageService.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Services\\Abstract\\ICloudStorageService.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Services\\Abstract\\ICloudStorageService.cs",
@@ -2122,7 +2134,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 128,
+              "DocumentIndex": 130,
               "Title": "MessageDTO.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\DTOs\\ChatDTOs\\MessageDTO.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\ChatDTOs\\MessageDTO.cs",
@@ -2134,7 +2146,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 129,
+              "DocumentIndex": 131,
               "Title": "Connectify.Server.csproj",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Connectify.Server.csproj",
               "RelativeDocumentMoniker": "Connectify.Server\\Connectify.Server.csproj",
@@ -2146,7 +2158,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 130,
+              "DocumentIndex": 132,
               "Title": "Message.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.BusinessObjects\\ChatFeature\\Message.cs",
               "RelativeDocumentMoniker": "Connectify.BusinessObjects\\ChatFeature\\Message.cs",
@@ -2158,7 +2170,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 131,
+              "DocumentIndex": 133,
               "Title": "IChatService.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Services\\Abstract\\IChatService.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Services\\Abstract\\IChatService.cs",
@@ -2170,7 +2182,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 132,
+              "DocumentIndex": 134,
               "Title": "UserConnectionCount.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Utils\\UserConnectionCount.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Utils\\UserConnectionCount.cs",
@@ -2182,7 +2194,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 133,
+              "DocumentIndex": 135,
               "Title": "ChatRoomReadReceipt.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.BusinessObjects\\ChatFeature\\ChatRoomReadReceipt.cs",
               "RelativeDocumentMoniker": "Connectify.BusinessObjects\\ChatFeature\\ChatRoomReadReceipt.cs",
@@ -2194,7 +2206,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 134,
+              "DocumentIndex": 136,
               "Title": "ChatRoomFilter.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Filters\\ChatRoomFilter.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Filters\\ChatRoomFilter.cs",
@@ -2206,7 +2218,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 59,
+              "DocumentIndex": 61,
               "Title": "AccountService.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Services\\Implement\\AccountService.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Services\\Implement\\AccountService.cs",
@@ -2224,14 +2236,14 @@
               "RelativeDocumentMoniker": "Connectify.Server\\Services\\Implement\\UserService.cs",
               "ToolTip": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Services\\Implement\\UserService.cs",
               "RelativeToolTip": "Connectify.Server\\Services\\Implement\\UserService.cs",
-              "ViewState": "AQIAAAwAAAAAAAAAAAAAABgAAAAJAAAA",
+              "ViewState": "AQIAAD8AAAAAAAAAAAAswGAAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-18T09:15:12.677Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 61,
+              "DocumentIndex": 63,
               "Title": "IAccountService.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Services\\Abstract\\IAccountService.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Services\\Abstract\\IAccountService.cs",
@@ -2243,7 +2255,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 26,
               "Title": "IMediaService.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Services\\Abstract\\IMediaService.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Services\\Abstract\\IMediaService.cs",
@@ -2255,7 +2267,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 11,
               "Title": "IPostService.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Services\\Abstract\\IPostService.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Services\\Abstract\\IPostService.cs",
@@ -2263,12 +2275,11 @@
               "RelativeToolTip": "Connectify.Server\\Services\\Abstract\\IPostService.cs",
               "ViewState": "AQIAAAMAAAAAAAAAAAAuwBEAAAAxAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T09:15:12.692Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-18T09:15:12.692Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 135,
+              "DocumentIndex": 137,
               "Title": "search.js",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\api\\search.js",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\api\\search.js",
@@ -2280,7 +2291,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 50,
+              "DocumentIndex": 52,
               "Title": "FriendService.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Services\\Implement\\FriendService.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Services\\Implement\\FriendService.cs",
@@ -2292,7 +2303,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 136,
+              "DocumentIndex": 138,
               "Title": "UserP2PStatus.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.BusinessObjects\\UserP2PStatus.cs",
               "RelativeDocumentMoniker": "Connectify.BusinessObjects\\UserP2PStatus.cs",
@@ -2304,7 +2315,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 137,
+              "DocumentIndex": 139,
               "Title": "Friend.js",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\api\\Friend.js",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\api\\Friend.js",
@@ -2316,7 +2327,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 23,
               "Title": "FriendRequestController.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Controllers\\FriendRequestController.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Controllers\\FriendRequestController.cs",
@@ -2328,7 +2339,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 60,
+              "DocumentIndex": 62,
               "Title": "IFriendService.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Services\\Abstract\\IFriendService.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Services\\Abstract\\IFriendService.cs",
@@ -2340,7 +2351,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 18,
               "Title": "FriendShip.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.BusinessObjects\\FriendFeature\\FriendShip.cs",
               "RelativeDocumentMoniker": "Connectify.BusinessObjects\\FriendFeature\\FriendShip.cs",
@@ -2352,7 +2363,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 138,
+              "DocumentIndex": 140,
               "Title": "MediaService.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Services\\Implement\\MediaService.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Services\\Implement\\MediaService.cs",
@@ -2364,7 +2375,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 19,
               "Title": "FriendRequest.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.BusinessObjects\\FriendFeature\\FriendRequest.cs",
               "RelativeDocumentMoniker": "Connectify.BusinessObjects\\FriendFeature\\FriendRequest.cs",
@@ -2376,7 +2387,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 139,
+              "DocumentIndex": 141,
               "Title": "UserProfile.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Utils\\UserProfile.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Utils\\UserProfile.cs",
@@ -2388,19 +2399,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 140,
+              "DocumentIndex": 0,
               "Title": "UserController.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Controllers\\UserController.cs",
               "ToolTip": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Controllers\\UserController.cs",
               "RelativeToolTip": "Connectify.Server\\Controllers\\UserController.cs",
-              "ViewState": "AQIAABAAAAAAAAAAAAAQwBsAAAAIAAAA",
+              "ViewState": "AQIAACoAAAAAAAAAAAAAADUAAAAPAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T09:15:12.743Z"
+              "WhenOpened": "2024-11-18T09:15:12.743Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 141,
+              "DocumentIndex": 142,
               "Title": "SearchController.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Controllers\\SearchController.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Controllers\\SearchController.cs",
@@ -2412,19 +2424,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 3,
               "Title": "IUserService.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Services\\Abstract\\IUserService.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Services\\Abstract\\IUserService.cs",
               "ToolTip": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Services\\Abstract\\IUserService.cs",
               "RelativeToolTip": "Connectify.Server\\Services\\Abstract\\IUserService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAuwAkAAACVAAAA",
+              "ViewState": "AQIAAAEAAAAAAAAAAAAcwAwAAABCAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T09:15:12.749Z"
+              "WhenOpened": "2024-11-18T09:15:12.749Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 9,
               "Title": "SearchService.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Services\\Implement\\SearchService.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Services\\Implement\\SearchService.cs",
@@ -2432,12 +2445,11 @@
               "RelativeToolTip": "Connectify.Server\\Services\\Implement\\SearchService.cs",
               "ViewState": "AQIAABgAAAAAAAAAAAAAADwAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T09:15:12.752Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-18T09:15:12.752Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 142,
+              "DocumentIndex": 143,
               "Title": "UserBasicDTO.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\DTOs\\UserBasicDTO.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\UserBasicDTO.cs",
@@ -2449,7 +2461,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 143,
+              "DocumentIndex": 144,
               "Title": "PaginatedResult.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Utils\\PaginatedResult.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Utils\\PaginatedResult.cs",
@@ -2461,7 +2473,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 144,
+              "DocumentIndex": 145,
               "Title": "MediaHelper.js",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\Utils\\MediaHelper.js",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\Utils\\MediaHelper.js",
@@ -2473,7 +2485,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 147,
+              "DocumentIndex": 148,
               "Title": "Media.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.BusinessObjects\\Media\\Media.cs",
               "RelativeDocumentMoniker": "Connectify.BusinessObjects\\Media\\Media.cs",
@@ -2485,7 +2497,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 145,
+              "DocumentIndex": 146,
               "Title": "MessageMedia.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.BusinessObjects\\Media\\MessageMedia.cs",
               "RelativeDocumentMoniker": "Connectify.BusinessObjects\\Media\\MessageMedia.cs",
@@ -2497,7 +2509,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 146,
+              "DocumentIndex": 147,
               "Title": "PostMedia.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.BusinessObjects\\Media\\PostMedia.cs",
               "RelativeDocumentMoniker": "Connectify.BusinessObjects\\Media\\PostMedia.cs",
@@ -2509,7 +2521,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 148,
+              "DocumentIndex": 149,
               "Title": "MediaFilterOptions.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Services\\FilterOptions\\MediaFilterOptions.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Services\\FilterOptions\\MediaFilterOptions.cs",
@@ -2521,7 +2533,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 149,
+              "DocumentIndex": 150,
               "Title": "PostsFilterOptions.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Services\\FilterOptions\\PostsFilterOptions.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Services\\FilterOptions\\PostsFilterOptions.cs",
@@ -2533,7 +2545,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 150,
+              "DocumentIndex": 151,
               "Title": "MediaDTO.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\DTOs\\ChatDTOs\\MediaDTO.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\ChatDTOs\\MediaDTO.cs",
@@ -2545,7 +2557,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 151,
+              "DocumentIndex": 152,
               "Title": "NormalPost.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.BusinessObjects\\PostFeature\\NormalPost.cs",
               "RelativeDocumentMoniker": "Connectify.BusinessObjects\\PostFeature\\NormalPost.cs",
@@ -2557,7 +2569,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 152,
+              "DocumentIndex": 153,
               "Title": "UserSearchDTO.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\DTOs\\UserSearchDTO.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\UserSearchDTO.cs",
@@ -2569,7 +2581,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 54,
+              "DocumentIndex": 56,
               "Title": "UserDTO.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\DTOs\\UserDTO.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\UserDTO.cs",
@@ -2581,7 +2593,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 153,
+              "DocumentIndex": 154,
               "Title": "Modal.css",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\assets\\css\\Modal.css",
               "RelativeDocumentMoniker": "connectify.client\\assets\\css\\Modal.css",
@@ -2593,7 +2605,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 56,
+              "DocumentIndex": 58,
               "Title": "UploadAvatarDTO.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\DTOs\\UploadAvatarDTO.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\UploadAvatarDTO.cs",
@@ -2605,7 +2617,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 154,
+              "DocumentIndex": 155,
               "Title": "UserDescriptionDTO.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\DTOs\\UserDescriptionDTO.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\UserDescriptionDTO.cs",
@@ -2617,7 +2629,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 155,
+              "DocumentIndex": 156,
               "Title": "UserFilterOptions.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Services\\FilterOptions\\UserFilterOptions.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Services\\FilterOptions\\UserFilterOptions.cs",
@@ -2629,7 +2641,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 156,
+              "DocumentIndex": 157,
               "Title": "usePagingManagement.js",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\Utils\\usePagingManagement.js",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\Utils\\usePagingManagement.js",
@@ -2641,7 +2653,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 43,
               "Title": "PostDTO.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\DTOs\\PostDTOs\\PostDTO.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\PostDTOs\\PostDTO.cs",
@@ -2653,7 +2665,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 157,
+              "DocumentIndex": 158,
               "Title": "UpdatePostDTO.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\DTOs\\PostDTOs\\UpdatePostDTO.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\PostDTOs\\UpdatePostDTO.cs",
@@ -2665,7 +2677,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 158,
+              "DocumentIndex": 159,
               "Title": "NormalPostDTO.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\DTOs\\PostDTOs\\NormalPostDTO.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\PostDTOs\\NormalPostDTO.cs",
@@ -2677,7 +2689,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 17,
               "Title": "Post.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.BusinessObjects\\PostFeature\\Post.cs",
               "RelativeDocumentMoniker": "Connectify.BusinessObjects\\PostFeature\\Post.cs",
@@ -2689,7 +2701,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 159,
+              "DocumentIndex": 160,
               "Title": "mediaStyle.css",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\assets\\css\\mediaStyle.css",
               "RelativeDocumentMoniker": "connectify.client\\assets\\css\\mediaStyle.css",
@@ -2701,7 +2713,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 160,
+              "DocumentIndex": 161,
               "Title": "icon.css",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\assets\\css\\icon.css",
               "RelativeDocumentMoniker": "connectify.client\\assets\\css\\icon.css",
@@ -2713,7 +2725,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 161,
+              "DocumentIndex": 162,
               "Title": "routing.js",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\Utils\\routing.js",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\Utils\\routing.js",
@@ -2725,7 +2737,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 162,
+              "DocumentIndex": 163,
               "Title": "ReactionDTO.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\DTOs\\ReactionDTO.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\ReactionDTO.cs",
@@ -2737,7 +2749,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 163,
+              "DocumentIndex": 164,
               "Title": "ReactionCount.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\DTOs\\ReactionCount.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\ReactionCount.cs",
@@ -2749,7 +2761,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 164,
+              "DocumentIndex": 165,
               "Title": "Autocomplete.css",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\assets\\css\\Autocomplete.css",
               "RelativeDocumentMoniker": "connectify.client\\assets\\css\\Autocomplete.css",
@@ -2761,7 +2773,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 20,
               "Title": "PostReaction.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.BusinessObjects\\PostFeature\\PostReaction.cs",
               "RelativeDocumentMoniker": "Connectify.BusinessObjects\\PostFeature\\PostReaction.cs",
@@ -2773,7 +2785,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 165,
+              "DocumentIndex": 166,
               "Title": "GroupPostDTO.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\DTOs\\PostDTOs\\GroupPostDTO.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\PostDTOs\\GroupPostDTO.cs",
@@ -2785,7 +2797,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 49,
+              "DocumentIndex": 51,
               "Title": "GroupPost.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.BusinessObjects\\PostFeature\\GroupPost.cs",
               "RelativeDocumentMoniker": "Connectify.BusinessObjects\\PostFeature\\GroupPost.cs",
@@ -2797,7 +2809,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 166,
+              "DocumentIndex": 167,
               "Title": "MathsHelper.js",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\Utils\\MathsHelper.js",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\Utils\\MathsHelper.js",
@@ -2809,7 +2821,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 37,
               "Title": "PostTag.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.BusinessObjects\\PostFeature\\PostTag.cs",
               "RelativeDocumentMoniker": "Connectify.BusinessObjects\\PostFeature\\PostTag.cs",
@@ -2821,7 +2833,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 167,
+              "DocumentIndex": 168,
               "Title": "SendMessageDTO.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\DTOs\\ChatDTOs\\SendMessageDTO.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\ChatDTOs\\SendMessageDTO.cs",
@@ -2833,7 +2845,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 169,
+              "DocumentIndex": 170,
               "Title": "SendTextMessageDTO.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\DTOs\\ChatDTOs\\SendTextMessageDTO.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\ChatDTOs\\SendTextMessageDTO.cs",
@@ -2845,7 +2857,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 168,
+              "DocumentIndex": 169,
               "Title": "SendMultiFilesMessageDTO.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\DTOs\\ChatDTOs\\SendMultiFilesMessageDTO.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\ChatDTOs\\SendMultiFilesMessageDTO.cs",
@@ -2857,7 +2869,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 46,
+              "DocumentIndex": 48,
               "Title": "data.sql",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\DataAcess\\data.sql",
               "RelativeDocumentMoniker": "Connectify.Server\\DataAcess\\data.sql",
@@ -2868,7 +2880,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 170,
+              "DocumentIndex": 171,
               "Title": "EmailDTO.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\DTOs\\EmailDTO.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\EmailDTO.cs",
@@ -2880,7 +2892,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 171,
+              "DocumentIndex": 172,
               "Title": "ResetPasswordDTO.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\DTOs\\ResetPasswordDTO.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\ResetPasswordDTO.cs",
@@ -2892,7 +2904,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 172,
+              "DocumentIndex": 173,
               "Title": "PaginationHelper.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Utils\\PaginationHelper.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Utils\\PaginationHelper.cs",
@@ -2904,7 +2916,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 173,
+              "DocumentIndex": 174,
               "Title": "config.js",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\js\\api\\config.js",
               "RelativeDocumentMoniker": "connectify.client\\src\\js\\api\\config.js",
@@ -2916,7 +2928,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 174,
+              "DocumentIndex": 175,
               "Title": "ISearchService.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Services\\Abstract\\ISearchService.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Services\\Abstract\\ISearchService.cs",
@@ -2928,7 +2940,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 175,
+              "DocumentIndex": 176,
               "Title": "FriendRequestDTO.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\DTOs\\FriendDTOs\\FriendRequestDTO.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\FriendDTOs\\FriendRequestDTO.cs",
@@ -2940,7 +2952,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 176,
+              "DocumentIndex": 177,
               "Title": "groups-2.html",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\socialite-v3.0\\groups-2.html",
               "RelativeDocumentMoniker": "connectify.client\\src\\socialite-v3.0\\groups-2.html",
@@ -2952,7 +2964,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 177,
+              "DocumentIndex": 178,
               "Title": "messages.html",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\socialite-v3.0\\messages.html",
               "RelativeDocumentMoniker": "connectify.client\\src\\socialite-v3.0\\messages.html",
@@ -2964,7 +2976,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 178,
+              "DocumentIndex": 179,
               "Title": "ChangePasswordDTO.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\DTOs\\ChangePasswordDTO.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\ChangePasswordDTO.cs",
@@ -2976,7 +2988,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 179,
+              "DocumentIndex": 180,
               "Title": "SignUpDTO.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\DTOs\\SignUpDTO.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\SignUpDTO.cs",
@@ -2988,7 +3000,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 180,
+              "DocumentIndex": 181,
               "Title": "setting.html",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\socialite-v3.0\\setting.html",
               "RelativeDocumentMoniker": "connectify.client\\src\\socialite-v3.0\\setting.html",
@@ -3000,7 +3012,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 181,
+              "DocumentIndex": 182,
               "Title": "RepliedMessageDTO.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\DTOs\\ChatDTOs\\RepliedMessageDTO.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\ChatDTOs\\RepliedMessageDTO.cs",
@@ -3012,7 +3024,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 182,
+              "DocumentIndex": 183,
               "Title": "ReactToMessageDTO.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\DTOs\\ChatDTOs\\ReactToMessageDTO.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\ChatDTOs\\ReactToMessageDTO.cs",
@@ -3024,7 +3036,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 183,
+              "DocumentIndex": 184,
               "Title": "MessageVisibility.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.BusinessObjects\\ChatFeature\\MessageVisibility.cs",
               "RelativeDocumentMoniker": "Connectify.BusinessObjects\\ChatFeature\\MessageVisibility.cs",
@@ -3036,7 +3048,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 184,
+              "DocumentIndex": 185,
               "Title": "SendSingleFileMessageDTO.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\DTOs\\ChatDTOs\\SendSingleFileMessageDTO.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\ChatDTOs\\SendSingleFileMessageDTO.cs",
@@ -3048,7 +3060,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 185,
+              "DocumentIndex": 186,
               "Title": "p-e26ac56f.js",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\unpkg.com\\ionicons@5.5.2\\dist\\ionicons\\p-e26ac56f.js",
               "RelativeDocumentMoniker": "connectify.client\\src\\unpkg.com\\ionicons@5.5.2\\dist\\ionicons\\p-e26ac56f.js",
@@ -3060,7 +3072,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 186,
+              "DocumentIndex": 187,
               "Title": "eslint.config.js",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\eslint.config.js",
               "RelativeDocumentMoniker": "connectify.client\\eslint.config.js",
@@ -3072,7 +3084,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 187,
+              "DocumentIndex": 188,
               "Title": "shCoreMidnight.css",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\assets\\syntax-highlighter\\styles\\shCoreMidnight.css",
               "RelativeDocumentMoniker": "connectify.client\\assets\\syntax-highlighter\\styles\\shCoreMidnight.css",
@@ -3084,7 +3096,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 188,
+              "DocumentIndex": 189,
               "Title": "shCore.css",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\assets\\syntax-highlighter\\styles\\shCore.css",
               "RelativeDocumentMoniker": "connectify.client\\assets\\syntax-highlighter\\styles\\shCore.css",
@@ -3096,7 +3108,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 189,
+              "DocumentIndex": 190,
               "Title": "ChatMessageFilterOptions.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Services\\FilterOptions\\ChatMessageFilterOptions.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Services\\FilterOptions\\ChatMessageFilterOptions.cs",
@@ -3108,7 +3120,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 190,
+              "DocumentIndex": 191,
               "Title": "RemoveMemberDTO.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\DTOs\\ChatDTOs\\RemoveMemberDTO.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\ChatDTOs\\RemoveMemberDTO.cs",
@@ -3120,7 +3132,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 191,
+              "DocumentIndex": 192,
               "Title": "CreateGroupChatDTO.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\DTOs\\ChatDTOs\\CreateGroupChatDTO.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\ChatDTOs\\CreateGroupChatDTO.cs",
@@ -3132,7 +3144,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 192,
+              "DocumentIndex": 193,
               "Title": "AddMemberDTO.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\DTOs\\ChatDTOs\\AddMemberDTO.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\ChatDTOs\\AddMemberDTO.cs",
@@ -3144,7 +3156,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 193,
+              "DocumentIndex": 194,
               "Title": "vite.config.js",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\vite.config.js",
               "RelativeDocumentMoniker": "connectify.client\\vite.config.js",
@@ -3156,7 +3168,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 194,
+              "DocumentIndex": 195,
               "Title": "TokenDTO.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\DTOs\\TokenDTO.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\TokenDTO.cs",
@@ -3168,7 +3180,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 195,
+              "DocumentIndex": 196,
               "Title": "EmailNotVerifiedException.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Services\\Exceptions\\EmailNotVerifiedException.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Services\\Exceptions\\EmailNotVerifiedException.cs",
@@ -3180,7 +3192,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 196,
+              "DocumentIndex": 197,
               "Title": "EmailSender.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\Services\\Implement\\EmailSender.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\Services\\Implement\\EmailSender.cs",
@@ -3192,7 +3204,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 197,
+              "DocumentIndex": 198,
               "Title": "SignInDTO.cs",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\Connectify.Server\\DTOs\\SignInDTO.cs",
               "RelativeDocumentMoniker": "Connectify.Server\\DTOs\\SignInDTO.cs",
@@ -3204,7 +3216,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 198,
+              "DocumentIndex": 199,
               "Title": "form-register.html",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\socialite-v3.0\\form-register.html",
               "RelativeDocumentMoniker": "connectify.client\\src\\socialite-v3.0\\form-register.html",
@@ -3216,7 +3228,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 199,
+              "DocumentIndex": 200,
               "Title": "form-login.html",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\src\\socialite-v3.0\\form-login.html",
               "RelativeDocumentMoniker": "connectify.client\\src\\socialite-v3.0\\form-login.html",
@@ -3228,7 +3240,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 200,
+              "DocumentIndex": 201,
               "Title": "launch.json",
               "DocumentMoniker": "E:\\OJT\\mooc_project\\project\\connectify.client\\.vscode\\launch.json",
               "RelativeDocumentMoniker": "connectify.client\\.vscode\\launch.json",

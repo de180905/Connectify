@@ -17,33 +17,23 @@ const ActivityHistory = () => {
         setPageNumber({value: 0})
     }
     const fetchData = async () => {
+        let response = null
         if (activityItem.id === 1) {
-            const response = await getCommentHistory(pageNumber.value, pageSize)
-            if (response && response.data) {
-                console.log(response.data)
-                setLogs((prev) => [...prev, ...response.data])
-            }
+            response = await getCommentHistory(pageNumber.value, pageSize)
         }
         else if(activityItem.id === 2){
-            const response = await getReactionHistory(pageNumber.value, pageSize)
-            if (response && response.data) {
-                console.log(response.data)
-                setLogs((prev) => [...prev, ...response.data])
-            }
+            response = await getReactionHistory(pageNumber.value, pageSize)
         }
         else if(activityItem.id === 3){
-            const response = await getPostSaves(pageNumber.value, pageSize)
-            if (response && response.data) {
-                console.log(response.data)
-                setLogs((prev) => [...prev, ...response.data])
-            }
+            response = await getPostSaves(pageNumber.value, pageSize)
         }
         else if(activityItem.id === 4){
-            const response = await getFriendshipHistory(pageNumber.value, pageSize)
-            if (response && response.data) {
-                console.log(response.data)
-                setLogs((prev) => [...prev, ...response.data])
-            }
+            response = await getFriendshipHistory(pageNumber.value, pageSize)         
+        }
+        
+        if (response && response.data) {
+            console.log(response.data)
+            setLogs((prev) => [...prev, ...response.data])
         }
         
     }

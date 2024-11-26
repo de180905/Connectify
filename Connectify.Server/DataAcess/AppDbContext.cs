@@ -259,6 +259,28 @@ namespace Connectify.Server.DataAccess
                 .WithMany()
                 .HasForeignKey(ps => ps.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
+            //block user
+            builder.Entity<BlockedUsers>(entity =>
+            {
+                entity.HasKey(bu => new { bu.UserId, bu.BlockedUserId })
+                .HasName("block_user_pkey");
+                entity.Property(e => e.UserId)
+                .HasColumnName("user_id");
+                entity.Property(e => e.BlockedUserId)
+                .HasColumnName("blocked_user_idd");
+                entity.Property(e => e.BlockedDate)
+                .HasColumnName("blocked_date");
+            });
+            builder.Entity<BlockedUsers>()
+                .HasOne(ps => ps.User)
+                .WithMany()
+                .HasForeignKey(ps => ps.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<BlockedUsers>()
+                .HasOne(ps => ps.BlockedUser)
+                .WithMany()
+                .HasForeignKey(ps => ps.BlockedUserId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
         public DbSet<Post> Posts { get; set; }
         public DbSet<Media> Media { get; set; }
@@ -284,5 +306,6 @@ namespace Connectify.Server.DataAccess
         public DbSet<PostReportReason>PostReportReasons { get; set; }
         public DbSet<PostReport>PostReports { get; set; }
         public DbSet<PostSave>PostSaves { get; set; }
+        public DbSet<BlockedUsers> BlockedUsers { get; set; }
     }
 }

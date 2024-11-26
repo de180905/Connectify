@@ -817,6 +817,28 @@ namespace Connectify.Server.Migrations
                     b.ToTable("PostTags");
                 });
 
+            modelBuilder.Entity("Connectify.BusinessObjects.Report.BlockedUsers", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)")
+                        .HasColumnName("user_id");
+
+                    b.Property<string>("BlockedUserId")
+                        .HasColumnType("nvarchar(450)")
+                        .HasColumnName("blocked_user_idd");
+
+                    b.Property<DateTime>("BlockedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("blocked_date");
+
+                    b.HasKey("UserId", "BlockedUserId")
+                        .HasName("block_user_pkey");
+
+                    b.HasIndex("BlockedUserId");
+
+                    b.ToTable("BlockedUsers");
+                });
+
             modelBuilder.Entity("Connectify.BusinessObjects.Report.PostReport", b =>
                 {
                     b.Property<int>("Id")
@@ -1434,6 +1456,25 @@ namespace Connectify.Server.Migrations
                         .IsRequired();
 
                     b.Navigation("Post");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Connectify.BusinessObjects.Report.BlockedUsers", b =>
+                {
+                    b.HasOne("Connectify.BusinessObjects.Authen.User", "BlockedUser")
+                        .WithMany()
+                        .HasForeignKey("BlockedUserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Connectify.BusinessObjects.Authen.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("BlockedUser");
 
                     b.Navigation("User");
                 });

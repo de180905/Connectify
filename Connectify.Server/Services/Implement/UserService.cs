@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Connectify.BusinessObjects.PostFeature;
+using Connectify.BusinessObjects.Report;
 using Connectify.Server.DataAccess;
 using Connectify.Server.DTOs;
 using Connectify.Server.DTOs.PostDTOs;
@@ -69,6 +70,32 @@ namespace Connectify.Server.Services.Implement
             });
             var res = await PaginationHelper.CreatePaginatedResultAsync<UserSearchDTO>(projectedQuery, pageNumber, pageSize);
             return res;
+        }
+
+        public async Task<bool> BlockUser(string userId, string blockedUserId)
+        {
+            var blockedUser = await _context.BlockedUsers.FirstOrDefaultAsync(bu => bu.UserId == userId && bu.BlockedUserId == blockedUserId);
+            if (blockedUser == null)
+            {
+                var blockedUserInsert = new BlockedUsers { UserId = userId, BlockedUserId = blockedUserId};
+                _context.BlockedUsers.Add(blockedUserInsert);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            return false;
+        
+        }
+
+        public async Task<bool> UnblockUser(string userId, string blockedUserId)
+        {
+            var blockedUser = await _context.BlockedUsers.FirstOrDefaultAsync(bu => bu.UserId == userId && bu.BlockedUserId == blockedUserId);
+            if(blockedUser != null)
+            {
+                _context.BlockedUsers.Remove(blockedUser);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            return false;
         }
     }
 }

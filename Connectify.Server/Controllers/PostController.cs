@@ -181,7 +181,7 @@ namespace Connectify.Server.Controllers
             }
             catch(Exception ex)
             {
-                return BadRequest(new { isSuccess = false});
+                return BadRequest(new { error = ex.Message});
             }
         }
         
