@@ -117,7 +117,7 @@ namespace Connectify.Server.Controllers
                         TriggeredByUserId = userId,
                         Message = "reacted to your post.",
                         Type = NotificationType.ReactPost,
-                        ActionLink = $"/post-view/{postId}",
+                        ActionLink = $"/post-view/{postId}/0",
                     };
 
                     var recipientIds = new List<string>();
@@ -170,5 +170,20 @@ namespace Connectify.Server.Controllers
                 return StatusCode(500, $"An error occurred: {ex.Message}");
             }
         }
+        [HttpPost("save")]
+        public async Task<IActionResult>SavePost([FromBody]int postId)
+        {
+            try
+            {
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                await postService.SavePost(postId, userId);
+                return Ok(new {isSuccess = true});
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(new { isSuccess = false});
+            }
+        }
+        
     }
 }

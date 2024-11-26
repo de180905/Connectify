@@ -1,0 +1,77 @@
+.body{
+    padding-top: 64px;
+    background-color: #F2F4F7;
+}
+.active{
+    background-color: rgb(215, 228, 244) ;
+}
+
+.sideBar{
+    width: 20%;
+    height: 100%;
+    border-right: 1px #ccc solid;
+    padding-right: 0px;
+    position: fixed;
+    background-color: #fff;
+    box-shadow: 3px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.activityItem{
+    width: 100%;
+    margin-left: 0px;
+    color: #201f1f;
+    cursor: pointer;
+}
+.activityItem:hover{
+    background-color: #ccc;
+}
+.activityItem i{
+    border-radius: 50%;
+    background-color: #ccc;
+}
+.activityItem:nth-child(1) i{
+    padding: 8px;
+}
+.activityItem:nth-child(2) i{
+    padding: 8px;
+}
+.activityItem:nth-child(3) i{
+    padding: 8px 10px;
+}
+.activityItem:nth-child(4) i{
+    padding: 10px 7px;
+}
+
+.activitys{
+    padding-left: 0px;
+    padding-right: 5%;
+}
+.log{
+    background-color: #fff;
+    border-radius: 10px;
+}
+.activitys .activity{
+    border-radius: 10px;
+}
+.activity{
+    position: relative;
+}
+.activity .activityTime{
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+}
+.activitys .activity:hover{
+    background-color: #ccc;
+    cursor: pointer;
+} 
+.moreBtn{
+    background-color: #1c6cec;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+
+}
+.moreBtn:hover{
+    background-color: #0542a4;
+}

@@ -1,4 +1,4 @@
-﻿import React, { useState, useRef, useContext, useCallback } from "react";
+﻿import React, { useState, useRef, useContext, useCallback, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import { FaEllipsisH, FaThumbsUp, FaRegCommentDots, FaShare, FaSmile, FaLaugh, FaSadTear } from "react-icons/fa";
 import OutsideClickHandler from "react-outside-click-handler";
@@ -8,7 +8,7 @@ import '/assets/css/Modal.css'
 import '/assets/css/Icon.css'
 import '/assets/css/mediaStyle.css'
 import { reactionTypeValue } from "../../Utils/EnumMapper";
-import { reactToPost, unReactPost } from "../../api/Post";
+import { reactToPost, savePost, unReactPost } from "../../api/Post";
 import { AppContext } from "../../Contexts/AppProvider";
 import { formatDistanceToUTCNow } from "../../Utils/datetimeUtil";
 import CommentSection from "../commentFeature/CommentSection";
@@ -19,13 +19,23 @@ import PostReport from "../report/PostReport";
 // Đặt thuộc tính cho modal
 Modal.setAppElement('#root');
 
-const Post = ({ post, updatePostUI }) => {
+const Post = ({ post, updatePostUI, commentId }) => {
+
     const [showCommentSection, setShowCommentSection] = useState(false);
     const [showReactionDetails, setShowReactionDetails] = useState(false);
     const [showAllTaggedUsers, setShowAllTaggedUsers] = useState(false);
     const [show3dotsOpts, setShow3dotsOpts] = useState(false);
     const { postUpdateBoxRef, mediaDetailRef } = useContext(AppContext);
     const [isOpenReport, setIsOpenReport] = useState(false)
+    //
+        useEffect(()=>{
+            if(commentId && commentId>0)setShowCommentSection(true)
+        }, [])
+    //save post
+    const handleSavePost = async () => {     
+        const response = await savePost(post.id);
+        console.log(response)
+    };
     //đóng report
     const closeReportForm = useCallback(()=>{setIsOpenReport(false)}, [])
     // Hàm để chuyển đổi trạng thái xem thêm/thu gọn
@@ -385,7 +395,7 @@ const Post = ({ post, updatePostUI }) => {
                                                 </button>
                                             </li>
                                         </> : (<div className="d-flex flex-column cursor-pointer">
-                                            <div className="row justify-content-center align-items-center p-2 hover:bg-gray-100 text-gray-700 m-0" ><i className="fas fa-bookmark col-md-2"></i> <p className="col-md-10">Save Post</p></div>                                       
+                                            <div className="row justify-content-center align-items-center p-2 hover:bg-gray-100 text-gray-700 m-0" onClick={handleSavePost}><i className="fas fa-bookmark col-md-2"></i> <p className="col-md-10">Save Post</p></div>                                       
                                             <div className="row justify-content-center align-items-center p-2 hover:bg-gray-100 text-gray-700 m-0"><i className="fas fa-code col-md-2"></i> <p className="col-md-10">Embed</p></div>
                                             <div className="row justify-content-center align-items-center p-2 hover:bg-gray-100 text-gray-700 m-0" ><i className="fas fa-eye-slash col-md-2"></i> <p className="col-md-10">Hide Post</p></div>
                                             <div className="row justify-content-center align-items-center p-2 hover:bg-gray-100 text-gray-700 m-0" 
@@ -478,7 +488,7 @@ const Post = ({ post, updatePostUI }) => {
                     <span>Share</span>
                 </button>
             </div>
-            {showCommentSection && <CommentSection postId={post.id} />}
+            {showCommentSection && <CommentSection postId={post.id} commentId={commentId} />}
         </div>
     );
 };

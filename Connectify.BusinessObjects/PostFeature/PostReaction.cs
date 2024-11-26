@@ -21,6 +21,7 @@ namespace Connectify.BusinessObjects.PostFeature
         public string UserId { get; set; }
         public virtual User User { get; set; }
         public ReactionType Reaction { get; set; }
+        public DateTime UpdateAt { get; set; } = DateTime.UtcNow.ToLocalTime();
 
     }
 }

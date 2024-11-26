@@ -98,6 +98,7 @@ namespace Connectify.Server
             builder.Services.AddScoped<ICommentService, CommentService>();
             builder.Services.AddScoped<IPostReportService, PostReportService>();
             builder.Services.AddScoped<INotificationService, NotificationService>();
+            builder.Services.AddScoped<IUserActivityService, UserActivityService>();
             builder.Services.AddTransient<IEmailSender, EmailSender>();
             
 

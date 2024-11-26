@@ -120,6 +120,24 @@ async function reactToComment(commentId, value) {
         throw new Error('Failed to react to comment');
     }
 }
-export { addComment, replyToComment, getTopLevelComments, getReplies, getCommentById, deleteComment, editComment, reactToComment }; 
+async function getRootComment (commentId) {
+    try {
+        const response = await fetch(`${CONNECTIFY_API_BASE_URL}/api/Comment/get-root?commentId=${commentId}`, {
+            method: 'GET', 
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem("accessToken")}`, // Đính kèm token
+                'Content-Type': 'application/json'
+            },
+        });
+
+        if (!response.ok) throw new Error('Network response was not ok');
+        const data = await response.json();
+        return { data: data };
+    } catch (error) {
+        console.log("Error fetching notifications:", error);
+        return { error: error.message };
+    }
+}
+export { addComment, replyToComment, getTopLevelComments, getReplies, getCommentById, deleteComment, editComment, reactToComment, getRootComment }; 
 
 

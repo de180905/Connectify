@@ -29,6 +29,7 @@ import NotificationForm from './js/Components/notification/NotificationForm';
 import { toast, ToastContainer } from 'react-toastify';
 import PostView from './js/Components/post/PostView';
 import PostReport from './js/Components/report/PostReport';
+import ActivityHistory from './js/Components/activityHistory/ActivityHistory';
 function MyApp() {
     const [connection, setConnection] = React.useState(null);
     const chatRoomDetailRef = React.useRef(null);
@@ -74,6 +75,7 @@ function MyApp() {
                         if (data) {
                             console.log('send notification data:', data)
                             toast(<NotificationForm 
+                                id={data.notificationId}
                                 name={data.triggeredByUserName}
                                 avatar={data.triggeredByUserAvatarUrl}
                                 message={data.message}
@@ -151,8 +153,8 @@ function MyApp() {
                         <Route path="reset-password-success" element={<ResetPasswordSuccess />} />
                     </Route>
                     <Route path="account/verify-email/:email" element={<VerifyAccount />} />
-                    <Route path='post-view/:postId' element={<PostView/>}/>
-                    
+                    <Route path='post-view/:postId/:commentId' element={<PostView/>}/>
+                    <Route path ='activityHistory' element={<ActivityHistory/>}/>
                 </Routes>
             </Router>
             <ToastContainer />

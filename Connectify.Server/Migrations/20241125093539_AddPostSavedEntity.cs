@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Connectify.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class InitializeDb : Migration
+    public partial class AddPostSavedEntity : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -689,7 +689,8 @@ namespace Connectify.Server.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PostId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Reaction = table.Column<int>(type: "int", nullable: false)
+                    Reaction = table.Column<int>(type: "int", nullable: false),
+                    UpdateAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -719,7 +720,7 @@ namespace Connectify.Server.Migrations
                     post_report_reason_id = table.Column<int>(type: "int", nullable: false),
                     status = table.Column<int>(type: "int", nullable: false),
                     created_at = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    updated_at = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    updated_at = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -738,6 +739,31 @@ namespace Connectify.Server.Migrations
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_PostReports_Posts_post_id",
+                        column: x => x.post_id,
+                        principalTable: "Posts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PostSaves",
+                columns: table => new
+                {
+                    post_id = table.Column<int>(type: "int", nullable: false),
+                    user_id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    create_at = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("postSave_pkey", x => new { x.post_id, x.user_id });
+                    table.ForeignKey(
+                        name: "FK_PostSaves_AspNetUsers_user_id",
+                        column: x => x.user_id,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_PostSaves_Posts_post_id",
                         column: x => x.post_id,
                         principalTable: "Posts",
                         principalColumn: "Id",
@@ -784,7 +810,8 @@ namespace Connectify.Server.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CommentId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    IsLike = table.Column<bool>(type: "bit", nullable: false)
+                    IsLike = table.Column<bool>(type: "bit", nullable: false),
+                    UpdateAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -1039,6 +1066,11 @@ namespace Connectify.Server.Migrations
                 column: "GroupId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_PostSaves_user_id",
+                table: "PostSaves",
+                column: "user_id");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PostTags_PostId",
                 table: "PostTags",
                 column: "PostId");
@@ -1118,6 +1150,9 @@ namespace Connectify.Server.Migrations
 
             migrationBuilder.DropTable(
                 name: "PostReports");
+
+            migrationBuilder.DropTable(
+                name: "PostSaves");
 
             migrationBuilder.DropTable(
                 name: "PostTags");

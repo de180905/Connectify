@@ -5,6 +5,7 @@ import { getPost } from '../../api/Post'
 import { useParams } from 'react-router-dom'
 const PostView = () => {
     const {postId} = useParams()
+    const {commentId} = useParams()
     const [post, setPost] = useState() 
     useEffect(()=>{
         const fetchData = async()=>{
@@ -23,7 +24,7 @@ const PostView = () => {
         <div className={`${styles.postView}`}>
             {/* Chỉ hiển thị Post khi đã có dữ liệu */}
             {post && (
-                <Post post={post} updatePostUI={updatePostUI} />
+                <Post post={post} commentId={commentId} updatePostUI={updatePostUI} />
             )}
         </div>
     )

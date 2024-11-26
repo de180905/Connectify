@@ -236,6 +236,29 @@ namespace Connectify.Server.DataAccess
                 .WithMany(prs => prs.Reports)
                 .HasForeignKey(pr => pr.PostReportReasonId)
                 .OnDelete(DeleteBehavior.Restrict);
+            //post save
+            builder.Entity<PostSave>(entity =>
+            {
+                entity.HasKey(ps => new {ps.PostId, ps.UserId})
+                .HasName("postSave_pkey");
+                entity.Property(e => e.PostId)
+                .HasColumnName("post_id");
+                entity.Property(e => e.UserId)
+                .HasColumnName("user_id");
+                entity.Property(e => e.CreateAt)
+                .HasColumnName("create_at");
+                
+            });
+            builder.Entity<PostSave>()
+                .HasOne(ps => ps.Post)
+                .WithMany()
+                .HasForeignKey(ps => ps.PostId)
+                .OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<PostSave>()
+                .HasOne(ps => ps.User)
+                .WithMany()
+                .HasForeignKey(ps => ps.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
         public DbSet<Post> Posts { get; set; }
         public DbSet<Media> Media { get; set; }
@@ -260,5 +283,6 @@ namespace Connectify.Server.DataAccess
         public DbSet<NotificationRecipient> NotificationRecipients { get; set; }
         public DbSet<PostReportReason>PostReportReasons { get; set; }
         public DbSet<PostReport>PostReports { get; set; }
+        public DbSet<PostSave>PostSaves { get; set; }
     }
 }

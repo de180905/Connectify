@@ -81,7 +81,7 @@ namespace Connectify.Server.Controllers
                     TriggeredByUserId = userId,
                     Message = "has accepted your friend request.",
                     Type = NotificationType.AcceptFriendRequest,
-                    ActionLink = "/people",
+                    ActionLink = $"/{userId}",
                 };
                 notification = await _notificationService.CreateNotification(notification, otherUserId);
                 var triggeredByUserName = await _accountService.GetFullName(userId);

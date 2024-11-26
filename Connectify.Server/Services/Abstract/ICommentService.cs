@@ -19,5 +19,7 @@ namespace Connectify.Server.Services.Abstract
         Task<Comment> GetCommentById(int commentId);
         Task<int> GetPostId(int commentId);
         Task<string> GetAuthorId ( int commentId);
+        //lay comment root
+        Task<CommentDTO> GetRootComment(string userId, int commentId);
     }
 }

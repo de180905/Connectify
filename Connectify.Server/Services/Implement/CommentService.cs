@@ -172,5 +172,65 @@ namespace Connectify.Server.Services.Implement
             if (comment != null) return comment.AuthorId;
             return "";
         }
+
+        //lay comment root cua 1 comment
+        public async Task<CommentDTO> GetRootComment(string userId, int commentId)
+        {
+            // Tìm comment đầu tiên theo ID
+            var rootComment = await _context.Comments
+                .Include(c => c.Author) // Bao gồm thông tin tác giả
+                .Include(c => c.Reactions) // Bao gồm thông tin phản ứng
+                .FirstOrDefaultAsync(cmt => cmt.CommentId == commentId);
+
+            if (rootComment == null) throw new Exception("Comment not found");
+
+            // Nếu có ParentCommentId, tìm đệ quy comment gốc
+            if (rootComment.ParentCommentId != null)
+            {
+                return await GetRootComment(userId, rootComment.ParentCommentId.Value);
+            }
+
+            // Trả về DTO cho comment gốc
+            return new CommentDTO
+            {
+                CommentId = rootComment.CommentId,
+                Content = rootComment.Content,
+                CreatedAt = rootComment.CreatedAt,
+                AuthorId = rootComment.AuthorId,
+                AuthorName = rootComment.Author.FullName,
+                AuthorAvatar = rootComment.Author.Avatar,
+                ParentCommentId = rootComment.ParentCommentId,
+                ReplyToAuthorId = rootComment.ReplyToUserId,
+                ReplyToAuthorName = rootComment.ReplyToUser?.FullName,
+                IsAuthor = rootComment.AuthorId == userId,
+                RepliesCount = RepliesCount(rootComment),
+                LikesCount = rootComment.Reactions.Count,
+                ViewerReaction = rootComment.Reactions.Any(r => r.UserId == userId)
+            };
+        }
+
+        //dem replycoment 
+        private int RepliesCount(Comment comment)
+        {
+            if (comment == null) return 0;
+
+            // Kiểm tra nếu Replies chưa được tải
+            if (comment.Replies == null || !comment.Replies.Any())
+            {
+                comment.Replies = _context.Comments
+                    .Where(c => c.ParentCommentId == comment.CommentId)
+                    .ToList();
+            }
+
+            int count = comment.Replies.Count; // Đếm số phản hồi trực tiếp
+
+            foreach (var reply in comment.Replies)
+            {
+                count += RepliesCount(reply); // Đệ quy đếm phản hồi con
+            }
+
+            return count;
+        }
+
     }
 }

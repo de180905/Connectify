@@ -8,8 +8,8 @@ import { getUnreadNotificationsCount } from "../../api/notificationApi";
 
 const Header = forwardRef(({ chatNotificationRef }, ref) => {
     const { user } = useContext(AppContext);
-    const [numberUnReadNotification, setNumberUnreadNotification]=useState(0)
-    const [loadNotifications, setLoadNotifications]=useState(0)
+    const [numberUnReadNotification, setNumberUnreadNotification] = useState(0)
+    const [loadNotifications, setLoadNotifications] = useState(0)
     const fetchData = useCallback(async () => {
         try {
             const response = await getUnreadNotificationsCount();
@@ -21,13 +21,13 @@ const Header = forwardRef(({ chatNotificationRef }, ref) => {
             console.error('Error fetching notifications:', error);
         }
     }, []);
-    useEffect(()=>{
+    useEffect(() => {
         fetchData()
     }, [])
-    useImperativeHandle(ref, ()=>({
-        incrementUnreadNotification(){
+    useImperativeHandle(ref, () => ({
+        incrementUnreadNotification() {
             setNumberUnreadNotification(prevCount => prevCount + 1)
-            setLoadNotifications(prev=>prev+1)
+            setLoadNotifications(prev => prev + 1)
         }
     }))
     return (
@@ -460,7 +460,7 @@ const Header = forwardRef(({ chatNotificationRef }, ref) => {
                                     />
                                 </svg>
                                 <div className="absolute top-0 right-0 -m-1 bg-red-600 text-white text-xs px-1 rounded-full">
-                                    {numberUnReadNotification ?numberUnReadNotification:''}
+                                    {numberUnReadNotification ? numberUnReadNotification : ''}
                                 </div>
                                 <ion-icon
                                     name="notifications-outline"
@@ -472,7 +472,7 @@ const Header = forwardRef(({ chatNotificationRef }, ref) => {
                                 className="hidden bg-white rounded-lg drop-shadow-xl dark:bg-slate-700 md:w-[365px] w-screen border2"
                                 uk-drop="offset:6;pos: bottom-right; mode: click; animate-out: true; animation: uk-animation-scale-up uk-transform-origin-top-right "
                             >
-                                <NotificationList notificationEvent={loadNotifications}/>
+                                <NotificationList notificationEvent={loadNotifications} />
                             </div>
                             {/* messages */}
                             <ChatNotification ref={chatNotificationRef} />
@@ -482,7 +482,7 @@ const Header = forwardRef(({ chatNotificationRef }, ref) => {
                                     src={user?.avatar}
                                     alt=""
                                     className="sm:w-9 sm:h-9 w-7 h-7 rounded-full shadow shrink-0"
-                                /> 
+                                />
                             </div>
                             <div
                                 className="hidden bg-white rounded-lg drop-shadow-xl dark:bg-slate-700 w-64 border2"
@@ -547,6 +547,27 @@ const Header = forwardRef(({ chatNotificationRef }, ref) => {
                                             My Account
                                         </div>
                                     </a>
+                                    <a href="/activityHistory">
+                                        <div className="flex items-center gap-2.5 hover:bg-secondery p-2 px-2.5 rounded-md dark:hover:bg-white/10">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                strokeWidth="1"
+                                                stroke="currentColor"
+                                                className="w-6 h-6"
+                                            >                                              
+                                                <circle cx="3.5" cy="6" r="0.8" fill="currentColor" />
+                                                <circle cx="3.5" cy="12" r="0.8" fill="currentColor" />
+                                                <circle cx="3.5" cy="18" r="0.8" fill="currentColor" />                                                
+                                                <rect x="7" y="5.25" width="13" height="1" fill="currentColor" />
+                                                <rect x="7" y="11.25" width="13" height="1" fill="currentColor" />
+                                                <rect x="7" y="17.25" width="13" height="1" fill="currentColor" />
+                                            </svg>
+                                            Activity History
+                                        </div>
+                                    </a>
+
                                     <hr className="-mx-2 my-2 dark:border-gray-600/60" />
                                     <button onClick={TokenService.logout}>
                                         <div className="flex items-center gap-2.5 hover:bg-secondery p-2 px-2.5 rounded-md dark:hover:bg-white/10">
@@ -569,7 +590,7 @@ const Header = forwardRef(({ chatNotificationRef }, ref) => {
                                     </button>
                                 </nav>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>

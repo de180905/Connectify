@@ -46,7 +46,7 @@ namespace Connectify.Server.Controllers
                     TriggeredByUserId = authorId,
                     Message = "commented on your post.",
                     Type = NotificationType.CommentPost,
-                    ActionLink = $"/post-view/{dto.PostId}",
+                    ActionLink = $"/post-view/{dto.PostId}/{commentId}",
                 };
                 var recipientIds = new List<string>();
                 recipientIds.Add(recipientId);
@@ -98,7 +98,7 @@ namespace Connectify.Server.Controllers
                         TriggeredByUserId = createdReply.AuthorId,
                         Message = "replied to your comment.",
                         Type = NotificationType.CommentReply,
-                        ActionLink = $"/post-view/{postId}",
+                        ActionLink = $"/post-view/{postId}/{commentId}",
                     };
                     notif = await _notificationService.CreateNotification(notif, recipientId);
                     var triggeredByUserAvatarUrl = await _accountService.GetAvatarUrl(createdReply.AuthorId);
@@ -122,7 +122,7 @@ namespace Connectify.Server.Controllers
                         TriggeredByUserId = authorId,
                         Message = "commented on your post.",
                         Type = NotificationType.CommentPost,
-                        ActionLink = $"/post-view/{postId}",
+                        ActionLink = $"/post-view/{postId}/{commentId}",
                     };
                     notif = await _notificationService.CreateNotification(notif, recipientId);
 
@@ -219,7 +219,7 @@ namespace Connectify.Server.Controllers
                     TriggeredByUserId = userId,
                     Message = "reacted to your comment.",
                     Type = NotificationType.CommentReact,
-                    ActionLink = $"/post-view/{postId}",
+                    ActionLink = $"/post-view/{postId}/{commentId}",
                 };
                 notif = await _notificationService.CreateNotification(notif, recipientId);
                 var triggeredByUserAvatarUrl = await _accountService.GetAvatarUrl(userId);
@@ -237,6 +237,15 @@ namespace Connectify.Server.Controllers
             }
             //
             return Ok();
+        }
+        //lay root comment
+        [HttpGet("get-root")]
+        public async Task<IActionResult> GetRoot([FromQuery]int commentId)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var response = await _commentService.GetRootComment(userId, commentId);
+            Console.WriteLine(response);
+            return Ok(response);
         }
     }
 }

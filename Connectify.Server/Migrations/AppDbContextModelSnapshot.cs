@@ -552,6 +552,9 @@ namespace Connectify.Server.Migrations
                     b.Property<bool>("IsLike")
                         .HasColumnType("bit");
 
+                    b.Property<DateTime>("UpdateAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -747,6 +750,9 @@ namespace Connectify.Server.Migrations
                     b.Property<int>("Reaction")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("UpdateAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -758,6 +764,28 @@ namespace Connectify.Server.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("PostReactions");
+                });
+
+            modelBuilder.Entity("Connectify.BusinessObjects.PostFeature.PostSave", b =>
+                {
+                    b.Property<int>("PostId")
+                        .HasColumnType("int")
+                        .HasColumnName("post_id");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)")
+                        .HasColumnName("user_id");
+
+                    b.Property<DateTime>("CreateAt")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("create_at");
+
+                    b.HasKey("PostId", "UserId")
+                        .HasName("postSave_pkey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("PostSaves");
                 });
 
             modelBuilder.Entity("Connectify.BusinessObjects.PostFeature.PostTag", b =>
@@ -819,7 +847,7 @@ namespace Connectify.Server.Migrations
                         .HasColumnType("int")
                         .HasColumnName("status");
 
-                    b.Property<DateTime?>("UpdatedAt")
+                    b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2")
                         .HasColumnName("updated_at");
 
@@ -1355,6 +1383,25 @@ namespace Connectify.Server.Migrations
                         .WithMany("Reactions")
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Connectify.BusinessObjects.Authen.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Post");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Connectify.BusinessObjects.PostFeature.PostSave", b =>
+                {
+                    b.HasOne("Connectify.BusinessObjects.PostFeature.Post", "Post")
+                        .WithMany()
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Connectify.BusinessObjects.Authen.User", "User")
