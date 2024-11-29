@@ -4,9 +4,13 @@ import { CONNECTIFY_API_BASE_URL } from "./config";
 async function createPost(post) {
     const formData = new FormData();
     // Add the content field to formData
-    formData.append("Content", post.content);
+    if (post.content) {
+        formData.append("Content", post.content);
+    }
     // Add the feeling field to formData
-    formData.append("Feeling", post.feeling);
+    if (post.feeling) {
+        formData.append("Feeling", post.feeling);
+    }
     // Add the visibility level field to formData
     formData.append("Visibility", post.visibility);
     // Add the files to formData
@@ -36,9 +40,13 @@ async function createPost(post) {
 async function updatePost(post) {
     const formData = new FormData();
     // Add the content field to formData
-    formData.append("Content", post.content);
+    if (post.content) {
+        formData.append("Content", post.content);
+    }
     // Add the feeling field to formData
-    formData.append("Feeling", post.feeling);
+    if (post.feeling) {
+        formData.append("Feeling", post.feeling);
+    }
     // Add the visibility level field to formData
     formData.append("Visibility", post.visibility);
     for (let i = 0; i < post.filesAdded.length; i++) {
@@ -179,5 +187,35 @@ async function getPost(id) {
         console.error('Error fetching posts:', error);
     }
 }
-export { createPost, getPosts, reactToPost, unReactPost, updatePost, getPost }
+async function deletePost(postId) {
+    const url = `${CONNECTIFY_API_BASE_URL}/api/Posts/${postId}`; // Adjust the base URL as needed
+    const response = await fetch(url, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + TokenService.getAccessToken() // Include the auth token if required
+        }
+    });
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
+}
+async function getPostReactionCounts(postId) {
+    const url = `${CONNECTIFY_API_BASE_URL}/api/Posts/${postId}/reaction-counts`; // Adjust the base URL as needed
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + TokenService.getAccessToken() // Include the auth token if required
+        }
+    });
+
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const reactionCounts = await response.json();
+    return reactionCounts;
+}
+export { createPost, getPosts, reactToPost, unReactPost, updatePost, getPost, deletePost, getPostReactionCounts }
 

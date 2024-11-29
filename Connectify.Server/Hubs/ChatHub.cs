@@ -45,7 +45,8 @@ namespace Connectify.Server.Hubs
             {
                 await _chatService.SetMemberLastSeenAsync(userId, chatRoomId, DateTime.UtcNow);
             }
-            return await _chatService.GetChatRoomByIdAsync(userId, chatRoomId);
+            var chatroom = await _chatService.GetChatRoomByIdAsync(userId, chatRoomId);
+            return chatroom;
         }
 
         public override async Task OnDisconnectedAsync(Exception exception)

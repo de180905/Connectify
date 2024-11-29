@@ -40,7 +40,8 @@ const MediaDetailModal = forwardRef(({ }, ref) => {
                     )
                 }
                 {isImage(mediaList[currentMediaIndex].url) ? (
-                    <img src={mediaList[currentMediaIndex].url} alt="" className="max-h-full max-w-full" />
+                    <img src={mediaList[currentMediaIndex].url} alt="" className="max-h-full max-w-full"
+                        style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
                 ) : (
                     <video className="max-h-full max-w-full" controls>
                         <source src={mediaList[currentMediaIndex].url} type="video/mp4" />

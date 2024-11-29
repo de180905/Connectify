@@ -3,16 +3,19 @@ import { AppContext } from "../../Contexts/AppProvider";
 import { useEffect } from "react";
 import CoverUploader from "../croppedUploaders/CoverUploader";
 import AvatarUploader from "../croppedUploaders/AvatarUploader";
-import { useParams, Outlet, NavLink } from 'react-router-dom';
+import { useParams, Outlet, NavLink, useNavigate } from 'react-router-dom';
 import { getUserBasic } from "../../api/search";
-import { FaUserPlus, FaUserMinus, FaCheckCircle, FaTimesCircle, FaSearch, FaEllipsisH, FaTags, FaClock, FaFlag, FaShareAlt, FaBan } from "react-icons/fa";
+import { FaUserPlus, FaEnvelope, FaUserMinus, FaCheckCircle, FaTimesCircle, FaSearch, FaEllipsisH, FaTags, FaClock, FaFlag, FaShareAlt, FaBan } from "react-icons/fa";
 import { respondFriendRequest, revokeFriendRequest, sendFriendRequest, unFriend } from "../../api/Friend";
+import { getOrCreatePrivateChatRoom } from "../../api/chat";
+import { uploadAvatar } from "../../api/authen";
 
 
 const UserTimeline = () => {
     const { user: myUser } = useContext(AppContext);
     const { userId } = useParams();
     const [user, setUser] = useState(null);
+    const navigate = useNavigate();
     useEffect(() => {
         const getUser = async () => {
             try {
@@ -39,7 +42,10 @@ const UserTimeline = () => {
                     <div className="p-3">
                         <div className="flex flex-col justify-center md:items-center lg:-mt-48 -mt-28">
                             <div className="relative lg:h-48 lg:w-48 w-28 h-28 mb-4 z-10">
-                                <AvatarUploader initialAvatar={user?.avatar} editable={myUser?.id == userId} />
+                                <div className="relative overflow-hidden rounded-full md:border-[6px] border-gray-100 dark:border-slate-900 shadow aspect-square">
+                                    <AvatarUploader initialAvatar={user?.avatar} editable={myUser?.id == userId}
+                                        uploadFunc={uploadAvatar} />
+                                </div>
                                 <button
                                     type="button"
                                     className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-white shadow p-1.5 rounded-full sm:flex hidden"
@@ -144,10 +150,20 @@ const UserTimeline = () => {
                                 </button>
                             )}
 
-                            {/* Search button */}
-                            <button type="submit" className="rounded-lg bg-secondary flex px-2.5 py-2 dark:bg-dark2">
-                                <FaSearch className="text-xl" />
-                            </button>
+                            {/* Message button */}
+                            {myUser.id != userId && <button className="rounded-lg bg-secondary flex px-2.5 py-2 dark:bg-dark2"
+                                onClick={async () => {
+                                    try {
+                                        const chatroomId = await getOrCreatePrivateChatRoom(userId);
+                                        navigate(`/chatrooms/${chatroomId}`);
+                                    }
+                                    catch (error) {
+                                        window.alert("error occured, please try again");
+                                    }
+                                }}
+                            >
+                                <FaEnvelope className="text-xl text-white" />
+                            </button>}
 
                             {/* Menu button with dropdown */}
                             <div>

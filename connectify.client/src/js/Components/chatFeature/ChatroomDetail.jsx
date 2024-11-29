@@ -1,5 +1,5 @@
-﻿import { useParams, useOutletContext} from "react-router-dom";
-import { loadChatMessages, loadChatRoomById, sendTextMessage, sendMultiFilesMessage, sendSingleFileMessage, deleteMessage } from "../../api/chat";
+﻿import { useParams, useNavigate} from "react-router-dom";
+import { loadChatMessages, loadChatRoomById, sendTextMessage, sendMultiFilesMessage, sendSingleFileMessage, deleteMessage, getChatRoomMembers, removeChatroomMember, leaveChatroom, addUsersToChatroom, uploadChatroomAvatar, renameChatroom } from "../../api/chat";
 import * as React from "react";
 import { TextMessage } from "./TextMessage";
 import FilePreview from "./FilePreview";
@@ -11,7 +11,17 @@ import { formatDistanceToUTCNow } from "../../Utils/datetimeUtil";
 import { useContext } from "react";
 import { AppContext } from "../../Contexts/AppProvider";
 import TextareaAutosize from 'react-textarea-autosize';
+import { ViewChatroomMembersModal } from "./ViewChatroomMembersModal";
+import useConfirmModal from "../../CustomHooks/UseConfirmModal";
+import { SelectUsersModal } from "../utils/SelectUsersModal";
+import { getUsersToAddToChatroom } from "../../api/search";
+import AvatarUploader from "../croppedUploaders/AvatarUploader";
+import CustomInlineTextEditor from "../utils/CustomInlineTextEditor";
+import { EditNameModal } from "./EditNameModal";
+
 const ChatroomDetail = React.forwardRef(({ updateChatroomHasSeen }, ref) => {
+    const { openModal: openLeaveConfirmModal, ModalComponent: LeaveConfirmModalComponent } = useConfirmModal();
+    const navigate = useNavigate();
     const { id } = useParams();
     const [chatroom, setChatroom] = React.useState(null);
     const chatMessagesRef = React.useRef(null);
@@ -21,6 +31,9 @@ const ChatroomDetail = React.forwardRef(({ updateChatroomHasSeen }, ref) => {
     const [messageInput, setMsgInput] = React.useState("");
     const [loadingOlderMessages, setLoadingOlderMessages] = React.useState(false);
     const [replyMessage, setReplyMessage] = React.useState(null);
+    const [isViewMembersModalOpen, setIsViewMembersModalOpen] = React.useState(false);
+    const [isAddMembersModalOpen, setIsAddMembersModalOpen] = React.useState(false);
+    const [isEditNameModalOpen, setIsEditNameModalOpen] = React.useState(false);
     const handleReply = (message) => {
         setReplyMessage(message);
     };
@@ -154,17 +167,6 @@ const ChatroomDetail = React.forwardRef(({ updateChatroomHasSeen }, ref) => {
                     {/* chat heading */}
                     <div className="flex items-center justify-between gap-2 w- px-6 py-3.5 z-10 border-b dark:border-slate-700 uk-animation-slide-top-medium">
                         <div className="flex items-center sm:gap-4 gap-2">
-                            {/* toggle for mobile */}
-                            <button
-                                type="button"
-                                className="md:hidden"
-                                uk-toggle="target: #side-chat ; cls: max-md:-translate-x-full"
-                            >
-                                <ion-icon
-                                    name="chevron-back-outline"
-                                    className="text-2xl -ml-4"
-                                />
-                            </button>
                             <div
                                 className="relative cursor-pointer max-md:hidden"
                                 uk-toggle="target: .rightt ; cls: hidden"
@@ -194,38 +196,6 @@ const ChatroomDetail = React.forwardRef(({ updateChatroomHasSeen }, ref) => {
                             </div>
                         </div>
                         <div className="flex items-center gap-2">
-                            <button type="button" className="button__ico">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 20 20"
-                                    fill="currentColor"
-                                    className="w-6 h-6"
-                                >
-                                    <path
-                                        fillRule="evenodd"
-                                        d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z"
-                                        clipRule="evenodd"
-                                    />
-                                </svg>
-                            </button>
-                            <button
-                                type="button"
-                                className="hover:bg-slate-100 p-1.5 rounded-full"
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    strokeWidth="1.5"
-                                    stroke="currentColor"
-                                    className="w-6 h-6"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z"
-                                    />
-                                </svg>
-                            </button>
                             <button
                                 type="button"
                                 className="hover:bg-slate-100 p-1.5 rounded-full"
@@ -265,14 +235,6 @@ const ChatroomDetail = React.forwardRef(({ updateChatroomHasSeen }, ref) => {
                                 <div className="text-gray-500 text-sm   dark:text-white/80">
                                     {" "}
                                 </div>
-                            </div>
-                            <div className="mt-3.5">
-                                <a
-                                    href="timeline.html"
-                                    className="inline-block rounded-lg px-4 py-1.5 text-sm font-semibold bg-secondery"
-                                >
-                                    View profile
-                                </a>
                             </div>
                         </div>
                     </>)}
@@ -358,114 +320,144 @@ const ChatroomDetail = React.forwardRef(({ updateChatroomHasSeen }, ref) => {
                 </div>               
             </div>
             {/* user profile right info */}
-            <div className="rightt w-full h-full absolute top-0 right-0 z-10 hidden transition-transform">
+            {chatroom && <div className="rightt w-full h-full absolute top-0 right-0 z-10 hidden transition-transform">
                 <div className="w-[360px] border-l shadow-lg h-screen bg-white absolute right-0 top-0 uk-animation-slide-right-medium delay-200 z-50 dark:bg-dark2 dark:border-slate-700">
                     <div className="w-full h-1.5 bg-gradient-to-r to-purple-500 via-red-500 from-pink-500 -mt-px" />
                     <div className="py-10 text-center text-sm pt-20">
-                        <img
-                            src="assets/images/avatars/avatar-3.jpg"
-                            className="w-24 h-24 rounded-full mx-auto mb-3"
-                            alt=""
-                        />
+                        {
+                            chatroom.isPrivate ? <img
+                                src={chatroom.avatar}
+                                className="w-24 h-24 rounded-full mx-auto mb-3"
+                                alt=""
+                            /> : <div className="relative d-inline-block">
+                                    <AvatarUploader initialAvatar={chatroom.avatar}
+                                        widthClass="w-24" heightClass="h-24" editable={true}
+                                        uploadFunc={async (blob) => {
+                                            return await uploadChatroomAvatar(chatroom.chatRoomId, blob)
+                                        }}
+                                     />
+                                </div>  
+                        }
                         <div className="mt-8">
-                            <div className="md:text-xl text-base font-medium text-black dark:text-white">
+                            <span className="md:text-xl text-base font-medium text-black dark:text-white">
                                 {" "}
-                                Monroe Parker
-                            </div>
-                            <div className="text-gray-500 text-sm mt-1 dark:text-white/80">
-                                @Monroepark
-                            </div>
-                        </div>
-                        <div className="mt-5">
-                            <a
-                                href="timeline.html"
-                                className="inline-block rounded-full px-4 py-1.5 text-sm font-semibold bg-secondery"
+                                {chatroom.name}
+                            </span>
+                            {!chatroom.isPrivate && <button
+                                className="ml-2 text-gray-500 hover:text-blue-500"
+                                aria-label="Edit name"
+                                onClick={() => setIsEditNameModalOpen(true)}
                             >
-                                View profile
-                            </a>
+                                <i className="fas fa-pencil-alt"></i> {/* Use Font Awesome or any icon library */}
+                            </button>}
+                            {isEditNameModalOpen && <EditNameModal
+                                name={chatroom.name}
+                                onClose={() => { setIsEditNameModalOpen(false) }}
+                                onSave={async (newName) => {
+                                    try {
+                                        await renameChatroom(chatroom.chatRoomId, newName);
+                                        setIsEditNameModalOpen(false);
+                                        setChatroom(prev => {
+                                            return { ...prev, name: newName }
+                                        });
+                                    } catch {
+                                        window.alert("failed, pls try again");
+                                    }
+                                }}
+                            />}
                         </div>
                     </div>
                     <hr className="opacity-80 dark:border-slate-700" />
                     <ul className="text-base font-medium p-3">
-                        <li>
-                            <div className="flex items-center gap-5 rounded-md p-3 w-full hover:bg-secondery">
-                                <ion-icon
-                                    name="notifications-off-outline"
-                                    className="text-2xl"
-                                />{" "}
-                                Mute Notification
-                                <label className="switch cursor-pointer ml-auto">
-                                    {" "}
-                                    <input type="checkbox" defaultChecked="" />
-                                    <span className="switch-button !relative" />
-                                </label>
-                            </div>
-                        </li>
-                        <li>
+                        {!chatroom.isPrivate && <li>
                             {" "}
                             <button
                                 type="button"
                                 className="flex items-center gap-5 rounded-md p-3 w-full hover:bg-secondery"
+                                onClick={() => setIsViewMembersModalOpen(true)}
                             >
                                 {" "}
-                                <ion-icon
-                                    name="flag-outline"
-                                    className="text-2xl"
-                                /> Report{" "}
-                            </button>
-                        </li>
-                        <li>
-                            {" "}
-                            <button
-                                type="button"
-                                className="flex items-center gap-5 rounded-md p-3 w-full hover:bg-secondery"
-                            >
-                                {" "}
-                                <ion-icon name="settings-outline" className="text-2xl" /> Ignore
-                                messages{" "}
+                                View members{" "}
                             </button>{" "}
-                        </li>
-                        <li>
+                        </li>}
+                        {!chatroom.isPrivate && <li>
+                            {" "}
+                            <button
+                                type="button"
+                                className="flex items-center gap-5 rounded-md p-3 w-full hover:bg-secondery"
+                                onClick={() => {
+                                    setIsAddMembersModalOpen(true);
+                                }}
+                            >
+                                {" "}
+                                Add members{" "}
+                            </button>{" "}
+                            {isAddMembersModalOpen && <SelectUsersModal
+                                header={"Add Members"}
+                                onClose={() => { setIsAddMembersModalOpen(false) }}
+                                onSubmit={async (data) => {
+                                    await addUsersToChatroom(chatroom.chatRoomId, data.userIds);
+                                }}
+                                loadFunc={async (searchTerm) => {
+                                    return await getUsersToAddToChatroom(chatroom.chatRoomId, searchTerm);
+                                }}
+                            /> }
+                        </li>}
+                        {chatroom.isPrivate && <li>
                             {" "}
                             <button
                                 type="button"
                                 className="flex items-center gap-5 rounded-md p-3 w-full hover:bg-secondery"
                             >
                                 {" "}
-                                <ion-icon
-                                    name="stop-circle-outline"
-                                    className="text-2xl"
-                                />{" "}
                                 Block{" "}
                             </button>{" "}
-                        </li>
+                        </li>}
                         <li>
                             {" "}
                             <button
                                 type="button"
                                 className="flex items-center gap-5 rounded-md p-3 w-full hover:bg-red-50 text-red-500"
+                                onClick={openLeaveConfirmModal}
                             >
                                 {" "}
-                                <ion-icon name="trash-outline" className="text-2xl" /> Delete
-                                Chat{" "}
+                                {chatroom.isPrivate ? "Delete" : "Leave"} Chat{" "}
                             </button>{" "}
-                        </li>
+                            <LeaveConfirmModalComponent
+                                onCancel={() => { }}
+                                onOk={async () => {
+                                    try {
+                                        await leaveChatroom(chatroom.chatRoomId);
+                                        window.location.href = '/chatrooms';
+                                        return;
+                                    } catch (error) {
+                                        window.alert("error occured");
+                                        return false;
+                                    }
+                                }}
+                                title="Leave chat"
+                                content={"You will no longer see this chat"}
+                            />
+                        </li>                      
                     </ul>
-                    {/* close button */}
-                    <button
-                        type="button"
-                        className="absolute top-0 right-0 m-4 p-2 bg-secondery rounded-full"
-                        uk-toggle="target: .rightt ; cls: hidden"
-                    >
-                        <ion-icon name="close" className="text-2xl flex" />
-                    </button>
                 </div>
                 {/* overly */}
                 <div
                     className="bg-slate-100/40 backdrop-blur absolute w-full h-full dark:bg-slate-800/40"
                     uk-toggle="target: .rightt ; cls: hidden"
                 />
-            </div>
+            </div>}
+            {isViewMembersModalOpen &&
+                <ViewChatroomMembersModal
+                onClose={() => { setIsViewMembersModalOpen(false); }}
+                loadDataFunc={async () => {
+                    const data = await getChatRoomMembers(chatroom.chatRoomId);
+                    return data.items;
+                }}
+                onRemoveMem={async (memId) => {
+                    await removeChatroomMember(chatroom.chatRoomId, memId);
+                }}
+                />}
         </>
     );
 })

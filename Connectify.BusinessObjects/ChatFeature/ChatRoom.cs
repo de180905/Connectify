@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,5 +17,6 @@ namespace Connectify.BusinessObjects.ChatFeature
         public virtual ICollection<ChatRoomMember> Members { get; set; } = new List<ChatRoomMember>();
         public virtual ICollection<Message> Messages { get; set; } = new List<Message>();
         public bool IsPrivate { get; set; }
+        public string? Avatar { get; set; }
     }
 }

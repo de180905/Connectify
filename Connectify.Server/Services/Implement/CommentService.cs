@@ -152,7 +152,7 @@ namespace Connectify.Server.Services.Implement
 
             // Save changes
             await _context.SaveChangesAsync();
-        }  
+        }
 
     }
 }

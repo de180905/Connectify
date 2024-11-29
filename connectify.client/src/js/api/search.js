@@ -120,5 +120,96 @@ async function getFriendsOfUser(userId, searchTerm, pageNumber, pageSize = 10) {
         return false;
     }
 }
+async function getUserFriends(searchTerm = '', pageNumber = 1, pageSize = 10) {
+    const params = new URLSearchParams({ searchTerm, pageNumber, pageSize });
+    try {
+        let url = `${CONNECTIFY_API_BASE_URL}/api/User/myFriends?${params.toString()}`;
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + TokenService.getAccessToken(),
+            },
+        });
+        if (!response.ok) {
+            console.log(response.status);
+            return false;
+        }
+        const data = await response.json();
+        return data; // Return the data if needed elsewhere
+    } catch (error) {
+        return false;
+    }
+}
+async function getUsersToAddToChatroom(chatroomId = null, searchTerm = '', pageNumber = 1, pageSize = 10) {
+    const params = new URLSearchParams({searchTerm, pageNumber, pageSize });
+    try {
+        let url = `${CONNECTIFY_API_BASE_URL}/api/User/usersToAddToChatroom?${params.toString()}`;
+        if (chatroomId != null) {
+            url += `&chatroomId=${chatroomId}`
+        }
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + TokenService.getAccessToken(),
+            },
+        });
+        if (!response.ok) {
+            console.log(response.status);
+            return false;
+        }
+        const data = await response.json();
+        return data; // Return the data if needed elsewhere
+    } catch (error) {
+        return false;
+    }
+}
+async function getMutualFriends(user2Id, pageNumber=1, pageSize = 10) {
+    try {
+        console.log("getting mutual");
+        let url = `${CONNECTIFY_API_BASE_URL}/api/User/mutual-friends?&user2Id=${user2Id}&pageNumber=${pageNumber}&pageSize=${pageSize}`;
 
-export { getPeople, getFriendRequest, getUserBasic, getDescriptionOfUser, getPostMediaOfUser, getFriendsOfUser }
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + TokenService.getAccessToken(),
+            },
+        });
+
+        if (!response.ok) {
+            console.log('Error status:', response.status);
+            return false;
+        }
+
+        const data = await response.json();
+        return data; // Return the data if needed elsewhere
+    } catch (error) {
+        console.error('Error fetching mutual friends:', error);
+        return false;
+    }
+}
+async function getFriendsOfFriends(count = 10) {
+    const url = `${CONNECTIFY_API_BASE_URL}/api/Search/people/friends-of-friends?count=${count}`;
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + TokenService.getAccessToken(), // Assuming token-based auth
+        },
+    });
+    if (!response.ok) {
+        throw new Error(response.statusText);
+    }
+    const data = await response.json();
+    return data; // Return the data to use in your application
+}
+
+
+export {
+    getPeople, getFriendRequest, getUserBasic,
+    getDescriptionOfUser, getPostMediaOfUser,
+    getFriendsOfUser, getMutualFriends, getFriendsOfFriends,
+    getUserFriends, getUsersToAddToChatroom
+}

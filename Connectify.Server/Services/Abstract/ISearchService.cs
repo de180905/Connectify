@@ -8,6 +8,8 @@ namespace Connectify.Server.Services.Abstract
     public interface ISearchService
     {
         Task<PaginatedResult<UserSearchDTO>> GetPeopleAsync(string userId, UserFilterOptions options);
-        Task<PaginatedResult<FriendRequestDTO>> GetFriendRequestForUserAsync(string userId, string filter, int pageNumber, int pageSize = 10);
+        Task<PaginatedResult<UserSearchDTO>> GetFriendRequestForUserAsync(string userId, string filter, int pageNumber, int pageSize = 10);
+        Task<List<UserSearchDTO>> GetFriendsOfFriendsAsync(string userId, int count);
+        
     }
 }

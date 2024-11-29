@@ -239,7 +239,7 @@
           }
         }
       },
-      "Microsoft.AspNetCore.SpaProxy/8.0.8": {
+      "Microsoft.AspNetCore.SpaProxy/8.0.11": {
         "type": "package",
         "compile": {
           "lib/net8.0/Microsoft.AspNetCore.SpaProxy.dll": {}
@@ -1148,6 +1148,19 @@
         },
         "runtime": {
           "lib/netstandard2.0/Mono.TextTemplating.dll": {}
+        }
+      },
+      "morelinq/4.3.0": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/MoreLinq.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/MoreLinq.dll": {
+            "related": ".pdb;.xml"
+          }
         }
       },
       "Newtonsoft.Json/13.0.3": {
@@ -2918,10 +2931,10 @@
         "microsoft.aspnetcore.signalr.common.nuspec"
       ]
     },
-    "Microsoft.AspNetCore.SpaProxy/8.0.8": {
-      "sha512": "T9Zhb64OmOr2nU0iND7br44EfJrQYHpopxvq33l33uZM2Uu/V2GTHKg5OmGMO3XJuUX59fhqvMyXOcFFj6k1pA==",
+    "Microsoft.AspNetCore.SpaProxy/8.0.11": {
+      "sha512": "jwE/cg81t/FTZF1DOKpd90ztzZz6NNNHdo+vLUL4I2IzqL3e8Coo+2eR0KeD4ShbJm+3LNPXH9a6gYv/oP+aQQ==",
       "type": "package",
-      "path": "microsoft.aspnetcore.spaproxy/8.0.8",
+      "path": "microsoft.aspnetcore.spaproxy/8.0.11",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -2929,7 +2942,7 @@
         "THIRD-PARTY-NOTICES.TXT",
         "build/Microsoft.AspNetCore.SpaProxy.targets",
         "lib/net8.0/Microsoft.AspNetCore.SpaProxy.dll",
-        "microsoft.aspnetcore.spaproxy.8.0.8.nupkg.sha512",
+        "microsoft.aspnetcore.spaproxy.8.0.11.nupkg.sha512",
         "microsoft.aspnetcore.spaproxy.nuspec"
       ]
     },
@@ -4542,6 +4555,31 @@
         "lib/netstandard2.0/Mono.TextTemplating.dll",
         "mono.texttemplating.2.2.1.nupkg.sha512",
         "mono.texttemplating.nuspec"
+      ]
+    },
+    "morelinq/4.3.0": {
+      "sha512": "mQ0CBsO+dgrLOR8jC8NUcuz7ohH1NAbRn3XRrfpVt5PqcK8YLUmDbmIQfUEosQwtI7l41QcIf1xBhkR0w3b72A==",
+      "type": "package",
+      "path": "morelinq/4.3.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "COPYING.txt",
+        "README.md",
+        "lib/net6.0/MoreLinq.dll",
+        "lib/net6.0/MoreLinq.pdb",
+        "lib/net6.0/MoreLinq.xml",
+        "lib/net8.0/MoreLinq.dll",
+        "lib/net8.0/MoreLinq.pdb",
+        "lib/net8.0/MoreLinq.xml",
+        "lib/netstandard2.0/MoreLinq.dll",
+        "lib/netstandard2.0/MoreLinq.pdb",
+        "lib/netstandard2.0/MoreLinq.xml",
+        "lib/netstandard2.1/MoreLinq.dll",
+        "lib/netstandard2.1/MoreLinq.pdb",
+        "lib/netstandard2.1/MoreLinq.xml",
+        "morelinq.4.3.0.nupkg.sha512",
+        "morelinq.nuspec"
       ]
     },
     "Newtonsoft.Json/13.0.3": {
@@ -7822,6 +7860,7 @@
       "Microsoft.EntityFrameworkCore.Design >= 8.0.8",
       "Microsoft.EntityFrameworkCore.SqlServer >= 8.0.8",
       "Swashbuckle.AspNetCore >= 6.4.0",
+      "morelinq >= 4.3.0",
       "tusdotnet >= 2.8.0"
     ]
   },
@@ -7909,6 +7948,10 @@
           "Swashbuckle.AspNetCore": {
             "target": "Package",
             "version": "[6.4.0, )"
+          },
+          "morelinq": {
+            "target": "Package",
+            "version": "[4.3.0, )"
           },
           "tusdotnet": {
             "target": "Package",

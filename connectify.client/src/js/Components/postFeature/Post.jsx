@@ -8,72 +8,42 @@ import '/assets/css/Modal.css'
 import '/assets/css/Icon.css'
 import '/assets/css/mediaStyle.css'
 import { reactionTypeValue } from "../../Utils/EnumMapper";
-import { reactToPost, unReactPost } from "../../api/Post";
+import { deletePost, getPostReactionCounts, reactToPost, unReactPost } from "../../api/Post";
 import { AppContext } from "../../Contexts/AppProvider";
 import { formatDistanceToUTCNow } from "../../Utils/datetimeUtil";
 import CommentSection from "../commentFeature/CommentSection";
 import ReadMoreLess from 'react-read-more-less';
+import useConfirmModal from "../../CustomHooks/UseConfirmModal";
 
 
 // Đặt thuộc tính cho modal
 Modal.setAppElement('#root');
 
 const Post = ({ post, updatePostUI }) => {
+    const [isDeleted, setIsDeleted] = useState(false);
     const [showCommentSection, setShowCommentSection] = useState(false);
     const [showReactionDetails, setShowReactionDetails] = useState(false);
     const [showAllTaggedUsers, setShowAllTaggedUsers] = useState(false);
     const [show3dotsOpts, setShow3dotsOpts] = useState(false);
     const { postUpdateBoxRef, mediaDetailRef } = useContext(AppContext);
+    const { openModal, ModalComponent } = useConfirmModal();
     // Hàm để chuyển đổi trạng thái xem thêm/thu gọn
     const toggleShowAllTaggedUsers = () => {
         setShowAllTaggedUsers(!showAllTaggedUsers);
     };
     const handleReactionClick = async (reactionType) => {
-        if (reactionType != post.viewerReaction?.value) {
-            const result = await reactToPost(post.id, reactionType);
-            if (result.success) {
-                console.log("vua react to post");
-                const newP = { ...post, viewerReaction: result.data };
-                const ncl = [...post.reactionCountsList]
-                if (post.viewerReaction != null) {
-                    for (let i = 0; i < ncl.length; i++) {
-                        if (ncl[i].reactionType == post.viewerReaction.value) {
-                            ncl[i] = { reactionType: post.viewerReaction.value, count: ncl[i].count - 1 }
-                            if (ncl[i].count == 0) {
-                                ncl.splice(i, 1);
-                            }
-                            break;
-                        }
-                    }
-                }
-                for (let i = 0; i < ncl.length; i++) {
-                    if (ncl[i].reactionType == reactionType) {
-                        ncl[i] = { reactionType: reactionType, count: ncl[i].count + 1 }
-                        newP.reactionCountsList = ncl;
-                        break;
-                    }
-                }
-                ncl.push({ reactionType: reactionType, count: 1 })
-                newP.reactionCountsList = ncl;
-                updatePostUI(newP);
+        const result = (reactionType != post.viewerReaction?.value) ?
+            await reactToPost(post.id, reactionType) : await unReactPost(post.id);
+        if (result.success) {
+            const newP = (reactionType != post.viewerReaction?.value) ?
+                { ...post, viewerReaction: result.data } : { ...post, viewerReaction: null };
+            try {
+                const ncl = await getPostReactionCounts(post.id);
+                newP.reactionCountsList = ncl
+            } catch {
+
             }
-        } else {
-            const result = await unReactPost(post.id);
-            if (result.success) {
-                const newP = { ...post, viewerReaction: null };
-                const ncl = [...post.reactionCountsList]
-                for (let i = 0; i < ncl.length; i++) {
-                    if (ncl[i].reactionType == post.viewerReaction.value) {
-                        ncl[i] = { reactionType: post.viewerReaction.value, count: ncl[i].count - 1 }
-                        if (ncl[i].count == 0) {
-                            ncl.splice(i, 1);
-                        }
-                        break;
-                    }
-                }
-                newP.reactionCountsList = ncl;
-                updatePostUI(newP);
-            }
+            updatePostUI(newP);
         }
     }
     const toggleReactionDetails = () => {
@@ -318,6 +288,13 @@ const Post = ({ post, updatePostUI }) => {
 
         return null;
     };
+    if (isDeleted) {
+        return (
+            <div className="bg-white rounded-xl shadow-sm text-sm font-medium border dark:bg-dark2 text-center p-4">
+                <p className="text-gray-500 dark:text-white">This post has been deleted.</p>
+            </div>
+        );
+    }
     return (
         <div className="bg-white rounded-xl shadow-sm text-sm font-medium border dark:bg-dark2">
             {/* post heading */}
@@ -348,54 +325,73 @@ const Post = ({ post, updatePostUI }) => {
                     </div>
                 </div>
                 <div className="-mr-1 relative">
-                    <button type="button" onClick={() => {
-                        if (!show3dotsOpts) {
-                            setShow3dotsOpts(true);
-                        }
-                    }} className="button-icon w-8 h-8">
-                        <FaEllipsisH className="text-xl" />
-                    </button>
-                    {show3dotsOpts && (
-                        <OutsideClickHandler onOutsideClick={() => { setShow3dotsOpts(false) }}>
+                    <OutsideClickHandler onOutsideClick={() => { setShow3dotsOpts(false) }}>
+                        <button type="button" onClick={() => {
+                            setShow3dotsOpts(prev => !prev);
+                        }} className="button-icon w-8 h-8">
+                            <FaEllipsisH className="text-xl" />
+                        </button>
+                        {show3dotsOpts && (
+
                             <div className="absolute right-0 mt-2 w-48 bg-white border rounded shadow-lg z-10">
                                 <ul className="py-1">
                                     {post.isAuthor &&
                                         <>
-                                        <li>
-                                            <button
-                                                onClick={() => {
-                                                    postUpdateBoxRef.current.openPostUpdateBox();
-                                                    postUpdateBoxRef.current.setPost(post);
-                                                    postUpdateBoxRef.current.setUpdatePostUI(updatePostUI);
-                                                }}
-                                                className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                                                Update
-                                            </button>
-                                        </li>
-                                        <li>
-                                            <button
-                                                onClick={() => { /* handleDelete */ }}
-                                                className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                                                Delete
-                                            </button>
-                                        </li>
+                                            <li>
+                                                <button
+                                                    onClick={(event) => {
+                                                        postUpdateBoxRef.current.openPostUpdateBox();
+                                                        postUpdateBoxRef.current.setPost(post);
+                                                        postUpdateBoxRef.current.setUpdatePostUI(updatePostUI);
+                                                        setShow3dotsOpts(false);
+                                                    }}
+                                                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                                    Update
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button
+                                                    onClick={(event) => {
+                                                        openModal();
+                                                        setShow3dotsOpts(false);
+                                                    }}
+                                                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                                    Delete
+                                                </button>
+                                            </li>
                                         </>
                                     }
                                 </ul>
                             </div>
-                        </OutsideClickHandler>
-                    )}
+                        )}
+                    </OutsideClickHandler>
+                    <ModalComponent
+                        onCancel={() => { }}
+                        onOk={async () => {
+                            try {
+                                await deletePost(post.id);
+                                setIsDeleted(true);
+                                return true;
+                            }
+                            catch (error) {
+                                window.alert("Error occured");
+                                return false
+                            }
+                        }}
+                        title="Delete Post"
+                        content="Are you sure you want to delete this Post?"
+                    />
                 </div>
             </div>
             {/* post content */}
             <div className="pt-2 whitespace-pre-line pb-4 px-4">
-                <ReadMoreLess
+                {post.content && <ReadMoreLess
                     charLimit={500} // Limit the number of characters shown initially
                     readMoreText="Read More"
                     readLessText="Shrink"
                 >
                     {post.content}
-                </ReadMoreLess>
+                </ReadMoreLess> }
             </div>
             {/* post media */}
             <div className="flex">

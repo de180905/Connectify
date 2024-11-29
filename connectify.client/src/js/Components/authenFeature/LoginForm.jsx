@@ -18,7 +18,7 @@ function LoginForm() {
             if (response.needEmailVerified) {
                 navigate("/account/verify-email/" + email);
             } else {
-                window.location.href = '/';
+                navigate('/');
             }
         }
     }

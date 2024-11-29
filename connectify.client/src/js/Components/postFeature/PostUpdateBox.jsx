@@ -14,9 +14,9 @@ const PostUpdateBox = forwardRef(({ }, ref) => {
     const [isTaggingFriends, setIsTaggingFriends] = useState(false);
     const [visibility, setVisibility] = useState(null);
     const [images, setImages] = useState([]);
-    const [feeling, setFeeling] = useState('');
+    const [feeling, setFeeling] = useState(null);
     const [taggedFriends, setTaggedFriends] = useState([]);
-    const [postContent, setPostContent] = useState('');
+    const [postContent, setPostContent] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const updatePostUIRef = useRef((post) => { });
     useImperativeHandle(ref, () => ({
@@ -44,9 +44,9 @@ const PostUpdateBox = forwardRef(({ }, ref) => {
         setId(0);
         setVisibility(0);
         setImages([]);
-        setFeeling('');
+        setFeeling(null);
         setTaggedFriends([]);
-        setPostContent('');
+        setPostContent(null);
         updatePostUIRef.current = (post) => { };
     };
 
@@ -246,7 +246,7 @@ const PostUpdateBox = forwardRef(({ }, ref) => {
                         <Button variant="secondary" onClick={handleClose} style={{ color: '#6c757d', backgroundColor: 'white', borderColor: '#6c757d' }}>
                             Close
                         </Button>
-                        <Button variant="primary" onClick={handleSaveChanges} disabled={isLoading} style={{ color: 'white', backgroundColor: '#007bff', borderColor: '#007bff' }}>
+                        <Button variant="primary" onClick={handleSaveChanges} disabled={isLoading || (!postContent || postContent.trim() === '') && images.length < 1} style={{ color: 'white', backgroundColor: '#007bff', borderColor: '#007bff' }}>
                             {isLoading ? 'Saving...' : 'Save changes'}
                         </Button>
                     </Modal.Footer>

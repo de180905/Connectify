@@ -1,15 +1,18 @@
 ﻿import * as React from "react";
 import Chatroom from "./Chatroom";
 import { Outlet, Link, useNavigate, useLocation } from "react-router-dom";
-import { loadChatRooms } from "../../api/chat";
+import { createChatRoom, loadChatRooms } from "../../api/chat";
 import OutsideClickHandler from "react-outside-click-handler";
-
+import { FaPlus } from "react-icons/fa"
+import { SelectUsersModal } from "../utils/SelectUsersModal";
+import { getUsersToAddToChatroom } from "../../api/search";
 const ChatroomsLayout = React.forwardRef((props, ref) => {
     const navigate = useNavigate();
     const location = useLocation();
     const [chatroomslist, setChatroomslist] = React.useState([]);
     const [loadTrigger, setLoadTrigger] = React.useState({ page: 1, searchTerm: "" });
     const [isLoading, setIsLoading] = React.useState(false);
+    const [isCreateGroupModalOpen, setIsCreateGroupModalOpen] = React.useState(false);
     const updateAndMoveChatroomToTop = (updatedChatroom) => {
         setChatroomslist(prevList => {
             const chatroomIndex = prevList.findIndex(cr => cr.chatRoomId == updatedChatroom.chatRoomId);
@@ -45,7 +48,7 @@ const ChatroomsLayout = React.forwardRef((props, ref) => {
     const fetchChatRooms = async () => {
         setIsLoading(true);
         try {
-            const chatrooms = await loadChatRooms(loadTrigger.searchTerm, loadTrigger.page, 10);
+            const chatrooms = await loadChatRooms(null, loadTrigger.searchTerm, loadTrigger.page, 10);
             if (loadTrigger.page == 1) {
                 setChatroomslist(prev => chatrooms);
             } else {
@@ -109,61 +112,31 @@ const ChatroomsLayout = React.forwardRef((props, ref) => {
                                         {" "}
                                         Chats{" "}
                                     </h2>
-                                    {/* right action buttons */}
-                                    <div className="flex items-center gap-2.5">
-                                        <button className="group">
-                                            <ion-icon
-                                                name="settings-outline"
-                                                className="text-2xl flex group-aria-expanded:rotate-180"
-                                            />
-                                        </button>
-                                        <div
-                                            className="md:w-[270px] w-full"
-                                            uk-dropdown="pos: bottom-left; offset:10; animation: uk-animation-slide-bottom-small"
-                                        >
-                                            <nav>
-                                                <a href="#">
-                                                    {" "}
-                                                    <ion-icon
-                                                        className="text-2xl shrink-0 -ml-1"
-                                                        name="checkmark-outline"
-                                                    />{" "}
-                                                    Mark all as read{" "}
-                                                </a>
-                                                <a href="#">
-                                                    {" "}
-                                                    <ion-icon
-                                                        className="text-2xl shrink-0 -ml-1"
-                                                        name="notifications-outline"
-                                                    />{" "}
-                                                    notifications setting{" "}
-                                                </a>
-                                                <a href="#">
-                                                    {" "}
-                                                    <ion-icon
-                                                        className="text-xl shrink-0 -ml-1"
-                                                        name="volume-mute-outline"
-                                                    />{" "}
-                                                    Mute notifications{" "}
-                                                </a>
-                                            </nav>
-                                        </div>
-                                        <button className="">
-                                            <ion-icon
-                                                name="checkmark-circle-outline"
-                                                className="text-2xl flex"
-                                            />
-                                        </button>
-                                        {/* mobile toggle menu */}
-                                        <button
-                                            type="button"
-                                            className="md:hidden"
-                                            uk-toggle="target: #side-chat ; cls: max-md:-translate-x-full"
-                                        >
-                                            <ion-icon name="chevron-down-outline" />
-                                        </button>
-                                    </div>
+                                    <button
+                                        className="btn btn-primary d-flex align-items-center"
+                                        style={{ gap: '0.5rem', fontSize: '1rem' }}
+                                        onClick={() => {setIsCreateGroupModalOpen(true);}}
+                                    >
+                                        <FaPlus/>
+                                        Group
+                                    </button>
+                                    {isCreateGroupModalOpen && <SelectUsersModal
+                                        minUsersCount={2}
+                                        header={"Create Group"}
+                                        loadFunc={async (searchTerm) => {
+                                            return await getUsersToAddToChatroom(null, searchTerm);
+                                        }}
+                                        onClose={() => { setIsCreateGroupModalOpen(false) }}
+                                        onSubmit={async (data) => {
+                                            const chatroom = {
+                                                name: data.name,
+                                                memberIds: data.userIds
+                                            }
+                                            await createChatRoom(chatroom);
+                                        }}
+                                    />}
                                 </div>
+                                
                                 {/* search */}
                                 <OutsideClickHandler onOutsideClick={() => {
                                     if (loadTrigger.searchTerm) {
@@ -207,8 +180,7 @@ const ChatroomsLayout = React.forwardRef((props, ref) => {
                             uk-toggle="target: #side-chat ; cls: max-md:-translate-x-full"
                         />
                     </div>
-                    <Outlet context={{updateChatroomHasSeen}} />
-
+                    <Outlet context={{ updateChatroomHasSeen }} />               
                 </div>
             </div>
         </main>

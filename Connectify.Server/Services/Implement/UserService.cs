@@ -8,6 +8,7 @@ using Connectify.Server.Services.Abstract;
 using Connectify.Server.Services.FilterOptions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using MoreLinq;
 using YueXiao.Utils;
 
 namespace Connectify.Server.Services.Implement
@@ -68,6 +69,51 @@ namespace Connectify.Server.Services.Implement
                 UserP2PStatus = friendService.GetUsersP2PStatus(viewerId, u.Id),
             });
             var res = await PaginationHelper.CreatePaginatedResultAsync<UserSearchDTO>(projectedQuery, pageNumber, pageSize);
+            return res;
+        }
+        public async Task<PaginatedResult<UserDisplayDTO>> GetUserFriends(string userId, string? searchTerm, int pageNumber = 1, int pageSize = -1)
+        {
+            var query = _context.FriendShips
+            .Where(fs => fs.User1Id == userId)
+            .Select(fs => fs.User2)
+            .Union(
+                _context.FriendShips
+                    .Where(fs => fs.User2Id == userId)
+                    .Select(fs => fs.User1)
+            );
+
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                query = query.Where(u => u.FirstName.StartsWith(searchTerm));
+            }
+            var projectedQuery = query.ProjectTo<UserDisplayDTO>(_mapper.ConfigurationProvider);
+            var res = await PaginationHelper.CreatePaginatedResultAsync<UserDisplayDTO>(projectedQuery, pageNumber, pageSize);
+            return res;
+
+        }
+        public async Task<PaginatedResult<UserDisplayDTO>> GetUsersToAddToChatroomAsyc(string userId, int? chatroomId, string? searchTerm, int pageNumber = 1, int pageSize = -1)
+        {
+            var query = _context.FriendShips
+            .Where(fs => fs.User1Id == userId)
+            .Select(fs => fs.User2)
+            .Union(
+                _context.FriendShips
+                    .Where(fs => fs.User2Id == userId)
+                    .Select(fs => fs.User1)
+            );
+            if(chatroomId != null)
+            {
+                query = query.Where(u => !_context.ChatRoomMembers.Any(crm => crm.UserId == u.Id && crm.ChatRoomId == chatroomId));
+            }
+
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                query = query.Where(u => u.FirstName.StartsWith(searchTerm) 
+                || u.LastName.StartsWith(searchTerm)
+                || (u.FirstName+" "+u.LastName).StartsWith(searchTerm));
+            }
+            var projectedQuery = query.ProjectTo<UserDisplayDTO>(_mapper.ConfigurationProvider);
+            var res = await PaginationHelper.CreatePaginatedResultAsync<UserDisplayDTO>(projectedQuery, pageNumber, pageSize);
             return res;
         }
     }

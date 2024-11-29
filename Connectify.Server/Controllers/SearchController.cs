@@ -1,4 +1,5 @@
-﻿using Connectify.Server.Services.Abstract;
+﻿using Connectify.Server.DTOs;
+using Connectify.Server.Services.Abstract;
 using Connectify.Server.Services.FilterOptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -25,10 +26,10 @@ namespace Connectify.Server.Controllers
             return Ok(people);
         }
         [HttpGet("people/friendRequest")]
-        public async Task<IActionResult> GetFriendRequests([FromQuery]string filter, [FromQuery]int pageNumber = 1)
+        public async Task<IActionResult> GetFriendRequests([FromQuery]string filter, [FromQuery]int pageNumber = 1, [FromQuery]int pageSize = 10)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Get user ID from claims
-            var friendRequest = await searchService.GetFriendRequestForUserAsync(userId, filter, pageNumber, 1);
+            var friendRequest = await searchService.GetFriendRequestForUserAsync(userId, filter, pageNumber, pageSize);
             return Ok(friendRequest);
         }
         [HttpGet("UserBasic/{userId}")]
@@ -44,6 +45,13 @@ namespace Connectify.Server.Controllers
             var viewerId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Get user ID from claims
             var res = await userService.GetDescriptionOfUser(viewerId, userId);
             return Ok(res);
+        }
+        [HttpGet("people/friends-of-friends")]
+        public async Task<ActionResult<List<UserSearchDTO>>> GetFriendsOfFriends([FromQuery] int count = 10)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var friendsOfFriends = await searchService.GetFriendsOfFriendsAsync(userId, count);
+                return Ok(friendsOfFriends);
         }
     }
 }

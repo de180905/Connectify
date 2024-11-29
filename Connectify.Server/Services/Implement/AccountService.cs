@@ -132,8 +132,8 @@ namespace Connectify.Server.Services.Implement {
                 UserName = dto.Email,
                 DateOfBirth = dto.DateOfBirth,
                 Gender = dto.Gender,
-                Avatar = "https://res.cloudinary.com/dj7lju0cn/image/upload/v1730541203/Connectify/bui9wpcatrjkpjvqypoc.png",
-                ProfileCover = "http://res.cloudinary.com/dj7lju0cn/image/upload/v1730547974/Connectify/l5hhwu26y65yqiutslmc.png"
+                Avatar = "https://i.ibb.co/7YNHLvV/Avatar-Default.png",
+                ProfileCover = "https://i.ibb.co/M1C50yW/Cover-Default.png"
             };
             var result = await userManager.CreateAsync(user, dto.Password);
             if (result.Succeeded)

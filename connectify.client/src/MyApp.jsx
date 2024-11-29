@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Navigate, Outlet } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useNavigate, Outlet } from 'react-router-dom';
 import Feed from './js/Components/newsFeedFeature/Feed';
 import GroupIndex from './js/Components/groupFeature/GroupIndex';
 import GroupTimeline from './js/Components/groupFeature/GroupTimeline';
@@ -25,6 +25,7 @@ import ChatroomsLayout from './js/Components/chatFeature/ChatroomsLayout';
 import ChatroomDetail from './js/Components/chatFeature/ChatroomDetail';
 import PeopleRequest from './js/Components/peopleFeature/PeopleRequest';
 import ForgotPasswordForm from './js/Components/password/ForgotPasswordForm';
+import PrivateRoute from './js/Components/authenFeature/PrivateRoute';
 function MyApp() {
     const [connection, setConnection] = React.useState(null);
     const chatRoomDetailRef = React.useRef(null);
@@ -41,7 +42,6 @@ function MyApp() {
 
         setConnection(newConnection);
     }, []);
-
     React.useEffect(() => {
         if (connection) {
             connection.start()
@@ -65,6 +65,16 @@ function MyApp() {
                             chatRoomDetailRef.current.deleteMessage(messageId);
                         }
                     });
+                    connection.on('ChatroomUpdate', (chatroomId) => {
+                        connection.invoke('AcknowledgeMessage', parseInt(chatroomId)
+                            , chatroomId == chatRoomDetailRef?.current?.id)
+                            .then(result => {
+                                if (chatroomsLayoutRef.current) {
+                                    chatroomsLayoutRef.current.updateAndMoveChatroomToTop(result);
+                                }
+                                chatNotificationRef.current.updateAndMoveChatroomToTop(result);
+                            })
+                    });
                 })
                 .catch(error => console.error('Connection failed: ', error));
         }
@@ -77,8 +87,8 @@ function MyApp() {
         };
     }, [connection]);
     return (
-        <AppProvider>
-            <Router>
+        <Router>
+            <AppProvider>
                 <Routes>
                     <Route element={
                         (<div id="wrapper">
@@ -87,34 +97,36 @@ function MyApp() {
                             <Outlet />
                         </div>)}
                     >
-                        <Route index element={<Feed />} />
-                        <Route path=":userId" element={<UserTimeline />}>
-                            <Route index element={<UserTimelineMain />} />
-                            <Route path="photos" element={<TimelineGallery />} />
-                            <Route path="friends" element={<UserTimelineFriends />} />
+                        <Route element={<PrivateRoute />}>
+                            <Route index element={<Feed />} />
+                            <Route path=":userId" element={<UserTimeline />}>
+                                <Route index element={<UserTimelineMain />} />
+                                <Route path="photos" element={<TimelineGallery />} />
+                                <Route path="friends" element={<UserTimelineFriends />} />
+                            </Route>
+                            <Route path="/settings" element={<UserSettings />} />
+                            <Route path="groups">
+                                <Route index element={<GroupIndex />} />
+                                <Route path=":groupId" element={<GroupTimeline />} />
+                            </Route>
+                            <Route path="people">
+                                <Route index element={<PeopleIndex />} />
+                                <Route path="requests" element={<PeopleRequest />} />
+                            </Route>
+                            <Route path="chatrooms" element={<ChatroomsLayout ref={chatroomsLayoutRef} />}>
+                                <Route path=":id" element={<ChatroomDetail
+                                    ref={chatRoomDetailRef}
+                                    updateChatroomHasSeen={(id) => {
+                                        if (chatroomsLayoutRef.current) {
+                                            chatroomsLayoutRef.current.updateChatroomHasSeen(id);
+                                        }
+                                        chatNotificationRef.current.updateChatroomHasSeen(id);
+                                    }}
+                                />}
+                                />
+                            </Route>
                         </Route>
-                        <Route path="/settings" element={<UserSettings />} />
-                        <Route path="groups">
-                            <Route index element={<GroupIndex />} />
-                            <Route path=":groupId" element={<GroupTimeline />} />
-                        </Route>
-                        <Route path="people">
-                            <Route index element={<PeopleIndex />} />
-                            <Route path="requests" element={<PeopleRequest />} />
-                        </Route>
-                        <Route path="chatrooms" element={<ChatroomsLayout ref={chatroomsLayoutRef} />}>
-                            <Route path=":id" element={<ChatroomDetail
-                                ref={chatRoomDetailRef}
-                                updateChatroomHasSeen={(id) => {
-                                    if (chatroomsLayoutRef.current) {
-                                        chatroomsLayoutRef.current.updateChatroomHasSeen(id);
-                                    }
-                                    chatNotificationRef.current.updateChatroomHasSeen(id);
-                                }}
-                            />}
-                            />
-                        </Route>
-                    </Route>                   
+                    </Route>
                     <Route path="account" element={<LoginLayout />}>
                         <Route path="login" element={<LoginForm />} />
                         <Route path="register" element={<RegisterForm />} />
@@ -124,8 +136,9 @@ function MyApp() {
                     </Route>
                     <Route path="account/verify-email/:email" element={<VerifyAccount />} />
                 </Routes>
-            </Router>
-        </AppProvider>
+            </AppProvider>           
+        </Router>
+
     );
 }
 

@@ -47,7 +47,6 @@ const Feed = () => {
         fetchPosts();
     }, [currentPage]);
 
-    const outLetCtx = useOutletContext();
     return (
         <main
             id="site__main"
@@ -58,7 +57,7 @@ const Feed = () => {
                 className="lg:flex 2xl:gap-16 gap-12 max-w-[1065px] mx-auto"
                 id="js-oversized"
             >
-                <div className="max-w-[680px] mx-auto">
+                <div className="max-w-[680px] mx-auto shrink-0">
                     <Stories/>
                     {/* feed story */}
                     <div className="md:max-w-[580px] mx-auto flex-1 xl:space-y-6 space-y-3">

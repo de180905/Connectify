@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using AutoMapper.Execution;
 using AutoMapper.QueryableExtensions;
 using BussinessObjects.MediaFeature;
 using Connectify.BusinessObjects;
@@ -29,45 +30,53 @@ namespace Connectify.Server.Services.Implement
             _mapper = mapper;
             _cloudStorageService = cloudStorageService;
         }
-        public async Task<ChatRoom> CreateGroupChatAsync(string creatorId, CreateGroupChatDTO dto)
+        public async Task<int> CreateGroupChatAsync(string creatorId, CreateGroupChatDTO dto)
         {
+            if(dto.MemberIds.Count < 2)
+            {
+                throw new ArgumentException("must have more than 2 members");
+            }
             var chatRoom = new ChatRoom
             {
                 Name = dto.Name,
                 CreatedAt = DateTime.UtcNow,
-            };
-            _context.ChatRooms.Add(chatRoom);
-            await _context.SaveChangesAsync();
-            // Add initial members if provided
-            _context.ChatRoomMembers.Add(new ChatRoomMember
-            {
-                ChatRoomId = chatRoom.ChatRoomId,
-                UserId = creatorId,
-                Role = MemberRole.Admin,
-                JoinedAt = DateTime.UtcNow,
-            });
-            foreach (var memberId in dto.MemberIds)
-            {
-                _context.ChatRoomMembers.Add(new ChatRoomMember
+                Members = dto.MemberIds.Select(mId => new ChatRoomMember
                 {
-                    ChatRoomId = chatRoom.ChatRoomId,
-                    UserId = memberId,
+                    UserId = mId,
                     Role = MemberRole.Member,
                     JoinedAt = DateTime.UtcNow,
-                });
-            }
+                }).ToList(),
+                IsPrivate = false,
+                Avatar = "https://i.ibb.co/VSSXtXC/Group-Avatar-Default.webp"
+            };
+            chatRoom.Members.Add(new ChatRoomMember
+            {
+                UserId = creatorId,
+                Role = MemberRole.Owner,
+                JoinedAt = DateTime.UtcNow,
+            });
+            await _context.ChatRooms.AddAsync(chatRoom);
             await _context.SaveChangesAsync();
-            return chatRoom;
+            return chatRoom.ChatRoomId;
         }
-        public async Task<PaginatedResult<ChatRoomDTO>> GetChatRoomsForUserAsync(string userId, string searchTerm, int pageNumber, int pageSize)
+        public async Task<PaginatedResult<ChatRoomDTO>> GetChatRoomsForUserAsync(string userId, string? type, string? searchTerm, int pageNumber, int pageSize)
         {
             var query = _context.ChatRooms
                 .Where(cr => cr.Members.Any(m => m.UserId == userId));
+            if(type == "private")
+            {
+                query = query.Where(cr => cr.IsPrivate);
+            }
+            else if (type == "group")
+            {
+                query = query.Where(cr => !cr.IsPrivate);
+            }
             if (!string.IsNullOrEmpty(searchTerm))
             {
                 query = query.Where(cr => (cr.Name != null && cr.Name.StartsWith(searchTerm)) ||
                       cr.Members.Any(m =>(m.UserId != userId) && (m.User.FirstName.StartsWith(searchTerm) ||
-                                          m.User.LastName.StartsWith(searchTerm))));
+                                          m.User.LastName.StartsWith(searchTerm) ||
+                                          (m.User.FirstName+m.User.LastName).StartsWith(searchTerm))));
             }
             query = query.OrderByDescending(cr => cr.Messages.Max(m => m.SentAt));
             var projectedQuery = query.ProjectTo<ChatRoomDTO>(_mapper.ConfigurationProvider, new { userId = userId });
@@ -272,12 +281,6 @@ namespace Connectify.Server.Services.Implement
             var res = !dto.Deleted && !_context.MessageVisibilities.Any(mv => mv.MessageId == dto.MessageId && mv.UserId == userId);
             return res;
         }
-        public async Task<ChatRoomDTO> GetPrivateChatRoomAsync(string currentUserId, string otherUserId)
-        {
-            var chatRoomId = await GetPrivateChatRoomIdAsync(currentUserId, otherUserId);
-            var query = _context.ChatRooms.Where(cr => cr.ChatRoomId == chatRoomId);
-            return await ProjectToChatRoomDTO(query, currentUserId).SingleAsync();
-        }
         private async Task<bool> DoesChatRoomAndMessageMatchAsync(int roomId, int messageId)
         {
             return await _context.Messages.AnyAsync(msg => msg.ChatRoomId == roomId
@@ -289,6 +292,10 @@ namespace Connectify.Server.Services.Implement
         }
         public async Task<int> GetPrivateChatRoomIdAsync(string userId1, string userId2)
         {
+            if(userId1 == userId2)
+            {
+                throw new ArgumentException("userId1 cannot equal to userId2");
+            }
             var chatRoom = await _context.ChatRooms
                 .Where(cr => cr.IsPrivate && cr.Members.Any(m => m.UserId == userId1) && cr.Members.Any(m => m.UserId == userId2))
                 .FirstOrDefaultAsync();
@@ -361,49 +368,6 @@ namespace Connectify.Server.Services.Implement
             Task.Run(() => { _cloudStorageService.DeleteFilesAsync(filesToDelete); });
             await _context.SaveChangesAsync();
         }
-        private IQueryable<ChatRoomDTO> ProjectToChatRoomDTO(IQueryable<ChatRoom> chatRooms, string userId)
-        {
-            return chatRooms.Select(cr => cr.IsPrivate
-                ? new ChatRoomDTO
-                {
-                    ChatRoomId = cr.ChatRoomId,
-                    IsPrivate = true,
-                    Name = cr.Members.Where(m => m.UserId != userId).Select(m => m.User.FullName).FirstOrDefault(),
-                    Avatar = cr.Members.Where(m => m.UserId != userId).Select(m => m.User.Avatar).FirstOrDefault(),
-                    IsOnline = cr.Members.Any(m => m.User.IsOnline && m.UserId != userId),
-                    LastOnline = cr.Members.Where(m => m.UserId != m.UserId).Select(m => m.User.LastOnline).FirstOrDefault(),
-                    LastAction = cr.Messages.OrderByDescending(m => m.SentAt).Take(1).Select(m => new ActionDTO
-                    {
-                        ActorName = m.Sender.FirstName,
-                        ActionMsg = m.Type == MessageType.Text ? TextHelper.ShrinkText(m.Text, 10) : "[File]",
-                        IsActor = m.Sender.Id == userId,
-                        DidAt = m.SentAt
-                    }).FirstOrDefault(),
-                    HasSeen = !cr.Messages.Any() || cr.Members.Where(m => m.UserId == userId).Select(m => m.LastSeen).FirstOrDefault() >= cr.Messages.Max(m => m.SentAt)
-                } :
-                new ChatRoomDTO
-                {
-                    ChatRoomId = cr.ChatRoomId,
-                    IsPrivate = false,
-                    Name = string.IsNullOrEmpty(cr.Name)
-                        ? string.Join(", ", cr.Members
-                            .Where(m => m.UserId != userId)
-                            .OrderBy(m => m.JoinedAt)
-                            .Take(3)
-                            .Select(m => m.User.FullName))
-                        : cr.Name,
-                    IsOnline = cr.Members.Any(m => m.User.IsOnline && m.UserId != userId),
-                    LastOnline = cr.Members.Where(m => m.UserId != m.UserId).Select(m => m.User.LastOnline).FirstOrDefault(),
-                    LastAction = cr.Messages.OrderByDescending(m => m.SentAt).Take(1).Select(m => new ActionDTO
-                    {
-                        ActorName = m.Sender.FirstName,
-                        ActionMsg = m.Type == MessageType.Text ? TextHelper.ShrinkText(m.Text, 10) : "[File]",
-                        IsActor = m.Sender.Id == userId,
-                        DidAt = m.SentAt
-                    }).FirstOrDefault(),
-                    HasSeen = cr.Members.Where(m => m.UserId == userId).Select(m => m.LastSeen).FirstOrDefault() > cr.Messages.Max(m => m.SentAt)
-                });
-        }
 
         public async Task<PaginatedResult<UserDTO>> GetChatRoomMembers(string currentUserId, int chatRoomId, int pageNumber, int pageSize = -1)
         {
@@ -413,14 +377,6 @@ namespace Connectify.Server.Services.Implement
             return await PaginationHelper.CreatePaginatedResultAsync(query, pageNumber, pageSize);
 
         }
-        //public async Task<PaginatedResult<UserDTO>> GetChatRoomMemberIds(string currentUserId, int chatRoomId, int pageNumber, int pageSize = -1)
-        //{
-        //    var query = _context.ChatRoomMembers
-        //                .Where(crm => crm.ChatRoomId == chatRoomId)
-        //                .Select(crm => crm.UserId);
-        //    return await PaginationHelper.CreatePaginatedResultAsync(query, pageNumber, pageSize);
-
-        //}
 
         public async Task<ChatRoomDTO?> GetChatRoomByIdAsync(string userId, int chatRoomId)
         {
@@ -440,6 +396,96 @@ namespace Connectify.Server.Services.Implement
             mem.LastSeen = time;
             await _context.SaveChangesAsync();
         }
-
+        public async Task<List<string>> GetChatroomMemberIdsAsync(int chatroomId)
+        {
+            var data = await _context.ChatRoomMembers.Where(crm => crm.ChatRoomId == chatroomId).Select(crm => crm.UserId).ToListAsync();
+            return data;
+        }
+        public async Task<PaginatedResult<ChatroomMemberDTO>> GetChatroomMembers(int chatroomId, int pageNumber, int pageSize)
+        {
+            var query = _context.ChatRoomMembers.Where(crm => crm.ChatRoomId == chatroomId);
+            var projectedQuery = query.ProjectTo<ChatroomMemberDTO>(_mapper.ConfigurationProvider);
+            return await PaginationHelper.CreatePaginatedResultAsync<ChatroomMemberDTO>(projectedQuery, pageNumber, pageSize);
+        }
+        public async Task RemoveChatroomMemberAsync(string executerId, int chatroomId, string memId)
+        {
+            var executerRole = await _context.ChatRoomMembers
+                .Where(crm => crm.UserId == executerId && crm.ChatRoomId == chatroomId)
+                .Select(crm => crm.Role)
+                .FirstOrDefaultAsync();
+            if (executerRole == null || executerRole > MemberRole.Admin)
+            {
+                throw new UnauthorizedAccessException("Unauthorized");
+            }
+            await LeaveChatroomAsync(chatroomId, memId);
+        }
+        public async Task LeaveChatroomAsync(int chatroomId, string memId)
+        {
+            var currentMem = await _context.ChatRoomMembers
+                .FirstOrDefaultAsync(crm => crm.UserId == memId && crm.ChatRoomId == chatroomId);
+            if (currentMem == null)
+            {
+                throw new KeyNotFoundException("Not found");
+            }
+            if (currentMem.Role <= MemberRole.Admin)
+            {
+                var nextMem = await _context.ChatRoomMembers.FirstOrDefaultAsync(crm => crm.ChatRoomId == chatroomId && crm.Role > MemberRole.Admin);
+                if (nextMem != null)
+                {
+                    nextMem.Role = MemberRole.Admin;
+                }               
+            }
+            _context.ChatRoomMembers.Remove(currentMem);
+            await _context.SaveChangesAsync();
+        }
+        public async Task AddUsersToChatroomAsync(string executerId, int chatroomId, List<string> userIds)
+        {
+            var executerMem = await _context.ChatRoomMembers.FirstOrDefaultAsync(crm => crm.UserId == executerId && crm.ChatRoomId == chatroomId);
+            if(executerMem == null)
+            {
+                throw new UnauthorizedAccessException();
+            }
+            await _context.ChatRoomMembers.AddRangeAsync(userIds.Select(uid => new ChatRoomMember
+            {
+                ChatRoomId = chatroomId, 
+                UserId = uid,
+                Role = MemberRole.Member,
+                JoinedAt = DateTime.UtcNow
+            }));
+            await _context.SaveChangesAsync();
+        }
+        public async Task RenameChatroomAsync(string executerId, int chatroomId, RenameChatroomDTO dto)
+        {
+            var chatRoom = await _context.ChatRoomMembers
+                .Where(crm => crm.ChatRoomId == chatroomId && crm.UserId == executerId)
+                .Select(crm => crm.ChatRoom)
+                .FirstOrDefaultAsync();
+            if(chatRoom == null)
+            {
+                throw new KeyNotFoundException();
+            }
+            chatRoom.Name = dto.Name;
+            await _context.SaveChangesAsync();
+        }
+        public async Task<string> UploadChatroomAvatarAsync(string executerId, int chatroomId, UploadChatroomAvatarDTO dto)
+        {
+            var chatRoom = await _context.ChatRoomMembers
+                .Where(crm => crm.ChatRoomId == chatroomId && crm.UserId == executerId)
+                .Select(crm => crm.ChatRoom)
+                .FirstOrDefaultAsync();
+            if (chatRoom == null)
+            {
+                throw new KeyNotFoundException();
+            }
+            var mediaUrl = await _cloudStorageService.UploadFileAsync(dto.File);
+            var oldFile = chatRoom.Avatar;
+            chatRoom.Avatar = mediaUrl; // Assuming you have AvatarUrl property in your User entity
+            await _context.SaveChangesAsync();
+            if (oldFile != null)
+            {
+                Task.Run(() => { _cloudStorageService.DeleteFileAsync(oldFile); });
+            }
+            return mediaUrl;
+        }
     }
 }

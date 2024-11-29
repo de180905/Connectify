@@ -13,9 +13,9 @@ const PostBox = forwardRef(({ }, ref) => {
     const [isTaggingFriends, setIsTaggingFriends] = useState(false);
     const [privacy, setPrivacy] = useState(0);
     const [images, setImages] = useState([]);
-    const [feeling, setFeeling] = useState('');
+    const [feeling, setFeeling] = useState(null);
     const [taggedFriends, setTaggedFriends] = useState([]);
-    const [postContent, setPostContent] = useState('');
+    const [postContent, setPostContent] = useState(null);
     useImperativeHandle(ref, () => ({
         openPostBox: () => setShow(true),
         closePostBox: () => setShow(false),
@@ -27,14 +27,13 @@ const PostBox = forwardRef(({ }, ref) => {
         setShow(false);
         resetPostBox();
     };
-    const handleShow = () => setShow(true);
 
     const resetPostBox = () => {
         setPrivacy(0);
         setImages([]);
-        setFeeling('');
+        setFeeling(null);
         setTaggedFriends([]);
-        setPostContent('');
+        setPostContent(null);
     };
 
     const handleImageChange = (e) => {
@@ -73,6 +72,7 @@ const PostBox = forwardRef(({ }, ref) => {
             taggedFriendIds: taggedFriends.map(fr => fr.id),
             feeling: feeling
         };
+        console.log(postData);
         const res = createPost(postData);
         handleClose();
     };
@@ -203,7 +203,7 @@ const PostBox = forwardRef(({ }, ref) => {
                         <Button variant="secondary" onClick={handleClose} style={{ color: '#6c757d', backgroundColor: 'white', borderColor: '#6c757d' }}>
                             Close
                         </Button>
-                        <Button variant="primary" onClick={handleSubmitPost} style={{ color: 'white', backgroundColor: '#007bff', borderColor: '#007bff' }}>
+                        <Button variant="primary" disabled={(!postContent||postContent.trim() === '') && images.length < 1} onClick={handleSubmitPost} style={{ color: 'white', backgroundColor: '#007bff', borderColor: '#007bff' }}>
                             Post
                         </Button>
                     </Modal.Footer>

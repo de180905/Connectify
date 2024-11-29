@@ -1,107 +1,7 @@
 import * as React from "react";
 import { getFriendRequest } from "../../api/search";
-import { respondFriendRequest, revokeFriendRequest } from "../../api/Friend";
+import PeopleCard from "./PeopleCard";
 
-const FriendRequestCard = ({ request }) => {
-    const [finishedText, setFinishedText] = React.useState();
-    const accept = async () => {
-        const res = await respondFriendRequest(request.userId, 1);
-        if (res) {
-            console.log("Success");
-            setFinishedText("Accepted");
-        }
-
-    }
-    const decline = async () => {
-        const res = await respondFriendRequest(request.userId, 2);
-        if (res) {
-            console.log("Success");
-            setFinishedText("Declined");
-        }
-
-    }
-    const revoke = async () => {
-        const res = await revokeFriendRequest(request.userId);
-        if (res) {
-            console.log("Success");
-            setFinishedText("Revoked");
-        }
-
-    }
-
-    return (
-        <div className="flex md:items-center space-x-4 p-4 rounded-md box">
-            <div className="sm:w-20 w-14 sm:h-20 h-14 flex-shrink-0 rounded-lg relative">
-                <img
-                    src={request.avatar}
-                    className="absolute w-full h-full inset-0 rounded-md object-cover shadow-sm"
-                    alt=""
-                />
-            </div>
-            <div className="flex-1">
-                <a
-                    href="timeline-group.html"
-                    className="md:text-lg text-base font-semibold capitalize text-black dark:text-white"
-                >
-                    {" "}
-                    {request.firstName + " " + request.lastName}{" "}
-                </a>
-                <div className="flex items-center mt-2">
-                    <img
-                        src="assets/images/avatars/avatar-2.jpg"
-                        className="w-6 rounded-full border-2 border-gray-200 -mr-2"
-                        alt=""
-                    />
-                    <img
-                        src="assets/images/avatars/avatar-4.jpg"
-                        className="w-6 rounded-full border-2 border-gray-200"
-                        alt=""
-                    />
-                    <div className="text-sm text-gray-500 ml-2">
-                        {" "}
-                        16 common friends
-                    </div>
-                </div>
-            </div>
-            {finishedText? <button
-                type="button"
-                className="button bg-grey-500 text-black"
-                disabled
-            >
-                {finishedText}
-            </button> : 
-                request.isSent ? (
-                    <button
-                        type="button"
-                        onClick={revoke}
-                        className="button bg-yellow-500 text-white"
-                    >
-                        Revoke
-                    </button>
-                ) : (
-                    <div className="flex flex-col space-y-2">
-                        <button
-                                type="button"
-                                className="button bg-blue-500 text-white"
-                                onClick={accept}
-                        >
-                            Accept
-                        </button>
-                        <button
-                            type="button"
-                                className="button bg-yellow-500 text-white"
-                                onClick={decline}
-                        >
-                            Decline
-                        </button>
-                    </div>
-                )
-            }
-            
-            
-        </div>
-    )
-}
 const PeopleRequest = () => {
     const [totalPage, setTotalPage] = React.useState(0);
     const [pageNumber, setPageNumber] = React.useState(1);
@@ -122,7 +22,6 @@ const PeopleRequest = () => {
             setPageNumber(1);
             const data = await getFriendRequest(filter, pageNumber);
             if (data) {
-                console.log(data);
                 setRequestList(data.items);
                 setTotalPage(data.totalCount / data.pageSize);
             } else {
@@ -164,8 +63,8 @@ const PeopleRequest = () => {
                     </select>
                 </div>
                 <div className="grid md:grid-cols-2 md:gap-2 gap-3">
-                    {requestList.map((request) => {
-                        return <FriendRequestCard key={request.userId} request={request} />
+                    {requestList.map((people) => {
+                        return <PeopleCard people={people} key={people.id} />
                     })}
                 </div>
                 <div className="flex justify-center my-6">

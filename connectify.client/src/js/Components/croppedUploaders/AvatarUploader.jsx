@@ -3,10 +3,11 @@ import Cropper from 'react-cropper';
 import 'cropperjs/dist/cropper.css';
 import '/assets/css/Modal.css';
 import { FaCamera } from 'react-icons/fa';
-import { uploadAvatar } from '../../api/authen';
 import { AppContext } from '../../Contexts/AppProvider';
 
-function AvatarUploader({ initialAvatar, editable}) {
+function AvatarUploader({ initialAvatar, editable,
+    widthClass = "w-full", heightClass = "h-full",
+    uploadFunc = async () => { }}) {
     const [image, setImage] = useState(null);
     const [croppedAvatar, setCroppedAvatar] = useState(null);
     const [isProcessing, setIsProcessing] = useState(false);
@@ -54,11 +55,11 @@ function AvatarUploader({ initialAvatar, editable}) {
     const uploadCroppedAvatar = async (croppedImage) => {
         const response = await fetch(croppedImage);
         const blob = await response.blob();
-        return await uploadAvatar(blob);
+        return await uploadFunc(blob);
     };
 
     return (
-        <div className="relative overflow-hidden rounded-full md:border-[6px] border-gray-100 dark:border-slate-900 shadow aspect-square">
+        <>
             {/* Avatar Image */}
             <img
                 src={croppedAvatar || initialAvatar}
@@ -69,7 +70,7 @@ function AvatarUploader({ initialAvatar, editable}) {
                     }
                 }
                 alt="Avatar"
-                className="h-full w-full object-cover rounded-full cursor-pointer"
+                className={`${heightClass} ${widthClass} object-cover rounded-full mx-auto cursor-pointer`}
             />
 
             {/* Buttons for Upload & Crop */}
@@ -91,7 +92,7 @@ function AvatarUploader({ initialAvatar, editable}) {
                         <FaCamera size={25} />
                     </button>
                 }
-                
+
             </div>
 
             {/* Crop Modal */}
@@ -114,7 +115,7 @@ function AvatarUploader({ initialAvatar, editable}) {
                     </div>
                 </div>
             )}
-        </div>
+        </>
     );
 }
 

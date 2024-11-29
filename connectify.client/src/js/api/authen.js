@@ -1,3 +1,4 @@
+import {useState} from "react";
 import { CONNECTIFY_API_BASE_URL } from "./config";
 async function signup(firstName, lastName, email, password, passwordCf, gender, dob) {
     const url = CONNECTIFY_API_BASE_URL + 'api/Account/SignUp'; // Replace with your API URL
@@ -132,10 +133,10 @@ async function updateUserDescription(data) {
 }
 class TokenService {
     static getAccessToken() {
-        return localStorage.getItem('accessToken');
+        return localStorage.getItem("accessToken");
     }
     static setAccessToken(token) {
-        localStorage.setItem('accessToken', token);
+        localStorage.setItem("accessToken", token);
     }
     static async refreshToken() {
         try {
@@ -155,7 +156,7 @@ class TokenService {
         }
     }
     static clearTokens() {
-        localStorage.removeItem('accessToken');
+        this.accessToken = null;
         // Note: You don't need to manually remove the refreshToken, it's handled via cookie expiration
     }
     static async logout() {

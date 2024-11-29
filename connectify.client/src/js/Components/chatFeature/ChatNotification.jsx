@@ -3,7 +3,8 @@ import Chatroom from "./Chatroom";
 import { Outlet, Link, useNavigate, useLocation } from "react-router-dom";
 import { loadChatRooms } from "../../api/chat";
 import OutsideClickHandler from "react-outside-click-handler";
-import NotificationDot from "../notificationFeature/NotificationDot";
+import NotificationDot from "../notification/NotificationDot";
+
 
 const ChatNotification = forwardRef((props, ref) => {
     const navigate = useNavigate();
@@ -46,7 +47,7 @@ const ChatNotification = forwardRef((props, ref) => {
     const fetchChatRooms = async () => {
         setIsLoading(true);
         try {
-            const chatrooms = await loadChatRooms(loadTrigger.searchTerm, loadTrigger.page, 10);
+            const chatrooms = await loadChatRooms(null, loadTrigger.searchTerm, loadTrigger.page, 10);
             if (loadTrigger.page == 1) {
                 setChatroomslist(prev => chatrooms);
             } else {

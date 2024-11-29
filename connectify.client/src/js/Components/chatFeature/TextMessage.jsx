@@ -1,10 +1,11 @@
 import { useState, useRef, useEffect } from 'react';
-import ConfirmationModal from '../utils/ConfirmationModel';
 import Modal from 'react-modal';
 import { formatDate } from '../../Utils/datetimeUtil';
+import useConfirmModal from '../../CustomHooks/UseConfirmModal';
 Modal.setAppElement('#root'); // Required for accessibility
 const TextMessage = ({ message, onReply, onDelete }) => {
     const [showOptions, setShowOptions] = useState(false);
+    const { openModal: openDeleteConfirmModal, ModalComponent: DeleteConfirmModalComponent } = useConfirmModal();
     const [isModalOpen, setIsModalOpen] = useState(false); 
     const optionsRef = useRef(null); // Ref for options menu
 
@@ -19,7 +20,7 @@ const TextMessage = ({ message, onReply, onDelete }) => {
             onReply(message); // Trigger reply action with message
         }
         if (action === 'delete') {
-            setIsModalOpen(true); // Trigger reply action with message
+            openDeleteConfirmModal();
         }
     };
 
@@ -28,14 +29,7 @@ const TextMessage = ({ message, onReply, onDelete }) => {
             setShowOptions(false);
         }
     };
-    const handleDeleteConfirm = () => {
-        onDelete(message); // Confirm delete action
-        setIsModalOpen(false); // Close the modal
-    };
 
-    const handleDeleteCancel = () => {
-        setIsModalOpen(false); // Close the modal
-    };
     useEffect(() => {
         // Add event listener for clicks outside
         document.addEventListener('mousedown', handleClickOutside);
@@ -136,83 +130,16 @@ const TextMessage = ({ message, onReply, onDelete }) => {
                     )}
                 </div>
             </div>
-            <style>{`
-        /* Modal content styles */
-        .modal-content {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          background-color: white;
-          padding: 20px;
-          border-radius: 10px;
-          box-: 0 5px 15px rgba(0, 0, 0, 0.3);
-          width: 90%;
-          max-width: 500px;
-          text-align: center;
-        }
 
-        /* Overlay styles (blur the background) */
-        .modal-overlay {
-          position: fixed;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background-color: rgba(0, 0, 0, 0.5);
-          backdrop-filter: blur(8px);
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        /* Button styles */
-        .btn {
-          padding: 10px 20px;
-          border: none;
-          border-radius: 5px;
-          cursor: pointer;
-        }
-        .btn-cancel {
-          background-color: #ccc;
-          color: #333;
-        }
-        .btn-cancel:hover {
-          background-color: #bbb;
-        }
-        .btn-delete {
-          background-color: #e74c3c;
-          color: white;
-        }
-        .btn-delete:hover {
-          background-color: #c0392b;
-        }
-      `}</style>
-            {/* Modal for delete confirmation */}
-            <Modal
-                isOpen={isModalOpen}
-                onRequestClose={() => setIsModalOpen(false)}
-                contentLabel="Delete Confirmation"
-                className="modal-content"
-                overlayClassName="modal-overlay"
-            >
-                <h2 className="text-lg font-semibold mb-4">Are you sure?</h2>
-                <p className="text-gray-700 mb-4">{message.isSent? "The message will be deleted permanently" : "If continue, you will be no longer see the message but others can"}</p>
-                <div className="flex justify-end gap-4">
-                    <button
-                        onClick={() => setIsModalOpen(false)}
-                        className="px-4 py-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-400"
-                    >
-                        Cancel
-                    </button>
-                    <button
-                        onClick={handleDeleteConfirm}
-                        className="px-4 py-2 bg-red-500 text-gray-800 rounded hover:bg-red-600"
-                    >
-                        Delete
-                    </button>
-                </div>
-            </Modal>
+            <DeleteConfirmModalComponent
+                onCancel={() => { }}
+                onOk={async () => {
+                    onDelete(message);
+                    return true;
+                }}
+                title="Delete Message"
+                content={message.isSent ? "The message will be deleted permanently" : "If continue, you will be no longer see the message but others can"}
+            />
         </>  
     );
 };

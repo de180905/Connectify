@@ -25,8 +25,9 @@ const loadChatMessages = async (chatRoomId, toDate = null, pageNumber = 1) => {
     }
 };
 
-const loadChatRooms = async (searchTerm = "", pageNumber = 1, pageSize = 2) => {
-    let url = `${CONNECTIFY_API_BASE_URL}/api/Chat/chatrooms?searchTerm=${searchTerm}&pageNumber=${pageNumber}&pageSize=${pageSize}`;
+const loadChatRooms = async (type = null, searchTerm = "", pageNumber = 1, pageSize = 2) => {
+    const params = new URLSearchParams({type, searchTerm, pageNumber, pageSize });
+    let url = `${CONNECTIFY_API_BASE_URL}/api/Chat/chatrooms?${params.toString()}`;
     const response = await fetch(url, {
         method: 'GET',
         headers: {
@@ -184,5 +185,157 @@ async function deleteMessage(messageId, mode) {
         console.error('Fetch error:', error);
     }
 }
+const getOrCreatePrivateChatRoom = async (user2Id) => {
+    // Call the GetOrCreatePrivateChatRoom API
+    const response = await fetch(`${CONNECTIFY_API_BASE_URL}/api/Chat/private?user2Id=${encodeURIComponent(user2Id)}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + TokenService.getAccessToken()
+        }
+    });
 
-export { loadChatMessages, deleteMessage, loadChatRooms, loadChatRoomById, sendTextMessage, sendSingleFileMessage, sendMultiFilesMessage, reactToMessage };
+    if (!response.ok) {
+        throw new Error('Failed to get or create private chat room');
+    }
+
+    // Extract chat room ID from the response
+    const chatRoomId = await response.json();
+    return chatRoomId;
+};
+const createChatRoom = async (chatRoomData) => {
+    const url = `${CONNECTIFY_API_BASE_URL}/api/Chat/create-chatroom`;
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + TokenService.getAccessToken()
+        },
+        body: JSON.stringify(chatRoomData)
+    });
+
+    if (!response.ok) {
+        throw new Error('Failed to create chat room');
+    }
+
+    const result = response;
+    return result;
+};
+const addUsersToChatroom = async (chatroomId, userIds) => {
+    const url = `${CONNECTIFY_API_BASE_URL}/api/Chat/chatrooms/${chatroomId}/members`;
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + TokenService.getAccessToken()
+        },
+        body: JSON.stringify(userIds)
+    });
+
+    if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Failed to add members: ${errorText}`);
+    }
+
+    const result = await response.json();
+    return result;
+};
+
+const getChatRoomMembers = async (chatRoomId, pageNumber = 1, pageSize = -1) => {
+    const url = `${CONNECTIFY_API_BASE_URL}/api/Chat/chatrooms/${chatRoomId}/members?pageNumber=${pageNumber}&pageSize=${pageSize}`;
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + TokenService.getAccessToken()
+        }
+    });
+
+    if (!response.ok) {
+        throw new Error('Failed to fetch chat room members');
+    }
+    const result = await response.json(); // Parse the JSON response
+    return result;
+};
+const removeChatroomMember = async (chatroomId, memId) => {
+    const url = `${CONNECTIFY_API_BASE_URL}/api/Chat/chatrooms/${chatroomId}/members/${memId}`;
+
+    const response = await fetch(url, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + TokenService.getAccessToken(),
+        }
+    });
+
+    if (!response.ok) {
+        const errorData = await response.json();
+        console.log(errorData);
+        throw new Error(errorData.message || 'Failed to remove member');
+    }
+};
+const leaveChatroom = async (chatroomId) => {
+    const url = `${CONNECTIFY_API_BASE_URL}/api/Chat/chatrooms/${chatroomId}/leave`;
+
+    const response = await fetch(url, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + TokenService.getAccessToken(),
+        }
+    });
+
+    if (!response.ok) {
+        const errorData = await response.json();
+        console.log(errorData);
+        throw new Error(errorData.message || 'Failed to remove member');
+    }
+};
+const renameChatroom = async (chatroomId, newName) => {
+    const url = `${CONNECTIFY_API_BASE_URL}/api/Chat/chatrooms/${chatroomId}/name`;
+    console.log(newName);
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + TokenService.getAccessToken(),
+        },
+        body: JSON.stringify({ name: newName })
+    });
+
+    if (!response.ok) {
+        const errorData = await response.json();
+        console.error(errorData);
+        throw new Error(errorData.message || 'Failed to rename chatroom');
+    }
+};
+const uploadChatroomAvatar = async (chatroomId, file) => {
+    try {
+        const url = `${CONNECTIFY_API_BASE_URL}/api/Chat/chatrooms/${chatroomId}/avatar`;
+
+        const formData = new FormData();
+        formData.append('file', file);
+
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer ' + TokenService.getAccessToken(),
+            },
+            body: formData
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to upload avatar');
+        }
+        return { success: true }
+    } catch (error) {
+        return { success: false, message: "Failed to update" }
+    }
+};
+
+export {
+    loadChatMessages, deleteMessage, loadChatRooms,
+    loadChatRoomById, sendTextMessage, sendSingleFileMessage,
+    sendMultiFilesMessage, reactToMessage, getOrCreatePrivateChatRoom,
+    createChatRoom, getChatRoomMembers, removeChatroomMember, leaveChatroom,
+    addUsersToChatroom, renameChatroom, uploadChatroomAvatar
+};

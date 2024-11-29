@@ -19,11 +19,11 @@ namespace Connectify.Server.Utils
                                 .Where(m => m.UserId != userId)
                                 .OrderBy(m => m.JoinedAt)
                                 .Take(3)
-                                .Select(m => m.User.FullName))
+                                .Select(m => m.User.FirstName))
                             : src.Name))
                 .ForMember(dest => dest.Avatar, opt => opt.MapFrom(src =>
                     src.IsPrivate ? src.Members.Where(m => m.UserId != userId)
-                        .Select(m => m.User.Avatar).FirstOrDefault() : null))
+                        .Select(m => m.User.Avatar).FirstOrDefault() : src.Avatar))
                 .ForMember(dest => dest.IsOnline, opt => opt.MapFrom(src =>
                     src.Members.Any(m => m.User.IsOnline && m.UserId != userId)))
                 .ForMember(dest => dest.LastOnline, opt => opt.MapFrom(src =>

@@ -16,5 +16,9 @@ namespace Connectify.Server.Services.Abstract
         Task<bool> RevokeFriendRequestAsync(string requesterId, string receiverId);
         bool Friend(string userId1, string userId2);
         Task<bool> UnFriend(string userId1, string userId2);
+        int GetMutualFriendsCount(string user1Id, string user2Id);
+        List<string?> GetMutualFriendAvatars(string user1Id, string user2Id);
+        Task<PaginatedResult<UserDisplayDTO>> GetMutualFriends(string user1Id, string user2Id, int pageNumber, int pageSize);
+        bool AreFriends(string user1Id, string user2Id, FriendShip fs);
     }
 }

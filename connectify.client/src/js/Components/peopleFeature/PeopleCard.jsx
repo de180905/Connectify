@@ -1,7 +1,13 @@
 import * as React from "react";
-import { Link } from 'react-router-dom'
+import { Link, useNavigate} from 'react-router-dom'
 import { respondFriendRequest, revokeFriendRequest, sendFriendRequest } from "../../api/Friend";
+import { useContext } from "react";
+import { AppContext } from "../../Contexts/AppProvider";
+import { getMutualFriends } from "../../api/search";
+import { getOrCreatePrivateChatRoom } from "../../api/chat";
 const PeopleCard = ({ people, setPeople }) => {
+    const { userListRef } = useContext(AppContext);
+    const navigate = useNavigate();
     const addFriend = async () => {
         const res = await sendFriendRequest(people.id);
         if (res) {
@@ -26,9 +32,7 @@ const PeopleCard = ({ people, setPeople }) => {
         }
 
     }
-    const response = () => {
 
-    }
     const revoke = async () => {
         const res = await revokeFriendRequest(people.id);
         if (res) {
@@ -37,7 +41,18 @@ const PeopleCard = ({ people, setPeople }) => {
         }
 
     }
-    const view = async () => { }
+    const view = async () => {
+        navigate(`/${people.id}`)
+    }
+    const chat = async () => {
+        try {
+            const chatroomId = await getOrCreatePrivateChatRoom(people.id);
+            navigate(`/chatrooms/${chatroomId}`);
+        }
+        catch (error) {
+            window.alert("error occured, please try again");
+        }
+    }
     const UserP2PStatusAction = {
         0: {
             text: "AddFriend",
@@ -48,8 +63,8 @@ const PeopleCard = ({ people, setPeople }) => {
             action: revoke
         },
         3: {
-            text: "View",
-            action: view
+            text: "Chat",
+            action: chat
         },
         4: {
             text: "View",
@@ -65,7 +80,7 @@ const PeopleCard = ({ people, setPeople }) => {
                 >
                     <img
                         src={people.avatar}
-                        className="absolute w-full h-full inset-0 rounded-md object-cover shadow-sm"
+                        className="absolute w-full h-full inset-0 rounded-full object-cover shadow-sm"
                         alt=""
                     />
                 </Link>
@@ -79,26 +94,32 @@ const PeopleCard = ({ people, setPeople }) => {
                     {people.fullName}{" "}
                 </Link>
                 <div className="flex space-x-2 items-center text-sm font-normal">
-                    <div> 19K Members</div>
-                    <div>·</div>
+                    {people.location && <div>Live at {people.Location} &#183;</div>}
+                    {people.company && <div>Work at {people.company} &#183;</div>}
+                    
                     <div> 21 posts a week</div>
                 </div>
                 <div className="flex items-center mt-2">
-                    <img
-                        src="assets/images/avatars/avatar-2.jpg"
-                        className="w-6 rounded-full border-2 border-gray-200 -mr-2"
-                        alt=""
-                    />
-                    <img
-                        src="assets/images/avatars/avatar-4.jpg"
-                        className="w-6 rounded-full border-2 border-gray-200"
-                        alt=""
-                    />
-                    <div className="text-sm text-gray-500 ml-2">
-                        {" "}
-                        16 common friends
-                    </div>
+                    {people.mutualFriendAvatars && people.mutualFriendAvatars.map(e => (
+                        <img
+                            src={e}
+                            className="w-6 rounded-full border-2 border-gray-200"
+                            alt=""
+                        />
+                    ))}
+                    {people.mutualFriendsCount > 0 && <div
+                        className="text-sm text-blue-500 ml-2 cursor-pointer hover:underline"
+                        onClick={() => {
+                            userListRef.current.open();
+                            userListRef.current.setLoadUsersFunc((pageNumber, pageSize) => {
+                                return getMutualFriends(people.id, pageNumber, pageSize);
+                            });
+                        }}
+                    >
+                        {people.mutualFriendsCount} mutual friends
+                    </div>}
                 </div>
+                
             </div>
             {people.userP2PStatus == 2 ? <div className="flex flex-col space-y-2">
                 <button

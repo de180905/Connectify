@@ -4,8 +4,10 @@ using BussinessObjects.MediaFeature;
 using Connectify.BusinessObjects;
 using Connectify.BusinessObjects.Authen;
 using Connectify.BusinessObjects.ChatFeature;
+using Connectify.BusinessObjects.CommentFeature;
 using Connectify.BusinessObjects.PostFeature;
 using Connectify.Server.DataAccess;
+using Connectify.Server.DTOs;
 using Connectify.Server.DTOs.ChatDTOs;
 using Connectify.Server.DTOs.PostDTOs;
 using Connectify.Server.Services.Abstract;
@@ -220,6 +222,38 @@ namespace Connectify.Server.Services.Implement
                 Task.Run(() => { _cloudStorageService.DeleteFilesAsync(fileUrlsToDelete); });
             }
             return;
+        }
+        public async Task DeletePostAsync(string userId, int postId)
+        {
+            var post = await _context.Posts
+                .Include(p => p.Media)
+                .FirstOrDefaultAsync(p => p.Id == postId && p.AuthorId == userId);
+            if(post == null)
+            {
+                throw new UnauthorizedAccessException();
+            }
+            _context.Media.RemoveRange(post.Media);
+            var comments = _context.Comments
+                .Include(c => c.Replies)
+                .Where(c => c.PostId == postId && c.ParentCommentId == null).ToList();
+            foreach(var c in comments)
+            {
+                _context.Comments.RemoveRange(c.Replies);
+            }
+            _context.Comments.RemoveRange(comments);
+            _context.Posts.Remove(post);
+            await _context.SaveChangesAsync();
+            Task.Run(() => { _cloudStorageService.DeleteFilesAsync(post.Media.Select(m => m.Url).ToList());});
+        }
+        public async Task<List<ReactionCount>> GetPostReactionCountsList(int postId)
+        {
+            var ReactionCountsList = _context.Posts.Where(p => p.Id == postId).Select(p => p.Reactions.GroupBy(r => r.Reaction)
+                    .Select(g => new ReactionCount
+                    {
+                        ReactionType = g.Key, // This is the reaction type
+                        Count = g.Count() // Counting occurrences
+                    }).ToList()).FirstOrDefault();
+            return ReactionCountsList ?? new List<ReactionCount>();
         }
     }
 }

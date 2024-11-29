@@ -108,5 +108,42 @@ namespace Connectify.Server.Controllers
                 return StatusCode(500, $"An error occurred: {ex.Message}");
             }
         }
+        [HttpDelete("{postId}")]
+        public async Task<IActionResult> DeletePost(int postId)
+        {
+            // Assume user ID is obtained from the authenticated user (JWT or another mechanism)
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            try
+            {
+                await postService.DeletePostAsync(userId, postId);
+                return NoContent(); // 204 No Content
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Forbid(ex.Message); // 403 Forbidden
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message); // 404 Not Found
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+        [HttpGet("{postId}/reaction-counts")]
+        public async Task<IActionResult> GetReactionCounts(int postId)
+        {
+            try
+            {
+                var reactionCounts = await postService.GetPostReactionCountsList(postId);
+                return Ok(reactionCounts);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (not shown here)
+                return StatusCode(500, new { Message = "An error occurred while retrieving the reactions.", Details = ex.Message });
+            }
+        }
     }
 }

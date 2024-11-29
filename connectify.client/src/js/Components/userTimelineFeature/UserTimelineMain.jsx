@@ -4,7 +4,10 @@ import PostsFeedingSection from "../postFeature/PostsFeedingSection"
 import { useParams, Link} from 'react-router-dom';
 import { getDescriptionOfUser, getFriendsOfUser, getPostMediaOfUser } from "../../api/search";
 import { DateDisplay } from "../../Utils/datetimeUtil";
+import { AppContext } from "../../Contexts/AppProvider";
+
 const UserTimelineMain = () => {
+    const { user: myUser } = useContext(AppContext);
     const { userId } = useParams();
     const [userDes, setUserDes] = useState(null);
     const [userPhotosPreview, setUserPhotosPreview] = useState([]);
@@ -78,9 +81,9 @@ const UserTimelineMain = () => {
                     <div className="box p-5 px-6">
                         <div className="flex items-ce justify-between text-black dark:text-white">
                             <h3 className="font-bold text-lg"> Intro </h3>
-                            <a href="#" className="text-sm text-blue-500">
+                            {userId == myUser.id && <Link to="/settings" className="text-sm text-blue-500">
                                 Edit
-                            </a>
+                            </Link>}
                         </div>
                         <ul className="text-gray-700 space-y-4 mt-4 text-sm dark:text-white/80">
                             <li className="flex items-center gap-3">
@@ -245,11 +248,11 @@ const UserTimelineMain = () => {
                         <div className="grid grid-cols-3 gap-2 gap-y-5 text-center text-sm mt-4 mb-2">
                             {userFriendsPreview.items.map(f => (
                                 <div key={f.id}>
-                                    <div className="relative w-full aspect-square rounded-lg overflow-hidden">
+                                    <div className="relative w-full aspect-square rounded-full overflow-hidden">
                                         <img
                                             src={f.avatar}
                                             alt=""
-                                            className="object-cover w-full h-full inset-0"
+                                            className="object-cover inset-0"
                                         />
                                     </div>
                                     <div className="mt-2 line-clamp-1"> {f.fullName} </div>

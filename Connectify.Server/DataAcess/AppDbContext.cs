@@ -184,6 +184,11 @@ namespace Connectify.Server.DataAccess
             .WithMany(u => u.NotificationsReceived)
             .HasForeignKey(nr => nr.UserId)
             .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<ChatRoomMember>()
+            .HasIndex(c => new { c.ChatRoomId, c.UserId })
+            .IsUnique();
+
         }
         public DbSet<Post> Posts { get; set; }
         public DbSet<Media> Media { get; set; }

@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
 using Connectify.BusinessObjects;
-using Connectify.BusinessObjects.Authen;
 using Connectify.BusinessObjects.FriendFeature;
 using Connectify.Server.DataAccess;
 using Connectify.Server.DTOs;
-using Connectify.Server.DTOs.FriendDTOs;
 using Connectify.Server.Services.Abstract;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
 using System.Linq.Expressions;
 using YueXiao.Utils;
 
@@ -128,6 +128,45 @@ namespace Connectify.Server.Services.Implement
             return dbContext.FriendShips.Any(
                 fs => fs.User1Id == userId1 && fs.User2Id == userId2
                 || fs.User2Id == userId1 && fs.User1Id == userId2);
+        }
+        public bool AreFriends(string user1Id, string user2Id, FriendShip fs)
+        {
+            return fs.User1Id == user1Id && fs.User2Id == user2Id ||
+                fs.User1Id == user2Id && fs.User2Id == user1Id;
+        }
+        public int GetMutualFriendsCount(string user1Id, string user2Id)
+        {
+            return dbContext.FriendShips
+            .Where(f => f.User1Id == user1Id || f.User2Id == user1Id)
+            .Select(f => f.User1Id == user1Id ? f.User2Id : f.User1Id)
+            .Intersect(
+                dbContext.FriendShips
+                .Where(f => f.User1Id == user2Id || f.User2Id == user2Id)
+                .Select(f => f.User1Id == user2Id ? f.User2Id : f.User1Id)
+            ).Count();
+        }
+        public List<string?> GetMutualFriendAvatars(string user1Id, string user2Id)
+        {
+            return dbContext.FriendShips
+    .Where(f => (f.User1Id == user1Id || f.User2Id == user1Id))  // Get friendships of user1
+    .Join(dbContext.FriendShips
+        .Where(f => (f.User1Id == user2Id || f.User2Id == user2Id)), // Get friendships of user2
+        f1 => f1.User1Id == user1Id ? f1.User2Id : f1.User1Id, // Friend of user1
+        f2 => f2.User1Id == user2Id ? f2.User2Id : f2.User1Id, // Friend of user2
+        (f1, f2) => f1.User1Id == user1Id ? f1.User2.Avatar : f1.User1.Avatar)
+        .Take(2)
+        .ToList();
+        }
+        public async Task<PaginatedResult<UserDisplayDTO>> GetMutualFriends(string user1Id, string user2Id, int pageNumber, int pageSize)
+        {
+            var query = dbContext.FriendShips
+    .Where(f => (f.User1Id == user1Id || f.User2Id == user1Id))  // Get friendships of user1
+    .Join(dbContext.FriendShips
+        .Where(f => (f.User1Id == user2Id || f.User2Id == user2Id)), // Get friendships of user2
+        f1 => f1.User1Id == user1Id ? f1.User2Id : f1.User1Id, // Friend of user1
+        f2 => f2.User1Id == user2Id ? f2.User2Id : f2.User1Id, // Friend of user2
+        (f1, f2) => mapper.Map<UserDisplayDTO>(f1.User1Id == user1Id ? f1.User2 : f1.User1));
+            return await PaginationHelper.CreatePaginatedResultAsync<UserDisplayDTO>(query, pageNumber, pageSize);
         }
     }
 }

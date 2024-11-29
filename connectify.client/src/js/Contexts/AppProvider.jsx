@@ -3,6 +3,8 @@ import { getMyUser } from '../api/authen';
 import PostBox from '../Components/postFeature/PostBox';
 import PostUpdateBox from '../Components/postFeature/PostUpdateBox';
 import MediaDetailModal from '../Components/utils/MediaDetailModal';
+import UserList from '../Components/utils/UserList';
+import ConfirmModal from '../Components/utils/ConfirmModel';
 
 // Create a context with default values
 export const AppContext = createContext();
@@ -12,6 +14,7 @@ const AppProvider = ({ children }) => {
     const postBoxRef = useRef(null);
     const postUpdateBoxRef = useRef(null);
     const mediaDetailRef = useRef(null);
+    const userListRef = useRef(null);
     useEffect(() => {
         const getUser = async () => {
             const data = await getMyUser();
@@ -24,7 +27,8 @@ const AppProvider = ({ children }) => {
         user,
         postBoxRef,
         postUpdateBoxRef,
-        mediaDetailRef
+        mediaDetailRef,
+        userListRef
     };
 
     return (
@@ -33,6 +37,7 @@ const AppProvider = ({ children }) => {
             <PostBox ref={postBoxRef} />
             <PostUpdateBox ref={postUpdateBoxRef} />
             <MediaDetailModal ref={mediaDetailRef} />
+            <UserList ref={userListRef} />
         </AppContext.Provider>
     );
 };
