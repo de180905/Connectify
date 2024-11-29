@@ -6,6 +6,7 @@ using Connectify.BusinessObjects.CommentFeature;
 using Connectify.BusinessObjects.FriendFeature;
 using Connectify.BusinessObjects.Notification;
 using Connectify.BusinessObjects.PostFeature;
+using Connectify.BusinessObjects.Report;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -138,6 +139,10 @@ namespace Connectify.Server.DataAccess
                 .HasForeignKey(pr => pr.UserId)
                 .OnDelete(DeleteBehavior.Restrict); // Prevent cascade delete
 
+            builder.Entity<ChatRoomMember>()
+            .HasIndex(c => new { c.ChatRoomId, c.UserId })
+            .IsUnique();
+
             //notification
             builder.Entity<Notifications>(entity => {
                 entity.ToTable("notification");
@@ -184,10 +189,97 @@ namespace Connectify.Server.DataAccess
             .WithMany(u => u.NotificationsReceived)
             .HasForeignKey(nr => nr.UserId)
             .OnDelete(DeleteBehavior.Restrict);
+            //report 
+            builder.Entity<PostReportReason>(entity =>
+            {
+                entity.HasKey(n => n.Id)
+                .HasName("post_report_reason_pkey");
+                entity.Property(e => e.Id)
+                .HasColumnName("id");
+                entity.Property(e => e.Description)
+                .HasColumnName("description");
+                entity.Property(e => e.CreatedAt)
+                .HasColumnName("created_at");
+            });
+            builder.Entity<PostReport>(entity =>
+            {
+                entity.HasKey(n => n.Id)
+                .HasName("post_report_pkey");
+                entity.Property(e => e.Id)
+                .HasColumnName("id");
+                entity.Property(e => e.PostId)
+                .HasColumnName("post_id");
+                entity.Property(e => e.ReportedByUserId)
+                .HasJsonPropertyName("reported_by_userId");
+                entity.Property(e => e.PostReportReasonId)
+                .HasColumnName("post_report_reason_id");
+                entity.Property(e => e.Status)
+                .HasColumnName("status");
+                entity.Property(e => e.CreatedAt)
+                .HasColumnName("created_at");
+                entity.Property(e => e.UpdatedAt)
+                .HasColumnName("updated_at");
+            });
+            builder.Entity<PostReport>()
+                .HasOne(pr => pr.ReportedByUser)
+                .WithMany(u => u.PostReports)
+                .HasForeignKey(pr => pr.ReportedByUserId)
+                .OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<PostReport>()
+                .HasOne(pr => pr.Post)
+                .WithMany(p => p.PostReports)
+                .HasForeignKey(pr => pr.PostId)
+                .OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<PostReport>()
+                .HasOne(pr => pr.ReportedReason)
+                .WithMany(prs => prs.Reports)
+                .HasForeignKey(pr => pr.PostReportReasonId)
+                .OnDelete(DeleteBehavior.Restrict);
+            //post save
+            builder.Entity<PostSave>(entity =>
+            {
+                entity.HasKey(ps => new { ps.PostId, ps.UserId })
+                .HasName("postSave_pkey");
+                entity.Property(e => e.PostId)
+                .HasColumnName("post_id");
+                entity.Property(e => e.UserId)
+                .HasColumnName("user_id");
+                entity.Property(e => e.CreateAt)
+                .HasColumnName("create_at");
 
-            builder.Entity<ChatRoomMember>()
-            .HasIndex(c => new { c.ChatRoomId, c.UserId })
-            .IsUnique();
+            });
+            builder.Entity<PostSave>()
+                .HasOne(ps => ps.Post)
+                .WithMany()
+                .HasForeignKey(ps => ps.PostId)
+                .OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<PostSave>()
+                .HasOne(ps => ps.User)
+                .WithMany()
+                .HasForeignKey(ps => ps.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+            //block user
+            builder.Entity<BlockedUsers>(entity =>
+            {
+                entity.HasKey(bu => new { bu.UserId, bu.BlockedUserId })
+                .HasName("block_user_pkey");
+                entity.Property(e => e.UserId)
+                .HasColumnName("user_id");
+                entity.Property(e => e.BlockedUserId)
+                .HasColumnName("blocked_user_idd");
+                entity.Property(e => e.BlockedDate)
+                .HasColumnName("blocked_date");
+            });
+            builder.Entity<BlockedUsers>()
+                .HasOne(ps => ps.User)
+                .WithMany()
+                .HasForeignKey(ps => ps.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<BlockedUsers>()
+                .HasOne(ps => ps.BlockedUser)
+                .WithMany()
+                .HasForeignKey(ps => ps.BlockedUserId)
+                .OnDelete(DeleteBehavior.Restrict);
 
         }
         public DbSet<Post> Posts { get; set; }
@@ -211,5 +303,9 @@ namespace Connectify.Server.DataAccess
         public DbSet<PostReaction> PostReactions { get; set; }
         public DbSet<Notifications> Notifications { get; set; }
         public DbSet<NotificationRecipient> NotificationRecipients { get; set; }
+        public DbSet<PostReportReason>PostReportReasons { get; set; }
+        public DbSet<PostReport> PostReports { get; set; }
+        public DbSet<PostSave> PostSaves { get; set; }
+        public DbSet<BlockedUsers> BlockedUsers { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "51UQakEzASu/OLGKIBNIAs3mhoct47jFFN/bXGazxLg=",
+  "Hash": "prxw21NEjuaVwSdp7aig6q+cfsBidR8HUq1f2ZYo1cI=",
   "Source": "Connectify.Server",
   "BasePath": "_content/Connectify.Server",
   "Mode": "Default",
@@ -11,10 +11,10 @@
       "Version": 2,
       "Source": "connectify.client",
       "GetPublishAssetsTargets": "GetCurrentProjectPublishStaticWebAssetItems",
-      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishProperties": "",
       "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained",
       "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
-      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildProperties": "",
       "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained"
     }
   ],

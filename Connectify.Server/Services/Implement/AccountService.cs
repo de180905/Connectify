@@ -385,13 +385,27 @@ namespace Connectify.Server.Services.Implement {
         public async Task TrackUserConnectionAsync(string userId, bool isOnline)
         {
             var user = await userManager.FindByIdAsync(userId);
-            if(user != null)
+            if (user != null)
             {
                 user.IsOnline = isOnline;
-                if(!isOnline) user.LastOnline = DateTime.UtcNow;
+                if (!isOnline) user.LastOnline = DateTime.UtcNow;
                 await userManager.UpdateAsync(user);
                 await dbContext.SaveChangesAsync();
             }
+        }
+
+        public async Task<string> GetFullName(string userId)
+        {
+            var user = await dbContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            if (user != null) return user.FullName;
+            else return "";
+        }
+
+        public async Task<string> GetAvatarUrl(string userId)
+        {
+            var user = await dbContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            if (user != null) return user.Avatar;
+            else return "";
         }
     }    
 }

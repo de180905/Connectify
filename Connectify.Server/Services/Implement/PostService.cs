@@ -255,5 +255,23 @@ namespace Connectify.Server.Services.Implement
                     }).ToList()).FirstOrDefault();
             return ReactionCountsList ?? new List<ReactionCount>();
         }
+        public async Task<string> GetAuthorIdOfPost(int postId)
+        {
+            var post = await _context.Posts.FirstOrDefaultAsync(p => p.Id == postId);
+            return post.AuthorId;
+        }
+
+        public async Task SavePost(int postId, string userId)
+        {
+            var postSave = await _context.PostSaves.FirstOrDefaultAsync(ps => ps.PostId == postId && ps.UserId == userId);
+            if (postSave == null)
+            {
+                var postSaveInsert = new PostSave { PostId = postId, UserId = userId };
+                _context.PostSaves.AddAsync(postSaveInsert);
+            }
+            else
+                _context.PostSaves.Remove(postSave);
+            await _context.SaveChangesAsync();
+        }
     }
 }

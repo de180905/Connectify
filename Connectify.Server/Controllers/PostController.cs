@@ -1,6 +1,8 @@
 ﻿using BussinessObjects.MediaFeature;
+using Connectify.BusinessObjects.Notification;
 using Connectify.BusinessObjects.PostFeature;
 using Connectify.Server.DTOs;
+using Connectify.Server.DTOs.notification;
 using Connectify.Server.DTOs.PostDTOs;
 using Connectify.Server.Services;
 using Connectify.Server.Services.Abstract;
@@ -19,11 +21,16 @@ namespace Connectify.Server.Controllers
     {
         private readonly IPostService postService;
         private readonly ICloudStorageService cloudStorageService;
-
-        public PostsController(IPostService postService, ICloudStorageService cloudStorageService)
+        private readonly INotificationService _notificationService;
+        private readonly IFriendService _friendService;
+        private readonly IAccountService _accountService;
+        public PostsController(IPostService postService, ICloudStorageService cloudStorageService, IAccountService accountService, INotificationService notificationService, IFriendService friendService)
         {
             this.postService = postService;
             this.cloudStorageService = cloudStorageService;
+            _accountService = accountService;
+            _notificationService = notificationService;
+            _friendService = friendService;
         }
 
         [HttpPost("")]
@@ -73,7 +80,34 @@ namespace Connectify.Server.Controllers
             {
                 var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 await postService.ReactToPost(userId, postId, dto.Reaction);
+                //gửi thông báo
+                var recipientId = await postService.GetAuthorIdOfPost(postId);
+                if (recipientId != userId)
+                {
+                    var notification = new Notifications
+                    {
+                        TriggeredByUserId = userId,
+                        Message = "reacted to your post.",
+                        Type = NotificationType.ReactPost,
+                        ActionLink = $"/post-view/{postId}/0",
+                    };
 
+                    var recipientIds = new List<string>();
+                    recipientIds.Add(recipientId);
+                    notification = await _notificationService.CreateNotification(notification, recipientIds);
+
+                    var triggeredByUserName = await _accountService.GetFullName(userId);
+                    var triggeredByUserAvatarUrl = await _accountService.GetAvatarUrl(userId);
+                    var sendNotification = new SendNotificationDTO
+                    {
+                        NotificationId = notification.Id,
+                        TriggeredByUserName = triggeredByUserName,
+                        TriggeredByUserAvatarUrl = triggeredByUserAvatarUrl,
+                        Message = notification.Message,
+                        ActionLink = notification.ActionLink,
+                    };
+                    await _notificationService.SendNotification(recipientId, sendNotification);
+                }
                 // Return a 204 No Content to indicate the dto was successful
                 return Ok(new ReactionDTO { Text = dto.Reaction.ToString(), Value = dto.Reaction});
             }
@@ -143,6 +177,20 @@ namespace Connectify.Server.Controllers
             {
                 // Log the exception (not shown here)
                 return StatusCode(500, new { Message = "An error occurred while retrieving the reactions.", Details = ex.Message });
+            }
+        }
+        [HttpPost("save")]
+        public async Task<IActionResult> SavePost([FromBody] int postId)
+        {
+            try
+            {
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                await postService.SavePost(postId, userId);
+                return Ok(new { isSuccess = true });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { error = ex.Message });
             }
         }
     }

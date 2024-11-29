@@ -15,5 +15,9 @@ namespace Connectify.Server.Services.Abstract
         Task<CommentDTO?> GetCommentByIdAsync(string viewerId, int id);
         Task DeleteCommentAsync(int commentId, string userId);
         Task EditCommentAsync(string userId, EditCommentDTO dto);
+        Task<int> GetPostId(int commentId);
+        Task<string> GetAuthorId(int commentId);
+        //lay comment root
+        Task<CommentDTO> GetRootComment(string userId, int commentId);
     }
 }

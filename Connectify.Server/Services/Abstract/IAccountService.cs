@@ -20,5 +20,7 @@ namespace Connectify.Server.Services.Abstract
         Task<bool> ResetPasswordAsync(ResetPasswordDTO resetPasswordDTO);
         Task UploadProfileCoverAsync(string userId, IFormFile file);
         Task TrackUserConnectionAsync(string userId, bool isOnline);
+        Task<string> GetFullName(string userId);
+        Task<string> GetAvatarUrl(string userId);
     }
 }

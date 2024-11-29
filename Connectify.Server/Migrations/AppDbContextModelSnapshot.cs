@@ -556,6 +556,9 @@ namespace Connectify.Server.Migrations
                     b.Property<bool>("IsLike")
                         .HasColumnType("bit");
 
+                    b.Property<DateTime>("UpdateAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -751,6 +754,9 @@ namespace Connectify.Server.Migrations
                     b.Property<int>("Reaction")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("UpdateAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -762,6 +768,28 @@ namespace Connectify.Server.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("PostReactions");
+                });
+
+            modelBuilder.Entity("Connectify.BusinessObjects.PostFeature.PostSave", b =>
+                {
+                    b.Property<int>("PostId")
+                        .HasColumnType("int")
+                        .HasColumnName("post_id");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)")
+                        .HasColumnName("user_id");
+
+                    b.Property<DateTime>("CreateAt")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("create_at");
+
+                    b.HasKey("PostId", "UserId")
+                        .HasName("postSave_pkey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("PostSaves");
                 });
 
             modelBuilder.Entity("Connectify.BusinessObjects.PostFeature.PostTag", b =>
@@ -786,6 +814,98 @@ namespace Connectify.Server.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("PostTags");
+                });
+
+            modelBuilder.Entity("Connectify.BusinessObjects.Report.BlockedUsers", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)")
+                        .HasColumnName("user_id");
+
+                    b.Property<string>("BlockedUserId")
+                        .HasColumnType("nvarchar(450)")
+                        .HasColumnName("blocked_user_idd");
+
+                    b.Property<DateTime>("BlockedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("blocked_date");
+
+                    b.HasKey("UserId", "BlockedUserId")
+                        .HasName("block_user_pkey");
+
+                    b.HasIndex("BlockedUserId");
+
+                    b.ToTable("BlockedUsers");
+                });
+
+            modelBuilder.Entity("Connectify.BusinessObjects.Report.PostReport", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("created_at");
+
+                    b.Property<int>("PostId")
+                        .HasColumnType("int")
+                        .HasColumnName("post_id");
+
+                    b.Property<int>("PostReportReasonId")
+                        .HasColumnType("int")
+                        .HasColumnName("post_report_reason_id");
+
+                    b.Property<string>("ReportedByUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)")
+                        .HasAnnotation("Relational:JsonPropertyName", "reported_by_userId");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int")
+                        .HasColumnName("status");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("updated_at");
+
+                    b.HasKey("Id")
+                        .HasName("post_report_pkey");
+
+                    b.HasIndex("PostId");
+
+                    b.HasIndex("PostReportReasonId");
+
+                    b.HasIndex("ReportedByUserId");
+
+                    b.ToTable("PostReports");
+                });
+
+            modelBuilder.Entity("Connectify.BusinessObjects.Report.PostReportReason", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("created_at");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("description");
+
+                    b.HasKey("Id")
+                        .HasName("post_report_reason_pkey");
+
+                    b.ToTable("PostReportReasons");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -1297,6 +1417,25 @@ namespace Connectify.Server.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Connectify.BusinessObjects.PostFeature.PostSave", b =>
+                {
+                    b.HasOne("Connectify.BusinessObjects.PostFeature.Post", "Post")
+                        .WithMany()
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Connectify.BusinessObjects.Authen.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Post");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Connectify.BusinessObjects.PostFeature.PostTag", b =>
                 {
                     b.HasOne("Connectify.BusinessObjects.PostFeature.Post", "Post")
@@ -1314,6 +1453,52 @@ namespace Connectify.Server.Migrations
                     b.Navigation("Post");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Connectify.BusinessObjects.Report.BlockedUsers", b =>
+                {
+                    b.HasOne("Connectify.BusinessObjects.Authen.User", "BlockedUser")
+                        .WithMany()
+                        .HasForeignKey("BlockedUserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Connectify.BusinessObjects.Authen.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("BlockedUser");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Connectify.BusinessObjects.Report.PostReport", b =>
+                {
+                    b.HasOne("Connectify.BusinessObjects.PostFeature.Post", "Post")
+                        .WithMany("PostReports")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Connectify.BusinessObjects.Report.PostReportReason", "ReportedReason")
+                        .WithMany("Reports")
+                        .HasForeignKey("PostReportReasonId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Connectify.BusinessObjects.Authen.User", "ReportedByUser")
+                        .WithMany("PostReports")
+                        .HasForeignKey("ReportedByUserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Post");
+
+                    b.Navigation("ReportedByUser");
+
+                    b.Navigation("ReportedReason");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -1416,6 +1601,8 @@ namespace Connectify.Server.Migrations
                 {
                     b.Navigation("NotificationsReceived");
 
+                    b.Navigation("PostReports");
+
                     b.Navigation("SentNotifications");
                 });
 
@@ -1453,9 +1640,16 @@ namespace Connectify.Server.Migrations
 
                     b.Navigation("Media");
 
+                    b.Navigation("PostReports");
+
                     b.Navigation("PostTags");
 
                     b.Navigation("Reactions");
+                });
+
+            modelBuilder.Entity("Connectify.BusinessObjects.Report.PostReportReason", b =>
+                {
+                    b.Navigation("Reports");
                 });
 #pragma warning restore 612, 618
         }

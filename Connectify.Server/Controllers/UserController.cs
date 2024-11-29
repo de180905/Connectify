@@ -71,5 +71,37 @@ namespace Connectify.Server.Controllers
                 return StatusCode(500, $"An error occurred: {ex.Message}");
             }
         }
+        [HttpPost("block")]
+        public async Task<IActionResult> BlockUser([FromBody] string blockedUserId)
+        {
+            try
+            {
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                if (userId == blockedUserId) throw new Exception("You cannot block yourself.");
+                var result = await _userService.BlockUser(userId, blockedUserId);
+                if (result) return Ok(new { isSuccess = true });
+                throw new Exception("Block user fail.");
+            }
+            catch (Exception ex)
+            {
+                return Ok(new { error = ex.Message });
+            }
+        }
+        [HttpPost("unblock")]
+        public async Task<IActionResult> UnblockUser([FromBody] string blockedUserId)
+        {
+            try
+            {
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                if (userId == blockedUserId) throw new Exception("You cannot unblock yourself.");
+                var result = await _userService.UnblockUser(userId, blockedUserId);
+                if (result) return Ok(new { isSuccess = true });
+                throw new Exception("Unblock user fail.");
+            }
+            catch (Exception ex)
+            {
+                return Ok(new { error = ex.Message });
+            }
+        }
     }
 }
