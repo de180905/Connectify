@@ -1,8 +1,10 @@
+
 ﻿using Connectify.BusinessObjects.Authen;
 using Connectify.BusinessObjects.PostFeature;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,17 +16,17 @@ namespace Connectify.BusinessObjects.Report
         public int Id { get; set; }
         [Required]
         public int PostId { get; set; }
-        [Required]
+        [Required]     
         public string ReportedByUserId { get; set; }
-        [Required]
-
-        public int PostReportReasonId { get; set; }
-        public ReportStatus Status { get; set; } = ReportStatus.Resolved;
+        [Required]    
+        
+        public int PostReportReasonId { get; set; }     
+        public ReportStatus Status { get; set; }=ReportStatus.Resolved;
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-        public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;     
 
         // Navigation Properties
-        public virtual Post Post { get; set; }
+        public virtual Post Post { get; set; }                
         public virtual User ReportedByUser { get; set; }
         public virtual PostReportReason ReportedReason { get; set; }
     }

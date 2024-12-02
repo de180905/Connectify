@@ -38,4 +38,9 @@ namespace Connectify.BusinessObjects.Authen
         public ICollection<Notifications> SentNotifications { get; set; }
         public ICollection<PostReport> PostReports { get; set; }
     }
+
+    public enum UserStatus
+    {
+        Active, Locked
+    }
 }

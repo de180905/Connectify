@@ -1,4 +1,5 @@
-﻿using Connectify.Server.DTOs;
+﻿using Connectify.BusinessObjects.Authen;
+using Connectify.Server.DTOs;
 using YueXiao.Utils;
 
 namespace Connectify.Server.Services.Abstract
@@ -13,5 +14,6 @@ namespace Connectify.Server.Services.Abstract
         // block user and unblock user
         Task<bool> BlockUser(string userId, string blockedUserId);
         Task<bool> UnblockUser(string userId, string blockedUserId);
+        Task<PaginatedResult<UserManageDTO>> GetUsersForAdminAsync(string? emailSearch, UserStatus? status, int pageNumber, int pageSize);
     }
 }

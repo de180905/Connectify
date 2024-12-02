@@ -11,9 +11,11 @@ namespace Connectify.Server.Controllers
     public class PostReportController : ControllerBase
     {
         private readonly IPostReportService _postReportService;
-        public PostReportController(IPostReportService postReportService)
+        private readonly IPostService _postService;
+        public PostReportController(IPostReportService postReportService, IPostService postService)
         {
             _postReportService = postReportService;
+            _postService = postService;
         }
         [HttpGet("get-report-reasons")]
         public async Task<IActionResult> GetPostReportReasons()
@@ -47,6 +49,36 @@ namespace Connectify.Server.Controllers
             {
                 return BadRequest(new { error = ex.Message });
             }
+        }
+        [HttpGet("reported-posts")]
+        public async Task<IActionResult> GetReportedPosts(
+       [FromQuery] int page = 1,
+       [FromQuery] int pageSize = 10)
+        {
+            var result = await _postReportService.GetReportedPostsAsync(page, pageSize);
+            return Ok(result);
+        }
+        [HttpDelete("reported-posts/{postId}")]
+        public async Task<IActionResult> DeleteReportedPost(int postId)
+        {
+            try
+            {
+                await _postService.DeletePostAsync("", postId, true);
+                return NoContent();
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(new { ex.Message });
+            }
+        }
+        [HttpGet("report-details/{postId}")]
+        public async Task<IActionResult> GetReportCountByType(int postId)
+        {
+            var reportDetails = await _postReportService.GetReportCountByTypeAsync(postId);
+            if (!reportDetails.Any())
+                return NotFound(new { Message = "No reports found for this post" });
+
+            return Ok(reportDetails);
         }
     }
 }

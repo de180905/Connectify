@@ -1,5 +1,21 @@
 import {Link, NavLink} from 'react-router-dom';
+import { TokenService } from '../../api/authen';
+import { loadChatRooms } from '../../api/chat';
+import { useEffect } from 'react';
+import { useState } from 'react';
 const Sidebar = () => {
+    const [chatrooms, setChatrooms] = useState([]);
+    useEffect(() => {
+        const loadData = async () => {
+            try {
+                const data = await loadChatRooms("private", '', 1, 3);
+                setChatrooms(data);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        loadData();
+    }, [])
     return (
         <div
             id="site__sidebar"
@@ -57,58 +73,24 @@ const Sidebar = () => {
                                     <span> People </span>
                                 </NavLink>
                             </li>
-                            <li>
-                                <NavLink
-                                    to="/groups"
-                                    end
-                                    className={({ isActive }) =>
-                                        `inline-block py-3 leading-8 px-3.5 ${isActive ? 'bg-gray-200 text-blue-600' : 'bg-transparent text-gray-600'}`
-                                    }
-                                >
-                                    <img
-                                        src="assets/images/icons/group.png"
-                                        alt="groups"
-                                        className="w-6"
-                                    />
-                                    <span> Groups </span>
-                                </NavLink>
-                            </li>
                         </ul>
                     </nav>
                     <div className="font-medium text-sm text-black border-t pt-3 mt-2 dark:text-white dark:border-slate-800">
                         <div className="px-3 pb-2 text-sm font-medium">
                             <div className="text-black dark:text-white">Shortcut</div>
                         </div>
-                        <a href="#">
-                            <div className="flex items-center gap-2 p-3 px-4 rounded-xl hover:bg-secondery">
-                                <img
-                                    src="assets/images/avatars/avatar-2.jpg"
-                                    alt=""
-                                    className="w-6 rounded-full object-cover"
-                                />
-                                <div> Marin Gray</div>
-                            </div>
-                        </a>
-                        <a href="#">
-                            <div className="flex items-center gap-2 p-3 px-4 rounded-xl hover:bg-secondery">
-                                <img
-                                    src="assets/images/avatars/avatar-7.jpg"
-                                    alt=""
-                                    className="w-6 rounded-full object-cover"
-                                />
-                                <div> Alexa Stella</div>
-                            </div>
-                        </a>
-                        <a href="#">
-                            <div className="flex items-center gap-2 p-3 px-4 rounded-xl hover:bg-secondery">
-                                <img
-                                    src="assets/images/avatars/avatar-3.jpg"
-                                    alt=""
-                                    className="w-6 rounded-full object-cover"
-                                />
-                                <div> Sarah Ali</div>
-                            </div>
-                        </a>
+                        {chatrooms.map((cr) => (
+                            <Link to={`/chatrooms/${cr.chatRoomId}`}>
+                                <div className="flex items-center gap-2 p-3 px-4 rounded-xl hover:bg-secondery">
+                                    <img
+                                        src={cr.avatar}
+                                        alt=""
+                                        className="w-6 rounded-full object-cover"
+                                    />
+                                    <div>{cr.name}</div>
+                                </div>
+                            </Link>
+                        ))}
                     </div>
                     <nav
                         id="side"
@@ -117,9 +99,14 @@ const Sidebar = () => {
                         <div className="px-3 pb-2 text-sm font-medium">
                             <div className="text-black dark:text-white">Pages</div>
                         </div>
-                        <ul className="mt-2 -space-y-2" uk-nav="multiple: true">
+                        <ul className="mt-2 -space-y-2">
                             <li>
-                                <a href="setting.html">
+                                <NavLink
+                                    to="/settings"
+                                    end
+                                    className="block py-2 px-3 rounded"
+                                    activeClassName="bg-gray-200"
+                                >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         fill="none"
@@ -140,10 +127,15 @@ const Sidebar = () => {
                                         />
                                     </svg>
                                     <span> Setting </span>
-                                </a>
+                                </NavLink>
                             </li>
                             <li>
-                                <a href="upgrade.html">
+                                <NavLink
+                                    to="/activityHistory"
+                                    end
+                                    className="block py-2 px-3 rounded"
+                                    activeClassName="bg-gray-300"
+                                >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         fill="none"
@@ -158,11 +150,18 @@ const Sidebar = () => {
                                             d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z"
                                         />
                                     </svg>
-                                    <span> Upgrade </span>
-                                </a>
+                                    <span> Activity History </span>
+                                </NavLink>
                             </li>
                             <li>
-                                <a href="form-login.html">
+                                <Link
+                                    className="block py-2 px-3 rounded"
+                                    activeClassName="bg-gray-300"
+                                    onClick={(event) => {
+                                        event.preventDefault(); // Prevent navigation
+                                        TokenService.logout();
+                                    }}
+                                >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         fill="none"
@@ -177,48 +176,8 @@ const Sidebar = () => {
                                             d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9"
                                         />
                                     </svg>
-                                    <span> Authentication </span>
-                                </a>
-                            </li>
-                            <li className="uk-parent">
-                                <a href="#" className="group">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        strokeWidth="1.5"
-                                        stroke="currentColor"
-                                        className="w-4 h-4"
-                                    >
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z"
-                                        />
-                                    </svg>
-                                    <span> Development </span>
-                                    <ion-icon
-                                        name="chevron-down"
-                                        className="text-base ml-auto duration-200 group-aria-expanded:rotate-180"
-                                    />
-                                </a>
-                                <ul className="pl-10 my-1 space-y-0 text-sm">
-                                    <li>
-                                        <a href="components.html" className="!py-2 !rounded -md">
-                                            Elements
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="components.html" className="!py-2 !rounded -md">
-                                            Components
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="components.html" className="!py-2 !rounded -md">
-                                            Icons
-                                        </a>
-                                    </li>
-                                </ul>
+                                    <span> Logout </span>
+                                </Link>
                             </li>
                         </ul>
                     </nav>

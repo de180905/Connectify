@@ -142,6 +142,10 @@ namespace Connectify.Server.Services.Implement {
                 {
                     await roleManager.CreateAsync(new IdentityRole(AppRole.NormalUser));
                 }
+                if (!await roleManager.RoleExistsAsync(AppRole.Admin))
+                {
+                    await roleManager.CreateAsync(new IdentityRole(AppRole.Admin));
+                }
                 await userManager.AddToRoleAsync(user, AppRole.NormalUser);
                 
             }
@@ -190,6 +194,10 @@ namespace Connectify.Server.Services.Implement {
             if (user == null)
             {
                 return null;
+            }
+            if(user.LockoutEnd.HasValue && user.LockoutEnd > DateTimeOffset.UtcNow) 
+            {
+                throw new UnauthorizedAccessException("You're currently not allowed to login");
             }
             if (!await userManager.IsEmailConfirmedAsync(user))
             {
@@ -295,7 +303,7 @@ namespace Connectify.Server.Services.Implement {
         public async Task<UserDTO?> GetMyUser(string userId)
         {
             return await dbContext.Users.Where(u => u.Id == userId).
-                ProjectTo<UserDTO>(_mapper.ConfigurationProvider).FirstOrDefaultAsync();
+                ProjectTo<UserDTO>(_mapper.ConfigurationProvider, new {userManager}).FirstOrDefaultAsync();
         }
         public async Task<string> UploadAvatarAsync(string userId, UploadAvatarDTO dto)
         {

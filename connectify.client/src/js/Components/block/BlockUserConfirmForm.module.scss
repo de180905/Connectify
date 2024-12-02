@@ -1,0 +1,29 @@
+.blockUserConfirm{
+    backdrop-filter: blur(10px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99999;   
+}
+.blockUserForm{
+    background-color: #fff;
+    color: #000;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+.closeBtn i{
+    background-color: #e1e0e0;
+    border-radius: 50%;
+    padding: 5px 8px;
+    cursor: pointer;
+}
+.closeBtn i:hover{
+    background-color: #afaeae;
+}
+.blockUserForm ul{
+    list-style-type: disc;
+    padding-left: 7%;
+}
+.cancelBtn:hover{
+    background-color: #ccc;
+}

@@ -1,7 +1,7 @@
 import {useState} from "react";
 import { CONNECTIFY_API_BASE_URL } from "./config";
 async function signup(firstName, lastName, email, password, passwordCf, gender, dob) {
-    const url = CONNECTIFY_API_BASE_URL + 'api/Account/SignUp'; // Replace with your API URL
+    const url = CONNECTIFY_API_BASE_URL + '/api/Account/SignUp'; // Replace with your API URL
     const registerData = {
         firstName: firstName,
         lastName: lastName,
@@ -37,7 +37,7 @@ async function signup(firstName, lastName, email, password, passwordCf, gender, 
     }
 }
 async function requireEmailConfirm(email) {
-    const url = CONNECTIFY_API_BASE_URL + 'api/Account/RequireEmailConfirm/'+email;
+    const url = CONNECTIFY_API_BASE_URL + '/api/Account/RequireEmailConfirm/'+email;
     try {
         const response = await fetch(url, {
             method: "GET",
@@ -326,6 +326,7 @@ async function resetPassword(email, password, token) {
         return { success: false, error: 'Something went wrong. Please try again.' };
     }
 }
+
 
 export {
     requireEmailConfirm, signin, signup, TokenService, getUserDescription, updateUserDescription,

@@ -1,5 +1,5 @@
-﻿import React, { useState, useRef, useContext } from "react";
-import {Link} from 'react-router-dom';
+﻿import React, { useState, useRef, useContext, useCallback, useEffect } from "react";
+import { Link } from 'react-router-dom';
 import { FaEllipsisH, FaThumbsUp, FaRegCommentDots, FaShare, FaSmile, FaLaugh, FaSadTear } from "react-icons/fa";
 import OutsideClickHandler from "react-outside-click-handler";
 import Modal from "react-modal";
@@ -8,24 +8,38 @@ import '/assets/css/Modal.css'
 import '/assets/css/Icon.css'
 import '/assets/css/mediaStyle.css'
 import { reactionTypeValue } from "../../Utils/EnumMapper";
-import { deletePost, getPostReactionCounts, reactToPost, unReactPost } from "../../api/Post";
+import { deletePost, getPostReactionCounts, reactToPost, unReactPost, savePost } from "../../api/Post";
 import { AppContext } from "../../Contexts/AppProvider";
 import { formatDistanceToUTCNow } from "../../Utils/datetimeUtil";
 import CommentSection from "../commentFeature/CommentSection";
 import ReadMoreLess from 'react-read-more-less';
+import PostReport from "../report/PostReport";
 import useConfirmModal from "../../CustomHooks/UseConfirmModal";
 
 
 // Đặt thuộc tính cho modal
 Modal.setAppElement('#root');
 
-const Post = ({ post, updatePostUI }) => {
+const Post = ({ post, updatePostUI, commentId }) => {
     const [isDeleted, setIsDeleted] = useState(false);
     const [showCommentSection, setShowCommentSection] = useState(false);
     const [showReactionDetails, setShowReactionDetails] = useState(false);
     const [showAllTaggedUsers, setShowAllTaggedUsers] = useState(false);
     const [show3dotsOpts, setShow3dotsOpts] = useState(false);
     const { postUpdateBoxRef, mediaDetailRef } = useContext(AppContext);
+    const [isOpenReport, setIsOpenReport] = useState(false)
+    //
+        useEffect(()=>{
+            if(commentId && commentId>0)setShowCommentSection(true)
+        }, [])
+    //save post
+    const handleSavePost = async () => {     
+        const response = await savePost(post.id);
+        updatePostUI({ ...post, isSaved:true })
+        console.log(response)
+    };
+    //đóng report
+    const closeReportForm = useCallback(()=>{setIsOpenReport(false)}, [])
     const { openModal, ModalComponent } = useConfirmModal();
     // Hàm để chuyển đổi trạng thái xem thêm/thu gọn
     const toggleShowAllTaggedUsers = () => {
@@ -53,7 +67,7 @@ const Post = ({ post, updatePostUI }) => {
     // Hàm render các cảm xúc
     const renderReactions = () => {
         return (
-            <div style={{ top: '-150%', left: '0'}} className="absolute mb-2 flex space-x-2 p-2 bg-white rounded-lg shadow-lg">
+            <div style={{ top: '-150%', left: '0' }} className="absolute mb-2 flex space-x-2 p-2 bg-white rounded-lg shadow-lg">
                 {Object.keys(reactionTypeValue).map(key =>
                     <button onClick={() => { handleReactionClick(parseInt(key)) }}>
                         {reactionTypeValue[key]}
@@ -148,7 +162,7 @@ const Post = ({ post, updatePostUI }) => {
                     mediaDetailRef.current.open(0);
                 }} className="post-media-render cursor-pointer flex-1">
                     {isImage(post.media[0].url) ? (
-                        <img src={post.media[0].url} alt="" className="w-full post-media  object-cover"/>
+                        <img src={post.media[0].url} alt="" className="w-full post-media  object-cover" />
                     ) : (
                         <video className="w-full h-full object-cover" controls>
                             <source src={post.media[0].url} type="video/mp4" />
@@ -191,9 +205,9 @@ const Post = ({ post, updatePostUI }) => {
                 <div className="post-media-render flex flex-col gap-1"> {/* Added gap-2 for gutter */}
                     <div
                         onClick={() => {
-                                mediaDetailRef.current.setMedia(post.media);
-                                mediaDetailRef.current.open(0);
-                            }}
+                            mediaDetailRef.current.setMedia(post.media);
+                            mediaDetailRef.current.open(0);
+                        }}
                         className="cursor-pointer"
                         style={{ height: "50%" }}
                     >
@@ -206,13 +220,13 @@ const Post = ({ post, updatePostUI }) => {
                             </video>
                         )}
                     </div>
-                    <div className="flex flex-row gap-1" style={{height: "50%" }}> {/* Added gap-2 for gutter */}
+                    <div className="flex flex-row gap-1" style={{ height: "50%" }}> {/* Added gap-2 for gutter */}
                         {post.media.slice(1).map((item, index) => (
                             <div
                                 key={index + 1}
                                 onClick={() => {
                                     mediaDetailRef.current.setMedia(post.media);
-                                    mediaDetailRef.current.open(index+1);
+                                    mediaDetailRef.current.open(index + 1);
                                 }}
                                 className="cursor-pointer flex-1"
                                 style={{ width: "50%" }}
@@ -258,7 +272,7 @@ const Post = ({ post, updatePostUI }) => {
                                 key={index + 1}
                                 onClick={() => {
                                     mediaDetailRef.current.setMedia(post.media);
-                                    mediaDetailRef.current.open(index+1);
+                                    mediaDetailRef.current.open(index + 1);
                                 }}
                                 className="cursor-pointer flex-1 relative"
                                 style={{ width: "50%" }}
@@ -297,6 +311,7 @@ const Post = ({ post, updatePostUI }) => {
     }
     return (
         <div className="bg-white rounded-xl shadow-sm text-sm font-medium border dark:bg-dark2">
+            {isOpenReport ? <PostReport onCloseReportForm={closeReportForm} postId={post.id}/>:''}
             {/* post heading */}
             <div className="flex gap-3 sm:p-3 p-2.5 text-sm font-medium">
                 <Link to={`/${post.author.id}`}>
@@ -335,7 +350,7 @@ const Post = ({ post, updatePostUI }) => {
 
                             <div className="absolute right-0 mt-2 w-48 bg-white border rounded shadow-lg z-10">
                                 <ul className="py-1">
-                                    {post.isAuthor &&
+                                    {post.isAuthor ?
                                         <>
                                             <li>
                                                 <button
@@ -359,7 +374,20 @@ const Post = ({ post, updatePostUI }) => {
                                                     Delete
                                                 </button>
                                             </li>
-                                        </>
+                                        </> : (<div className="d-flex flex-column cursor-pointer">
+                                            <div
+                                                className={`row justify-content-center align-items-center p-2 text-gray-700 m-0 ${post.isSaved ? 'bg-gray-300 cursor-not-allowed' : 'hover:bg-gray-100 cursor-pointer'}`}
+                                                onClick={!post.isSaved ? handleSavePost : null}
+                                            >
+                                                <i
+                                                    className={`fas fa-bookmark col-md-2 ${post.isSaved ? 'text-red-500' : ''}`}
+                                                ></i>
+                                                <p className="col-md-10">{post.isSaved ? 'Post Saved' : 'Save Post'}</p>
+                                            </div>
+
+                                            <div className="row justify-content-center align-items-center p-2 hover:bg-gray-100 text-gray-700 m-0"
+                                                onClick={() => { setIsOpenReport(true) }}><i className="fas fa-flag col-md-2"></i> <p className="col-md-10">Report Post</p></div>
+                                        </div>)
                                     }
                                 </ul>
                             </div>
@@ -433,7 +461,7 @@ const Post = ({ post, updatePostUI }) => {
                     onMouseLeave={() => { setIsLikeHovering(false) }}>
                     <button className="flex items-center space-x-2" onClick={() => {
                         handleReactionClick(post.viewerReaction ? post.viewerReaction.value : 0)
-                    } }>
+                    }}>
                         {post.viewerReaction ?
                             <>
                                 {reactionTypeValue[post.viewerReaction.value]}
@@ -459,11 +487,11 @@ const Post = ({ post, updatePostUI }) => {
                     <span>Comment</span>
                 </button>
                 <button className="flex items-center space-x-2">
-                    <FaShare className="icon-hover"/>
+                    <FaShare className="icon-hover" />
                     <span>Share</span>
                 </button>
             </div>
-            {showCommentSection && <CommentSection postId={post.id} />}
+            {showCommentSection && <CommentSection postId={post.id} commentId={commentId} />}
         </div>
     );
 };

@@ -223,11 +223,17 @@ namespace Connectify.Server.Services.Implement
             }
             return;
         }
-        public async Task DeletePostAsync(string userId, int postId)
+        public async Task DeletePostAsync(string userId, int postId, bool isAuthorized = false)
         {
-            var post = await _context.Posts
+            Post? post;
+            var query = _context.Posts
                 .Include(p => p.Media)
-                .FirstOrDefaultAsync(p => p.Id == postId && p.AuthorId == userId);
+                .Where(p => p.Id == postId);
+            if (!isAuthorized)
+            {
+                query = query.Where(p => p.AuthorId == userId);
+            }
+            post = await query.FirstOrDefaultAsync();
             if(post == null)
             {
                 throw new UnauthorizedAccessException();

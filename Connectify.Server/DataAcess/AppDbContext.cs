@@ -229,7 +229,7 @@ namespace Connectify.Server.DataAccess
                 .HasOne(pr => pr.Post)
                 .WithMany(p => p.PostReports)
                 .HasForeignKey(pr => pr.PostId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
             builder.Entity<PostReport>()
                 .HasOne(pr => pr.ReportedReason)
                 .WithMany(prs => prs.Reports)
@@ -252,7 +252,7 @@ namespace Connectify.Server.DataAccess
                 .HasOne(ps => ps.Post)
                 .WithMany()
                 .HasForeignKey(ps => ps.PostId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
             builder.Entity<PostSave>()
                 .HasOne(ps => ps.User)
                 .WithMany()

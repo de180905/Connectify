@@ -236,8 +236,8 @@ namespace Connectify.Server.Controllers
         [HttpGet("get-root")]
         public async Task<IActionResult> GetRoot([FromQuery] int commentId)
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var response = await _commentService.GetRootComment(userId, commentId);
+            var viewerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var response = await _commentService.GetRootComment(viewerId, commentId);
             Console.WriteLine(response);
             return Ok(response);
         }

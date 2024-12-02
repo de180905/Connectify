@@ -217,5 +217,26 @@ async function getPostReactionCounts(postId) {
     const reactionCounts = await response.json();
     return reactionCounts;
 }
-export { createPost, getPosts, reactToPost, unReactPost, updatePost, getPost, deletePost, getPostReactionCounts }
+
+async function savePost(postId){
+    try{
+        const response = await fetch(`${CONNECTIFY_API_BASE_URL}/api/Posts/save`, {
+            method: 'POST', 
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem("accessToken")}`, // Đính kèm token
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(postId),
+        });
+
+        if (!response.ok) throw new Error('Network response was not ok');
+        const data = await response.json();
+        return { data: data };
+    }
+    catch (error) {
+        console.log("Error fetching notifications:", error);
+        return { error: error.message };
+    }
+}
+export { createPost, getPosts, reactToPost, unReactPost, updatePost, getPost, savePost, deletePost, getPostReactionCounts }
 

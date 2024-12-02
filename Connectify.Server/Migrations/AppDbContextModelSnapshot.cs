@@ -1422,7 +1422,7 @@ namespace Connectify.Server.Migrations
                     b.HasOne("Connectify.BusinessObjects.PostFeature.Post", "Post")
                         .WithMany()
                         .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Connectify.BusinessObjects.Authen.User", "User")
@@ -1479,7 +1479,7 @@ namespace Connectify.Server.Migrations
                     b.HasOne("Connectify.BusinessObjects.PostFeature.Post", "Post")
                         .WithMany("PostReports")
                         .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Connectify.BusinessObjects.Report.PostReportReason", "ReportedReason")

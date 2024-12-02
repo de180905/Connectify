@@ -1,5 +1,4 @@
 ﻿
-import { useOutletContext } from 'react-router-dom';
 import { useState, useEffect, useCallback } from 'react'
 import { getPosts } from "../../api/Post";
 import Stories from './Stories';
@@ -85,8 +84,8 @@ const Feed = () => {
                         </div>
                     </div>
                 </div>
-                {/* sidebar */}
-                <FeedSidebar/>
+                {/* Sidebar */}
+                <FeedSidebar />
             </div>
         </main>
     )

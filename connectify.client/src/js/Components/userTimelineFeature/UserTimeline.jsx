@@ -1,4 +1,4 @@
-﻿import { useContext, useMemo, useRef, useState } from "react";
+﻿import { useCallback, useContext, useMemo, useRef, useState } from "react";
 import { AppContext } from "../../Contexts/AppProvider";
 import { useEffect } from "react";
 import CoverUploader from "../croppedUploaders/CoverUploader";
@@ -9,12 +9,20 @@ import { FaUserPlus, FaEnvelope, FaUserMinus, FaCheckCircle, FaTimesCircle, FaSe
 import { respondFriendRequest, revokeFriendRequest, sendFriendRequest, unFriend } from "../../api/Friend";
 import { getOrCreatePrivateChatRoom } from "../../api/chat";
 import { uploadAvatar } from "../../api/authen";
+import BlockUserConfirmForm from "../block/BlockUserConfirmForm";
+
 
 
 const UserTimeline = () => {
     const { user: myUser } = useContext(AppContext);
     const { userId } = useParams();
     const [user, setUser] = useState(null);
+    const [isOpenBlockConfirm, setIsOpenBlockConfirm]=useState(false)
+
+    //ham dong block user 
+    const handleCloseComfirmBlockUser = useCallback(()=>{
+        setIsOpenBlockConfirm(false)
+    }, [])
     const navigate = useNavigate();
     useEffect(() => {
         const getUser = async () => {
@@ -180,7 +188,8 @@ const UserTimeline = () => {
                                         <a href="#"><FaFlag className="text-xl" /> Report</a>
                                         <a href="#"><FaShareAlt className="text-xl" /> Share profile</a>
                                         <hr />
-                                        <a href="#" className="text-red-400 hover:!bg-red-50 dark:hover:!bg-red-500/50">
+                                        <a href="#" className="text-red-400 hover:!bg-red-50 dark:hover:!bg-red-500/50"
+                                            onClick={()=>{setIsOpenBlockConfirm(true)}}>
                                             <FaBan className="text-xl" /> Block
                                         </a>
                                     </nav>
@@ -249,6 +258,8 @@ const UserTimeline = () => {
 
                 </div>
             </div>
+            {/*Block confirm component */}
+            {isOpenBlockConfirm && <BlockUserConfirmForm user={user} onCloseBlockUserCofirm={handleCloseComfirmBlockUser}/>}
         </main>
     )
 }

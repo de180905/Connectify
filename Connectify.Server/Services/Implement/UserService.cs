@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Connectify.BusinessObjects.Authen;
 using Connectify.BusinessObjects.PostFeature;
 using Connectify.BusinessObjects.Report;
 using Connectify.Server.DataAccess;
@@ -9,6 +10,7 @@ using Connectify.Server.Services.Abstract;
 using Connectify.Server.Services.FilterOptions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using MoreLinq;
 using YueXiao.Utils;
 
@@ -19,11 +21,13 @@ namespace Connectify.Server.Services.Implement
         private readonly AppDbContext _context;
         private readonly IMapper _mapper;
         private readonly IFriendService friendService;
-        public UserService(AppDbContext dbContext, IMapper mapper, IFriendService friendService)
+        private readonly UserManager<User> _userManager;
+        public UserService(AppDbContext dbContext, IMapper mapper, IFriendService friendService, UserManager<User> userManager)
         {
             this._context = dbContext;
             this._mapper = mapper;
             this.friendService = friendService;
+            this._userManager = userManager;
         }
         public async Task<UserBasicDTO?> GetUserBasic(string viewerId, string userId)
         {
@@ -141,6 +145,33 @@ namespace Connectify.Server.Services.Implement
                 return true;
             }
             return false;
+        }
+
+        public async Task<PaginatedResult<UserManageDTO>> GetUsersForAdminAsync(string? emailSearch, UserStatus? status, int pageNumber, int pageSize)
+        {
+            var query = _context.Users.AsQueryable();
+            if(status != null)
+            {
+                if(status == UserStatus.Active)
+                {
+                    query = query.Where(u => !u.LockoutEnd.HasValue ||  DateTimeOffset.UtcNow > u.LockoutEnd);
+                }
+                else if (status == UserStatus.Locked)
+                {
+                    query = query.Where(u => u.LockoutEnd.HasValue && DateTimeOffset.UtcNow < u.LockoutEnd);
+                }
+            }
+            if(!string.IsNullOrEmpty(emailSearch))
+            {
+                query = query.Where(u => u.Email!=null && u.Email.StartsWith(emailSearch));
+            }
+            var projectedQuery = query.ProjectTo<UserManageDTO>(_mapper.ConfigurationProvider);
+            var data = await PaginationHelper.CreatePaginatedResultAsync<UserManageDTO>(projectedQuery, pageNumber, pageSize);
+            foreach(var item in data.Items)
+            {
+                item.Roles = (List<string>)await _userManager.GetRolesAsync(new User {Id=item.Id});
+            }
+            return data;
         }
     }
 }

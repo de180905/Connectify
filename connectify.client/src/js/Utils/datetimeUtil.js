@@ -31,4 +31,13 @@ const formatDate = (dateString) => {
         return format(date, 'd MMM yyyy'); // e.g., "7 November 2023"
     }
 };
-export { DateDisplay, formatDistanceToUTCNow, formatDate }
+const formatTo12HourTime = (timestamp) => {
+    const date = new Date(timestamp)
+    let hours = date.getHours()
+    const minutes = date.getMinutes().toString().padStart(2, 0)
+    const ampm = hours >=12 ? 'PM' : 'AM'
+    hours = hours % 12||12
+    return `${hours}:${minutes} ${ampm}`
+};
+
+export { DateDisplay, formatDistanceToUTCNow, formatDate, formatTo12HourTime }

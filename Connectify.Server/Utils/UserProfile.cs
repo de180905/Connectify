@@ -4,6 +4,7 @@ using Connectify.BusinessObjects.ChatFeature;
 using Connectify.Server.DTOs;
 using Connectify.Server.DTOs.ChatDTOs;
 using Connectify.Server.Services.Abstract;
+using Microsoft.AspNetCore.Identity;
 
 namespace Connectify.Server.Utils
 {
@@ -11,6 +12,7 @@ namespace Connectify.Server.Utils
     {
         public UserProfile()
         {
+            UserManager<User> userManager = null;
             string userId = null;
             IFriendService friendService = null;
             CreateMap<User, UserDisplayDTO>()
@@ -29,7 +31,8 @@ namespace Connectify.Server.Utils
                 .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.LastName))
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.ProfileCover, opt => opt.MapFrom(src => src.ProfileCover))
-                .ForMember(dest => dest.Avatar, opt => opt.MapFrom(src => src.Avatar));
+                .ForMember(dest => dest.Avatar, opt => opt.MapFrom(src => src.Avatar))
+                .ForMember(dest => dest.Roles, opt => opt.MapFrom(src => userManager != null? userManager.GetRolesAsync(new User { Id = src.Id }).Result : new List<string>()));
             CreateMap<User, UserSearchDTO>()
                 .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.FirstName))
                 .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.LastName))
@@ -47,6 +50,11 @@ namespace Connectify.Server.Utils
                 .ForMember(dest => dest.ProfileCover, opt => opt.MapFrom(src => src.ProfileCover))
                 .ForMember(dest => dest.Avatar, opt => opt.MapFrom(src => src.Avatar))
                 .ForMember(dest => dest.UserP2PStatus, opt => opt.MapFrom(src => friendService.GetUsersP2PStatus(userId, src.Id)));
+            CreateMap<User, UserManageDTO>()
+            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+            .ForMember(dest => dest.Name, opt => opt.MapFrom(src => $"{src.FirstName} {src.LastName}"))
+            .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.LockoutEnd.HasValue && DateTimeOffset.UtcNow < src.LockoutEnd ? UserStatus.Locked : UserStatus.Active))
+            .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email));
         }
     }
 }

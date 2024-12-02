@@ -30,5 +30,6 @@ namespace Connectify.BusinessObjects.PostFeature
         public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
         [StringLength(50)]
         public string? Feeling { get; set; }
+
     }
 }

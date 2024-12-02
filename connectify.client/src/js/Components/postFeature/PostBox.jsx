@@ -7,6 +7,9 @@ import { createPost } from '../../api/Post';
 import { generateGuid } from '../../Utils/MathsHelper';
 import { FaCamera } from 'react-icons/fa'; 
 import TextareaAutosize from 'react-textarea-autosize';
+import { SelectUsersModal } from '../utils/SelectUsersModal';
+import { getUsersToAddToChatroom } from '../../api/search';
+import { useRef } from 'react';
 const PostBox = forwardRef(({ }, ref) => {
     const { user } = useContext(AppContext);
     const [show, setShow] = useState(false);
@@ -16,12 +19,25 @@ const PostBox = forwardRef(({ }, ref) => {
     const [feeling, setFeeling] = useState(null);
     const [taggedFriends, setTaggedFriends] = useState([]);
     const [postContent, setPostContent] = useState(null);
+    const textareaRef = useRef(null);
     useImperativeHandle(ref, () => ({
         openPostBox: () => setShow(true),
         closePostBox: () => setShow(false),
     }));
     const handleEmojiSelect = (emoji) => {
-        setPostContent((prevText) => prevText + emoji.native); // Append the selected emoji to the text
+        const cursorPosition = textareaRef.current.selectionStart; // Get cursor position
+        const textBeforeCursor = postContent.slice(0, cursorPosition); // Text before the cursor
+        const textAfterCursor = postContent.slice(cursorPosition); // Text after the cursor
+
+        const emojiText = emoji.native; // Emoji to insert
+
+        // Update the post content with emoji inserted at the cursor position
+        setPostContent(textBeforeCursor + emojiText + textAfterCursor);
+
+        // Set the cursor position after the emoji
+        setTimeout(() => {
+            textareaRef.current.selectionStart = textareaRef.current.selectionEnd = cursorPosition + emojiText.length;
+        }, 0);
     };
     const handleClose = () => {
         setShow(false);
@@ -79,7 +95,7 @@ const PostBox = forwardRef(({ }, ref) => {
 
     return (
         <>
-            <Modal show={show} onHide={handleClose} centered>
+            <Modal show={show && !isTaggingFriends} onHide={handleClose} centered>
                 <Modal.Header closeButton>
                     <div className="d-flex align-items-center">
                         <Image src={user?.avatar} roundedCircle width={50} height={50} className="me-2" style={{ aspectRatio: '1 / 1', objectFit: 'cover' }} />
@@ -95,7 +111,6 @@ const PostBox = forwardRef(({ }, ref) => {
                 </Modal.Header>
 
                 <Modal.Body>
-                    {!isTaggingFriends ? (
                         <>
                             <div style={{ position: 'relative' }}>
                                 <TextareaAutosize
@@ -104,7 +119,8 @@ const PostBox = forwardRef(({ }, ref) => {
                                     placeholder="What's on your mind?"
                                     value={postContent}
                                     onChange={(e) => setPostContent(e.target.value)}
-                                    className="w-full p-2 border rounded-md"
+                                className="w-full p-2 border rounded-md"
+                                ref={textareaRef}
                                 />
                                 {/* Emoji Button */}
                                 <EmojiPicker
@@ -162,7 +178,7 @@ const PostBox = forwardRef(({ }, ref) => {
                             </div>
 
                             {/* Emotion and Tag friends */}
-                            <div className="d-flex justify-content-between mt-3">
+                        <div className="d-flex justify-content-between mt-3">
                                 {/* Emotion selection */}
                                 <div className="flex-fill me-2">
                                     <Form.Label>Select Feeling</Form.Label>
@@ -175,16 +191,23 @@ const PostBox = forwardRef(({ }, ref) => {
                                     </Form.Control>
                                 </div>
 
-                                {/* Tag friends section */}
-                                <div className="flex-fill">
+                            {/* Tag friends section */}
+                            <div style={{width: '70%'}}>
                                     <Form.Label>Tag Friends</Form.Label>
                                     <Button variant="info" onClick={handleTagFriends} className="w-100">
                                         Tag Friends
                                     </Button>
-                                    <div className="mt-2 d-flex flex-wrap">
-                                        {taggedFriends.map((friend, index) => (
-                                            <Badge style={{cursor:'pointer'}} onClick={() => removeTaggedFriend(friend.id)} key={index} bg="secondary" className="me-1 mb-1 d-flex align-items-center">
-                                                <Image src={friend.avatar} roundedCircle width={30} height={30} className="me-2" />
+                                    <div className="mt-2 d-flex overflow-x-auto">
+                                        {taggedFriends.map((friend) => (
+                                            <Badge
+                                                key={friend.id}
+                                                bg="secondary"
+                                                className="me-1 mb-1"
+                                                style={{
+                                                    maxWidth: '150px', // Limits the badge size for a cleaner appearance
+                                                    whiteSpace: 'nowrap',
+                                                }}
+                                            >
                                                 {friend.fullName}
                                             </Badge>
                                         ))}
@@ -192,13 +215,8 @@ const PostBox = forwardRef(({ }, ref) => {
                                 </div>
                             </div>
                         </>
-                    ) : (
-                            <FriendSearch handleFriendSelect={handleFriendSelect} onClose={() => { setIsTaggingFriends(false); }}
-                                listToExclude={taggedFriends} />
-                    )}
                 </Modal.Body>
 
-                {!isTaggingFriends && (
                     <Modal.Footer>
                         <Button variant="secondary" onClick={handleClose} style={{ color: '#6c757d', backgroundColor: 'white', borderColor: '#6c757d' }}>
                             Close
@@ -207,9 +225,23 @@ const PostBox = forwardRef(({ }, ref) => {
                             Post
                         </Button>
                     </Modal.Footer>
-                )}
             </Modal>
+            {isTaggingFriends && <SelectUsersModal
+                minUsersCount={0}
+                showTxtName={false}
+                selectedFriendsInitial={taggedFriends}
+                header={"Tag Friends"}
+                loadFunc={async (searchTerm) => {
+                    return await getUsersToAddToChatroom(null, searchTerm);
+                }}
+                onClose={() => { setIsTaggingFriends(false) }}
+                onSubmit={async (data) => {
+                    setTaggedFriends(data.users);
+                }}
+
+            />}
         </>
+
     );
 })
 

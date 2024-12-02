@@ -5,9 +5,10 @@ import { useEffect } from 'react';
 import { useImperativeHandle } from 'react';
 import { createChatRoom } from '../../api/chat';
 Modal.setAppElement('#root');
-export const SelectUsersModal = ({onClose, header, onSubmit, loadFunc, minUsersCount = 1}) => {
+export const SelectUsersModal = ({ onClose, header, onSubmit, loadFunc = () => { },
+    minUsersCount = 1, selectedFriendsInitial = [], showTxtName = true }) => {
     const [searchTerm, setSearchTerm] = useState('');
-    const [selectedFriends, setSelectedFriends] = useState([]);
+    const [selectedFriends, setSelectedFriends] = useState(selectedFriendsInitial);
     const [groupName, setGroupName] = useState('');
     const [friendsList, setFriendsList] = useState([]);
     useEffect(() => {
@@ -18,20 +19,25 @@ export const SelectUsersModal = ({onClose, header, onSubmit, loadFunc, minUsersC
                 setFriendsList(data.items);
             }
         }
-        loadFriends();
+        try {
+            loadFriends();
+        } catch {
+
+        }
+        
     }, [searchTerm])
 
     const submit = async () => {
         const data = {
             name: groupName,
-            userIds: selectedFriends.map((friend) => friend.id),
+            /*userIds: selectedFriends.map((friend) => friend.id),*/
+            users: selectedFriends
         };
         try {
             const result = await onSubmit(data);
             onClose();
         } catch (error) {
-            console.error('Error creating group:', error);
-            alert('Failed to create the group. Please try again.');
+            console.error('Error:', error);
         }
     };
     const addFriend = (friend) => {
@@ -73,14 +79,14 @@ export const SelectUsersModal = ({onClose, header, onSubmit, loadFunc, minUsersC
                 </button>
             </div>
             {/* Group Name Input */}
-            <input
+            {showTxtName && <input
                 type="text"
                 placeholder="Enter group name..."
                 className="form-control mb-3"
                 onChange={(e) => {
                     setGroupName(e.target.value);
                 }}
-            />
+            />}
             <input
                 type="text"
                 placeholder="Search friends..."

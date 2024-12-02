@@ -88,9 +88,14 @@ namespace Connectify.Server.Controllers
             try
             {
                 result = await accountRepo.SignInAsync(dto);
-            }catch(EmailNotVerifiedException)
+            }
+            catch(EmailNotVerifiedException)
             {
                 return Ok(new {needEmailVerified = true});
+            }
+            catch(UnauthorizedAccessException ex) 
+            {
+                return Unauthorized(new { message = ex.Message });
             }
             if (result == null)
             {

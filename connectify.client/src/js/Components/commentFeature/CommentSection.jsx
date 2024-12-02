@@ -1,27 +1,39 @@
 ﻿import React, { useState, useEffect, useRef } from 'react';
-import { addComment, getTopLevelComments } from '../../api/Comment';
+import { addComment, getRootComment, getTopLevelComments } from '../../api/Comment';
 import Comment from './Comment';
 import TextareaAutosize from 'react-textarea-autosize';
 // A single comment with replies
 
 // Main Comment Section
-const CommentSection = ({postId}) => {
+const CommentSection = ({ postId, commentId }) => {
     const [comments, setComments] = useState([]);
     const [loadTrigger, setLoadTrigger] = useState({ page: 1, sortOption: 0 });
     const [isLoading, setIsLoading] = useState(false);
     const [totalCount, setTotalCount] = useState(0);
     const textareaRef = useRef(null);
+
     const fetchComments = async () => {
         setIsLoading(true);
         try {
-            const commentPaging = await getTopLevelComments(postId, loadTrigger.sortOption, loadTrigger.page, 5);
-            const comments = commentPaging.items;
-            if (loadTrigger.page == 1) {
-                setComments(prev => comments);
+            if (commentId && commentId > 0) {
+                // If commentId is provided, fetch the comment and its replies
+                const response = await getRootComment(commentId);
+                if (response && response.data) {
+                    console.log(response.data)
+                    setComments([response.data]);
+                }
+
+                setTotalCount(1);
             } else {
-                setComments((prev) => [...prev, ...comments]);
+                const commentPaging = await getTopLevelComments(postId, loadTrigger.sortOption, loadTrigger.page, 5);
+                const comments = commentPaging.items;
+                if (loadTrigger.page === 1) {
+                    setComments(comments);
+                } else {
+                    setComments((prev) => [...prev, ...comments]);
+                }
+                setTotalCount(commentPaging.totalCount);
             }
-            setTotalCount(commentPaging.totalCount);
         }
         catch (error) {
             window.alert("error occured, pls try again");
@@ -79,8 +91,8 @@ const CommentSection = ({postId}) => {
                         }
                     }}
                 >
-                        Submit
-                    </button>
+                    Submit
+                </button>
             </div>
 
             <div className="space-y-4">

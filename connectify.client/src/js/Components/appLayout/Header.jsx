@@ -1,12 +1,35 @@
-﻿import { useContext } from "react";
+﻿import { forwardRef, useCallback, useContext, useEffect, useImperativeHandle, useState } from "react";
 import { AppContext } from "../../Contexts/AppProvider";
 import { TokenService } from "../../api/authen";
 import { Link } from 'react-router-dom';
 import ChatNotification from "../chatFeature/ChatNotification";
 import NotificationList from "../notification/NotificationList";
+import { getUnreadNotificationsCount } from "../../api/notificationApi";
 
-const Header = ({ chatNotificationRef, NotificationRef }) => {
+const Header = forwardRef(({ chatNotificationRef }, ref) => {
     const { user } = useContext(AppContext);
+    const [numberUnReadNotification, setNumberUnreadNotification] = useState(0)
+    const [loadNotifications, setLoadNotifications] = useState(0)
+    const fetchData = useCallback(async () => {
+        try {
+            const response = await getUnreadNotificationsCount();
+            console.log('number of notification:', response);
+            if (response && response.data) {
+                setNumberUnreadNotification(response.data.count);
+            }
+        } catch (error) {
+            console.error('Error fetching notifications:', error);
+        }
+    }, []);
+    useEffect(() => {
+        fetchData()
+    }, [])
+    useImperativeHandle(ref, () => ({
+        incrementUnreadNotification() {
+            setNumberUnreadNotification(prevCount => prevCount + 1)
+            setLoadNotifications(prev => prev + 1)
+        }
+    }))
     return (
         <header className="z-[100] h-[--m-top] fixed top-0 left-0 w-full flex items-center bg-white/80 sky-50 backdrop-blur-xl border-b border-slate-200 dark:bg-dark2 dark:border-slate-800">
             <div className="flex items-center w-full xl:px-6 px-2 max-lg:gap-10">
@@ -230,7 +253,7 @@ const Header = ({ chatNotificationRef, NotificationRef }) => {
                                     />
                                 </svg>
                                 <div className="absolute top-0 right-0 -m-1 bg-red-600 text-white text-xs px-1 rounded-full">
-                                    6
+                                    {numberUnReadNotification ? numberUnReadNotification : ''}
                                 </div>
                                 <ion-icon
                                     name="notifications-outline"
@@ -242,7 +265,7 @@ const Header = ({ chatNotificationRef, NotificationRef }) => {
                                 className="hidden bg-white rounded-lg drop-shadow-xl dark:bg-slate-700 md:w-[365px] w-screen border2"
                                 uk-drop="offset:6;pos: bottom-right; mode: click; animate-out: true; animation: uk-animation-scale-up uk-transform-origin-top-right "
                             >
-                                <NotificationList />
+                                <NotificationList notificationEvent={loadNotifications} />
                             </div>
                             {/* messages */}
                             <ChatNotification ref={chatNotificationRef} />
@@ -252,7 +275,7 @@ const Header = ({ chatNotificationRef, NotificationRef }) => {
                                     src={user?.avatar}
                                     alt=""
                                     className="sm:w-9 sm:h-9 w-7 h-7 rounded-full shadow shrink-0"
-                                /> 
+                                />
                             </div>
                             <div
                                 className="hidden bg-white rounded-lg drop-shadow-xl dark:bg-slate-700 w-64 border2"
@@ -274,26 +297,7 @@ const Header = ({ chatNotificationRef, NotificationRef }) => {
                                 </Link>
                                 <hr className="dark:border-gray-600/60" />
                                 <nav className="p-2 text-sm text-black font-normal dark:text-white">
-                                    <a href="setting.html">
-                                        <div className="flex items-center gap-2.5 hover:bg-secondery p-2 px-2.5 rounded-md dark:hover:bg-white/10">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                strokeWidth="1.5"
-                                                stroke="currentColor"
-                                                className="w-6 h-6"
-                                            >
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z"
-                                                />
-                                            </svg>
-                                            My Billing
-                                        </div>
-                                    </a>
-                                    <a href="/settings">
+                                    <Link to="/settings">
                                         <div className="flex items-center gap-2.5 hover:bg-secondery p-2 px-2.5 rounded-md dark:hover:bg-white/10">
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
@@ -316,7 +320,69 @@ const Header = ({ chatNotificationRef, NotificationRef }) => {
                                             </svg>
                                             My Account
                                         </div>
-                                    </a>
+                                    </Link>
+                                    <Link to="/activityHistory">
+                                        <div className="flex items-center gap-2.5 hover:bg-secondery p-2 px-2.5 rounded-md dark:hover:bg-white/10">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                strokeWidth="1"
+                                                stroke="currentColor"
+                                                className="w-6 h-6"
+                                            >                                              
+                                                <circle cx="3.5" cy="6" r="0.8" fill="currentColor" />
+                                                <circle cx="3.5" cy="12" r="0.8" fill="currentColor" />
+                                                <circle cx="3.5" cy="18" r="0.8" fill="currentColor" />                                                
+                                                <rect x="7" y="5.25" width="13" height="1" fill="currentColor" />
+                                                <rect x="7" y="11.25" width="13" height="1" fill="currentColor" />
+                                                <rect x="7" y="17.25" width="13" height="1" fill="currentColor" />
+                                            </svg>
+                                            Activity History
+                                        </div>
+                                    </Link>
+                                    {user?.roles && user.roles.includes("administrator") && <>
+                                        {/* Manage Posts */}
+                                        <Link to="/admin/ManagePostReports">
+                                            <div className="flex items-center gap-2.5 hover:bg-secondery p-2 px-2.5 rounded-md dark:hover:bg-white/10">
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    fill="none"
+                                                    viewBox="0 0 24 24"
+                                                    strokeWidth="1"
+                                                    stroke="currentColor"
+                                                    className="w-6 h-6"
+                                                >
+                                                    <rect x="3" y="4" width="18" height="2" fill="currentColor" />
+                                                    <rect x="3" y="11" width="18" height="2" fill="currentColor" />
+                                                    <rect x="3" y="18" width="18" height="2" fill="currentColor" />
+                                                </svg>
+                                                Manage Post Reports
+                                            </div>
+                                        </Link>
+
+                                        {/* Manage Users */}
+                                        <Link to="/admin/ManageUsers">
+                                            <div className="flex items-center gap-2.5 hover:bg-secondery p-2 px-2.5 rounded-md dark:hover:bg-white/10">
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    fill="none"
+                                                    viewBox="0 0 24 24"
+                                                    strokeWidth="1"
+                                                    stroke="currentColor"
+                                                    className="w-6 h-6"
+                                                >
+                                                    <circle cx="12" cy="8" r="3.5" fill="currentColor" />
+                                                    <path
+                                                        d="M12 14c-4 0-7 2-7 4v1h14v-1c0-2-3-4-7-4z"
+                                                        fill="currentColor"
+                                                    />
+                                                </svg>
+                                                Manage Users
+                                            </div>
+                                        </Link>
+                                    </>}
+
                                     <hr className="-mx-2 my-2 dark:border-gray-600/60" />
                                     <button onClick={TokenService.logout}>
                                         <div className="flex items-center gap-2.5 hover:bg-secondery p-2 px-2.5 rounded-md dark:hover:bg-white/10">
@@ -339,7 +405,7 @@ const Header = ({ chatNotificationRef, NotificationRef }) => {
                                     </button>
                                 </nav>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -347,6 +413,6 @@ const Header = ({ chatNotificationRef, NotificationRef }) => {
         </header>
 
     )
-}
+})
 export default Header;
 
