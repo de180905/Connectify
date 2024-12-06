@@ -7,6 +7,7 @@ import { AppContext } from '../../Contexts/AppProvider';
 
 function AvatarUploader({ initialAvatar, editable,
     widthClass = "w-full", heightClass = "h-full",
+    camRight = 0, camBot = 0,
     uploadFunc = async () => { }}) {
     const [image, setImage] = useState(null);
     const [croppedAvatar, setCroppedAvatar] = useState(null);
@@ -74,7 +75,9 @@ function AvatarUploader({ initialAvatar, editable,
             />
 
             {/* Buttons for Upload & Crop */}
-            <div className="absolute bottom-0 right-0 m-2 z-20">
+            <div className="absolute m-2 z-20"
+                style={{ bottom: camBot, right: camRight }}
+            >
                 <input
                     type="file"
                     accept="image/*"

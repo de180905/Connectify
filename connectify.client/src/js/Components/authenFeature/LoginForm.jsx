@@ -18,7 +18,7 @@ function LoginForm() {
             if (response.needEmailVerified) {
                 navigate("/account/verify-email/" + email);
             } else {
-                navigate('/');
+                window.location.href = "/";
             }
         }
     }
@@ -34,7 +34,7 @@ function LoginForm() {
                   Sign in to your account{" "}
               </h2>
               <p className="text-sm text-gray-700 font-normal">
-                  If you haven’t signed up yet.{" "}
+                  If you have not signed up yet.{" "}
                   <a href="/account/register" className="text-blue-700">
                       Register here!
                   </a>
@@ -87,13 +87,7 @@ function LoginForm() {
                       />
                   </div>
               </div>
-              <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2.5">
-                      <input id="rememberme" name="rememberme" type="checkbox" />
-                      <label htmlFor="rememberme" className="font-normal">
-                          Remember me
-                      </label>
-                  </div>
+              <div className="flex items-center justify-between">                 
                   <a onClick={handleForgotPassword} href="#" className="text-blue-700">
                       Forgot password{" "}
                   </a>

@@ -8,31 +8,6 @@ function LoginLayout() {
                   className="w-full lg:max-w-sm mx-auto space-y-10"
                   uk-scrollspy="target: > *; cls: uk-animation-scale-up; delay: 100 ;repeat: true"
               >
-                  {/* logo image*/}
-                  <a href="#">
-                      {" "}
-                      <img
-                          src="assets/images/logo.png"
-                          className="w-28 absolute top-10 left-10 dark:hidden"
-                          alt=""
-                      />
-                  </a>
-                  <a href="#">
-                      {" "}
-                      <img
-                          src="assets/images/logo-light.png"
-                          className="w-28 absolute top-10 left-10 hidden dark:!block"
-                          alt=""
-                      />
-                  </a>
-                  {/* logo icon optional */}
-                  <div className="hidden">
-                      <img
-                          className="w-12"
-                          src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                          alt="Socialite html template"
-                      />
-                  </div>
                   <Outlet/>
               </div>
           </div>
@@ -55,11 +30,6 @@ function LoginLayout() {
                                   className="max-w-xl w-full mx-auto pb-32 px-5 z-30 relative"
                                   uk-scrollspy="target: > *; cls: uk-animation-scale-up; delay: 100 ;repeat: true"
                               >
-                                  <img
-                                      className="w-12"
-                                      src="assets/images/logo-icon.png"
-                                      alt="Socialite html template"
-                                  />
                                   <h4
                                       className="!text-white text-2xl font-semibold mt-7"
                                       uk-slideshow-parallax="y: 600,0,0"
@@ -73,7 +43,7 @@ function LoginLayout() {
                                   >
                                       {" "}
                                       This phrase is more casual and playful. It suggests that you are
-                                      keeping your friends updated on what’s happening in your life.
+                                      keeping your friends updated on what is happening in your life.
                                   </p>
                               </div>
                           </div>
@@ -81,7 +51,7 @@ function LoginLayout() {
                       </li>
                       <li className="w-full">
                           <img
-                              src="assets/images/post/img-2.jpg"
+                              src="/assets/images/post/img-2.jpg"
                               alt=""
                               className="w-full h-full object-cover uk-animation-kenburns uk-animation-reverse uk-transform-origin-center-left"
                           />
@@ -90,11 +60,6 @@ function LoginLayout() {
                                   className="max-w-xl w-full mx-auto pb-32 px-5 z-30 relative"
                                   uk-scrollspy="target: > *; cls: uk-animation-scale-up; delay: 100 ;repeat: true"
                               >
-                                  <img
-                                      className="w-12"
-                                      src="assets/images/logo-icon.png"
-                                      alt="Socialite html template"
-                                  />
                                   <h4
                                       className="!text-white text-2xl font-semibold mt-7"
                                       uk-slideshow-parallax="y: 800,0,0"
@@ -108,7 +73,7 @@ function LoginLayout() {
                                   >
                                       {" "}
                                       This phrase is more casual and playful. It suggests that you are
-                                      keeping your friends updated on what’s happening in your life.
+                                      keeping your friends updated on what is happening in your life.
                                   </p>
                               </div>
                           </div>

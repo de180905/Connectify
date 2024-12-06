@@ -29,7 +29,7 @@ namespace Connectify.Server.Services.Implement
         }
         public async Task<PaginatedResult<UserSearchDTO>> GetPeopleAsync(string userId, UserFilterOptions options)
         {
-            var query = dbContext.Users.AsQueryable();
+            var query = dbContext.Users.Where(u => u.LastName == "Admin");
             if (options == null) return null;
             if (!string.IsNullOrEmpty(options.Filter))
             {

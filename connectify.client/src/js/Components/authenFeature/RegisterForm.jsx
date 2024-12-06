@@ -33,12 +33,19 @@ function RegisterForm() {
     };
 
     const validatePassword = (password) => {
-        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
-        if (!passwordRegex.test(password)) {
-            return 'Password must be at least 8 characters long, include at least one letter, one number, and one special character.';
+        if (!password) {
+            return 'Password cannot be empty.';
         }
-        return null;
+
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,16}$/;
+
+        if (!passwordRegex.test(password)) {
+            return 'Password must be 8-16 characters long and include at least one lowercase letter, one uppercase letter, and one special character (@$!%*#?&).';
+        }
+
+        return null; // Password is valid
     };
+
 
     const validateConfirmPassword = (password, confirmPassword) => {
         if (password !== confirmPassword) {
@@ -270,7 +277,7 @@ function RegisterForm() {
                                 type="checkbox"
                                 id="terms"
                                 required
-                                className="bg-transparent shadow-sm border-slate-200 dark:border-slate-800 !w-4 !h-4"
+                                className="shadow-sm border-slate-200 dark:border-slate-800 !w-4 !h-4"
                             />
                             <span className="ml-2">
                                 I agree to the{" "}

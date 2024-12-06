@@ -96,25 +96,25 @@ const PeopleIndex = () => {
                     />
 
                     {/* Location and Company Search on the same line */}
-                    <div className="flex gap-4">
-                        {/* Search by Place using Autocomplete */}
-                        <div className="w-1/2"> {/* Flex child to split the width */}
-                            <SearchAutocomplete
-                                placeholder="Search by location..."
-                                Category="location"
-                                passData={onLocationChange}
-                            />
-                        </div>
+                    {/*<div className="flex gap-4">*/}
+                    {/*    */}{/* Search by Place using Autocomplete */}
+                    {/*    <div className="w-1/2"> */}{/* Flex child to split the width */}
+                    {/*        <SearchAutocomplete*/}
+                    {/*            placeholder="Search by location..."*/}
+                    {/*            Category="location"*/}
+                    {/*            passData={onLocationChange}*/}
+                    {/*        />*/}
+                    {/*    </div>*/}
 
-                        {/* Search by Workplace using Autocomplete */}
-                        <div className="w-1/2"> {/* Flex child to split the width */}
-                            <SearchAutocomplete
-                                placeholder="Search by workplace..."
-                                Category="company"
-                                passData={onCompanyChange}
-                            />
-                        </div>
-                    </div>
+                    {/*    */}{/* Search by Workplace using Autocomplete */}
+                    {/*    <div className="w-1/2"> */}{/* Flex child to split the width */}
+                    {/*        <SearchAutocomplete*/}
+                    {/*            placeholder="Search by workplace..."*/}
+                    {/*            Category="company"*/}
+                    {/*            passData={onCompanyChange}*/}
+                    {/*        />*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
                 </div>
 
                 <div className="grid md:grid-cols-2 md:gap-2 gap-3">

@@ -6,6 +6,7 @@ import "swiper/css/navigation";
 import { useEffect } from "react";
 import { loadChatRooms } from "../../api/chat";
 import { splitFullName } from "../../Utils/stringUtil";
+import {Link } from "react-router-dom"
 const Stories = () => {
     const [chatrooms, setChatrooms] = useState([]);
     useEffect(() => {
@@ -39,22 +40,27 @@ const Stories = () => {
                     {/* Dynamically generate slides for users */}
                     {chatrooms.map((cr) => (
                         <SwiperSlide key={cr.chatRoomId}>
-                            <div className="flex flex-col items-center">
+                            <Link
+                                to={`/chatrooms/${cr.chatRoomId}`}
+                                className="flex flex-col items-center"
+                            >
                                 <div className="md:w-16 md:h-16 w-12 h-12 relative md:border-4 border-2 shadow border-white rounded-full dark:border-slate-700">
                                     <img
                                         src={cr.avatar}
                                         alt={cr.name}
                                         className="absolute w-full h-full object-cover rounded-full"
                                     />
-                                    {/* Green dot to indicate online status */}
-                                    {cr.isOnline && <div className="w-4 h-4 absolute bottom-0 right-0  bg-green-500 rounded-full border border-white dark:border-slate-800" />}
+                                    {cr.isOnline && (
+                                        <div className="w-4 h-4 absolute bottom-0 right-0 bg-green-500 rounded-full border border-white dark:border-slate-800" />
+                                    )}
                                 </div>
                                 <div className="mt-2 text-sm font-medium text-gray-700 dark:text-gray-300">
                                     {splitFullName(cr.name).firstName}
                                 </div>
-                            </div>
+                            </Link>
                         </SwiperSlide>
                     ))}
+
                 </Swiper>
 
                 {/* Navigation Buttons */}

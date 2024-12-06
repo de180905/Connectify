@@ -6,7 +6,7 @@ const PeopleRequest = () => {
     const [totalPage, setTotalPage] = React.useState(0);
     const [pageNumber, setPageNumber] = React.useState(1);
     const [requestList, setRequestList] = React.useState([]);
-    const [filter, setFilter] = React.useState("sent");
+    const [filter, setFilter] = React.useState("received");
     const loadMore = async () => {
         const data = await getFriendRequest(filter, pageNumber+1);
         if (data) {
@@ -64,7 +64,7 @@ const PeopleRequest = () => {
                 </div>
                 <div className="grid md:grid-cols-2 md:gap-2 gap-3">
                     {requestList.map((people) => {
-                        return <PeopleCard people={people} key={people.id} />
+                        return <PeopleCard people={people} key={people.id} setPeople={setRequestList} />
                     })}
                 </div>
                 <div className="flex justify-center my-6">

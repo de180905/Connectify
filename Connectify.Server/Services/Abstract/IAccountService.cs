@@ -14,7 +14,7 @@ namespace Connectify.Server.Services.Abstract
         Task<IdentityResult> UpdateUserDescription(string userId, UserDescriptionDTO dto);
         Task<UserDescriptionDTO?> GetUserDescription(string userId);
         Task<IdentityResult> ChangePasswordAsync(string userId, ChangePasswordDTO dto);
-        Task<UserDTO> GetMyUser(string userId);
+        Task<UserDTO?> GetMyUserAsync(string userId);
         Task<string> UploadAvatarAsync(string userId, UploadAvatarDTO dto);
         Task<bool> SendPasswordResetLinkAsync(string email);
         Task<bool> ResetPasswordAsync(ResetPasswordDTO resetPasswordDTO);

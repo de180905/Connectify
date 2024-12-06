@@ -6,6 +6,7 @@ import { getDescriptionOfUser, getFriendsOfUser, getPostMediaOfUser } from "../.
 import { DateDisplay } from "../../Utils/datetimeUtil";
 import { AppContext } from "../../Contexts/AppProvider";
 
+
 const UserTimelineMain = () => {
     const { user: myUser } = useContext(AppContext);
     const { userId } = useParams();
@@ -41,7 +42,7 @@ const UserTimelineMain = () => {
         fetchUserDes();
         fetchUserPhotosPreview();
         fetchUserFriendsPreview();
-    }, [])
+    }, [userId])
     return (
         <>
             {/* feed story */}
@@ -49,6 +50,7 @@ const UserTimelineMain = () => {
                 <PostBoxOpener />
                 {/*  post image*/}
                 <PostsFeedingSection
+                    key={userId}
                     filterOptions={{
                         authorId: userId
                     }}
@@ -163,47 +165,7 @@ const UserTimelineMain = () => {
                                     </span>{" "}
                                 </div>
                             </li>
-
-                            <li className="flex items-center gap-3">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    strokeWidth="1.5"
-                                    stroke="currentColor"
-                                    className="w-6 h-6"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        d="M12.75 19.5v-.75a7.5 7.5 0 00-7.5-7.5H4.5m0-6.75h.75c7.87 0 14.25 6.38 14.25 14.25v.75M6 18.75a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
-                                    />
-                                </svg>
-                                <div>
-                                    {" "}
-                                    Flowwed By{" "}
-                                    <span className="font-semibold text-black dark:text-white">
-                                        {" "}
-                                        3,240 People{" "}
-                                    </span>{" "}
-                                </div>
-                            </li>
                         </ul>
-                        {/* Hobbies */}
-                        <div className="flex flex-wrap gap-1 text-sm mt-4 font-semibold capitalize">
-                            <div className="inline-flex items-center gap-2 py-0.5 px-2.5 border shadow rounded-full border-gray-100">
-                                Shoping
-                            </div>
-                            <div className="inline-flex items-center gap-2 py-0.5 px-2.5 border shadow rounded-full border-gray-100">
-                                code
-                            </div>
-                            <div className="inline-flex items-center gap-2 py-0.5 px-2.5 border shadow rounded-full border-gray-100">
-                                art
-                            </div>
-                            <div className="inline-flex items-center gap-2 py-0.5 px-2.5 border shadow rounded-full border-gray-100">
-                                design
-                            </div>
-                        </div>
                         {userPhotosPreview.length > 0 && (
                             <>
                                 <div className="grid grid-cols-2 gap-1 text-center text-sm mt-4 mb-2 rounded-lg overflow-hidden">
@@ -247,7 +209,11 @@ const UserTimelineMain = () => {
                         </div>
                         <div className="grid grid-cols-3 gap-2 gap-y-5 text-center text-sm mt-4 mb-2">
                             {userFriendsPreview.items.map(f => (
-                                <div key={f.id}>
+                                <Link
+                                    key={f.id}
+                                    to={`/${f.id}`}
+                                    className="block"
+                                >
                                     <div className="relative w-full aspect-square rounded-full overflow-hidden">
                                         <img
                                             src={f.avatar}
@@ -255,69 +221,11 @@ const UserTimelineMain = () => {
                                             className="object-cover inset-0"
                                         />
                                     </div>
-                                    <div className="mt-2 line-clamp-1"> {f.fullName} </div>
-                                </div>
+                                    <div className="mt-2 line-clamp-1">{f.fullName}</div>
+                                </Link>
                             ))}
+
           
-                        </div>
-                    </div>
-                    {/* Groups You Manage  */}
-                    <div className="bg-white rounded-xl shadow p-5 px-6 border1 dark:bg-dark2">
-                        <div className="flex items-baseline justify-between text-black dark:text-white">
-                            <h3 className="font-bold text-base"> Suggested Manage </h3>
-                            <a href="#" className="text-sm text-blue-500">
-                                See all
-                            </a>
-                        </div>
-                        <div className="side-list">
-                            <div className="side-list-item">
-                                <a href="timeline-group.html">
-                                    <img
-                                        src="assets/images/avatars/avatar-2.jpg"
-                                        alt=""
-                                        className="side-list-image rounded-md"
-                                    />
-                                </a>
-                                <div className="flex-1">
-                                    <a href="timeline-group.html">
-                                        <h4 className="side-list-title"> John Michael</h4>
-                                    </a>
-                                    <div className="side-list-info"> Updated 1 week ago </div>
-                                </div>
-                                <button className="button bg-primary text-white">Like</button>
-                            </div>
-                            <div className="side-list-item">
-                                <a href="timeline-group.html">
-                                    <img
-                                        src="assets/images/avatars/avatar-4.jpg"
-                                        alt=""
-                                        className="side-list-image rounded-md"
-                                    />
-                                </a>
-                                <div className="flex-1">
-                                    <a href="timeline-group.html">
-                                        <h4 className="side-list-title"> Martin Gray</h4>
-                                    </a>
-                                    <div className="side-list-info"> Updated 4 week ago </div>
-                                </div>
-                                <button className="button bg-primary text-white">Like</button>
-                            </div>
-                            <div className="side-list-item">
-                                <a href="timeline-group.html">
-                                    <img
-                                        src="assets/images/avatars/avatar-3.jpg"
-                                        alt=""
-                                        className="side-list-image rounded-md"
-                                    />
-                                </a>
-                                <div className="flex-1">
-                                    <a href="timeline-group.html">
-                                        <h4 className="side-list-title"> Monroe Parker</h4>
-                                    </a>
-                                    <div className="side-list-info"> Updated 2 month ago </div>
-                                </div>
-                                <button className="button bg-primary text-white">Like</button>
-                            </div>
                         </div>
                     </div>
                 </div>

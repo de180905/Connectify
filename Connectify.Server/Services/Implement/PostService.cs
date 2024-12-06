@@ -138,8 +138,20 @@ namespace Connectify.Server.Services.Implement
                     query = query.Where(p => p.AuthorId == opts.AuthorId);
                 }
             }
-                
-            query = query.OrderByDescending(p => p.CreatedAt);
+            query = query.Select(p => new
+            {
+                Post = p,
+                Score =
+            (p.Reactions.Count() * 2) +                // Độ phổ biến
+            (p.Comments.Count() * 3) +                 // Lượt comment
+            (p.AuthorId == userId ? 5 : 0) +           // Nếu là bài từ chính người dùng
+            (_context.FriendShips.Any(fs =>            // Nếu là bài từ bạn bè
+                (fs.User1Id == userId && fs.User2Id == p.AuthorId) ||
+                (fs.User1Id == p.AuthorId && fs.User2Id == userId)) ? 10 : 0) +
+            (p.CreatedAt > DateTime.UtcNow.AddDays(-7) ? 1 : 0)  // Tính gần đây
+            })
+            .OrderByDescending(x => x.Score)
+            .Select(x => x.Post);
 
             // Project to PostDTO and paginate
             var projectedQuery = query.ProjectTo<PostDTO>(_mapper.ConfigurationProvider, new {userId = userId});

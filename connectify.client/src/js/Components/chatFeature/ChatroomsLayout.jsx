@@ -130,9 +130,10 @@ const ChatroomsLayout = React.forwardRef((props, ref) => {
                                         onSubmit={async (data) => {
                                             const chatroom = {
                                                 name: data.name,
-                                                memberIds: data.userIds
+                                                memberIds: data.users.map(u => u.id)
                                             }
                                             await createChatRoom(chatroom);
+                                            console.log(chatroom);
                                         }}
                                     />}
                                 </div>

@@ -12,7 +12,6 @@ namespace Connectify.Server.Utils
     {
         public UserProfile()
         {
-            UserManager<User> userManager = null;
             string userId = null;
             IFriendService friendService = null;
             CreateMap<User, UserDisplayDTO>()
@@ -31,8 +30,7 @@ namespace Connectify.Server.Utils
                 .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.LastName))
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.ProfileCover, opt => opt.MapFrom(src => src.ProfileCover))
-                .ForMember(dest => dest.Avatar, opt => opt.MapFrom(src => src.Avatar))
-                .ForMember(dest => dest.Roles, opt => opt.MapFrom(src => userManager != null? userManager.GetRolesAsync(new User { Id = src.Id }).Result : new List<string>()));
+                .ForMember(dest => dest.Avatar, opt => opt.MapFrom(src => src.Avatar));
             CreateMap<User, UserSearchDTO>()
                 .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.FirstName))
                 .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.LastName))

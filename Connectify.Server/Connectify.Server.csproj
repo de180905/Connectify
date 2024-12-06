@@ -11,6 +11,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Assets\**" />
+    <Compile Remove="Configurations\**" />
+    <Content Remove="Assets\**" />
+    <Content Remove="Configurations\**" />
+    <EmbeddedResource Remove="Assets\**" />
+    <EmbeddedResource Remove="Configurations\**" />
+    <None Remove="Assets\**" />
+    <None Remove="Configurations\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CloudinaryDotNet" Version="1.26.2" />
     <PackageReference Include="MailKit" Version="4.7.1.1" />
     <PackageReference Include="MegaApiClient" Version="1.10.4" />
@@ -35,11 +46,6 @@
     <ProjectReference Include="..\connectify.client\connectify.client.esproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Assets\" />
-    <Folder Include="Configurations\" />
   </ItemGroup>
 
 </Project>

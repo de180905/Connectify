@@ -84,7 +84,7 @@ function MyApp() {
                                 actionLink={data.actionLink} />,
                                 {
                                     position: "bottom-right",
-                                    autoClose: 8000,
+                                    autoClose: 15000,
                                     hideProgressBar: false,
                                     closeOnClick: true,
                                     pauseOnHover: true,

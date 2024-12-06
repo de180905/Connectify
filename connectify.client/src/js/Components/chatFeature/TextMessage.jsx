@@ -1,12 +1,15 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useContext } from 'react';
 import Modal from 'react-modal';
 import { formatDate } from '../../Utils/datetimeUtil';
 import useConfirmModal from '../../CustomHooks/UseConfirmModal';
+import { AppContext } from '../../Contexts/AppProvider';
 Modal.setAppElement('#root'); // Required for accessibility
 const TextMessage = ({ message, onReply, onDelete }) => {
     const [showOptions, setShowOptions] = useState(false);
     const { openModal: openDeleteConfirmModal, ModalComponent: DeleteConfirmModalComponent } = useConfirmModal();
     const [isModalOpen, setIsModalOpen] = useState(false); 
+    const { mediaDetailRef } = useContext(AppContext);
+    
     const optionsRef = useRef(null); // Ref for options menu
 
     const handleOptionsClick = (e) => {
@@ -62,6 +65,10 @@ const TextMessage = ({ message, onReply, onDelete }) => {
                 <div className="flex flex-wrap gap-2 justify-end max-w-full">
                     {message.files.map((file, index) => (
                         <img
+                            onClick={() => {
+                                mediaDetailRef.current.setMedia([{ url: file.url }]);
+                                mediaDetailRef.current.open(0);
+                            }}
                             key={index}
                             src={file.url}
                             alt={`image-${index}`}

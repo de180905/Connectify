@@ -84,10 +84,10 @@ namespace Connectify.Server.Controllers
         [HttpPost("SignIn")]
         public async Task<IActionResult> SignIn(SignInDTO dto)
         {
-            TokenDTO result = null;
             try
             {
-                result = await accountRepo.SignInAsync(dto);
+                var result = await accountRepo.SignInAsync(dto);
+                return Ok(result);
             }
             catch(EmailNotVerifiedException)
             {
@@ -97,11 +97,13 @@ namespace Connectify.Server.Controllers
             {
                 return Unauthorized(new { message = ex.Message });
             }
-            if (result == null)
+            catch(Exception ex)
             {
-                return Unauthorized(new {message = "Wrong Email or Password"});
+                return StatusCode(StatusCodes.Status500InternalServerError, new
+                {
+                    message = "An unexpected error occurred. Please try again later.",
+                });
             }
-            return Ok(result);
         }
         [HttpPut("Settings/ChangePassword")]
         public async Task<IActionResult> ChangePassword(ChangePasswordDTO dto)
@@ -127,7 +129,7 @@ namespace Connectify.Server.Controllers
         public async Task<IActionResult> GetMyUser()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var myUser = await accountRepo.GetMyUser(userId);
+            var myUser = await accountRepo.GetMyUserAsync(userId);
             return Ok(myUser);
         }
         [Authorize]

@@ -50,7 +50,7 @@ const UserTimeline = () => {
                     <div className="p-3">
                         <div className="flex flex-col justify-center md:items-center lg:-mt-48 -mt-28">
                             <div className="relative lg:h-48 lg:w-48 w-28 h-28 mb-4 z-10">
-                                <div className="relative overflow-hidden rounded-full md:border-[6px] border-gray-100 dark:border-slate-900 shadow aspect-square">
+                                <div className="relative rounded-full md:border-[6px] border-gray-100 dark:border-slate-900 shadow aspect-square">
                                     <AvatarUploader initialAvatar={user?.avatar} editable={myUser?.id == userId}
                                         uploadFunc={uploadAvatar} />
                                 </div>
@@ -71,20 +71,6 @@ const UserTimeline = () => {
                                 {" "}
                                 {user?.fullName} {" "}
                             </h3>
-                            <p className="mt-2 text-gray-500 dark:text-white/80">
-                                {" "}
-                                Family , Food , Fashion , Fourever{" "}
-                                <a href="#" className="text-blue-500 ml-4 inline-block">
-                                    {" "}
-                                    Edit{" "}
-                                </a>
-                            </p>
-                            <p className="mt-2 max-w-xl text-sm md:font-normal font-light text-center hidden">
-                                {" "}
-                                I love beauty and emotion. 🥰 I’m passionate about photography and
-                                learning. 📚 I explore genres and styles. 🌈 I think photography is
-                                storytelling. 😊
-                            </p>
                         </div>
                     </div>
                     {/* navigations */}
@@ -172,29 +158,6 @@ const UserTimeline = () => {
                             >
                                 <FaEnvelope className="text-xl text-white" />
                             </button>}
-
-                            {/* Menu button with dropdown */}
-                            <div>
-                                <button type="submit" className="rounded-lg bg-secondary flex px-2.5 py-2 dark:bg-dark3">
-                                    <FaEllipsisH className="text-xl" />
-                                </button>
-                                <div
-                                    className="w-[240px]"
-                                    uk-dropdown="pos: bottom-right; animation: uk-animation-scale-up uk-transform-origin-top-right; animate-out: true; mode: click; offset:10"
-                                >
-                                    <nav>
-                                        <a href="#"><FaTags className="text-xl" /> Unfollow</a>
-                                        <a href="#"><FaClock className="text-xl" /> Mute story</a>
-                                        <a href="#"><FaFlag className="text-xl" /> Report</a>
-                                        <a href="#"><FaShareAlt className="text-xl" /> Share profile</a>
-                                        <hr />
-                                        <a href="#" className="text-red-400 hover:!bg-red-50 dark:hover:!bg-red-500/50"
-                                            onClick={()=>{setIsOpenBlockConfirm(true)}}>
-                                            <FaBan className="text-xl" /> Block
-                                        </a>
-                                    </nav>
-                                </div>
-                            </div>
                         </div>
 
                         <nav className="flex gap-0.5 rounded-xl -mb-px text-gray-600 font-medium text-[15px] dark:text-white max-md:w-full max-md:overflow-x-auto">
@@ -224,29 +187,6 @@ const UserTimeline = () => {
                             >
                                 Photos
                             </NavLink>
-                            {/* dropdown */}
-                            <div>
-                                <NavLink
-                                    to="#"
-                                    className="inline-flex items-center gap-2 py-3 leading-8 px-3"
-                                >
-                                    More <ion-icon name="chevron-down" />
-                                </NavLink>
-                                <div
-                                    className="md:w-[240px] w-screen"
-                                    uk-dropdown="pos: bottom-right; animation: uk-animation-scale-up uk-transform-origin-top-right; animate-out: true; mode: click;offset:-4"
-                                >
-                                    <nav className="text-[15px]">
-                                        <NavLink to="/likes"> Likes </NavLink>
-                                        <NavLink to="/music"> Music </NavLink>
-                                        <NavLink to="/events"> Events </NavLink>
-                                        <NavLink to="/books"> Books </NavLink>
-                                        <NavLink to="/reviews"> Reviews given </NavLink>
-                                        <NavLink to="/groups"> Groups</NavLink>
-                                        <NavLink to="/manage-sections"> Manage Sections</NavLink>
-                                    </nav>
-                                </div>
-                            </div>
                         </nav>
                     </div>
                 </div>

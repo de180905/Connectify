@@ -448,9 +448,9 @@ const Post = ({ post, updatePostUI, commentId }) => {
                             return total + reaction.count;
                         }, 0)}</span>
                     </div>
-                    <div className="text-sm">
-                        <span>{post.commentCount} Comments</span> · <span>7 Shares</span>
-                    </div>
+                    {/*<div className="text-sm">*/}
+                    {/*    <span>{post.commentCount} Comments</span> · <span>7 Shares</span>*/}
+                    {/*</div>*/}
                 </div>
             </div>
 
@@ -486,7 +486,7 @@ const Post = ({ post, updatePostUI, commentId }) => {
                     <FaRegCommentDots className="icon-hover" />
                     <span>Comment</span>
                 </button>
-                <button className="flex items-center space-x-2">
+                <button className="flex items-center space-x-2 hidden">
                     <FaShare className="icon-hover" />
                     <span>Share</span>
                 </button>

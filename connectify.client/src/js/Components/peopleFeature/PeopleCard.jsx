@@ -94,10 +94,8 @@ const PeopleCard = ({ people, setPeople }) => {
                     {people.fullName}{" "}
                 </Link>
                 <div className="flex space-x-2 items-center text-sm font-normal">
-                    {people.location && <div>Live at {people.Location} &#183;</div>}
+                    {people.location && <div>Live at {people.location} &#183;</div>}
                     {people.company && <div>Work at {people.company} &#183;</div>}
-                    
-                    <div> 21 posts a week</div>
                 </div>
                 <div className="flex items-center mt-2">
                     {people.mutualFriendAvatars && people.mutualFriendAvatars.map(e => (

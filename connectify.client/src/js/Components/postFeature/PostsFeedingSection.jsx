@@ -40,7 +40,7 @@ const PostsFeedingSection = ({filterOptions}) => {
             }
         }
         fetchPosts();
-    }, [currentPage]);
+    }, [currentPage, filterOptions]);
     return (
         <>
             {postsList.map((post) => <Post updatePostUI={updatePostUI} setPostsList={setPostsList} key={post.id} post={post} />)}

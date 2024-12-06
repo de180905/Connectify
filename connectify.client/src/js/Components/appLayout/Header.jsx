@@ -63,174 +63,16 @@ const Header = forwardRef(({ chatNotificationRef }, ref) => {
                 </div>
                 <div className="flex-1 relative">
                     <div className="max-w-[1220px] mx-auto flex items-center">
-                        {/* search */}
+                        {/* Slogan */}
                         <div
-                            id="search--box"
-                            className="xl:w-[680px] sm:w-96 sm:relative rounded-xl overflow-hidden z-20 bg-secondery max-md:hidden w-screen left-0 max-sm:fixed max-sm:top-2 dark:!bg-white/5"
+                            id="slogan"
+                            className="w-full flex items-center py-4 bg-transparent"
                         >
-                            <ion-icon
-                                name="search"
-                                className="absolute left-4 top-1/2 -translate-y-1/2"
-                            />
-                            <input
-                                type="text"
-                                placeholder="Search Friends, videos .."
-                                className="w-full !pl-10 !font-normal !bg-transparent h-12 !text-sm"
-                            />
+                            <h1 className="text-2xl font-bold text-gray-800 dark:text-white tracking-wide pl-16">
+                                Connectify - <span className="text-blue-600">Remake Your Life</span>
+                            </h1>
                         </div>
-                        {/* search dropdown*/}
-                        <div
-                            className="hidden uk- open z-10"
-                            uk-drop="pos: bottom-center ; animation: uk-animation-slide-bottom-small;mode:click "
-                        >
-                            <div className="xl:w-[694px] sm:w-96 bg-white dark:bg-dark3 w-screen p-2 rounded-lg shadow-lg -mt-14 pt-14">
-                                <div className="flex justify-between px-2 py-2.5 text-sm font-medium">
-                                    <div className=" text-black dark:text-white">Recent</div>
-                                    <button type="button" className="text-blue-500">
-                                        Clear
-                                    </button>
-                                </div>
-                                <nav className="text-sm font-medium text-black dark:text-white">
-                                    <a
-                                        href="#"
-                                        className=" relative px-3 py-1.5 flex items-center gap-4 hover:bg-secondery rounded-lg dark:hover:bg-white/10"
-                                    >
-                                        {" "}
-                                        <img
-                                            src="assets/images/avatars/avatar-2.jpg"
-                                            className="w-9 h-9 rounded-full"
-                                        />{" "}
-                                        <div>
-                                            {" "}
-                                            <div> Jesse Steeve </div>{" "}
-                                            <div className="text-xs text-blue-500 font-medium mt-0.5">
-                                                {" "}
-                                                Friend{" "}
-                                            </div>{" "}
-                                        </div>{" "}
-                                        <ion-icon
-                                            name="close"
-                                            className="text-base absolute right-3 top-1/2 -translate-y-1/2 "
-                                        />
-                                    </a>
-                                    <a
-                                        href="#"
-                                        className=" relative px-3 py-1.5 flex items-center gap-4 hover:bg-secondery rounded-lg dark:hover:bg-white/10"
-                                    >
-                                        {" "}
-                                        <img
-                                            src="assets/images/avatars/avatar-2.jpg"
-                                            className="w-9 h-9 rounded-full"
-                                        />{" "}
-                                        <div>
-                                            {" "}
-                                            <div> Martin Gray </div>{" "}
-                                            <div className="text-xs text-blue-500 font-medium mt-0.5">
-                                                {" "}
-                                                Friend{" "}
-                                            </div>{" "}
-                                        </div>{" "}
-                                        <ion-icon
-                                            name="close"
-                                            className="text-base absolute right-3 top-1/2 -translate-y-1/2 "
-                                        />
-                                    </a>
-                                    <a
-                                        href="#"
-                                        className=" relative px-3 py-1.5 flex items-center gap-4 hover:bg-secondery rounded-lg dark:hover:bg-white/10"
-                                    >
-                                        {" "}
-                                        <img
-                                            src="assets/images/group/group-2.jpg"
-                                            className="w-9 h-9 rounded-full"
-                                        />{" "}
-                                        <div>
-                                            {" "}
-                                            <div> Delicious Foods</div>{" "}
-                                            <div className="text-xs text-rose-500 font-medium mt-0.5">
-                                                {" "}
-                                                Group{" "}
-                                            </div>{" "}
-                                        </div>{" "}
-                                        <ion-icon
-                                            name="close"
-                                            className="text-base absolute right-3 top-1/2 -translate-y-1/2 "
-                                        />
-                                    </a>
-                                    <a
-                                        href="#"
-                                        className=" relative px-3 py-1.5 flex items-center gap-4 hover:bg-secondery rounded-lg dark:hover:bg-white/10"
-                                    >
-                                        {" "}
-                                        <img
-                                            src="assets/images/group/group-1.jpg"
-                                            className="w-9 h-9 rounded-full"
-                                        />{" "}
-                                        <div>
-                                            {" "}
-                                            <div> Delicious Foods</div>{" "}
-                                            <div className="text-xs text-yellow-500 font-medium mt-0.5">
-                                                {" "}
-                                                Page{" "}
-                                            </div>{" "}
-                                        </div>{" "}
-                                        <ion-icon
-                                            name="close"
-                                            className="text-base absolute right-3 top-1/2 -translate-y-1/2 "
-                                        />
-                                    </a>
-                                    <a
-                                        href="#"
-                                        className=" relative px-3 py-1.5 flex items-center gap-4 hover:bg-secondery rounded-lg dark:hover:bg-white/10"
-                                    >
-                                        {" "}
-                                        <img
-                                            src="assets/images/avatars/avatar-6.jpg"
-                                            className="w-9 h-9 rounded-full"
-                                        />{" "}
-                                        <div>
-                                            {" "}
-                                            <div> John Welim </div>{" "}
-                                            <div className="text-xs text-blue-500 font-medium mt-0.5">
-                                                {" "}
-                                                Friend{" "}
-                                            </div>{" "}
-                                        </div>{" "}
-                                        <ion-icon
-                                            name="close"
-                                            className="text-base absolute right-3 top-1/2 -translate-y-1/2 "
-                                        />
-                                    </a>
-                                    <a
-                                        href="#"
-                                        className="hidden relative  px-3 py-1.5 flex items-center gap-4 hover:bg-secondery rounded-lg dark:hover:bg-white/10"
-                                    >
-                                        {" "}
-                                        <ion-icon className="text-2xl" name="search-outline" /> Creative
-                                        ideas about Business
-                                    </a>
-                                    <a
-                                        href="#"
-                                        className="hidden relative  px-3 py-1.5 flex items-center gap-4 hover:bg-secondery rounded-lg dark:hover:bg-white/10"
-                                    >
-                                        {" "}
-                                        <ion-icon className="text-2xl" name="search-outline" /> 8 Facts
-                                        About Writting
-                                    </a>
-                                </nav>
-                                <hr className="-mx-2 mt-2 hidden" />
-                                <div className="flex justify-end pr-2 text-sm font-medium text-red-500 hidden">
-                                    <a
-                                        href="#"
-                                        className="flex hover:bg-red-50 dark:hover:bg-slate-700 p-1.5 rounded"
-                                    >
-                                        {" "}
-                                        <ion-icon name="trash" className="mr-2 text-lg" /> Clear your
-                                        history
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+
                         {/* header icons */}
                         <div className="flex items-center sm:gap-4 gap-2 absolute right-5 top-1/2 -translate-y-1/2 text-black">
                             {/* notification */}
@@ -341,7 +183,7 @@ const Header = forwardRef(({ chatNotificationRef }, ref) => {
                                             Activity History
                                         </div>
                                     </Link>
-                                    {user?.roles && user.roles.includes("administrator") && <>
+                                    {user?.roles && user.roles.includes("Administrator") && <>
                                         {/* Manage Posts */}
                                         <Link to="/admin/ManagePostReports">
                                             <div className="flex items-center gap-2.5 hover:bg-secondery p-2 px-2.5 rounded-md dark:hover:bg-white/10">

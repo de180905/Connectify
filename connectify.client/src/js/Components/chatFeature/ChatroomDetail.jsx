@@ -225,7 +225,7 @@ const ChatroomDetail = React.forwardRef(({ updateChatroomHasSeen }, ref) => {
                         <div className="py-10 text-center text-sm lg:pt-8">
                             <img
                                 src={chatroom?.avatar}
-                                className="w-24 h-24 rounded-full mx-auto mb-3"
+                                className="w-24 h-24 border-2 rounded-full mx-auto mb-3"
                                 alt=""
                             />
                             <div className="mt-8">
@@ -329,9 +329,11 @@ const ChatroomDetail = React.forwardRef(({ updateChatroomHasSeen }, ref) => {
                                 src={chatroom.avatar}
                                 className="w-24 h-24 rounded-full mx-auto mb-3"
                                 alt=""
-                            /> : <div className="relative d-inline-block">
+                            /> : <div className="relative border-2 rounded-full d-inline-block">
                                     <AvatarUploader initialAvatar={chatroom.avatar}
                                         widthClass="w-24" heightClass="h-24" editable={true}
+                                        camRight={-20}
+                                        camBot={-20}
                                         uploadFunc={async (blob) => {
                                             return await uploadChatroomAvatar(chatroom.chatRoomId, blob)
                                         }}
@@ -396,7 +398,7 @@ const ChatroomDetail = React.forwardRef(({ updateChatroomHasSeen }, ref) => {
                                 header={"Add Members"}
                                 onClose={() => { setIsAddMembersModalOpen(false) }}
                                 onSubmit={async (data) => {
-                                    await addUsersToChatroom(chatroom.chatRoomId, data.userIds);
+                                    await addUsersToChatroom(chatroom.chatRoomId, data.users.map(u => u.id));
                                 }}
                                 loadFunc={async (searchTerm) => {
                                     return await getUsersToAddToChatroom(chatroom.chatRoomId, searchTerm);

@@ -183,25 +183,21 @@ namespace Connectify.Server.Services.Implement {
             return result.Succeeded;
         }
 
-        public async Task<TokenDTO?> SignInAsync(SignInDTO dto)
+        public async Task<TokenDTO> SignInAsync(SignInDTO dto)
         {
             var result = await signInManager.PasswordSignInAsync(dto.Email, dto.Password, false, false);
+            if (result.IsLockedOut)
+            {
+                throw new UnauthorizedAccessException("You are currently not allowed to login");
+            }
             if (!result.Succeeded)
             {
-                return null;
+                throw new UnauthorizedAccessException("Wrong Email or Password");
             }
             var user = await userManager.FindByEmailAsync(dto.Email);
-            if (user == null)
-            {
-                return null;
-            }
-            if(user.LockoutEnd.HasValue && user.LockoutEnd > DateTimeOffset.UtcNow) 
-            {
-                throw new UnauthorizedAccessException("You're currently not allowed to login");
-            }
             if (!await userManager.IsEmailConfirmedAsync(user))
             {
-                throw new EmailNotVerifiedException();
+                throw new EmailNotVerifiedException("Please verify your email to continue");
             }
             var authClaims = new List<Claim>
             {
@@ -300,10 +296,15 @@ namespace Connectify.Server.Services.Implement {
             var result = await userManager.ChangePasswordAsync(user, dto.CurrentPassword, dto.NewPassword);
             return result;
         }
-        public async Task<UserDTO?> GetMyUser(string userId)
+        public async Task<UserDTO?> GetMyUserAsync(string userId)
         {
-            return await dbContext.Users.Where(u => u.Id == userId).
-                ProjectTo<UserDTO>(_mapper.ConfigurationProvider, new {userManager}).FirstOrDefaultAsync();
+            var myUser = await dbContext.Users.Where(u => u.Id == userId).
+                ProjectTo<UserDTO>(_mapper.ConfigurationProvider).FirstOrDefaultAsync();
+            if(myUser != null)
+            {
+                myUser.Roles = new List<string>(await userManager.GetRolesAsync(new User { Id = myUser.Id }));
+            }
+            return myUser;
         }
         public async Task<string> UploadAvatarAsync(string userId, UploadAvatarDTO dto)
         {

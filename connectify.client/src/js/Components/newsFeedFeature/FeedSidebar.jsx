@@ -18,7 +18,7 @@ const FeedSidebar = () => {
         loadData();
     }, [])
     return (
-        <div className="max-w-[40%] sticky top-0 self-start h-screen">
+        <div className="sticky top-0 self-start h-screen">
             <div
                 className="lg:space-y-4 lg:pb-8 max-lg:grid sm:grid-cols-2 max-lg:gap-6 overflow-y-auto"
                 style={{ height: '100%' }}
@@ -59,78 +59,7 @@ const FeedSidebar = () => {
                     </div>
                 </div>
                 <Gallery/>
-                {/* online friends */}
-                <div className="box p-5 px-6 border1 dark:bg-dark2">
-                    <div className="flex justify-between text-black dark:text-white">
-                        <h3 className="font-bold text-base"> Online Friends </h3>
-                        <button type="button">
-                            {" "}
-                            <ion-icon name="sync-outline" className="text-xl" />{" "}
-                        </button>
-                    </div>
-                    <div className="grid grid-cols-6 gap-3 mt-4">
-                        <a href="timeline.html">
-                            <div className="w-10 h-10 relative">
-                                <img
-                                    src="assets/images/avatars/avatar-2.jpg"
-                                    alt=""
-                                    className="w-full h-full absolute inset-0 rounded-full"
-                                />
-                                <div className="absolute bottom-0 right-0 m-0.5 bg-green-500 rounded-full w-2 h-2" />
-                            </div>
-                        </a>
-                        <a href="timeline.html">
-                            <div className="w-10 h-10 relative">
-                                <img
-                                    src="assets/images/avatars/avatar-3.jpg"
-                                    alt=""
-                                    className="w-full h-full absolute inset-0 rounded-full"
-                                />
-                                <div className="absolute bottom-0 right-0 m-0.5 bg-green-500 rounded-full w-2 h-2" />
-                            </div>
-                        </a>
-                        <a href="timeline.html">
-                            <div className="w-10 h-10 relative">
-                                <img
-                                    src="assets/images/avatars/avatar-4.jpg"
-                                    alt=""
-                                    className="w-full h-full absolute inset-0 rounded-full"
-                                />
-                                <div className="absolute bottom-0 right-0 m-0.5 bg-green-500 rounded-full w-2 h-2" />
-                            </div>
-                        </a>
-                        <a href="timeline.html">
-                            <div className="w-10 h-10 relative">
-                                <img
-                                    src="assets/images/avatars/avatar-5.jpg"
-                                    alt=""
-                                    className="w-full h-full absolute inset-0 rounded-full"
-                                />
-                                <div className="absolute bottom-0 right-0 m-0.5 bg-green-500 rounded-full w-2 h-2" />
-                            </div>
-                        </a>
-                        <a href="timeline.html">
-                            <div className="w-10 h-10 relative">
-                                <img
-                                    src="assets/images/avatars/avatar-6.jpg"
-                                    alt=""
-                                    className="w-full h-full absolute inset-0 rounded-full"
-                                />
-                                <div className="absolute bottom-0 right-0 m-0.5 bg-green-500 rounded-full w-2 h-2" />
-                            </div>
-                        </a>
-                        <a href="timeline.html">
-                            <div className="w-10 h-10 relative">
-                                <img
-                                    src="assets/images/avatars/avatar-7.jpg"
-                                    alt=""
-                                    className="w-full h-full absolute inset-0 rounded-full"
-                                />
-                                <div className="absolute bottom-0 right-0 m-0.5 bg-green-500 rounded-full w-2 h-2" />
-                            </div>
-                        </a>
-                    </div>
-                </div>
+                
                 {/* Trends */}
                 <div className="box p-5 px-6 border1 dark:bg-dark2">
                     <div className="flex justify-between text-black dark:text-white">

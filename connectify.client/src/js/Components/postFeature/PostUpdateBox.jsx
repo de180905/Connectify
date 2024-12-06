@@ -7,6 +7,8 @@ import { createPost, getPost, updatePost } from '../../api/Post';
 import { generateGuid } from '../../Utils/MathsHelper';
 import { FaCamera } from 'react-icons/fa';
 import TextareaAutosize from 'react-textarea-autosize';
+import { SelectUsersModal } from '../utils/SelectUsersModal';
+import { getUsersToAddToChatroom } from '../../api/search';
 const PostUpdateBox = forwardRef(({ }, ref) => {
     const [id, setId] = useState(0);
     const { user } = useContext(AppContext);
@@ -109,7 +111,7 @@ const PostUpdateBox = forwardRef(({ }, ref) => {
 
     return (
         <>
-            <Modal show={show} onHide={handleClose} centered>
+            <Modal show={show && !isTaggingFriends} onHide={handleClose} centered>
                 <Modal.Header closeButton>
                     <div className="d-flex align-items-center">
                         <Image src={user?.avatar} roundedCircle width={50} height={50} className="me-2" style={{ aspectRatio: '1 / 1', objectFit: 'cover' }} />
@@ -125,7 +127,6 @@ const PostUpdateBox = forwardRef(({ }, ref) => {
                 </Modal.Header>
 
                 <Modal.Body>
-                    {!isTaggingFriends ? (
                         <>
                             <div style={{ position: 'relative' }}>
                                 <TextareaAutosize
@@ -219,39 +220,54 @@ const PostUpdateBox = forwardRef(({ }, ref) => {
                                 </div>
 
                                 {/* Tag friends section */}
-                                <div className="flex-fill">
+                                <div style={{ width: '70%' }}>
                                     <Form.Label>Tag Friends</Form.Label>
                                     <Button variant="info" onClick={handleTagFriends} className="w-100">
                                         Tag Friends
                                     </Button>
-                                    <div className="mt-2 d-flex flex-wrap">
-                                        {taggedFriends.map((friend, index) => (
-                                            <Badge style={{ cursor: 'pointer' }} onClick={() => removeTaggedFriend(friend.id)} key={index} bg="secondary" className="me-1 mb-1 d-flex align-items-center">
-                                                <Image src={friend.avatar} roundedCircle width={30} height={30} className="me-2" />
+                                    <div className="mt-2 d-flex overflow-x-auto">
+                                        {taggedFriends.map((friend) => (
+                                            <Badge
+                                                key={friend.id}
+                                                bg="secondary"
+                                                className="me-1 mb-1"
+                                                style={{
+                                                    maxWidth: '150px', // Limits the badge size for a cleaner appearance
+                                                    whiteSpace: 'nowrap',
+                                                }}
+                                            >
                                                 {friend.fullName}
                                             </Badge>
                                         ))}
                                     </div>
                                 </div>
                             </div>
-                        </>
-                    ) : (
-                        <FriendSearch handleFriendSelect={handleFriendSelect} onClose={() => { setIsTaggingFriends(false); }}
-                            listToExclude={taggedFriends} />
-                    )}
+                        </>  
                 </Modal.Body>
 
-                {!isTaggingFriends && (
-                    <Modal.Footer>
-                        <Button variant="secondary" onClick={handleClose} style={{ color: '#6c757d', backgroundColor: 'white', borderColor: '#6c757d' }}>
-                            Close
-                        </Button>
-                        <Button variant="primary" onClick={handleSaveChanges} disabled={isLoading || (!postContent || postContent.trim() === '') && images.length < 1} style={{ color: 'white', backgroundColor: '#007bff', borderColor: '#007bff' }}>
-                            {isLoading ? 'Saving...' : 'Save changes'}
-                        </Button>
-                    </Modal.Footer>
-                )}
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose} style={{ color: '#6c757d', backgroundColor: 'white', borderColor: '#6c757d' }}>
+                        Close
+                    </Button>
+                    <Button variant="primary" onClick={handleSaveChanges} disabled={isLoading || (!postContent || postContent.trim() === '') && images.length < 1} style={{ color: 'white', backgroundColor: '#007bff', borderColor: '#007bff' }}>
+                        {isLoading ? 'Saving...' : 'Save changes'}
+                    </Button>
+                </Modal.Footer>
             </Modal>
+            {isTaggingFriends && <SelectUsersModal
+                minUsersCount={0}
+                showTxtName={false}
+                selectedFriendsInitial={taggedFriends}
+                header={"Tag Friends"}
+                loadFunc={async (searchTerm) => {
+                    return await getUsersToAddToChatroom(null, searchTerm);
+                }}
+                onClose={() => { setIsTaggingFriends(false) }}
+                onSubmit={async (data) => {
+                    setTaggedFriends(data.users);
+                }}
+            />}
+            
         </>
     );
 })
